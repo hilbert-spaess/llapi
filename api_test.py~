@@ -1,0 +1,29 @@
+import pickle
+import csv
+import math
+import api
+
+"""
+with open("vocab2.csv", 'r') as csvfile:
+    reader = csv.reader(csvfile)
+
+    changes = []
+    next(reader)
+    a = math.floor(float(next(reader)[2]))
+
+    for j,row in enumerate(reader):
+        if math.floor(float(row[2])) < a:
+            a = math.floor(float(row[2]))
+            changes.append(j)
+
+print(changes)
+"""
+
+api.get_chunk()
+
+# [12, 138, 1524, 7101, 15396, 19025, 19297]
+
+
+
+
+    
