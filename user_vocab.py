@@ -51,7 +51,7 @@ def initialise_vocab_user(cur, user_id, vocab, word_no):
     
     # TODO: WRITE SCHEDULER CODE AND FIGURE OUT HOW TO IMPORT
 
-conn, cur = connect
+conn, cur = connect()
 
 core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
 initialise_vocab_user(cur, "1", core_ids, 5)
