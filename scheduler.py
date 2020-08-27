@@ -2,6 +2,7 @@ import psycopg2
 import csv
 import pickle
 import random
+from connect import connect
 
 def find_unscheduled_vocab(cur, user_id):
     
@@ -90,8 +91,7 @@ def new_review_add(user_id):
     
     pass
 
-conn = psycopg2.connect("dbname=ll user=postgres password=postgres")
-cur = conn.cursor()
+conn, cur = connect()
 
 schedule(cur, "1")
 

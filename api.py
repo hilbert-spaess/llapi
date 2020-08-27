@@ -9,6 +9,7 @@ import spacy
 import psycopg2
 import api_helpers
 import on_review
+from connect import connect
 
 app = Flask(__name__)
 
@@ -130,9 +131,7 @@ def get_word():
 @app.route('/api/getchunk', methods=["POST", "GET"])
 def get_text_chunk():
     
-    conn = psycopg2.connect("dbname=ll user=postgres password=postgres")
-
-    cur = conn.cursor()
+    conn, cur = connect()
 
     req = request.get_json()
     

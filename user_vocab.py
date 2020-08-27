@@ -2,6 +2,7 @@ import psycopg2
 import csv
 import pickle
 import random
+from connect import connect
 
 def first_set_active(cur, user_id, vocab_id):
     
@@ -50,8 +51,7 @@ def initialise_vocab_user(cur, user_id, vocab, word_no):
     
     # TODO: WRITE SCHEDULER CODE AND FIGURE OUT HOW TO IMPORT
 
-conn = psycopg2.connect("dbname=ll user=postgres password=postgres")
-cur = conn.cursor()
+conn, cur = connect
 
 core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
 initialise_vocab_user(cur, "1", core_ids, 5)
