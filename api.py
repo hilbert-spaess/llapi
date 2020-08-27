@@ -8,6 +8,7 @@ import pandas as pd
 import spacy
 import psycopg2
 import api_helpers
+import on_review
 
 app = Flask(__name__)
 
@@ -135,7 +136,9 @@ def get_text_chunk():
 
     req = request.get_json()
     
-    userid = req["userid"]
+    userid = req["userId"]
+    
+    print("correct?", req["answeredCorrect"])
     
     if req["answeredCorrect"] == -1:
         out = api_helpers.next_chunk(userid, cur)
@@ -144,10 +147,10 @@ def get_text_chunk():
         
         # record the results
         
-        api_helpers.record_result(userid, req, cur)
+        on_review.on_review(cur, req)
         out = api_helpers.next_chunk(userid, cur)
             
-
+    print(out)
     res = make_response(jsonify(out))
     
     cur.close()

@@ -16,7 +16,7 @@ def get_grammar(chunkid, cur):
 def get_vocab(chunkid, cur):
 
     COMMAND = """
-    SELECT v.id, v.word, cv.locations, v.pos, cv.sentences FROM vocab v
+    SELECT v.id, v.word, cv.locations, v.pos, cv.first_sentence FROM vocab v
     INNER JOIN chunk_vocab cv
     ON v.id = cv.vocab_id
     WHERE cv.chunk_id=%s
@@ -98,7 +98,7 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
     if not chunkid:
     
         COMMAND = """
-        SELECT c.id, c.chunk, u.vocab, u.vocab_interaction, u.unknown_vocab, c.sentencebreaks FROM chunks C
+        SELECT c.id, c.chunk, u.vocab, u.vocab_interaction, u.unknown_vocab, c.sentence_breaks FROM chunks C
         INNER JOIN user_nextchunk u
         ON c.id = u.chunk_id
         WHERE u.user_id = %s AND EXTRACT(DAY FROM u.next) <= EXTRACT(DAY FROM NOW()) 
@@ -109,7 +109,7 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
     else:
         
         COMMAND = """
-        SELECT c.id, c.chunk, u.vocab, u.vocab_interaction, u.unknown_vocab, c.sentencebreaks FROM chunks C
+        SELECT c.id, c.chunk, u.vocab, u.vocab_interaction, u.unknown_vocab, c.sentence_breaks FROM chunks C
         INNER JOIN user_nextchunk u
         ON c.id = u.chunk_id
         WHERE u.user_id = %s AND EXTRACT(DAY FROM u.next) <= EXTRACT(DAY FROM NOW()) and c.id=%s
@@ -141,7 +141,7 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
         unknown_vocab = choices[0][4].split(",")
         print("unknown vocab", unknown_vocab)
         
-        sentencebreaks = choices[0][5].split("#")
+        sentencebreaks = choices[0][5].split(",")
         print("sentencebreaks", sentencebreaks)
                                              
         
@@ -195,7 +195,7 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
         
         # organise the vocab and interactions
         
-        get_sentences_command = """SELECT sentences, locations FROM chunk_vocab WHERE chunk_id=%s AND vocab_id=%s"""
+        get_sentences_command = """SELECT first_sentence, locations FROM chunk_vocab WHERE chunk_id=%s AND vocab_id=%s"""
         v_sentences = []
         for v in vocab_to_test:
             cur.execute(get_sentences_command, (choices[0][0], v))
@@ -204,6 +204,9 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
             location = records[0][1].split(",")[0]
             v_sentences.append((v, sentence, location))
         v_sentences = sorted(v_sentences, key=lambda x: x[1])
+        
+        print(v_sentences)
+        print(sentencebreaks)
         
         vocab_to_test = [x[0] for x in v_sentences]
         lengths = [sentencebreaks[int(y[1])] for y in v_sentences]
