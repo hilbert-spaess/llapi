@@ -126,9 +126,6 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
         out["chunk"] = "No#new#reviews#left."
         out["grammar"] = "0"
         
-        x = threading.Thread(target=scheduler.schedule, args=(cur, user))
-        x.start()
-        print("Starting the thread.")
     else:
         choices = random.sample(choices, 1)
         out["displayType"] = "sentence"

@@ -10,6 +10,8 @@ import psycopg2
 import api_helpers
 import on_review
 from connect import connect
+import threading
+import scheduler
 
 import sys
 sys.path.append('/var/www/html/llapi')
@@ -156,6 +158,13 @@ def get_text_chunk():
         out = api_helpers.next_chunk(userid, cur)
             
     print(out)
+    
+    if out["displayType"] == "done":
+        
+        x = threading.Thread(target=scheduler.schedule, args=(cur, user))
+        x.start()
+        print("Starting the thread.")
+        
     res = make_response(jsonify(out))
     
     cur.close()
