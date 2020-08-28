@@ -161,7 +161,7 @@ def get_text_chunk():
     
     if out["displayType"] == "done":
         
-        x = threading.Thread(target=scheduler.schedule, args=(cur, user))
+        x = threading.Thread(target=scheduler.schedule, args=(cur, userid))
         x.start()
         print("Starting the thread.")
         
