@@ -1,6 +1,8 @@
 import numpy as np
 import random
 import psycopg2
+import threading
+import scheduler
 
 def get_grammar(chunkid, cur):
 
@@ -123,6 +125,9 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
         out["displayType"] = "done"
         out["chunk"] = "No#new#reviews#left."
         out["grammar"] = "0"
+        
+        x = threading.Thread(target=scheduler.schedule, args=(cur, user))
+        x.start()
     else:
         choices = random.sample(choices, 1)
         out["displayType"] = "sentence"
