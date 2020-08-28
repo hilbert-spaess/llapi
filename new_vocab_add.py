@@ -3,6 +3,7 @@ import csv
 import pickle
 import random
 from connect import connect
+import scheduler
 
 def first_set_active(cur, user_id, vocab_id):
     
@@ -27,11 +28,20 @@ def initialise_vocab_user(cur, user_id, vocab, word_no):
     
     # ?10? words added to reviews IF there are >1 chunks using IT.
                     
+    new_vocab_add(cur, user_id, word_no)
+    
+    scheduler.schedule(cur, user_id)
+    
+    
+    
+    
+def new_vocab_add(cur, user_id, word_no):
+    
     NEW_COMMAND = """
     SELECT u.vocab_id FROM user_vocab u
     INNER JOIN vocab v
     ON u.vocab_id = v.id
-    WHERE u.user_id = %s AND v.counts > 1
+    WHERE u.user_id = %s AND v.counts > 1 and u.active = 0
     """
     cur.execute(NEW_COMMAND, (user_id,))
     potential_new_words = [z[0] for z in cur.fetchall()]
@@ -47,9 +57,7 @@ def initialise_vocab_user(cur, user_id, vocab, word_no):
         first_set_active(cur, user_id, vocab_id)
     
     
-    # trigger scheduler.
     
-    # TODO: WRITE SCHEDULER CODE AND FIGURE OUT HOW TO IMPORT
 
 conn, cur = connect()
 
