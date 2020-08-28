@@ -1,5 +1,5 @@
 from flask import Flask, request, make_response, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import pickle
 import csv
 import numpy as np
@@ -11,7 +11,13 @@ import api_helpers
 import on_review
 from connect import connect
 
+import sys
+sys.path.append('/var/www/html/llapi')
+sys.path.append('/home/ubuntu/.local/lib/python3.5/site-packages')
+
+
 app = Flask(__name__)
+CORS(app)
 
 # utility function: sample from an arbitrary discrete distribution
 

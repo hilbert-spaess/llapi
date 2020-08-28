@@ -177,7 +177,7 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
             context[key]['g'] = ','.join(context[key]['g'])
             context[key]['v'] = str(context[key]['v'])
         
-        print("context", context)
+        #print("context", context)
         
         # make dedicated grammar dictionary.
         # ID is key: name, locations
@@ -190,7 +190,7 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
         out["grammar"] = grammardict
         out["chunkid"] = choices[0][0]
         
-        print(choices)
+        #print(choices)
         interactions = choices[0][3].split(",")[next_interaction:]
         
         # organise the vocab and interactions
@@ -205,8 +205,8 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
             v_sentences.append((v, sentence, location))
         v_sentences = sorted(v_sentences, key=lambda x: x[1])
         
-        print(v_sentences)
-        print(sentencebreaks)
+        #print(v_sentences)
+        #print(sentencebreaks)
         
         vocab_to_test = [x[0] for x in v_sentences]
         lengths = [sentencebreaks[int(y[1])] for y in v_sentences]
@@ -240,7 +240,7 @@ def next_chunk(user, cur, next_interaction=0, chunkid=None):
 
         out["currentInteraction"] = "0"
         
-        print("interactiondict", interactiondict)
+        #print("interactiondict", interactiondict)
         out["interaction"] = interactiondict
 
         
