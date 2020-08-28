@@ -71,6 +71,8 @@ def set_scheduled(cur, vocab_id, user_id):
     
 def schedule(cur, user_id):
     
+    print("HEMLO")
+    
     # find active yet unscheduled words
     
     unscheduled_vocab = find_unscheduled_vocab(cur, user_id)
