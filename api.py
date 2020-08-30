@@ -159,6 +159,8 @@ def get_text_chunk():
         on_review.on_review(cur, req)
         
         if chunk_id:
+            print("Chunk_id chosen")
+            print(chunk_id)
             out = next_chunk(cur, user_id, chunk_id)
         else:
             out["displayType"] = "done"
