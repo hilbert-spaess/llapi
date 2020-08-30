@@ -7,7 +7,7 @@ import json
 import pandas as pd
 import spacy
 import psycopg2
-import api_helpers
+from api_helpers import choose_next_chunk, next_chunk
 import on_review
 from connect import connect
 import threading
@@ -149,7 +149,7 @@ def get_text_chunk():
     if req["answeredCorrect"] == -1:
         
         chunk_id = choose_next_chunk(cur, user_id)
-        out = api_helpers.next_chunk(cur, user_id, chunk_id)
+        out = next_chunk(cur, user_id, chunk_id)
     
     else:
         
@@ -159,7 +159,7 @@ def get_text_chunk():
         on_review.on_review(cur, req)
         
         if chunk_id:
-            out = api_helpers.next_chunk(cur, user_id, chunk_id)
+            out = next_chunk(cur, user_id, chunk_id)
         else:
             out["displayType"] = "done"
  
