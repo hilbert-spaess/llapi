@@ -137,6 +137,7 @@ def get_word():
     return res
 
 @app.route('/api/getchunk', methods=["POST", "GET"])
+@cross_origin()
 def get_text_chunk():
     
     conn, cur = connect()
