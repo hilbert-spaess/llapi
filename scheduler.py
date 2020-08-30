@@ -3,6 +3,7 @@ import csv
 import pickle
 import random
 from connect import connect
+import test_data
 
 def find_unscheduled_vocab(cur, user_id):
     
@@ -26,11 +27,7 @@ def get_schedule_time(cur, vocab_id, user_id):
     
     return schedule_time
 
-def schedule_next_chunk_basic(cur, vocab_id, user_id, schedule_time):
-    
-    # works well while the user hasn't seen that much stuff.
-    
-    # look for all chunks containing the vocab
+def choose_next_chunk(cur, vocab_id, user_id):
     
     NEXT_COMMAND = """
     SELECT chunk_id FROM chunk_vocab
@@ -52,13 +49,34 @@ def schedule_next_chunk_basic(cur, vocab_id, user_id, schedule_time):
     
     next_chunk = random.sample(candidates, 1)[0]
     
-    # schedule the next chunk
+    return next_chunk
+
+def get_unknown_vocab(cur, vocab_id, user_id):
+    
+    # TODO: code for unknown vocab
+    
+    return "0"
+
+
+def schedule_next_chunk_basic(cur, vocab_id, user_id):
+    
+    # works well while the user hasn't seen that much stuff.
+    
+    # look for all chunks containing the vocab
+    
+    next_chunk = choose_next_chunk(cur, vocab_id, user_id)
+    
+    schedule_time = get_schedule_time(cur, vocab_id, user_id)
+    
+    unknown_vocab = get_unknown_vocab(cur, vocab_id, user_id)
+    
+    test_data = test_data.get_test_data(cur, vocab_id, user_id, next_chunk)
     
     SCHEDULE_COMMAND = """
-    INSERT INTO user_nextchunk(user_id, chunk_id, next, vocab, unknown_vocab, vocab_interaction)
-    VALUES(%s, %s, %s, %s, 0, %s)
+    INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab)
+    VALUES(%s, %s, %s, %s, %s, %s)
     """
-    cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, schedule_time, vocab_id, "3"))
+    cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, schedule_time, test_data, unknown_vocab))
     
 def set_scheduled(cur, vocab_id, user_id):
     
@@ -69,7 +87,9 @@ def set_scheduled(cur, vocab_id, user_id):
     """
     cur.execute(COMMAND, (user_id, vocab_id))
     
-def schedule(cur, user_id):
+def schedule(user_id):
+    
+    conn, cur = connect()
     
     print("HEMLO")
     
@@ -78,12 +98,14 @@ def schedule(cur, user_id):
     unscheduled_vocab = find_unscheduled_vocab(cur, user_id)
     
     for vocab_id in unscheduled_vocab:
-        
-        schedule_time = get_schedule_time(cur, vocab_id, user_id)
     
-        schedule_next_chunk_basic(cur, vocab_id, user_id, schedule_time)
+        schedule_next_chunk_basic(cur, vocab_id, user_id)
         
         set_scheduled(cur, vocab_id, user_id)
+        
+    cur.close()
+    conn.commit()
+    conn.close()
 
 def optimise(user_id):
     
@@ -93,10 +115,4 @@ def new_review_add(user_id):
     
     pass
 
-conn, cur = connect()
-
-schedule(cur, "1")
-
-cur.close()
-conn.commit()
-conn.close()
+schedule("1")

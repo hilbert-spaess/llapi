@@ -85,7 +85,7 @@ def get_vocab_interaction_data(chunkid, cur, vocab, interaction):
             """
             cur.execute(COMMAND, (pos, v, v))
             options = cur.fetchall()
-            options.sort(key=lambda x: np.abs(x[1] - zipf))
+            options.sort(key=lambdaa x: np.abs(x[1] - zipf))
             y = options[:min(len(options), 3):]
             y.append((wd, zipf))
             random.shuffle(y)
@@ -95,156 +95,139 @@ def get_vocab_interaction_data(chunkid, cur, vocab, interaction):
                         
     return interaction_data
 
-def next_chunk(user, cur, next_interaction=0, chunkid=None):
+def choose_next_chunk(cur, user_id):
     
-    if not chunkid:
+    # check if next chunk is determined
     
-        COMMAND = """
-        SELECT c.id, c.chunk, u.vocab, u.vocab_interaction, u.unknown_vocab, c.sentence_breaks FROM chunks C
-        INNER JOIN user_nextchunk u
-        ON c.id = u.chunk_id
-        WHERE u.user_id = %s AND EXTRACT(DAY FROM u.next) <= EXTRACT(DAY FROM NOW()) 
-        """
-        cur.execute(COMMAND, (user,))
-        choices = cur.fetchall()
-    
-    else:
-        
-        COMMAND = """
-        SELECT c.id, c.chunk, u.vocab, u.vocab_interaction, u.unknown_vocab, c.sentence_breaks FROM chunks C
-        INNER JOIN user_nextchunk u
-        ON c.id = u.chunk_id
-        WHERE u.user_id = %s AND EXTRACT(DAY FROM u.next) <= EXTRACT(DAY FROM NOW()) and c.id=%s
-        """
-        cur.execute(COMMAND, (user, chunkid))
-        choices = cur.fetchall()
+    COMMAND = """
+    SELECT c.id FROM chunks C
+    INNER JOIN user_nextchunk u
+    ON c.id = u.chunk_id
+    WHERE u.user_id = %s AND EXTRACT(DAY FROM u.next) <= EXTRACT(DAY FROM NOW()) 
+    """
+    cur.execute(COMMAND, (user_id,))
+    choices = cur.fetchall()
     
     out = {}
-
+    
     if not choices:
-        out["displayType"] = "done"
-        out["chunk"] = "No#new#reviews#left."
-        out["grammar"] = "0"
-        
+        return None
+    
     else:
         choices = random.sample(choices, 1)
-        out["displayType"] = "sentence"
-        
-        chunk = choices[0][1].split("#")
-        
-        grammar = get_grammar(choices[0][0], cur)
-        print("grammar", grammar)
-        
-        vocab = get_vocab(choices[0][0], cur)
-        print("vocab", vocab)
+        return choices[0]
+    
 
-        vocab_to_test = choices[0][2].split(",")[next_interaction:]
-        print("to test", vocab_to_test)
+def build_context(chunk, grammar, vocab, unknown_vocab):
+    
+    context = {}
+    
+    for idx, word in enumerate(chunk):
+        context[str(idx)] = {'w': word, 'g': [], 'v': 0, 'u': 0}
         
-        unknown_vocab = choices[0][4].split(",")
-        print("unknown vocab", unknown_vocab)
-        
-        sentencebreaks = choices[0][5].split(",")
-        print("sentencebreaks", sentencebreaks)
-                                             
-        
-        
-        # make the context dictionary
-        # w: word, g: grammar item, v: vocab item, u: unknown, t: test
-        
-        context = {}
-        for idx, word in enumerate(chunk):
-            context[str(idx)] = {'w': word, 'g': [], 'v': 0, 'u': 0, 't': 0}
-        for item in grammar:
-            for j in item[2].split(","):
-                context[j]['g'].append(str(item[0]))
-            
-        for item in vocab:
-            for j in item[2].split(","):
-                context[j]['v'] = str(item[0])
-                context[j]['vw'] = str(item[1])
-                context[j]['p'] = str(item[3])
-                if str(item[0]) in vocab_to_test:
-                    context[j]['t']=1
-        """
-        for item in vocab_to_test:
-            for idx in range(len(chunk)):
-                if item == context[str(idx)]['v']:
-                    context[str(idx)]['t']=1
-        """
-        # stringify context + sort out unknown vocab in context dict
-        
-        for key in context.keys():
-            if key in unknown_vocab:
-                context[key]['u'] = 1
-            context[key]['g'] = ','.join(context[key]['g'])
-            context[key]['v'] = str(context[key]['v'])
-        
-        #print("context", context)
-        
-        # make dedicated grammar dictionary.
-        # ID is key: name, locations
-        
-        grammardict = {}
-        for item in grammar:
-            grammardict[item[0]] = {'n': item[1], 'l': item[2], 'u': 0, 't':0}
-        
-        out["context"] = context
-        out["grammar"] = grammardict
-        out["chunkid"] = choices[0][0]
-        
-        #print(choices)
-        interactions = choices[0][3].split(",")[next_interaction:]
-        
-        # organise the vocab and interactions
-        
-        get_sentences_command = """SELECT first_sentence, locations FROM chunk_vocab WHERE chunk_id=%s AND vocab_id=%s"""
-        v_sentences = []
-        for v in vocab_to_test:
-            cur.execute(get_sentences_command, (choices[0][0], v))
-            records = cur.fetchall()
-            sentence = records[0][0].split(",")[0]
-            location = records[0][1].split(",")[0]
-            v_sentences.append((v, sentence, location))
-        v_sentences = sorted(v_sentences, key=lambda x: x[1])
-        
-        #print(v_sentences)
-        #print(sentencebreaks)
-        
-        vocab_to_test = [x[0] for x in v_sentences]
-        lengths = [sentencebreaks[int(y[1])] for y in v_sentences]
-        locations = [x[2] for x in v_sentences]
-        
-        out["length"] = str(lengths[0])
-        
-        # get interaction data
-      
-        interactiondict = {}
-        vocab_interaction_data = get_vocab_interaction_data(choices[0][0], cur, vocab_to_test, interactions)
-        
-        for i, word in enumerate(vocab_to_test):
-            interactiondict[str(i)] = {}
-            interactiondict[str(i)]["mode"] = str(interactions[i])
-            interactiondict[str(i)]["location"] = str(locations[i])
-            interactiondict[str(i)]["v"] = word
-            interactiondict[str(i)]["length"] = str(lengths[i])
-            interactiondict[str(i)]["streak"] = vocab_interaction_data[i]["streak"]
-            if interactiondict[str(i)]["mode"] == "1":
-                for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
-                    interactiondict[str(i)][str(j)] = {'s': sen[1], 'l': sen[2]}
-            if interactiondict[str(i)]["mode"] == "2":
-                for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
-                    interactiondict[str(i)][str(j)] = {'s': sen[0]}
-            if interactiondict[str(i)]["mode"] == "3":
-                for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
-                    interactiondict[str(i)][str(j)] = {'s': sen[0]}
+    for item in grammar:
+        for j in item[2].split(","):
+            context[j]['g'].append(str(item[0]))
 
-                    
+    for item in vocab:
+        for j in item[2].split(","):
+            context[j]['v'] = str(item[0])
+            context[j]['vw'] = str(item[1])
+            context[j]['p'] = str(item[3])
+     
+    for key in context.keys():
+        if key in unknown_vocab:
+            context[key]['u'] = 1
+        context[key]['g'] = ','.join(context[key]['g'])
+        context[key]['v'] = str(context[key]['v'])
+    
+    return context
 
-        out["currentInteraction"] = "0"
+def build_grammar(grammar):
+    
+    grammardict = {}
+    
+    for item in grammar:
+        grammardict[item[0]] = {'n': item[1], 'l': item[2], 'u': 0, 't':0}
         
-        #print("interactiondict", interactiondict)
-        out["interaction"] = interactiondict
+    return grammardict
+    
+def next_chunk(cur, user_id, chunkid):
+    
+    COMMAND = """
+    SELECT c.id, c.chunk, u.test_data, u.unknown_vocab FROM chunks C
+    INNER JOIN user_nextchunk u
+    ON c.id = u.chunk_id
+    WHERE c.id = %s AND u.user_id=%s 
+    """
+    cur.execute(COMMAND, (chunk_id, user_id))
+    choices = cur.fetchall()
+    
+    out = {}
+    
+    out["displayType"] = "sentence"
+
+    chunk = choices[0][1].split("#")
+    grammar = get_grammar(choices[0][0], cur)
+    vocab = get_vocab(choices[0][0], cur)
+    unknown_vocab = choices[0][3].split(",")
+
+    out["context"] = build_context(chunk, grammar, vocab, vocab_to_test)
+    out["grammar"] = build_grammar(grammar)
+    out["chunkid"] = choices[0][0]
+
+    #print(choices)
+    interactions = choices[0][3].split(",")[next_interaction:]
+
+    # organise the vocab and interactions
+
+    get_sentences_command = """SELECT first_sentence, locations FROM chunk_vocab WHERE chunk_id=%s AND vocab_id=%s"""
+    v_sentences = []
+    for v in vocab_to_test:
+        cur.execute(get_sentences_command, (choices[0][0], v))
+        records = cur.fetchall()
+        sentence = records[0][0].split(",")[0]
+        location = records[0][1].split(",")[0]
+        v_sentences.append((v, sentence, location))
+    v_sentences = sorted(v_sentences, key=lambda x: x[1])
+
+    #print(v_sentences)
+    #print(sentencebreaks)
+
+    vocab_to_test = [x[0] for x in v_sentences]
+    lengths = [sentencebreaks[int(y[1])] for y in v_sentences]
+    locations = [x[2] for x in v_sentences]
+
+    out["length"] = str(lengths[0])
+
+    # get interaction data
+
+    interactiondict = {}
+    vocab_interaction_data = get_vocab_interaction_data(choices[0][0], cur, vocab_to_test, interactions)
+
+    for i, word in enumerate(vocab_to_test):
+        interactiondict[str(i)] = {}
+        interactiondict[str(i)]["mode"] = str(interactions[i])
+        interactiondict[str(i)]["location"] = str(locations[i])
+        interactiondict[str(i)]["v"] = word
+        interactiondict[str(i)]["length"] = str(lengths[i])
+        interactiondict[str(i)]["streak"] = vocab_interaction_data[i]["streak"]
+        if interactiondict[str(i)]["mode"] == "1":
+            for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
+                interactiondict[str(i)][str(j)] = {'s': sen[1], 'l': sen[2]}
+        if interactiondict[str(i)]["mode"] == "2":
+            for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
+                interactiondict[str(i)][str(j)] = {'s': sen[0]}
+        if interactiondict[str(i)]["mode"] == "3":
+            for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
+                interactiondict[str(i)][str(j)] = {'s': sen[0]}
+
+
+
+    out["currentInteraction"] = "0"
+
+    #print("interactiondict", interactiondict)
+    out["interaction"] = interactiondict
 
         
     return out

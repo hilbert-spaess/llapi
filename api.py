@@ -143,27 +143,31 @@ def get_text_chunk():
 
     req = request.get_json()
     
-    userid = req["userId"]
-    
-    print("correct?", req["answeredCorrect"])
+    user_id = req["userId"]
     
     if req["answeredCorrect"] == -1:
-        out = api_helpers.next_chunk(userid, cur)
         
+        chunk_id = choose_next_chunk(cur, user_id)
+        out = api_helpers.next_chunk(cur, user_id, chunk_id)
+    
     else:
         
-        # record the results
+        print("correct?", req["answeredCorrect"])
         
+        chunk_id = choose_next_chunk(cur, user_id)
         on_review.on_review(cur, req)
-        out = api_helpers.next_chunk(userid, cur)
-            
-    print(out)
-    
+        
+        if chunk_id:
+            out = api_helpers.next_chunk(cur, user_id, chunk_id)
+        else:
+            out["displayType"] = "done"
+ 
     if out["displayType"] == "done":
         
-        x = threading.Thread(target=scheduler.schedule, args=(cur, userid))
+        new_conn, new_cur = connect()
+        x = threading.Thread(target=scheduler.schedule, args=(user_id))
         x.start()
-        print("Starting the thread.")
+        print("Starting the background schedule thread.")
         
     res = make_response(jsonify(out))
     
