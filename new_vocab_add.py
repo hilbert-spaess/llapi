@@ -30,7 +30,7 @@ def initialise_vocab_user(cur, user_id, vocab, word_no):
                     
     new_vocab_add(cur, user_id, word_no)
     
-    scheduler.schedule(cur, user_id)
+    scheduler.schedule(user_id)
     
     
     
