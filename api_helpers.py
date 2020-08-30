@@ -175,9 +175,10 @@ def next_chunk(cur, user_id, chunkid):
     out["context"] = build_context(chunk, grammar, vocab, vocab_to_test)
     out["grammar"] = build_grammar(grammar)
     out["chunkid"] = choices[0][0]
-
-    #print(choices)
-    interactions = choices[0][3].split(",")[next_interaction:]
+    
+    test_data = choices[0][2]
+    print(test_data)
+    print(alpha)
 
     # organise the vocab and interactions
 
