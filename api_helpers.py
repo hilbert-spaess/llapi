@@ -163,6 +163,8 @@ def next_chunk(cur, user_id, chunk_id):
     cur.execute(COMMAND, (chunk_id, user_id))
     choices = cur.fetchall()
     
+    print(choices)
+    
     out = {}
     
     out["displayType"] = "sentence"
