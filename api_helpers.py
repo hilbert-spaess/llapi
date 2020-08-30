@@ -85,7 +85,7 @@ def get_vocab_interaction_data(chunkid, cur, vocab, interaction):
             """
             cur.execute(COMMAND, (pos, v, v))
             options = cur.fetchall()
-            options.sort(key=lambdaa x: np.abs(x[1] - zipf))
+            options.sort(key=lambda x: np.abs(x[1] - zipf))
             y = options[:min(len(options), 3):]
             y.append((wd, zipf))
             random.shuffle(y)
