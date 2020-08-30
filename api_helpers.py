@@ -152,7 +152,7 @@ def build_grammar(grammar):
         
     return grammardict
     
-def next_chunk(cur, user_id, chunkid):
+def next_chunk(cur, user_id, chunk_id):
     
     COMMAND = """
     SELECT c.id, c.chunk, u.test_data, u.unknown_vocab FROM chunks C
