@@ -149,6 +149,8 @@ def get_text_chunk():
     if req["answeredCorrect"] == -1:
         
         chunk_id = choose_next_chunk(cur, user_id)
+        print("chunk_id CHOSEN")
+        print(chunk_id)
         out = next_chunk(cur, user_id, chunk_id)
     
     else:
