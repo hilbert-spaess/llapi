@@ -26,74 +26,60 @@ def get_vocab(chunkid, cur):
     cur.execute(COMMAND, (chunkid,))
     return(cur.fetchall())
 
-def get_vocab_interaction_data(chunkid, cur, vocab, interaction):
+def get_vocab_interaction_data(cur, chunkid, v, interaction):
+    
     interaction_data = []
-    for idx, v in enumerate(vocab):
-        
+    COMMAND = """
+    SELECT v.pos, v.zipf, v.word FROM vocab v
+    WHERE v.id = %s
+    """
+    cur.execute(COMMAND, (v,))
+
+    out = cur.fetchall()[0]
+    pos = out[0]; zipf = out[1]; wd = out[2];
+    
+    outdata = {}
+
+    if interaction=="1":
+
         COMMAND = """
-        SELECT v.pos, v.zipf, v.word, uv.streak FROM vocab v
-        INNER JOIN user_vocab uv
-        ON uv.vocab_id = v.id
-        WHERE v.id = %s
+        SELECT c.id, c.chunk, cv.locations FROM chunks c
+        INNER JOIN chunk_vocab cv
+        ON c.id = cv.chunk_id
+        WHERE cv.vocab_id=%s AND c.id !=%s AND c.sentence=1
+        """
+        cur.execute(COMMAND, (v,chunkid))
+        options = cur.fetchall()
+        outdata["raw"] = random.sample(options, min(2, len(options)))
+
+    if interaction=="2":
+
+        COMMAND = """
+        SELECT v.word, v.zipf FROM vocab v
+        INNER JOIN synonyms s
+        ON s.vocab2_id = v.id
+        WHERE s.vocab1_id=%s
         """
         cur.execute(COMMAND, (v,))
-        
-        # WHILE NOT ALL HAVE STREAKS.
-        out = cur.fetchall()[0]
-        pos = out[0]; zipf = out[1]; wd = out[2];
-        if len(out) > 2: 
-            streak = out[3]
-        else:
-            streak = 0
-         
-        outdata = {}
-        outdata["pos"] = pos
-        outdata["zipf"] = zipf
-        outdata["wd"] = wd
-        outdata["streak"] = streak
-        
-        if interaction[idx]=="1":
+        options = cur.fetchall()
+        options.sort(key=lambda x: x[1])
+        outdata["raw"] = options[max(-len(options), -3):]
 
-            COMMAND = """
-            SELECT c.id, c.chunk, cv.locations FROM chunks c
-            INNER JOIN chunk_vocab cv
-            ON c.id = cv.chunk_id
-            WHERE cv.vocab_id=%s AND c.id !=%s AND c.sentence=1
-            """
-            cur.execute(COMMAND, (v,chunkid))
-            options = cur.fetchall()
-            outdata["raw"] = random.sample(options, min(2, len(options)))
-        
-        if interaction[idx]=="2":
-            
-            COMMAND = """
-            SELECT v.word, v.zipf FROM vocab v
-            INNER JOIN synonyms s
-            ON s.vocab2_id = v.id
-            WHERE s.vocab1_id=%s
-            """
-            cur.execute(COMMAND, (v,))
-            options = cur.fetchall()
-            options.sort(key=lambda x: x[1])
-            outdata["raw"] = options[max(-len(options), -3):]
-            
-        if interaction[idx]=="3":
-            
-            COMMAND = """
-            SELECT word, zipf FROM vocab
-            WHERE pos=%s AND ABS(id - %s) < 200 AND id != %s
-            """
-            cur.execute(COMMAND, (pos, v, v))
-            options = cur.fetchall()
-            options.sort(key=lambda x: np.abs(x[1] - zipf))
-            y = options[:min(len(options), 3):]
-            y.append((wd, zipf))
-            random.shuffle(y)
-            outdata["raw"] = y
-            
-        interaction_data.append(outdata)
-                        
-    return interaction_data
+    if interaction=="3":
+
+        COMMAND = """
+        SELECT word, zipf FROM vocab
+        WHERE pos=%s AND ABS(id - %s) < 200 AND id != %s
+        """
+        cur.execute(COMMAND, (pos, v, v))
+        options = cur.fetchall()
+        options.sort(key=lambda x: np.abs(x[1] - zipf))
+        y = options[:min(len(options), 3):]
+        y.append((wd, zipf))
+        random.shuffle(y)
+        outdata["raw"] = y
+
+    return outdata
 
 def choose_next_chunk(cur, user_id):
     
@@ -174,65 +160,34 @@ def next_chunk(cur, user_id, chunk_id):
     vocab = get_vocab(choices[0][0], cur)
     unknown_vocab = choices[0][3].split(",")
 
-    out["context"] = build_context(chunk, grammar, vocab, vocab_to_test)
+    out["context"] = build_context(chunk, grammar, vocab, unknown_vocab)
     out["grammar"] = build_grammar(grammar)
     out["chunkid"] = choices[0][0]
     
     test_data = choices[0][2]
-    print(test_data)
-    print(alpha)
+    
+    for i in test_data.keys():
+        
+        mode = test_data[i]['mode']
+        interaction_data = get_vocab_interaction_data(cur, choices[0][0], test_data[i]['v'], mode)
+        
+        if mode == "1":
+            for j, sen in enumerate(interaction_data["raw"]):
+                test_data[i][str(j)] = {'s': sen[1], 'l': sen[2]}
+        if mode == "2":
+            for j, sen in enumerate(interaction_data["raw"]):
+                test_data[i][str(j)] = {'s': sen[0]}
+        if mode == "3":
+            for j, sen in enumerate(interaction_data["raw"]):
+                test_data[i][str(j)] = {'s': sen[0]}       
 
-    # organise the vocab and interactions
-
-    get_sentences_command = """SELECT first_sentence, locations FROM chunk_vocab WHERE chunk_id=%s AND vocab_id=%s"""
-    v_sentences = []
-    for v in vocab_to_test:
-        cur.execute(get_sentences_command, (choices[0][0], v))
-        records = cur.fetchall()
-        sentence = records[0][0].split(",")[0]
-        location = records[0][1].split(",")[0]
-        v_sentences.append((v, sentence, location))
-    v_sentences = sorted(v_sentences, key=lambda x: x[1])
-
-    #print(v_sentences)
-    #print(sentencebreaks)
-
-    vocab_to_test = [x[0] for x in v_sentences]
-    lengths = [sentencebreaks[int(y[1])] for y in v_sentences]
-    locations = [x[2] for x in v_sentences]
-
-    out["length"] = str(lengths[0])
-
-    # get interaction data
-
-    interactiondict = {}
-    vocab_interaction_data = get_vocab_interaction_data(choices[0][0], cur, vocab_to_test, interactions)
-
-    for i, word in enumerate(vocab_to_test):
-        interactiondict[str(i)] = {}
-        interactiondict[str(i)]["mode"] = str(interactions[i])
-        interactiondict[str(i)]["location"] = str(locations[i])
-        interactiondict[str(i)]["v"] = word
-        interactiondict[str(i)]["length"] = str(lengths[i])
-        interactiondict[str(i)]["streak"] = vocab_interaction_data[i]["streak"]
-        if interactiondict[str(i)]["mode"] == "1":
-            for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
-                interactiondict[str(i)][str(j)] = {'s': sen[1], 'l': sen[2]}
-        if interactiondict[str(i)]["mode"] == "2":
-            for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
-                interactiondict[str(i)][str(j)] = {'s': sen[0]}
-        if interactiondict[str(i)]["mode"] == "3":
-            for j, sen in enumerate(vocab_interaction_data[i]["raw"]):
-                interactiondict[str(i)][str(j)] = {'s': sen[0]}
-
-
+    out["length"] = test_data["0"]["length"]
 
     out["currentInteraction"] = "0"
 
     #print("interactiondict", interactiondict)
-    out["interaction"] = interactiondict
+    out["interaction"] = test_data
 
-        
     return out
 
 def record_result(userid, req, cur):

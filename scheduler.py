@@ -4,14 +4,15 @@ import pickle
 import random
 from connect import connect
 import test_data
+import json
 
 def find_unscheduled_vocab(cur, user_id):
     
     FIND_COMMAND = """
     SELECT vocab_id FROM user_vocab
-    WHERE user_id=%s AND active=1 AND scheduled=0
+    WHERE user_id=%s AND active=%s AND scheduled=%s
     """
-    cur.execute(FIND_COMMAND, (user_id,))
+    cur.execute(FIND_COMMAND, (user_id,1,0))
     unscheduled_vocab = [x[0] for x in cur.fetchall()]
     
     return unscheduled_vocab
@@ -70,13 +71,13 @@ def schedule_next_chunk_basic(cur, vocab_id, user_id):
     
     unknown_vocab = get_unknown_vocab(cur, vocab_id, user_id)
     
-    test_data = test_data.get_test_data(cur, vocab_id, user_id, next_chunk)
+    my_test_data = test_data.get_test_data(cur, vocab_id, user_id, next_chunk)
     
     SCHEDULE_COMMAND = """
     INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab)
-    VALUES(%s, %s, %s, %s, %s, %s)
+    VALUES(%s, %s, %s, %s, %s)
     """
-    cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, schedule_time, test_data, unknown_vocab))
+    cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, schedule_time, json.dumps(my_test_data), unknown_vocab))
     
 def set_scheduled(cur, vocab_id, user_id):
     
@@ -97,6 +98,8 @@ def schedule(user_id):
     
     unscheduled_vocab = find_unscheduled_vocab(cur, user_id)
     
+    print("unscheduled: ", unscheduled_vocab)
+    
     for vocab_id in unscheduled_vocab:
     
         schedule_next_chunk_basic(cur, vocab_id, user_id)
@@ -114,5 +117,3 @@ def optimise(user_id):
 def new_review_add(user_id):
     
     pass
-
-schedule("1")

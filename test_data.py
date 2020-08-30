@@ -27,7 +27,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         SELECT streak FROM user_vocab
         WHERE user_id=%s AND vocab_id=%s
         """
-        cur.execute(COMMAND)
+        cur.execute(COMMAND, (user_id, vocab_id))
 
         return cur.fetchall()[0][0]
     
@@ -44,7 +44,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         cur.execute(sentence_command, (next_chunk, vocab_id))
         sentence = cur.fetchall()[0][0]
 
-        vocab.append((vocab_id, sentence, 1))
+        vocab.append((vocab_id, int(sentence), 1))
 
         # get aux vocab
 
@@ -56,7 +56,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
 
         for sen in range(sentence_no):
 
-            if sen != sentence:
+            if sen != int(sentence):
 
                 # some random element so not flooded with chunks, probably dependent on sentence_no
 
@@ -64,7 +64,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
 
                 if new_vocab:
 
-                    vocab.append((potential[0], sen, 0))
+                    vocab.append((new_vocab[0], sen, 0))
 
         return sorted(vocab, key = lambda x: x[1])
     
@@ -72,7 +72,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
     
         sentence_breaks_command = """
         SELECT sentence_breaks FROM chunks
-        WHERE chunk_id=%s
+        WHERE id=%s
         """
         cur.execute(sentence_breaks_command, (next_chunk,))
         return cur.fetchall()[0][0]
@@ -90,7 +90,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         WHERE chunk_id = %s AND vocab_id=%s
         """
         cur.execute(COMMAND, (next_chunk, v_id))
-        location = cur.fetchal()[0][0].split(",")[0]
+        location = cur.fetchall()[0][0].split(",")[0]
         return location
     
     def choose_new(sen):
@@ -108,7 +108,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         ON c.vocab_id = v.id
         WHERE c.chunk_id = %s AND c.first_sentence = %s
         """
-        cur.execute(COMMAND, (next_chunk, sen))
+        cur.execute(COMMAND, (next_chunk, str(sen)))
         potential = cur.fetchall()
 
         if potential:
@@ -121,6 +121,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
     # a JSON to into the user_nextchunk database for ease of loading.
     
     test_vocab = get_test_vocab()
+    print(test_vocab)
     
     for i, item in enumerate(test_vocab):
         
@@ -133,7 +134,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
     
     # find locations, lengths for all vocab items
     
-    sentence_breaks = get_sentence_breaks()
+    sentence_breaks = get_sentence_breaks().split(",")
     
     for i, item in enumerate(test_vocab):
         
