@@ -64,4 +64,4 @@ def new_vocab_add(cur, user_id, word_no):
     
 
 core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
-initialise_vocab_user("1", core_ids, 5)
+initialise_vocab_user("2", core_ids, 5)

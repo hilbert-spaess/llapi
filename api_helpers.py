@@ -30,15 +30,19 @@ def get_vocab_interaction_data(cur, chunkid, v, interaction):
     
     interaction_data = []
     COMMAND = """
-    SELECT v.pos, v.zipf, v.word FROM vocab v
-    WHERE v.id = %s
+    SELECT v.pos, v.zipf, v.word, cv.tags FROM vocab v
+    INNER JOIN chunk_vocab cv
+    ON cv.vocab_id = v.id
+    WHERE v.id = %s AND chunk_id=%s
     """
-    cur.execute(COMMAND, (v,))
+    cur.execute(COMMAND, (v, chunkid))
 
     out = cur.fetchall()[0]
-    pos = out[0]; zipf = out[1]; wd = out[2];
+    pos = out[0]; zipf = out[1]; wd = out[2]; tag = out[3].split(",")[0]
     
     outdata = {}
+    
+    outdata["tag"] = tag
 
     if interaction=="1":
 
@@ -137,6 +141,15 @@ def build_grammar(grammar):
         grammardict[item[0]] = {'n': item[1], 'l': item[2], 'u': 0, 't':0}
         
     return grammardict
+
+def translate_tag(tag):
+    
+    tagdict = {"NNS": "Plural noun.", "NN": "Singular noun", "VB": "Present tense verb", "RB": "Adverb", "VBG": "Verb participle", "VBN": "Verb past tense", "VBD": "Verb past tense", "JJ": "adjective"}
+    
+    if tag in tagdict.keys():
+        return tagdict[tag]
+    else:
+        return tag
     
 def next_chunk(cur, user_id, chunk_id):
     
@@ -170,7 +183,7 @@ def next_chunk(cur, user_id, chunk_id):
         
         mode = test_data[i]['mode']
         interaction_data = get_vocab_interaction_data(cur, choices[0][0], test_data[i]['v'], mode)
-        
+        test_data[i]["tag"] = translate_tag(interaction_data["tag"])
         if mode == "1":
             for j, sen in enumerate(interaction_data["raw"]):
                 test_data[i][str(j)] = {'s': sen[1], 'l': sen[2]}
