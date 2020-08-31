@@ -184,6 +184,12 @@ def next_chunk(cur, user_id, chunk_id):
     out["length"] = test_data["0"]["length"]
 
     out["currentInteraction"] = "0"
+    
+    # what is the key interaction
+    
+    for i in test_data.keys():
+        if test_data[i]["key"] == "1":
+            out["key"] = i
 
     #print("interactiondict", interactiondict)
     out["interaction"] = test_data

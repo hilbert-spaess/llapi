@@ -6,52 +6,61 @@ import random
 
 def on_review(cur, req):
     
+    key_location = int(req["key"])
+    correct = req["answers"][key_location]
+    streak = req["interaction"][str(key_location)]["streak"] + correct
+    
+    print("Streak", streak)
+    
+    def log_result():
+    
+        # user_vocab_log
+
+        COMMAND = """
+        INSERT INTO user_vocab_log(user_id, vocab_id, chunk_id, result)
+        VALUES(%s, %s, %s, %s)
+        """
+        cur.execute(COMMAND, (req["userId"], req["interaction"][req["key"]]["v"], req["chunkId"], correct))
+        
+    def remove_chunk():
+    
+        COMMAND = """
+        DELETE FROM user_nextchunk
+        WHERE user_id=%s and chunk_id=%s
+        """
+        cur.execute(COMMAND, (req["userId"], req["chunkId"]))
+        
+    def set_unscheduled():
+    
+        COMMAND = """
+        UPDATE user_vocab
+        SET scheduled=0, next=(NOW() + (%s * INTERVAL '1 day')), streak=%s
+        WHERE user_id=%s AND vocab_id=%s
+        """
+        cur.execute(COMMAND, (next_time(), streak, req["userId"], req["interaction"][req["key"]]["v"]))
+        
+    def next_time():
+        
+         streak_to_days = {1: "1", 2: "2", 3: "4", 4: "7", 5: "14"}
+    
+         return streak_to_days[streak]
+        
+    
     # log result
     
-    log_result(cur, req)
+    log_result()
     
-    remove_chunk(cur, req)
+    print("Result logged")
     
-    correct = req["answeredCorrect"]
+    remove_chunk()
+    
+    print("Deleted")
     
     if correct:
         
+        print("CORRECT")
+        
         # set unscheduled in user_vocab; set time for next review to be scheduled.
 
-        set_unscheduled(cur, req)
-    
-def log_result(cur, req):
-    
-    # user_vocab_log
-    
-    COMMAND = """
-    INSERT INTO user_vocab_log(user_id, vocab_id, chunk_id, result)
-    VALUES(%s, %s, %s, %s)
-    """
-    cur.execute(COMMAND, (req["userId"], req["interaction"][req["currentInteraction"]]["v"], req["chunkId"], req["answeredCorrect"]))
-
-def remove_chunk(cur, req):
-    
-    COMMAND = """
-    DELETE FROM user_nextchunk
-    WHERE user_id=%s and chunk_id=%s
-    """
-    cur.execute(COMMAND, (req["userId"], req["chunkId"]))
-
-def set_unscheduled(cur, req):
-    
-    COMMAND = """
-    UPDATE user_vocab
-    SET scheduled=0, next=(NOW() + (%s * INTERVAL '1 day')), streak=%s
-    WHERE user_id=%s AND vocab_id=%s
-    """
-    cur.execute(COMMAND, (next_time(req), req["streak"], req["userId"], req["interaction"][req["currentInteraction"]]["v"]))
-    
-def next_time(req):
-    
-    # return time to next review in days
-    
-    streak_to_days = {1: "1", 2: "2", 3: "4", 4: "7", 5: "14"}
-    
-    return streak_to_days[req["streak"]]
+        set_unscheduled()
     

@@ -136,44 +136,62 @@ def get_word():
 
     return res
 
+@app.route('/api/firstchunk', methods=["POST", "GET"])
+@cross_origin(origin='*')
+def get_first_chunk():
+    
+    req = request.get_json()
+    conn, cur = connect()
+    out = {}
+    
+    user_id = req["userId"]
+    
+    chunk_id = choose_next_chunk(cur, user_id)
+    print("chunk id: ", chunk_id)
+    
+    if chunk_id:
+        out = next_chunk(cur, user_id, chunk_id)
+    else:
+        out["displayType"] = "done"
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+    
+    return res
+        
+
 @app.route('/api/getchunk', methods=["POST", "GET"])
 @cross_origin(origin='*')
 def get_text_chunk():
     
+    out = {}
     conn, cur = connect()
-
     req = request.get_json()
     
     user_id = req["userId"]
-    
-    if req["answeredCorrect"] == -1:
-        
-        chunk_id = choose_next_chunk(cur, user_id)
-        print("chunk_id CHOSEN")
-        print(chunk_id)
+
+    on_review.on_review(cur, req)
+
+    cur.close()
+    conn.commit()
+    conn.close()
+
+    conn, cur = connect()
+
+    chunk_id = choose_next_chunk(cur, user_id)
+
+    if chunk_id:
         out = next_chunk(cur, user_id, chunk_id)
-    
     else:
-        
-        print("correct?", req["answeredCorrect"])
-        
-        chunk_id = choose_next_chunk(cur, user_id)
-        on_review.on_review(cur, req)
-        
-        if chunk_id:
-            print("Chunk_id chosen")
-            print(chunk_id)
-            out = next_chunk(cur, user_id, chunk_id)
-        else:
-            out["displayType"] = "done"
- 
-    if out["displayType"] == "done":
-        
+        out["displayType"] = "done"
         new_conn, new_cur = connect()
         x = threading.Thread(target=scheduler.schedule, args=(user_id))
         x.start()
-        print("Starting the background schedule thread.")
-        
+        print("Starting the background scheduling thread.")
+
     res = make_response(jsonify(out))
     
     cur.close()
