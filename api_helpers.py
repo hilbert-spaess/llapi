@@ -82,6 +82,22 @@ def get_vocab_interaction_data(cur, chunkid, v, interaction):
         y.append((wd, zipf))
         random.shuffle(y)
         outdata["raw"] = y
+    
+    if interaction=="4":
+        
+        COMMAND = """
+        SELECT s.definition FROM synsets s
+        INNER JOIN chunk_vocab cv
+        ON cv.sense = s.id
+        WHERE cv.chunk_id=%s AND cv.vocab_id=%s
+        """
+        print(chunkid, v)
+        cur.execute(COMMAND, (chunkid, v))
+        r = cur.fetchall()
+        print(r)
+        definition = r[0][0]
+        
+        outdata["raw"] = definition
 
     return outdata
 
@@ -181,6 +197,8 @@ def next_chunk(cur, user_id, chunk_id):
     
     for i in test_data.keys():
         
+        # put together the test_data
+        
         mode = test_data[i]['mode']
         interaction_data = get_vocab_interaction_data(cur, choices[0][0], test_data[i]['v'], mode)
         test_data[i]["tag"] = translate_tag(interaction_data["tag"])
@@ -192,7 +210,13 @@ def next_chunk(cur, user_id, chunk_id):
                 test_data[i][str(j)] = {'s': sen[0]}
         if mode == "3":
             for j, sen in enumerate(interaction_data["raw"]):
-                test_data[i][str(j)] = {'s': sen[0]}       
+                test_data[i][str(j)] = {'s': sen[0]}
+        if mode == "4":
+            test_data[i]["def"] = interaction_data["raw"]
+                
+        # give context access to test_data
+        
+        out["context"][test_data[i]["location"]]["i"] = i
 
     out["length"] = test_data["0"]["length"]
 
@@ -208,6 +232,45 @@ def next_chunk(cur, user_id, chunk_id):
     out["interaction"] = test_data
 
     return out
+
+def get_data(cur, req):
+    
+    stats = {}
+    
+    user_id = req["userId"]
+    
+    # how many reviews to do?
+    
+    COMMAND = """
+    SELECT chunk_id FROM user_nextchunk
+    WHERE user_id=%s
+    """
+    cur.execute(COMMAND, (user_id,))
+    review_no = len(cur.fetchall())
+    
+    stats["rn"] = review_no
+    
+    # how many key words of each type?
+    
+    COMMAND = """
+    SELECT streak FROM user_vocab
+    WHERE user_id=%s AND active=%s
+    """
+    cur.execute(COMMAND, (user_id, "1"))
+    active_words = cur.fetchall()
+    
+    streaks = {}
+    
+    for i in range(20):
+        streaks[i] = 0
+    
+    for word in active_words:
+        streaks[word[0]] += 1
+        
+    stats["streaks"] = streaks
+    
+    return stats
+               
 
 def record_result(userid, req, cur):
     

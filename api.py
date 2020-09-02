@@ -8,10 +8,12 @@ import pandas as pd
 import spacy
 import psycopg2
 from api_helpers import choose_next_chunk, next_chunk
+import api_helpers
 import on_review
 from connect import connect
 import threading
 import scheduler
+import my_vocab
 
 import sys
 sys.path.append('/var/www/html/llapi')
@@ -199,6 +201,49 @@ def get_text_chunk():
     conn.close()
 
     return res
+
+@app.route('/api/loadvocab', methods=["POST", "GET"])
+@cross_origin(origin='*')
+def load_vocab():
+
+    conn, cur = connect()
+    req = request.get_json()
+    
+    user_id = req["userId"]
+    
+    out = my_vocab.load_vocab(cur, req)
+    
+    print(out)
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+
+    return res
+
+@app.route('/api/getdata', methods=["POST", "GET"])
+@cross_origin(origin='*')
+def get_data():
+
+    conn, cur = connect()
+    req = request.get_json()
+    
+    user_id = req["userId"]
+    
+    out = api_helpers.get_data(cur, req)
+    
+    print(out)
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+
+    return res
+
 
 @app.route('/api/dumpresult', methods=["POST", "GET"])
 def dump_result():

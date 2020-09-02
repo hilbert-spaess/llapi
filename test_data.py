@@ -80,8 +80,10 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
     def get_interaction_mode(item):
     
         # will need code here once I figure out what good interactions look like
-
-        return "3"
+        if item[2]:
+            return "4"
+        else:
+            return "3"
     
     def get_location(v_id):
     
