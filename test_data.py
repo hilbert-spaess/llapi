@@ -34,7 +34,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
     def get_test_vocab():
     
         vocab = []
-
+        
         # get test vocab
 
         sentence_command = """
@@ -76,6 +76,19 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         """
         cur.execute(sentence_breaks_command, (next_chunk,))
         return cur.fetchall()[0][0]
+    
+    def get_sense():
+        
+        sense_command = """
+        SELECT sense FROM chunk_vocab
+        WHERE chunk_id=%s AND vocab_id=%s
+        """
+        cur.execute(sense_command, (next_chunk, vocab_id))
+        r = cur.fetchall()
+        if r:
+            return r[0][0]
+        else:
+            return None
     
     def get_interaction_mode(item):
     
@@ -142,10 +155,11 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         
         test_data[str(i)]["location"] = get_location(item[0])
         test_data[str(i)]["length"] = sentence_breaks[item[1]]
-    
+        
     # get streak
     
     test_data[key_location]["streak"] = get_streak()
+    test_data[key_location]["sense"] = get_sense()
 
     # choose interaction methodology for each (based on streak data)
     

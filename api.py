@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, jsonify
+from flask import Flask, request, make_response, jsonify, _request_ctx_stack
 from flask_cors import CORS, cross_origin
 import pickle
 import csv
@@ -12,141 +12,135 @@ import api_helpers
 import on_review
 from connect import connect
 import threading
-import scheduler
+import reviews_over
 import my_vocab
+import new_vocab_add
+
+from six.moves.urllib.request import urlopen
+from functools import wraps
+from jose import jwt
 
 import sys
 sys.path.append('/var/www/html/llapi')
 sys.path.append('/home/ubuntu/.local/lib/python3.5/site-packages')
 
+AUTH0_DOMAIN = "dev-yt8x5if8.eu.auth0.com"
+API_AUDIENCE="http://localhost:5000"
+ALGORITHMS = ["RS256"]
 
 app = Flask(__name__)
 CORS(app)
 
-# utility function: sample from an arbitrary discrete distribution
-
-def sample_discrete(weights):
-
-    weights = weights/np.sum(weights)
-
-    x = np.random.rand()
-    sum = weights[0]
-    i = 0
-
-    while sum < x:
-        sum += weights[i+1]
-        i += 1
-
-    return i
-        
-
-# compute the correct probability values
-
-# utility function: load a word from a CSV with a score in a particular range.
-
-def word_range(lower, upper):
-    print(lower)
-    with open("vocab2.csv", 'r') as vocabfile:
-        reader = list(csv.reader(vocabfile))
-        for i,line in enumerate(reader[1:]):
-            if float(line[2]) < upper:
-                upperid = i
-                break
-        for i,line in enumerate(reader[upperid+1:]):
-            if float(line[2]) < lower:
-                print(line[2])
-                lowerid = i
-                break
-        print("lowerid")
-        print(lowerid)
-        print("upperid")
-        print(upperid)
-        n = np.random.randint(1+upperid, 1+lowerid+upperid)
-        return reader[n][0], reader[n][2]
-                
-
-def word_computation(data):
-
-    if data["number"] == 0:
-        N = np.random.randint(19000)
+class AuthError(Exception):
     
-        with open("vocab2.csv", 'r') as vocabfile:
-            reader = csv.reader(vocabfile)
-            line = next((x for i, x in enumerate(reader) if i == N), None)
-
+    def __init__(self, error, status_code):
+        self.error = error
+        self.status_code = status_code
         
-        word = line[0]
-        score = line[2]
+@app.errorhandler(AuthError)
+def handle_auth_error(ex):
+    response = jsonify(ex.error)
+    response.status_code = ex.status_code
+    return response
 
-    else:
-        with open("temp_data.csv", 'r') as csvfile:
-            reader = csv.reader(csvfile)
-            rows = []
-            sortedlist = sorted(reader, key=lambda x: x[2])
-            for row in sortedlist:
-                if row[0] == data["userId"]:
-                    rows.append(row)
+# Format error response and append status code
+def get_token_auth_header():
+    """Obtains the Access Token from the Authorization Header
+    """
+    auth = request.headers.get("Authorization", None)
+    if not auth:
+        raise AuthError({"code": "authorization_header_missing",
+                        "description":
+                            "Authorization header is expected"}, 401)
 
-        scores = np.array([float(row[2]) for row in rows])
-        answered = np.array([float(row[3]) for row in rows])
+    parts = auth.split()
 
-        vals = np.zeros(len(scores)+1)
-        weights = []
-        for j in range(1,8):
-            newanswered = []
-            for i,answer in enumerate(answered):
-                if scores[i] < j:
-                    newanswered.append(1 - answer)
-                else: newanswered.append(answer)
-            newanswered = np.array(newanswered)
-            newanswered = 0.8*newanswered + 0.2*(1-newanswered)
-            weights.append(np.prod(newanswered))
-        x = sample_discrete(weights) + 1
+    if parts[0].lower() != "bearer":
+        raise AuthError({"code": "invalid_header",
+                        "description":
+                            "Authorization header must start with"
+                            " Bearer"}, 401)
+    elif len(parts) == 1:
+        raise AuthError({"code": "invalid_header",
+                        "description": "Token not found"}, 401)
+    elif len(parts) > 2:
+        raise AuthError({"code": "invalid_header",
+                        "description":
+                            "Authorization header must be"
+                            " Bearer token"}, 401)
 
-        #changes = [19297, 19025, 15396, 7101, 1524, 138, 12]
-        # optimise this later
-        
+    token = parts[1]
+    return token
 
+def requires_auth(f):
+    """Determines if the Access Token is valid
+    """
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        print("HI")
+        print(list(request.form.keys()))
+        token = get_token_auth_header()
+        jsonurl = urlopen("https://"+AUTH0_DOMAIN+"/.well-known/jwks.json")
+        jwks = json.loads(jsonurl.read())
+        unverified_header = jwt.get_unverified_header(token)
+        rsa_key = {}
+        for key in jwks["keys"]:
+            if key["kid"] == unverified_header["kid"]:
+                rsa_key = {
+                    "kty": key["kty"],
+                    "kid": key["kid"],
+                    "use": key["use"],
+                    "n": key["n"],
+                    "e": key["e"]
+                }
+        if rsa_key:
+            try:
+                payload = jwt.decode(
+                    token,
+                    rsa_key,
+                    algorithms=ALGORITHMS,
+                    audience=API_AUDIENCE,
+                    issuer="https://"+AUTH0_DOMAIN+"/"
+                )
+            except jwt.ExpiredSignatureError:
+                raise AuthError({"code": "token_expired",
+                                "description": "token is expired"}, 401)
+            except jwt.JWTClaimsError:
+                raise AuthError({"code": "invalid_claims",
+                                "description":
+                                    "incorrect claims,"
+                                    "please check the audience and issuer"}, 401)
+            except Exception:
+                raise AuthError({"code": "invalid_header",
+                                "description":
+                                    "Unable to parse authentication"
+                                    " token."}, 401)
 
-        # divide into integer sections. compute likelihood of falling into each integer section, and
-        # sample accordingly (using the direct values).
+            _request_ctx_stack.top.current_user = payload
+            return f(*args, **kwargs)
+        raise AuthError({"code": "invalid_header",
+                        "description": "Unable to find appropriate key"}, 401)
+    return decorated
 
-        
-        word, score = word_range(x, x+1)
-
-    return word, score
-
-def select_word(stuff):
-
-    word, score = word_computation(stuff)
-
-    return word, score
-
-@app.route('/api/getword', methods=["POST", "GET"])
-def get_word():
-
-    req = request.get_json()
-
-    if req["number"] > 0:
-        with open("temp_data.csv", 'a') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow([req["userId"], req["word"], req["score"], req["answered"]])
-
-    new_word, new_score = select_word(req)
-
-    res = make_response(jsonify({"word": new_word, "score": new_score}))
-
-    return res
 
 @app.route('/api/firstchunk', methods=["POST", "GET"])
 @cross_origin(origin='*')
+@requires_auth
 def get_first_chunk():
     
+    print("HEMLO")
+    print(_request_ctx_stack.top.current_user['sub'])
+    
+    print(request)
     req = request.get_json()
     conn, cur = connect()
     out = {}
     
-    user_id = req["userId"]
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    user_id = cur.fetchall()[0][0]
     
     chunk_id = choose_next_chunk(cur, user_id)
     print("chunk id: ", chunk_id)
@@ -163,43 +157,140 @@ def get_first_chunk():
     conn.close()
     
     return res
-        
 
-@app.route('/api/getchunk', methods=["POST", "GET"])
-@cross_origin(origin='*')
-def get_text_chunk():
+def get_first_chunk1(cur, user_id, req):
     
-    out = {}
-    conn, cur = connect()
-    req = request.get_json()
-    
-    user_id = req["userId"]
-
-    on_review.on_review(cur, req)
-
-    cur.close()
-    conn.commit()
-    conn.close()
-
-    conn, cur = connect()
-
     chunk_id = choose_next_chunk(cur, user_id)
-
+    print("chunk id: ", chunk_id)
+    
     if chunk_id:
         out = next_chunk(cur, user_id, chunk_id)
     else:
         out["displayType"] = "done"
-        new_conn, new_cur = connect()
-        x = threading.Thread(target=scheduler.schedule, args=(user_id))
-        x.start()
-        print("Starting the background scheduling thread.")
+    
+    res = make_response(jsonify(out))
+    
+    return res
+        
 
+@app.route('/api/getchunk', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def get_text_chunk():
+    
+    print("HENLO there sir")
+    
+    req = request.get_json()
+    conn, cur = connect()
+    out = {}
+    
+    print(req)
+    print("HEMLO")
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    a = cur.fetchall()
+    
+    print(a)
+    
+    if not a:
+        out["displayType"] = "newUser"
+        
+        res = make_response(jsonify(out))
+
+        cur.close()
+        conn.commit()
+        conn.close()
+
+        return res
+    
+    user_id = a[0][0]
+    
+    if req["answeredCorrect"] == "-1":
+        print("HEMLO this is the first chumk")
+        return get_first_chunk1(cur, user_id, req)
+    
+    else:
+        
+        print(req['keyloc'])
+
+        on_review.on_review(cur, user_id, req)
+
+        cur.close()
+        conn.commit()
+        conn.close()
+
+        conn, cur = connect()
+
+        chunk_id = choose_next_chunk(cur, user_id)
+
+        if chunk_id:
+            out = next_chunk(cur, user_id, chunk_id)
+        else:
+            out["displayType"] = "done"
+            new_conn, new_cur = connect()
+            x = threading.Thread(target=reviews_over.reviews_over, args=(user_id))
+            x.start()
+            print("Starting the background scheduling thread.")
+
+        res = make_response(jsonify(out))
+
+        cur.close()
+        conn.commit()
+        conn.close()
+
+        return res
+    
+@app.route('/api/newuser', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def new_user():
+    
+    req = request.get_json()
+    conn, cur = connect()
+    out = {}
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    a = cur.fetchall()
+    
+    if not a:
+        
+        course_id = req["courseChoice"]
+        print("course choice", course_id)
+        
+        COMMAND = """INSERT INTO users(name, vlevel)
+        VALUES(%s, %s)
+        RETURNING id"""
+        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], '4.5'))
+        user_id = cur.fetchall()[0][0]
+        print("id", user_id)
+        
+        cur.close()
+        conn.commit()
+        conn.close()
+        
+        new_vocab_add.new_course(user_id, course_id)
+        
+        res = make_response(jsonify(out))
+
+        return res
+
+        
+        
+        
     res = make_response(jsonify(out))
     
     cur.close()
     conn.commit()
     conn.close()
-
+    
     return res
 
 @app.route('/api/loadvocab', methods=["POST", "GET"])
@@ -225,6 +316,7 @@ def load_vocab():
 
 @app.route('/api/getdata', methods=["POST", "GET"])
 @cross_origin(origin='*')
+@requires_auth
 def get_data():
 
     conn, cur = connect()
@@ -245,17 +337,34 @@ def get_data():
     return res
 
 
-@app.route('/api/dumpresult', methods=["POST", "GET"])
-def dump_result():
-    req = request.json
+    # Format error response and append status code
+def get_token_auth_header():
+    """Obtains the Access Token from the Authorization Header
+    """
+    auth = request.headers.get("Authorization", None)
+    if not auth:
+        raise AuthError({"code": "authorization_header_missing",
+                        "description":
+                            "Authorization header is expected"}, 401)
 
-    with open("temp_data", 'wb') as dumpfile:
-        pickle.dump(req, dumpfile)
+    parts = auth.split()
 
-    res = make_response()
+    if parts[0].lower() != "bearer":
+        raise AuthError({"code": "invalid_header",
+                        "description":
+                            "Authorization header must start with"
+                            " Bearer"}, 401)
+    elif len(parts) == 1:
+        raise AuthError({"code": "invalid_header",
+                        "description": "Token not found"}, 401)
+    elif len(parts) > 2:
+        raise AuthError({"code": "invalid_header",
+                        "description":
+                            "Authorization header must be"
+                            " Bearer token"}, 401)
 
-    return res
+    token = parts[1]
+    return token
 
-if __name__=='__main__':
-    
-    app.run()
+# /server.py
+

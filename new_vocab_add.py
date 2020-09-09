@@ -38,9 +38,6 @@ def initialise_vocab_user(user_id, vocab, word_no):
     
     scheduler.schedule(user_id)
     
-    
-    
-    
 def new_vocab_add(cur, user_id, word_no):
     
     NEW_COMMAND = """
@@ -61,7 +58,15 @@ def new_vocab_add(cur, user_id, word_no):
     for vocab_id in new_words:
         
         first_set_active(cur, user_id, vocab_id)
+        
+def new_course(user_id, course_id):
+    
+    if course_id == "1":
+        
+        core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
+        
+        initialise_vocab_user(user_id, core_ids, 5)
     
 
-core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
-initialise_vocab_user("9", core_ids, 5)
+#core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
+#initialise_vocab_user("2", core_ids, 5)

@@ -166,3 +166,5 @@ wikipedia-downloader==0.2
 wikiquotes==1.4
 wordfreq==2.3.2
 zipp==3.1.0
+python-jose
+

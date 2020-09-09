@@ -26,7 +26,32 @@ def get_vocab(chunkid, cur):
     cur.execute(COMMAND, (chunkid,))
     return(cur.fetchall())
 
-def get_vocab_interaction_data(cur, chunkid, v, interaction):
+def get_relevant_sentences(cur, user_id, v, chunkids):
+    
+    # return array of the relevant sentences
+    
+    COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
+    INNER JOIN chunk_vocab cv
+    ON cv.chunk_id = c.id
+    WHERE c.id=%s OR c.id=%s
+    """
+    cur.execute(COMMAND, chunkids)
+    sentences = []
+    
+    for instance in cur.fetchall():
+        
+        sentence_breaks = [-1] + [int(k) for k in instance[1].split(",")]
+        lower_cap = sentence_breaks[int(instance[2])] + 1
+
+        location = int(instance[3].split(",")[0]) - lower_cap
+        sentence = instance[0].split("#")[lower_cap: upper_cap]
+        
+        sentences.append((sentence, location))
+    
+    return sentences
+        
+
+def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     
     interaction_data = []
     COMMAND = """
@@ -45,6 +70,8 @@ def get_vocab_interaction_data(cur, chunkid, v, interaction):
     outdata["tag"] = tag
 
     if interaction=="1":
+        
+        # load a sentence
 
         COMMAND = """
         SELECT c.id, c.chunk, cv.locations FROM chunks c
@@ -57,6 +84,8 @@ def get_vocab_interaction_data(cur, chunkid, v, interaction):
         outdata["raw"] = random.sample(options, min(2, len(options)))
 
     if interaction=="2":
+        
+        # load synonyms from synonym database
 
         COMMAND = """
         SELECT v.word, v.zipf FROM vocab v
@@ -70,6 +99,8 @@ def get_vocab_interaction_data(cur, chunkid, v, interaction):
         outdata["raw"] = options[max(-len(options), -3):]
 
     if interaction=="3":
+        
+        # 
 
         COMMAND = """
         SELECT word, zipf FROM vocab
@@ -96,8 +127,19 @@ def get_vocab_interaction_data(cur, chunkid, v, interaction):
         r = cur.fetchall()
         print(r)
         definition = r[0][0]
-        
         outdata["raw"] = definition
+        
+    if interaction=="5":
+        
+        COMMAND = """
+        SELECT rc.chunk1, rc.chunk2 FROM user_recentchunk rc
+        INNER JOIN chunk_vocab cv
+        ON cv.sense = rc.sense
+        WHERE rc.user_id=%s AND  rc.vocab_id=%s AND cv.chunk_id=%s
+        """
+        cur.execute(COMMAND, (user_id, v, chunkid))
+        chunk_ids = cur.fetchall()[0]
+        outdata["raw"] = get_relevant_sentences(cur, user_id, v, chunk_ids)
 
     return outdata
 
@@ -200,7 +242,7 @@ def next_chunk(cur, user_id, chunk_id):
         # put together the test_data
         
         mode = test_data[i]['mode']
-        interaction_data = get_vocab_interaction_data(cur, choices[0][0], test_data[i]['v'], mode)
+        interaction_data = get_vocab_interaction_data(cur, user_id, choices[0][0], test_data[i]['v'], mode)
         test_data[i]["tag"] = translate_tag(interaction_data["tag"])
         if mode == "1":
             for j, sen in enumerate(interaction_data["raw"]):
@@ -226,10 +268,14 @@ def next_chunk(cur, user_id, chunk_id):
     
     for i in test_data.keys():
         if test_data[i]["key"] == "1":
-            out["key"] = i
+            out["keyloc"] = i
+            
 
     #print("interactiondict", interactiondict)
     out["interaction"] = test_data
+    
+    print("HEMMMMMLO")
+    print(out["keyloc"])
 
     return out
 
