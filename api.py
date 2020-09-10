@@ -166,6 +166,7 @@ def get_first_chunk1(cur, user_id, req):
     if chunk_id:
         out = next_chunk(cur, user_id, chunk_id)
     else:
+        out = {}
         out["displayType"] = "done"
     
     res = make_response(jsonify(out))
@@ -232,7 +233,7 @@ def get_text_chunk():
         else:
             out["displayType"] = "done"
             new_conn, new_cur = connect()
-            x = threading.Thread(target=reviews_over.reviews_over, args=(user_id))
+            x = threading.Thread(target=reviews_over.reviews_over, args=(user_id,))
             x.start()
             print("Starting the background scheduling thread.")
 
@@ -295,14 +296,21 @@ def new_user():
 
 @app.route('/api/loadvocab', methods=["POST", "GET"])
 @cross_origin(origin='*')
+@requires_auth
 def load_vocab():
 
     conn, cur = connect()
     req = request.get_json()
     
-    user_id = req["userId"]
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
     
-    out = my_vocab.load_vocab(cur, req)
+    a = cur.fetchall()
+    user_id = a[0][0]
+    
+    out = my_vocab.load_vocab(cur, user_id, req)
     
     print(out)
     

@@ -1,8 +1,6 @@
 import psycopg2
 
-def load_vocab(cur, req):
-    
-    user_id = req["userId"]
+def load_vocab(cur, user_id, req):
     
     out = {}
     
