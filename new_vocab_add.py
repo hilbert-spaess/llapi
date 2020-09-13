@@ -4,6 +4,7 @@ import pickle
 import random
 from connect import connect
 import scheduler
+from config import DIRECTORY
 
 def first_set_active(cur, user_id, vocab_id):
     
@@ -63,7 +64,7 @@ def new_course(user_id, course_id):
     
     if course_id == "1":
         
-        core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
+        core_ids = pickle.load(open(DIRECTORY + "/data/core/toefl_core_ids.data", 'rb'))
         
         initialise_vocab_user(user_id, core_ids, 5)
     

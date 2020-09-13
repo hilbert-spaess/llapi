@@ -125,6 +125,8 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
         print(chunkid, v)
         cur.execute(COMMAND, (chunkid, v))
         r = cur.fetchall()
+        if not r:
+            return get_vocab_interaction_data(cur, user_id, chunkid, v, "3")
         print(r)
         definition = r[0][0]
         outdata["raw"] = definition
