@@ -142,7 +142,8 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
         cur.execute(COMMAND, (user_id, v, chunkid))
         chunk_ids = cur.fetchall()[0]
         outdata["raw"] = get_relevant_sentences(cur, user_id, v, chunk_ids)
-
+    
+    outdata["mode"] = interaction
     return outdata
 
 def choose_next_chunk(cur, user_id):
@@ -246,6 +247,8 @@ def next_chunk(cur, user_id, chunk_id):
         mode = test_data[i]['mode']
         interaction_data = get_vocab_interaction_data(cur, user_id, choices[0][0], test_data[i]['v'], mode)
         test_data[i]["tag"] = translate_tag(interaction_data["tag"])
+        test_data[i]["mode"] = interaction_data["mode"]
+        mode = test_data[i]["mode"]
         if mode == "1":
             for j, sen in enumerate(interaction_data["raw"]):
                 test_data[i][str(j)] = {'s': sen[1], 'l': sen[2]}
