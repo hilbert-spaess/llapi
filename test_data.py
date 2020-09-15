@@ -154,7 +154,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
     for i, item in enumerate(test_vocab):
         
         test_data[str(i)]["location"] = get_location(item[0])
-        test_data[str(i)]["length"] = sentence_breaks[item[1]]
+        test_data[str(i)]["length"] = str(int(sentence_breaks[item[1]]) + 1)
         
     # get streak
     
