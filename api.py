@@ -24,7 +24,7 @@ import sys
 sys.path.append('/var/www/html/llapi')
 sys.path.append('/home/ubuntu/.local/lib/python3.5/site-packages')
 
-AUTH0_DOMAIN = "dev-yt8x5if8.eu.auth0.com"
+AUTH0_DOMAIN = "accounts.ricecake.ai"
 API_AUDIENCE="http://localhost:5000"
 ALGORITHMS = ["RS256"]
 
