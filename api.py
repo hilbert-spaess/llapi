@@ -15,6 +15,7 @@ import threading
 import reviews_over
 import my_vocab
 import new_vocab_add
+from config import API_AUDIENCE
 
 from six.moves.urllib.request import urlopen
 from functools import wraps
@@ -25,7 +26,6 @@ sys.path.append('/var/www/html/llapi')
 sys.path.append('/home/ubuntu/.local/lib/python3.5/site-packages')
 
 AUTH0_DOMAIN = "accounts.ricecake.ai"
-API_AUDIENCE="http://localhost:5000"
 ALGORITHMS = ["RS256"]
 
 app = Flask(__name__)
@@ -81,7 +81,7 @@ def requires_auth(f):
         print(list(request.form.keys()))
         token = get_token_auth_header()
         jsonurl = urlopen("https://"+AUTH0_DOMAIN+"/.well-known/jwks.json")
-        jwks = json.loads(jsonurl.read())
+        jwks = json.loads(jsonurl.read().decode('utf-8'))
         unverified_header = jwt.get_unverified_header(token)
         rsa_key = {}
         for key in jwks["keys"]:
