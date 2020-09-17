@@ -213,6 +213,9 @@ def get_text_chunk():
     
     user_id = a[0][0]
     
+    if req == {}:
+        return make_response(jsonify({}))
+    
     if req["answeredCorrect"] == "-1":
         print("HEMLO this is the first chumk")
         return get_first_chunk1(cur, user_id, req)
