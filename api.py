@@ -7,7 +7,7 @@ import json
 import pandas as pd
 import spacy
 import psycopg2
-from api_helpers import choose_next_chunk, next_chunk
+from api_helpers import choose_next_chunk, next_chunk, get_all_chunks
 import api_helpers
 import on_review
 from connect import connect
@@ -165,9 +165,12 @@ def get_first_chunk1(cur, user_id, req):
     
     if chunk_id:
         out = next_chunk(cur, user_id, chunk_id)
+        out["allChunks"] = get_all_chunks(cur, user_id)
     else:
         out = {}
         out["displayType"] = "done"
+        
+        
     
     res = make_response(jsonify(out))
     
@@ -217,6 +220,7 @@ def get_text_chunk():
     else:
         
         print(req['keyloc'])
+        
 
         on_review.on_review(cur, user_id, req)
 
@@ -230,6 +234,8 @@ def get_text_chunk():
 
         if chunk_id:
             out = next_chunk(cur, user_id, chunk_id)
+            out["allChunks"] = get_all_chunks(cur, user_id)
+            print(out["allChunks"])
         else:
             out["displayType"] = "done"
             new_conn, new_cur = connect()

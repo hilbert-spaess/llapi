@@ -168,6 +168,32 @@ def choose_next_chunk(cur, user_id):
         choices = random.sample(choices, 1)
         return choices[0]
     
+def get_all_chunks(cur, user_id):
+    
+    COMMAND = """
+    SELECT c.id FROM chunks C
+    INNER JOIN user_nextchunk u
+    ON c.id = u.chunk_id
+    WHERE u.user_id = %s AND EXTRACT(DAY FROM u.next) <= EXTRACT(DAY FROM NOW()) 
+    """
+    cur.execute(COMMAND, (user_id,))
+    choices = cur.fetchall()
+    
+    """
+    all_chunks = {}
+    
+    for i, choice in enumerate(choices):
+        all_chunks[str(i)] = next_chunk(cur, user_id, choice[0])
+    """
+    
+    all_chunks = []
+    
+    for i,choice in enumerate(choices):
+        
+        all_chunks.append(next_chunk(cur, user_id, choice[0]))
+        
+    return all_chunks
+    
 
 def build_context(chunk, grammar, vocab, unknown_vocab):
     
