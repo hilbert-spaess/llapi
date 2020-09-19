@@ -142,14 +142,16 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction, nlp):
         # inflect them correctly
         
         ##
+        
+        first_letter = wd[0].lower()
 
         COMMAND = """
         SELECT word, zipf FROM vocab
-        WHERE pos=%s AND ABS(id - %s) < 200 AND id != %s
+        WHERE pos=%s AND LEFT(word,1)=%s AND id != %s
         """
-        cur.execute(COMMAND, (pos, v, v))
+        cur.execute(COMMAND, (pos, first_letter, v))
         options = [list(a) for a in cur.fetchall()]
-        options.sort(key=lambda x: np.abs(x[1] - zipf))
+        options.sort(key=lambda x: np.abs(x[1] - zipf) + np.abs(len(wd) - len(x[0])))
         y = options[:min(len(options), 3):]
         y.append([wd, zipf])
 
