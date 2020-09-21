@@ -171,7 +171,9 @@ def get_first_chunk1(cur, user_id, req):
     if chunk_id:
         out["allChunks"] = get_all_chunks(cur, user_id, nlp)
     else:
+        out["allChunks"] = [0]
         out["displayType"] = "done"
+        print("NOTHING LEFT")
         
         
     
@@ -223,35 +225,20 @@ def get_text_chunk():
         print(req["first"])
         
         if req["first"] == 1:
-            print("HWMLO BARRY")
-        
+            on_review.on_review(cur, user_id, req)
+            
+        if req["done"]:
 
-        on_review.on_review(cur, user_id, req)
-
-        cur.close()
-        conn.commit()
-        conn.close()
-
-        conn, cur = connect()
-
-        chunk_id = choose_next_chunk(cur, user_id)
-
-        if chunk_id:
-            out = next_chunk(cur, user_id, chunk_id, nlp)
-            out["allChunks"] = get_all_chunks(cur, user_id, nlp)
-            print(out["allChunks"])
-        else:
-            out["displayType"] = "done"
             new_conn, new_cur = connect()
             x = threading.Thread(target=reviews_over.reviews_over, args=(user_id,))
             x.start()
             print("Starting the background scheduling thread.")
-
-        res = make_response(jsonify(out))
-
+            
         cur.close()
         conn.commit()
         conn.close()
+
+        res = make_response(jsonify({}))
 
         return res
     
@@ -354,6 +341,42 @@ def get_data():
 
     return res
 
+
+@app.route('/api/todaywords', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def get_today_words():
+    
+    conn, cur = connect()
+    req = request.get_json()
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    a = cur.fetchall()
+    
+    user_id = a[0][0]
+    
+    COMMAND = """SELECT word FROM vocab v
+    INNER JOIN user_vocab_log l 
+    ON v.id = l.vocab_id
+    WHERE l.user_id=%s AND EXTRACT(DAY FROM l.time) = EXTRACT(DAY FROM NOW()) 
+    """
+    cur.execute(COMMAND, (user_id,))
+    
+    words = cur.fetchall()
+    
+    out = {}
+    out["words"] = [x[0] for x in words]
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+    
+    return res
 
     # Format error response and append status code
 def get_token_auth_header():

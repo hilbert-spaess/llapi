@@ -8,17 +8,29 @@ def on_review(cur, user_id, req):
     
     key_location = int(req["keyloc"])
     correct = req["answers"][key_location]
-    streak = req["interaction"][str(key_location)]["streak"] + correct
+    
+    def calculate_streak():
+        
+        current_streak = req["interaction"][str(key_location)]["streak"]
+        
+        if not correct:
+            return 1
+        
+        else:
+            return current_streak + 1
+        
+    streak = calculate_streak()
     
     print("Streak", streak)
+            
     
     def log_result():
     
         # user_vocab_log
 
         COMMAND = """
-        INSERT INTO user_vocab_log(user_id, vocab_id, chunk_id, result)
-        VALUES(%s, %s, %s, %s)
+        INSERT INTO user_vocab_log(user_id, vocab_id, chunk_id, result, time)
+        VALUES(%s, %s, %s, %s, NOW())
         """
         cur.execute(COMMAND, (user_id, req["interaction"][req["keyloc"]]["v"], req["chunkId"], correct))
         
@@ -40,6 +52,9 @@ def on_review(cur, user_id, req):
         cur.execute(COMMAND, (user_id, req["chunkId"]))
         
     def set_unscheduled():
+        
+        print(next_time())
+        print(streak)
     
         COMMAND = """
         UPDATE user_vocab
@@ -65,11 +80,7 @@ def on_review(cur, user_id, req):
     
     print("Deleted")
     
-    if correct:
-        
-        print("CORRECT")
-        
-        # set unscheduled in user_vocab; set time for next review to be scheduled.
+    print("correct", correct)
 
-        set_unscheduled()
+    set_unscheduled()
     

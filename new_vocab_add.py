@@ -6,14 +6,14 @@ from connect import connect
 import scheduler
 from config import DIRECTORY
 
-def first_set_active(cur, user_id, vocab_id):
+def first_set_active(cur, user_id, vocab_id, delay):
     
     ACTIVE_COMMAND = """
     UPDATE user_vocab
-    SET active=1, next=NOW()
+    SET active=1, next=(NOW() + (%s * INTERVAL '1 day'))
     WHERE user_id=%s AND vocab_id=%s
     """
-    cur.execute(ACTIVE_COMMAND, (user_id, vocab_id))             
+    cur.execute(ACTIVE_COMMAND, (delay, user_id, vocab_id))             
 
 def initialise_vocab_user(user_id, vocab, word_no):
     
@@ -31,7 +31,7 @@ def initialise_vocab_user(user_id, vocab, word_no):
     
     # ?10? words added to reviews IF there are >1 chunks using IT.
                     
-    new_vocab_add(cur, user_id, word_no)
+    new_vocab_add(cur, user_id, word_no, 0)
     
     cur.close()
     conn.commit()
@@ -39,7 +39,7 @@ def initialise_vocab_user(user_id, vocab, word_no):
     
     scheduler.schedule(user_id)
     
-def new_vocab_add(cur, user_id, word_no):
+def new_vocab_add(cur, user_id, word_no, delay):
     
     NEW_COMMAND = """
     SELECT u.vocab_id FROM user_vocab u
@@ -58,7 +58,7 @@ def new_vocab_add(cur, user_id, word_no):
     
     for vocab_id in new_words:
         
-        first_set_active(cur, user_id, vocab_id)
+        first_set_active(cur, user_id, vocab_id, delay)
         
 def new_course(user_id, course_id):
     
