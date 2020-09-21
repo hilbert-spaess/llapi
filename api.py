@@ -5,10 +5,8 @@ import csv
 import numpy as np
 import json
 import pandas as pd
-import spacy
 import psycopg2
 from api_helpers import choose_next_chunk, next_chunk, get_all_chunks
-import api_helpers
 import on_review
 from connect import connect
 import threading
