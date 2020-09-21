@@ -31,9 +31,6 @@ ALGORITHMS = ["RS256"]
 app = Flask(__name__)
 CORS(app)
 
-nlp = spacy.load("en_core_web_md")
-print("dependencies loaded")
-
 class AuthError(Exception):
     
     def __init__(self, error, status_code):
@@ -169,7 +166,7 @@ def get_first_chunk1(cur, user_id, req):
     out = {}
     
     if chunk_id:
-        out["allChunks"] = get_all_chunks(cur, user_id, nlp)
+        out["allChunks"] = get_all_chunks(cur, user_id)
     else:
         out["allChunks"] = [0]
         out["displayType"] = "done"

@@ -5,6 +5,10 @@ import random
 from connect import connect
 import test_data
 import json
+import spacy
+import lemminflect
+
+nlp = spacy.load("en_core_web_md")
 
 def find_unscheduled_vocab(cur, user_id):
     
@@ -71,7 +75,7 @@ def schedule_next_chunk_basic(cur, vocab_id, user_id):
     
     unknown_vocab = get_unknown_vocab(cur, vocab_id, user_id)
     
-    my_test_data = test_data.get_test_data(cur, vocab_id, user_id, next_chunk)
+    my_test_data = test_data.get_test_data(cur, vocab_id, user_id, next_chunk, nlp)
     
     SCHEDULE_COMMAND = """
     INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab)

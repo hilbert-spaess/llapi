@@ -3,7 +3,6 @@ import random
 import psycopg2
 import threading
 import scheduler
-import lemminflect
 
 def get_grammar(chunkid, cur):
 
@@ -87,7 +86,7 @@ def get_relevant_sentences(cur, user_id, v, chunkids):
     return sentences
         
 
-def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction, nlp):
+def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     
     interaction_data = []
     COMMAND = """
@@ -143,23 +142,6 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction, nlp):
         
         ##
         
-        first_letter = wd[0].lower()
-
-        COMMAND = """
-        SELECT word, zipf FROM vocab
-        WHERE pos=%s AND LEFT(word,1)=%s AND id != %s
-        """
-        cur.execute(COMMAND, (pos, first_letter, v))
-        options = [list(a) for a in cur.fetchall()]
-        options.sort(key=lambda x: np.abs(x[1] - zipf) + np.abs(len(wd) - len(x[0])))
-        y = options[:min(len(options), 3):]
-        y.append([wd, zipf])
-
-        for i in range(len(y)):
-            y[i][0] = nlp(y[i][0])[0]._.inflect(tag)
-        random.shuffle(y)
-        outdata["raw"] = y
-        
         samples = get_all_sample_sentences(cur, v, chunkid)
         outdata["samples"] = samples
     
@@ -175,7 +157,7 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction, nlp):
         cur.execute(COMMAND, (chunkid, v))
         r = cur.fetchall()
         if not r:
-            return get_vocab_interaction_data(cur, user_id, chunkid, v, "3", nlp)
+            return get_vocab_interaction_data(cur, user_id, chunkid, v, "3")
         print(r)
         definition = r[0][0]
         samples = get_all_sample_sentences(cur, v, chunkid)
@@ -224,7 +206,7 @@ def choose_next_chunk(cur, user_id):
         choices = random.sample(choices, 1)
         return choices[0]
     
-def get_all_chunks(cur, user_id, nlp):
+def get_all_chunks(cur, user_id):
     
     COMMAND = """
     SELECT c.id FROM chunks C
@@ -246,7 +228,7 @@ def get_all_chunks(cur, user_id, nlp):
     
     for i,choice in enumerate(choices):
         
-        all_chunks.append(next_chunk(cur, user_id, choice[0], nlp))
+        all_chunks.append(next_chunk(cur, user_id, choice[0]))
         
     return all_chunks
     
@@ -294,7 +276,7 @@ def translate_tag(tag):
     else:
         return tag
     
-def next_chunk(cur, user_id, chunk_id, nlp):
+def next_chunk(cur, user_id, chunk_id):
     
     COMMAND = """
     SELECT c.id, c.chunk, u.test_data, u.unknown_vocab FROM chunks C
@@ -327,7 +309,7 @@ def next_chunk(cur, user_id, chunk_id, nlp):
         # put together the test_data
         
         mode = test_data[i]['mode']
-        interaction_data = get_vocab_interaction_data(cur, user_id, choices[0][0], test_data[i]['v'], mode, nlp)
+        interaction_data = get_vocab_interaction_data(cur, user_id, choices[0][0], test_data[i]['v'], mode)
         test_data[i]["tag"] = translate_tag(interaction_data["tag"])
         test_data[i]["mode"] = interaction_data["mode"]
         mode = test_data[i]["mode"]
@@ -338,8 +320,6 @@ def next_chunk(cur, user_id, chunk_id, nlp):
             for j, sen in enumerate(interaction_data["raw"]):
                 test_data[i][str(j)] = {'s': sen[0]}
         if mode == "3":
-            for j, sen in enumerate(interaction_data["raw"]):
-                test_data[i][str(j)] = {'s': sen[0]}
             test_data[i]["samples"] = interaction_data["samples"]
         if mode == "4":
             test_data[i]["def"] = interaction_data["raw"]
