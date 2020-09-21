@@ -363,6 +363,9 @@ def next_chunk(cur, user_id, chunk_id, nlp):
     #print("interactiondict", interactiondict)
     out["interaction"] = test_data
     
+    out["first"] = 1
+    
+    
     print("HEMMMMMLO")
     print(out["keyloc"])
 

@@ -131,6 +131,14 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
 
         return potential
     
+    def get_lower_upper(sentence_breaks, key_location):
+        
+        sb = [-1] + [int(k) for k in sentence_breaks]
+        lower_cap = sb[int(key_location)] + 1
+        upper_cap = sb[int(key_location)+1]+1
+        
+        return [lower_cap, upper_cap]
+    
     test_data = {}
     
     # a JSON to into the user_nextchunk database for ease of loading.
@@ -160,11 +168,18 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
     
     test_data[key_location]["streak"] = get_streak()
     test_data[key_location]["sense"] = get_sense()
+    test_data[key_location]["lower_upper"] = get_lower_upper(sentence_breaks, key_location)
+    
+    print("lower-upper", test_data[key_location]["lower_upper"])
 
     # choose interaction methodology for each (based on streak data)
     
     for i, item in enumerate(test_vocab):
         
         test_data[str(i)]["mode"] = get_interaction_mode(item)
+        
+        if get_interaction_mode(item) == "3":
+            
+            continue
     
     return test_data

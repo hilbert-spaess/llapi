@@ -166,11 +166,11 @@ def get_first_chunk1(cur, user_id, req):
     chunk_id = choose_next_chunk(cur, user_id)
     print("chunk id: ", chunk_id)
     
+    out = {}
+    
     if chunk_id:
-        out = next_chunk(cur, user_id, chunk_id, nlp)
         out["allChunks"] = get_all_chunks(cur, user_id, nlp)
     else:
-        out = {}
         out["displayType"] = "done"
         
         
@@ -185,14 +185,11 @@ def get_first_chunk1(cur, user_id, req):
 @requires_auth
 def get_text_chunk():
     
-    print("HENLO there sir")
-    
     req = request.get_json()
     conn, cur = connect()
     out = {}
     
     print(req)
-    print("HEMLO")
     
     COMMAND = """SELECT id FROM users
     WHERE name=%s
@@ -200,8 +197,6 @@ def get_text_chunk():
     cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
     
     a = cur.fetchall()
-    
-    print(a)
     
     if not a:
         out["displayType"] = "newUser"
@@ -225,7 +220,10 @@ def get_text_chunk():
     
     else:
         
-        print(req['keyloc'])
+        print(req["first"])
+        
+        if req["first"] == 1:
+            print("HWMLO BARRY")
         
 
         on_review.on_review(cur, user_id, req)
@@ -239,8 +237,8 @@ def get_text_chunk():
         chunk_id = choose_next_chunk(cur, user_id)
 
         if chunk_id:
-            out = next_chunk(cur, user_id, chunk_id)
-            out["allChunks"] = get_all_chunks(cur, user_id)
+            out = next_chunk(cur, user_id, chunk_id, nlp)
+            out["allChunks"] = get_all_chunks(cur, user_id, nlp)
             print(out["allChunks"])
         else:
             out["displayType"] = "done"
