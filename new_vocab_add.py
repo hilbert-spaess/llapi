@@ -68,7 +68,7 @@ def new_course(user_id, course_id):
         
         conn, cur = connect()
         
-        with open("./data/core/core_curriculum.csv") as csvfile:
+        with open(DIRECTORY + "/data/core/core_curriculum.csv") as csvfile:
             
             csvreader = csv.reader(csvfile)
             
