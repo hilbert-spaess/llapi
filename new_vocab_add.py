@@ -6,6 +6,8 @@ from connect import connect
 import scheduler
 from config import DIRECTORY
 
+print("dependencies loaded")
+
 def first_set_active(cur, user_id, vocab_id, delay):
     
     ACTIVE_COMMAND = """
@@ -64,10 +66,32 @@ def new_course(user_id, course_id):
     
     if course_id == "1":
         
-        core_ids = pickle.load(open(DIRECTORY + "/data/core/toefl_core_ids.data", 'rb'))
+        conn, cur = connect()
         
-        initialise_vocab_user(user_id, core_ids, 5)
+        with open("./data/core/core_curriculum.csv") as csvfile:
+            
+            csvreader = csv.reader(csvfile)
+            
+            for row in csvreader:
+                
+                if row[0].strip():
+
+                    
+                    INS_COMMAND = """
+                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, sense, definition)
+                    VALUES(%s, %s, %s, %s, %s, %s, %s)
+                    """
+                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[1].strip(), row[2].strip()))
+        
+        
+        new_vocab_add(cur, user_id, 5, 0)
+        
+        cur.close()
+        conn.commit()
+        conn.close()
+        
+        scheduler.schedule(user_id)
     
 
 #core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
-#initialise_vocab_user("2", core_ids, 5)
+new_course("1", "1")

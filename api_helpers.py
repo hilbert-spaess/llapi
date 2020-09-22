@@ -147,18 +147,12 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     
     if interaction=="4":
         
-        COMMAND = """
-        SELECT s.definition, s.id FROM synsets s
-        INNER JOIN chunk_vocab cv
-        ON cv.sense = s.id
-        WHERE cv.chunk_id=%s AND cv.vocab_id=%s
-        """
-        print(chunkid, v)
-        cur.execute(COMMAND, (chunkid, v))
+        COMMAND = """SELECT definition FROM user_vocab
+        WHERE user_id=%s AND vocab_id=%s"""
+        cur.execute(COMMAND, (user_id, v))
         r = cur.fetchall()
         if not r:
             return get_vocab_interaction_data(cur, user_id, chunkid, v, "3")
-        print(r)
         definition = r[0][0]
         samples = get_all_sample_sentences(cur, v, chunkid)
         samples = samples[:min(2, len(samples))]

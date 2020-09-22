@@ -179,7 +179,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk, nlp):
     for i, item in enumerate(test_vocab):
         
         test_data[str(i)]["mode"] = get_interaction_mode(item)
-        
+   
         if get_interaction_mode(item) == "3":
             
             COMMAND = """
