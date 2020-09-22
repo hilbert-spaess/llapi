@@ -2,8 +2,9 @@ import psycopg2
 import csv
 import pickle
 import random
-import lemminflect
+from pyinflect import InflectionEngine
 import numpy as np
+
 
 def get_vocab_data(cur, vocab_id, user_id, next_chunk, v_context):
     
@@ -21,7 +22,7 @@ def get_vocab_data(cur, vocab_id, user_id, next_chunk, v_context):
     # for a particular vocab id, find location, interaction mechanism, length after the interaction
 
 
-def get_test_data(cur, vocab_id, user_id, next_chunk, nlp):
+def get_test_data(cur, vocab_id, user_id, next_chunk):
     
     def get_streak():
     
@@ -201,16 +202,21 @@ def get_test_data(cur, vocab_id, user_id, next_chunk, nlp):
             SELECT word, zipf FROM vocab
             WHERE pos=%s AND LEFT(word,1)=%s AND id != %s
             """
-            cur.execute(COMMAND, (pos, first_letter, vocab_id))
+            cur.execute(COMMAND, (pos, first_letter, item[0]))
             options = [list(a) for a in cur.fetchall()]
             options.sort(key=lambda x: np.abs(x[1] - zipf) + np.abs(len(wd) - len(x[0])))
             y = options[:min(len(options), 3):]
-            y.append([wd, zipf])
             
             print("YMCA",  y)
+            y.append([wd, zipf])
 
             for idc in range(len(y)):
-                y[idc][0] = nlp(y[idc][0])[0]._.inflect(tag)
+                print(y[idc][0])
+                print(tag)
+                a = InflectionEngine().getInflection(y[idc][0].split(" ")[0], tag)
+                if a:
+                    y[idc][0] = a[0]
+                
             random.shuffle(y)
             
             print(wd)
