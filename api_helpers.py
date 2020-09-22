@@ -145,7 +145,7 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
         samples = get_all_sample_sentences(cur, v, chunkid)
         outdata["samples"] = samples
     
-    if interaction=="4":
+    if interaction in ["4", "6"]:
         
         COMMAND = """SELECT definition FROM user_vocab
         WHERE user_id=%s AND vocab_id=%s"""
@@ -315,7 +315,7 @@ def next_chunk(cur, user_id, chunk_id):
                 test_data[i][str(j)] = {'s': sen[0]}
         if mode == "3":
             test_data[i]["samples"] = interaction_data["samples"]
-        if mode == "4":
+        if mode in ["4", "6"]:
             test_data[i]["def"] = interaction_data["raw"]
             test_data[i]["samples"] = interaction_data["samples"]
                 

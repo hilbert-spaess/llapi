@@ -96,7 +96,10 @@ def get_test_data(cur, vocab_id, user_id, next_chunk, nlp):
     
         # will need code here once I figure out what good interactions look like
         if item[2]:
-            return "4"
+            if not get_streak():
+                return "6"
+            else:
+                return "4"
         else:
             return "3"
     
@@ -180,7 +183,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk, nlp):
         
         test_data[str(i)]["mode"] = get_interaction_mode(item)
    
-        if get_interaction_mode(item) == "3":
+        if get_interaction_mode(item) in ["3", "6"]:
             
             COMMAND = """
             SELECT v.pos, v.zipf, v.word, cv.tags FROM vocab v
