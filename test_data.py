@@ -183,6 +183,29 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
     for i, item in enumerate(test_vocab):
         
         test_data[str(i)]["mode"] = get_interaction_mode(item)
+        
+        if get_interaction_mode(item) in ["4", "6"]:
+            
+            COMMAND = """
+            SELECT v.pos, v.zipf, v.word, cv.tags FROM vocab v
+            INNER JOIN chunk_vocab cv
+            ON cv.vocab_id = v.id
+            WHERE v.id = %s AND chunk_id=%s
+            """
+            cur.execute(COMMAND, (item[0], next_chunk))
+            out = cur.fetchall()[0]
+            pos = out[0]; zipf = out[1]; wd = out[2]; tag = out[3].split(",")[0]
+            
+            alternatives = []
+            
+            altdict = InflectionEngine().getAllInflections(wd)
+            
+            for t in altdict.values():
+                for z in t:
+                    alternatives.append(z)
+           
+            
+            test_data[str(i)]["alternatives"] = alternatives
    
         if get_interaction_mode(item) in ["3", "6"]:
             
