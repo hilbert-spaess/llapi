@@ -94,4 +94,3 @@ def new_course(user_id, course_id):
     
 
 #core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
-new_course("1", "1")
