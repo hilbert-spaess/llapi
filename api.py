@@ -388,7 +388,7 @@ def new_user_level_test():
     WHERE zipf > 4 AND zipf < 5"""
     cur.execute(COMMAND)
     records = cur.fetchall()
-    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 1)
+    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 3)
     
     for x in vocab:
         out["words"].append(x)
@@ -397,7 +397,7 @@ def new_user_level_test():
     WHERE zipf > 3 AND zipf < 4"""
     cur.execute(COMMAND)
     records = cur.fetchall()
-    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 1)
+    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 3)
     for x in vocab:
         out["words"].append(x)
     
@@ -405,7 +405,7 @@ def new_user_level_test():
     WHERE zipf > 2 AND zipf < 3"""
     cur.execute(COMMAND)
     records = cur.fetchall()
-    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 1)
+    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 3)
     
     for x in vocab:
         out["words"].append(x)
@@ -414,7 +414,7 @@ def new_user_level_test():
     WHERE zipf < 2"""
     cur.execute(COMMAND)
     records = cur.fetchall()
-    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 1)
+    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 3)
     for x in vocab:
         out["words"].append(x)
     
