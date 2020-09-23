@@ -14,6 +14,7 @@ import reviews_over
 import my_vocab
 import new_vocab_add
 from config import API_AUDIENCE
+import random
 
 from six.moves.urllib.request import urlopen
 from functools import wraps
@@ -119,7 +120,6 @@ def requires_auth(f):
         raise AuthError({"code": "invalid_header",
                         "description": "Unable to find appropriate key"}, 401)
     return decorated
-
 
 @app.route('/api/firstchunk', methods=["POST", "GET"])
 @cross_origin(origin='*')
@@ -255,7 +255,7 @@ def new_user():
     
     if not a:
         
-        course_id = req["courseChoice"]
+        course_id = req["course"]
         print("course choice", course_id)
         
         COMMAND = """INSERT INTO users(name, vlevel)
@@ -372,6 +372,60 @@ def get_today_words():
     conn.close()
     
     return res
+
+@app.route('/api/newuserleveltest', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def new_user_level_test():
+    
+    conn, cur = connect()
+    req = request.get_json()
+    
+    out = {}
+    out["words"] = []
+    
+    COMMAND = """SELECT word FROM vocab
+    WHERE zipf > 4 AND zipf < 5"""
+    cur.execute(COMMAND)
+    records = cur.fetchall()
+    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 1)
+    
+    for x in vocab:
+        out["words"].append(x)
+        
+    COMMAND = """SELECT word FROM vocab
+    WHERE zipf > 3 AND zipf < 4"""
+    cur.execute(COMMAND)
+    records = cur.fetchall()
+    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 1)
+    for x in vocab:
+        out["words"].append(x)
+    
+    COMMAND = """SELECT word FROM vocab
+    WHERE zipf > 2 AND zipf < 3"""
+    cur.execute(COMMAND)
+    records = cur.fetchall()
+    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 1)
+    
+    for x in vocab:
+        out["words"].append(x)
+        
+    COMMAND = """SELECT word FROM vocab
+    WHERE zipf < 2"""
+    cur.execute(COMMAND)
+    records = cur.fetchall()
+    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 1)
+    for x in vocab:
+        out["words"].append(x)
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+    
+    return res
+    
 
     # Format error response and append status code
 def get_token_auth_header():

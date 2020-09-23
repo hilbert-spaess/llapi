@@ -64,7 +64,10 @@ def new_vocab_add(cur, user_id, word_no, delay):
         
 def new_course(user_id, course_id):
     
-    if course_id == "1":
+    print("YO")
+    print(course_id == 1)
+    
+    if course_id == 1:
         
         conn, cur = connect()
         
