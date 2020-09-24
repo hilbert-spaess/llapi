@@ -251,6 +251,8 @@ def new_user():
     """
     cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
     
+    print(req)
+    
     a = cur.fetchall()
     
     if not a:
@@ -258,10 +260,10 @@ def new_user():
         course_id = req["course"]
         print("course choice", course_id)
         
-        COMMAND = """INSERT INTO users(name, vlevel, course_id)
-        VALUES(%s, %s, %s)
+        COMMAND = """INSERT INTO users(name, vlevel, course_id, email)
+        VALUES(%s, %s, %s, %s)
         RETURNING id"""
-        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], '4.5', course_id))
+        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], '4.5', course_id, req["email"]))
         user_id = cur.fetchall()[0][0]
         print("id", user_id)
         
@@ -437,6 +439,7 @@ def load_progress():
     COMMAND = """SELECT id FROM users
     WHERE name=%s
     """
+    
     cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
     
     a = cur.fetchall()
