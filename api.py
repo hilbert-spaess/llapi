@@ -164,8 +164,16 @@ def get_first_chunk1(cur, user_id, req):
     out = {}
     
     if chunk_id:
-        allchunks = get_all_chunks(cur, user_id)
+        allchunks = []
+        newallchunks = get_all_chunks(cur, user_id)
+        for chunk in newallchunks:
+            print(chunk)
+            if chunk["first"]:
+                allchunks.append(chunk)
         random.shuffle(allchunks)
+        for chunk in newallchunks:
+            if not chunk["first"]:
+                allchunks.append(chunk)
         out["allChunks"] = allchunks
     else:
         out["allChunks"] = [0]
@@ -222,6 +230,10 @@ def get_text_chunk():
         print(req["first"])
         
         if req["first"] == 1:
+            on_review.set_first(cur, user_id, req)
+        
+        if req["first"] == 0:
+            print("REVIEW")
             on_review.on_review(cur, user_id, req)
             
         if req["done"]:

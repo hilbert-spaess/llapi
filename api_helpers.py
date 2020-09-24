@@ -273,7 +273,7 @@ def translate_tag(tag):
 def next_chunk(cur, user_id, chunk_id):
     
     COMMAND = """
-    SELECT c.id, c.chunk, u.test_data, u.unknown_vocab FROM chunks C
+    SELECT c.id, c.chunk, u.test_data, u.unknown_vocab, u.first FROM chunks C
     INNER JOIN user_nextchunk u
     ON c.id = u.chunk_id
     WHERE c.id = %s AND u.user_id=%s 
@@ -286,6 +286,7 @@ def next_chunk(cur, user_id, chunk_id):
     out = {}
     
     out["displayType"] = "sentence"
+    
 
     chunk = choices[0][1].split("#")
     grammar = get_grammar(choices[0][0], cur)
@@ -337,8 +338,37 @@ def next_chunk(cur, user_id, chunk_id):
     #print("interactiondict", interactiondict)
     out["interaction"] = test_data
     
-    out["first"] = 1
+    out["first"] = choices[0][4]
     
+    if not out["first"]:
+        
+        newout = {}
+        
+        lower = out["interaction"][out["keyloc"]]["lower_upper"][0]
+        upper = out["interaction"][out["keyloc"]]["lower_upper"][1]
+        
+        interaction = {}
+        interaction["0"] = out["interaction"][out["keyloc"]]
+        loc = int(interaction["0"]["location"]) - lower
+        leng = int(interaction["0"]["length"]) - lower
+        interaction["0"]["location"] = loc
+        interaction["0"]["length"] = leng
+        
+        newout["keyloc"] = "0"
+        newout["interaction"] = interaction
+        newout["context"] = {}
+        print(out["context"])
+        print(upper)
+        for i in range(lower, upper):
+            newout["context"][str(i - lower)] = out["context"][str(i)]
+        newout["context"]["i"] = "0"
+        newout["grammar"] = out["grammar"]
+        newout["chunkid"] = out["chunkid"]
+        newout["displayType"] = "sentence"
+        newout["first"] = 0
+        
+        return newout
+        
     
     print("HEMMMMMLO")
     print(out["keyloc"])

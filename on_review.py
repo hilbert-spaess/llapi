@@ -4,6 +4,17 @@ import csv
 import pickle
 import random
 
+def set_first(cur, user_id, req):
+    
+    chunk_id = req["chunkId"]
+    
+    COMMAND = """UPDATE user_nextchunk
+    SET first=0
+    WHERE user_id=%s AND chunk_id=%s
+    """
+    cur.execute(COMMAND, (user_id, chunk_id))
+    
+
 def on_review(cur, user_id, req):
     
     key_location = int(req["keyloc"])

@@ -74,8 +74,8 @@ def schedule_next_chunk_basic(cur, vocab_id, user_id):
     my_test_data = test_data.get_test_data(cur, vocab_id, user_id, next_chunk)
     
     SCHEDULE_COMMAND = """
-    INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab)
-    VALUES(%s, %s, %s, %s, %s)
+    INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab, first)
+    VALUES(%s, %s, %s, %s, %s, 1)
     """
     cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, schedule_time, json.dumps(my_test_data), unknown_vocab))
     
