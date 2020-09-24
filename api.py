@@ -11,7 +11,7 @@ import on_review
 from connect import connect
 import threading
 import reviews_over
-import my_vocab
+import my_vocab, my_progress
 import new_vocab_add
 from config import API_AUDIENCE
 import random
@@ -258,10 +258,10 @@ def new_user():
         course_id = req["course"]
         print("course choice", course_id)
         
-        COMMAND = """INSERT INTO users(name, vlevel)
-        VALUES(%s, %s)
+        COMMAND = """INSERT INTO users(name, vlevel, course_id)
+        VALUES(%s, %s, %s)
         RETURNING id"""
-        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], '4.5'))
+        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], '4.5', course_id))
         user_id = cur.fetchall()[0][0]
         print("id", user_id)
         
@@ -425,7 +425,34 @@ def new_user_level_test():
     conn.close()
     
     return res
+
+@app.route('/api/loadprogress', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def load_progress():
+
+    conn, cur = connect()
+    req = request.get_json()
     
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    a = cur.fetchall()
+    user_id = a[0][0]
+    
+    out = my_progress.load_progress(cur, user_id)
+    
+    print(out)
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+
+    return res    
 
     # Format error response and append status code
 def get_token_auth_header():
