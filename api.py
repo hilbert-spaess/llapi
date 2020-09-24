@@ -164,7 +164,9 @@ def get_first_chunk1(cur, user_id, req):
     out = {}
     
     if chunk_id:
-        out["allChunks"] = get_all_chunks(cur, user_id)
+        allchunks = get_all_chunks(cur, user_id)
+        random.shuffle(allchunks)
+        out["allChunks"] = allchunks
     else:
         out["allChunks"] = [0]
         out["displayType"] = "done"
