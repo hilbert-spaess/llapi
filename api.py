@@ -220,6 +220,7 @@ def get_text_chunk():
     user_id = a[0][0]
     
     if "tutorial" in req.keys() and req["tutorial"] == "done":
+        print("TUTORIAL OVER")
         COMMAND = """UPDATE users
         SET tutorial = 0
         WHERE id=%s
@@ -229,7 +230,7 @@ def get_text_chunk():
         COMMAND = """DELETE FROM user_nextchunk
         WHERE user_id=%s AND chunk_id=1492
         """
-        
+        cur.execute(COMMAND, (user_id,))
         cur.close()
         conn.commit()
         conn.close()
