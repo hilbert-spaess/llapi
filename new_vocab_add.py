@@ -89,6 +89,9 @@ def new_course(user_id, course_id):
         
         new_vocab_add(cur, user_id, 5, 0)
         
+        # schedule tutorial
+        scheduler.schedule_next_chunk_fixed(cur, "3284", user_id, "1492")
+        
         cur.close()
         conn.commit()
         conn.close()

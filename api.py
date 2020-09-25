@@ -6,7 +6,7 @@ import numpy as np
 import json
 import pandas as pd
 import psycopg2
-from api_helpers import choose_next_chunk, next_chunk, get_all_chunks
+from api_helpers import choose_next_chunk, next_chunk, get_all_chunks, load_tutorial
 import on_review
 from connect import connect
 import threading
@@ -198,12 +198,13 @@ def get_text_chunk():
     
     print(req)
     
-    COMMAND = """SELECT id FROM users
+    COMMAND = """SELECT id, tutorial FROM users
     WHERE name=%s
     """
     cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
     
     a = cur.fetchall()
+    
     
     if not a:
         out["displayType"] = "newUser"
@@ -217,6 +218,40 @@ def get_text_chunk():
         return res
     
     user_id = a[0][0]
+    
+    if "tutorial" in req.keys() and req["tutorial"] == "done":
+        COMMAND = """UPDATE users
+        SET tutorial = 0
+        WHERE id=%s
+        """
+        cur.execute(COMMAND, (user_id,))
+        
+        COMMAND = """DELETE FROM user_nextchunk
+        WHERE user_id=%s AND chunk_id=1492
+        """
+        
+        cur.close()
+        conn.commit()
+        conn.close()
+        
+        conn, cur = connect()
+    
+    elif a[0][1]:
+        
+        out = {}
+        
+        out["tutorialchunk"] = load_tutorial(cur, user_id)
+        
+        out["displayType"] = "tutorial"
+        
+        cur.close()
+        conn.commit()
+        conn.close()
+
+        res = make_response(jsonify(out))
+
+        return res
+        
     
     if req == {}:
         return make_response(jsonify({}))
@@ -274,8 +309,8 @@ def new_user():
         course_id = req["course"]
         print("course choice", course_id)
         
-        COMMAND = """INSERT INTO users(name, vlevel, course_id, email)
-        VALUES(%s, %s, %s, %s)
+        COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial)
+        VALUES(%s, %s, %s, %s, 1)
         RETURNING id"""
         cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], '4.5', course_id, req["email"]))
         user_id = cur.fetchall()[0][0]
@@ -316,6 +351,19 @@ def load_vocab():
     cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
     
     a = cur.fetchall()
+    
+    if not a:
+        out = {}
+        out["displayType"] = "newUser"
+        
+        res = make_response(jsonify(out))
+    
+        cur.close()
+        conn.commit()
+        conn.close()
+
+        return res  
+    
     user_id = a[0][0]
     
     out = my_vocab.load_vocab(cur, user_id, req)
@@ -457,9 +505,73 @@ def load_progress():
     cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
     
     a = cur.fetchall()
+    
+    if not a:
+        out = {}
+        out["displayType"] = "newUser"
+        
+        res = make_response(jsonify(out))
+    
+        cur.close()
+        conn.commit()
+        conn.close()
+
+        return res  
+        
     user_id = a[0][0]
     
     out = my_progress.load_progress(cur, user_id)
+    
+    print(out)
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+
+    return res    
+
+@app.route('/api/notificationno', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def load_notifications():
+
+    conn, cur = connect()
+    req = request.get_json()
+    
+    COMMAND = """SELECT id, tutorial FROM users
+    WHERE name=%s
+    """
+    
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    a = cur.fetchall()
+    
+    if not a:
+        out = {}
+        out["displayType"] = "newUser"
+        
+        res = make_response(jsonify(out))
+    
+        cur.close()
+        conn.commit()
+        conn.close()
+
+        return res  
+        
+    user_id = a[0][0]
+    tutorial = a[0][1]
+    
+    COMMAND = """SELECT * FROM user_nextchunk
+    WHERE user_id=%s
+    """
+    cur.execute(COMMAND, (user_id,))
+    
+    records = cur.fetchall()
+    out = {}
+    out["notification"] = len(records)
+    out["tutorial"] = tutorial
     
     print(out)
     

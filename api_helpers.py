@@ -375,6 +375,10 @@ def next_chunk(cur, user_id, chunk_id):
 
     return out
 
+def load_tutorial(cur, user_id):
+    
+    return next_chunk(cur, user_id, "1492")
+
 def get_data(cur, req):
     
     stats = {}
@@ -460,6 +464,7 @@ def remove_chunk(userid, chunkid, cur):
     WHERE user_id = %s AND chunk_id = %s
     """
     cur.execute(remove_command, (userid, chunkid))
+    
     
 def get_next(streak, correct):
     
