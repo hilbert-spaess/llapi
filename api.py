@@ -6,7 +6,7 @@ import numpy as np
 import json
 import pandas as pd
 import psycopg2
-from api_helpers import choose_next_chunk, next_chunk, get_all_chunks, load_tutorial
+from api_helpers import choose_next_chunk, next_chunk, get_all_chunks, load_tutorial, get_today_progress
 import on_review
 from connect import connect
 import threading
@@ -180,7 +180,8 @@ def get_first_chunk1(cur, user_id, req):
         out["displayType"] = "done"
         print("NOTHING LEFT")
         
-        
+    yet, done = get_today_progress(cur, user_id)
+    out["today_progress"] = {"yet": yet, "done": done}  
     
     res = make_response(jsonify(out))
     
@@ -267,23 +268,48 @@ def get_text_chunk():
         
         if req["first"] == 1:
             on_review.set_first(cur, user_id, req)
+            
+            cur.close()
+            conn.commit()
+            conn.close()
+            
+            conn, cur = connect()
         
         if req["first"] == 0:
             print("REVIEW")
             on_review.on_review(cur, user_id, req)
             
+            cur.close()
+            conn.commit()
+            conn.close()
+            
+            conn, cur = connect()
+            
         if req["done"]:
 
-            new_conn, new_cur = connect()
             x = threading.Thread(target=reviews_over.reviews_over, args=(user_id,))
             x.start()
             print("Starting the background scheduling thread.")
+            
+            out["displayType"] = "done"
+            
+            COMMAND = """SELECT word FROM vocab v
+            INNER JOIN user_vocab_log l 
+            ON v.id = l.vocab_id
+            WHERE l.user_id=%s AND EXTRACT(DAY FROM l.time) = EXTRACT(DAY FROM NOW()) 
+            """
+            cur.execute(COMMAND, (user_id,))
+
+            words = cur.fetchall()
+
+            out["words"] = [x[0] for x in words]
+    
             
         cur.close()
         conn.commit()
         conn.close()
 
-        res = make_response(jsonify({}))
+        res = make_response(jsonify(out))
 
         return res
     
@@ -560,21 +586,14 @@ def load_notifications():
         conn.close()
 
         return res  
+    
+    out = {}
         
     user_id = a[0][0]
     tutorial = a[0][1]
-    
-    COMMAND = """SELECT * FROM user_nextchunk
-    WHERE user_id=%s
-    """
-    cur.execute(COMMAND, (user_id,))
-    
-    records = cur.fetchall()
-    out = {}
-    out["notification"] = len(records)
     out["tutorial"] = tutorial
     
-    print(out)
+    out["notification"] = get_today_progress(cur, user_id)[0]
     
     res = make_response(jsonify(out))
     

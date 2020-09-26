@@ -58,6 +58,15 @@ def get_unknown_vocab(cur, vocab_id, user_id):
     
     return "0"
 
+def get_streak(cur, vocab_id, user_id):
+    
+    COMMAND = """SELECT streak FROM user_vocab
+    WHERE user_id=%s AND vocab_id=%s
+    """
+    cur.execute(COMMAND, (user_id, vocab_id))
+    
+    return cur.fetchall()[0]
+
 def schedule_next_chunk_basic(cur, vocab_id, user_id):
     
     # works well while the user hasn't seen that much stuff.
@@ -73,10 +82,10 @@ def schedule_next_chunk_basic(cur, vocab_id, user_id):
     my_test_data = test_data.get_test_data(cur, vocab_id, user_id, next_chunk)
     
     SCHEDULE_COMMAND = """
-    INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab, first)
-    VALUES(%s, %s, %s, %s, %s, 1)
+    INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab, first, vocab_id)
+    VALUES(%s, %s, %s, %s, %s, 1, %s)
     """
-    cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, schedule_time, json.dumps(my_test_data), unknown_vocab))
+    cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, schedule_time, json.dumps(my_test_data), unknown_vocab, vocab_id))
 
 
     
@@ -92,10 +101,10 @@ def schedule_next_chunk_fixed(cur, vocab_id, user_id, next_chunk):
     my_test_data = test_data.get_test_data(cur, vocab_id, user_id, next_chunk)
     
     SCHEDULE_COMMAND = """
-    INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab, first)
-    VALUES(%s, %s, NOW(), %s, %s, 1)
+    INSERT INTO user_nextchunk(user_id, chunk_id, next, test_data, unknown_vocab, first, vocab_id)
+    VALUES(%s, %s, NOW(), %s, %s, 1, %s)
     """
-    cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, json.dumps(my_test_data), unknown_vocab))
+    cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, json.dumps(my_test_data), unknown_vocab, vocab_id))
     
 def set_scheduled(cur, vocab_id, user_id):
     

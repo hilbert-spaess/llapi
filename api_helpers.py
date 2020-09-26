@@ -4,6 +4,8 @@ import psycopg2
 import threading
 import scheduler
 
+from connect import connect
+
 def get_grammar(chunkid, cur):
 
     COMMAND = """
@@ -379,6 +381,48 @@ def load_tutorial(cur, user_id):
     
     return next_chunk(cur, user_id, "1492")
 
+def get_today_progress(cur, user_id):
+    
+    yet = 0
+    done = 0
+    
+    COMMAND = """SELECT un.first, uv.streak FROM user_nextchunk un
+    INNER JOIN user_vocab uv
+    ON uv.user_id = un.user_id
+    WHERE uv.user_id=%s AND uv.vocab_id= un.vocab_id AND EXTRACT(DAY FROM un.next) <= EXTRACT(DAY FROM NOW())
+    """
+    cur.execute(COMMAND, (user_id,))
+    records = cur.fetchall()
+    print(records)
+    
+    for instance in records:
+        if instance[0] and instance[1]==0:
+            yet += 2
+        elif not instance[1] and not instance[0]:
+            yet += 1
+            done += 1
+        else:
+            yet += 1
+    
+    
+    COMMAND = """SELECT uv.streak FROM user_vocab_log ul
+    INNER JOIN user_vocab uv
+    ON uv.user_id = ul.user_id
+    WHERE uv.user_id=%s AND uv.vocab_id=ul.vocab_id AND EXTRACT(DAY FROM ul.time) <= EXTRACT(DAY FROM NOW())
+    """
+    cur.execute(COMMAND, (user_id,))
+    records = cur.fetchall()
+    print(records)
+    
+    for instance in records:
+        if instance[0] == 1:
+            done += 2
+        else:
+            done += 1
+    
+    return (yet, done)
+    
+    
 def get_data(cur, req):
     
     stats = {}
@@ -471,3 +515,6 @@ def get_next(streak, correct):
     # will compute when next to test the vocab item, given whether correct and the current streak
     
     pass
+
+conn, cur = connect()
+print(get_today_progress(cur, "1"))
