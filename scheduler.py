@@ -48,6 +48,19 @@ def choose_next_chunk(cur, vocab_id, user_id):
     
     candidates = list(set(potential_nexts) - set(already_seen))
     
+    random.shuffle(candidates)
+    
+    COMM = """SELECT source FROM chunks
+    WHERE id=%s
+    """
+    
+    for candidate in candidates:
+        
+        cur.execute(COMM, (candidate,))
+        a = cur.fetchall()
+        if a[0][0] == "4" or a[0][0] == 4:
+            return candidate
+    
     next_chunk = random.sample(candidates, 1)[0]
     
     return next_chunk
