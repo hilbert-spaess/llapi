@@ -458,7 +458,7 @@ def get_today_words():
     words = cur.fetchall()
     
     out = {}
-    out["words"] = [x[0] for x in words]
+    out["words"] = list(set([x[0] for x in words]))
     
     res = make_response(jsonify(out))
     
