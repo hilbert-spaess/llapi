@@ -188,7 +188,7 @@ def choose_next_chunk(cur, user_id):
     SELECT c.id FROM chunks C
     INNER JOIN user_nextchunk u
     ON c.id = u.chunk_id
-    WHERE u.user_id = %s AND EXTRACT(DAY FROM u.next) <= EXTRACT(DAY FROM NOW()) 
+    WHERE u.user_id = %s AND DATE(u.next) <= DATE(NOW()) 
     """
     cur.execute(COMMAND, (user_id,))
     choices = cur.fetchall()
@@ -389,7 +389,7 @@ def get_today_progress(cur, user_id):
     COMMAND = """SELECT un.first, uv.streak FROM user_nextchunk un
     INNER JOIN user_vocab uv
     ON uv.user_id = un.user_id
-    WHERE uv.user_id=%s AND uv.vocab_id= un.vocab_id AND EXTRACT(DAY FROM un.next) <= EXTRACT(DAY FROM NOW())
+    WHERE uv.user_id=%s AND uv.vocab_id= un.vocab_id AND DATE(un.next) <= DATE(NOW())
     """
     cur.execute(COMMAND, (user_id,))
     records = cur.fetchall()

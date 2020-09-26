@@ -274,8 +274,12 @@ def get_text_chunk():
             conn.close()
             
             conn, cur = connect()
+            
+        print("baibaiBAI")
+        print(req["interaction"][req["keyloc"]]["streak"])
+        print(req["answeredCorrect"])
         
-        if req["first"] == 0:
+        if req["first"] == 0 or (req["interaction"][req["keyloc"]]["streak"] > 0 and int(req["answers"][int(req["keyloc"])]) == 1):
             print("REVIEW")
             on_review.on_review(cur, user_id, req)
             
