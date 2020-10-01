@@ -166,6 +166,7 @@ def get_first_chunk1(cur, user_id, req):
     if chunk_id:
         allchunks = []
         newallchunks = get_all_chunks(cur, user_id)
+        print("newallchunks", newallchunks)
         for chunk in newallchunks:
             print(chunk)
             if chunk["first"]:
