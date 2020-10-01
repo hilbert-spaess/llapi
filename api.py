@@ -175,6 +175,7 @@ def get_first_chunk1(cur, user_id, req):
             if not chunk["first"]:
                 allchunks.append(chunk)
         out["allChunks"] = allchunks
+        print(out["allChunks"][0])
     else:
         out["allChunks"] = [0]
         out["displayType"] = "done"

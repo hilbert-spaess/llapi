@@ -5,6 +5,9 @@ import random
 from connect import connect
 import scheduler
 from config import DIRECTORY
+import time
+
+from warning import log_warning
 
 print("dependencies loaded")
 
@@ -53,6 +56,10 @@ def new_vocab_add(cur, user_id, word_no, delay):
     potential_new_words = [z[0] for z in cur.fetchall()]
     
     print("potential: ", potential_new_words)
+
+    if len(potential_new_words) < word_no:
+        params = {"user_id": user_id, "text": "Not enough new word to add", "time": str(time.time())}
+        log_warning(params)
     
     new_words = random.sample(potential_new_words, min(word_no, len(potential_new_words)))
     

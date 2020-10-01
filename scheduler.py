@@ -6,6 +6,9 @@ from connect import connect
 import test_data
 import json
 
+from warning import log_warning
+import time
+
 def find_unscheduled_vocab(cur, user_id):
     
     FIND_COMMAND = """
@@ -53,6 +56,9 @@ def choose_next_chunk(cur, vocab_id, user_id):
     COMM = """SELECT source FROM chunks
     WHERE id=%s
     """
+
+    if not candidates:
+        return 0
     
     for candidate in candidates:
         
@@ -87,6 +93,10 @@ def schedule_next_chunk_basic(cur, vocab_id, user_id):
     # look for all chunks containing the vocab
     
     next_chunk = choose_next_chunk(cur, vocab_id, user_id)
+
+    if not next_chunk:
+        log_warning({"user_id": user_id, "vocab_id": vocab_id, "text": "No chunks left for this vocab", "time": str(time.time())})
+        return 0
     
     schedule_time = get_schedule_time(cur, vocab_id, user_id)
     
@@ -100,14 +110,7 @@ def schedule_next_chunk_basic(cur, vocab_id, user_id):
     """
     cur.execute(SCHEDULE_COMMAND, (user_id, next_chunk, schedule_time, json.dumps(my_test_data), unknown_vocab, vocab_id))
 
-
-    
 def schedule_next_chunk_fixed(cur, vocab_id, user_id, next_chunk):
-    
-    # works well while the user hasn't seen that much stuff.
-    
-    # look for all chunks containing the vocab
-
     
     unknown_vocab = get_unknown_vocab(cur, vocab_id, user_id)
     
