@@ -192,6 +192,8 @@ def choose_next_chunk(cur, user_id):
     """
     cur.execute(COMMAND, (user_id,))
     choices = cur.fetchall()
+
+    print("choices", choices)
     
     out = {}
     
@@ -212,6 +214,8 @@ def get_all_chunks(cur, user_id):
     """
     cur.execute(COMMAND, (user_id,))
     choices = cur.fetchall()
+
+    print(choices)
     
     """
     all_chunks = {}
