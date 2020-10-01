@@ -210,7 +210,7 @@ def get_all_chunks(cur, user_id):
     SELECT c.id FROM chunks C
     INNER JOIN user_nextchunk u
     ON c.id = u.chunk_id
-    WHERE u.user_id = %s AND EXTRACT(DAY FROM u.next) <= EXTRACT(DAY FROM NOW()) 
+    WHERE u.user_id = %s AND DATE(u.next) <= DATE(NOW()) 
     """
     cur.execute(COMMAND, (user_id,))
     choices = cur.fetchall()
