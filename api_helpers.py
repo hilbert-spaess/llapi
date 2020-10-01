@@ -396,29 +396,23 @@ def get_today_progress(cur, user_id):
     print(records)
     
     for instance in records:
-        if instance[0] and instance[1]==0:
-            yet += 2
-        elif not instance[1] and not instance[0]:
+        if instance[0]:
             yet += 1
-            done += 1
         else:
-            yet += 1
+            done += 1
     
     
     COMMAND = """SELECT uv.streak FROM user_vocab_log ul
     INNER JOIN user_vocab uv
     ON uv.user_id = ul.user_id
-    WHERE uv.user_id=%s AND uv.vocab_id=ul.vocab_id AND EXTRACT(DAY FROM ul.time) <= EXTRACT(DAY FROM NOW())
+    WHERE uv.user_id=%s AND uv.vocab_id=ul.vocab_id AND EXTRACT(DAY FROM ul.time) = EXTRACT(DAY FROM NOW())
     """
     cur.execute(COMMAND, (user_id,))
     records = cur.fetchall()
     print(records)
     
     for instance in records:
-        if instance[0] == 1:
-            done += 2
-        else:
-            done += 1
+        done += 1
     
     return (yet, done)
     

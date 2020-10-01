@@ -1,4 +1,5 @@
 venv/
 connect.py
+warnings.txt
 llapi.wsgi
 config.py

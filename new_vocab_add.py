@@ -71,11 +71,17 @@ def new_course(user_id, course_id):
         
         conn, cur = connect()
         
-        with open(DIRECTORY + "/data/core/core_curriculum.csv") as csvfile:
+        with open(DIRECTORY + "/data/core/core_curriculum.txt", 'r') as curriculumfile:
             
-            csvreader = csv.reader(csvfile)
+            lines = curriculumfile.readlines()
             
-            for row in csvreader:
+            for row in lines:
+
+                print(row)
+
+                row = row.split(":")
+
+                print(row)
                 
                 if row[0].strip():
 
