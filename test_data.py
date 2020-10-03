@@ -130,7 +130,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         SELECT v.id, v.zipf FROM vocab v
         INNER JOIN chunk_vocab c
         ON c.vocab_id = v.id
-        WHERE c.chunk_id = %s AND c.first_sentence = %s
+        WHERE c.chunk_id = %s AND c.first_sentence = %s AND v.zipf > 0
         """
         cur.execute(COMMAND, (next_chunk, str(sen)))
         potential = cur.fetchall()
@@ -229,7 +229,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
             WHERE pos=%s AND LEFT(word,1)=%s AND id != %s
             """
             cur.execute(COMMAND, (pos, first_letter, item[0]))
-            options = [list(a) for a in cur.fetchall()]
+            options = [list(a) for a in cur.fetchall() if a[1] > 0]
             options.sort(key=lambda x: np.abs(x[1] - zipf) + np.abs(len(wd) - len(x[0])))
             y = options[:min(len(options), 3):]
             

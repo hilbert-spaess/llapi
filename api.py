@@ -367,14 +367,16 @@ def new_user():
         
         if course_id in [1, "1"]:
             vlevel = '4'
+            tutorial=1
         if course_id in [2, "2"]:
             vlevel = '1.5'
+            tutorial=0
         
         
         COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial)
-        VALUES(%s, %s, %s, %s, 1)
+        VALUES(%s, %s, %s, %s, %s)
         RETURNING id"""
-        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], vlevel, course_id, req["email"]))
+        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], vlevel, course_id, req["email"], tutorial))
         user_id = cur.fetchall()[0][0]
         print("id", user_id)
         
