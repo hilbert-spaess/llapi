@@ -130,10 +130,10 @@ def new_course(user_id, course_id):
                     print(row[3].strip())
                     
                     INS_COMMAND = """
-                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition)
-                    VALUES(%s, %s, %s, %s, %s, %s)
+                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level)
+                    VALUES(%s, %s, %s, %s, %s, %s, %s)
                     """
-                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[2].strip()))
+                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[2].strip(), row[4].strip()))
         
 
         new_vocab_add(cur, user_id, 5, 0)

@@ -130,7 +130,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         SELECT v.id, v.zipf FROM vocab v
         INNER JOIN chunk_vocab c
         ON c.vocab_id = v.id
-        WHERE c.chunk_id = %s AND c.first_sentence = %s AND v.zipf > 0
+        WHERE c.chunk_id = %s AND c.first_sentence = %s AND v.zipf > 0 AND v.pos != 'determiner'
         """
         cur.execute(COMMAND, (next_chunk, str(sen)))
         potential = cur.fetchall()
