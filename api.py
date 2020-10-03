@@ -596,7 +596,7 @@ def load_progress():
 
     return res    
 
-@app.route('/api/notificationno', methods=["POST", "GET"])
+@app.route('/api/launchscreen', methods=["POST", "GET"])
 @cross_origin(origin='*')
 @requires_auth
 def load_notifications():
@@ -604,7 +604,7 @@ def load_notifications():
     conn, cur = connect()
     req = request.get_json()
     
-    COMMAND = """SELECT id, tutorial FROM users
+    COMMAND = """SELECT id, tutorial, message FROM users
     WHERE name=%s
     """
     
@@ -628,9 +628,12 @@ def load_notifications():
         
     user_id = a[0][0]
     tutorial = a[0][1]
+    message = a[0][2]
     out["tutorial"] = tutorial
     
     out["notification"] = get_today_progress(cur, user_id)[0]
+    
+    out["message"] = message
     
     res = make_response(jsonify(out))
     
