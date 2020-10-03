@@ -18,6 +18,9 @@ def find_unscheduled_vocab(cur, user_id):
     cur.execute(FIND_COMMAND, (user_id,1,0))
     unscheduled_vocab = [x[0] for x in cur.fetchall()]
     
+    print("UNSCHEDULED VOCAB")
+    print(unscheduled_vocab)
+    
     return unscheduled_vocab
 
 def get_schedule_time(cur, vocab_id, user_id):

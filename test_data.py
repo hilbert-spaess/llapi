@@ -31,8 +31,11 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         WHERE user_id=%s AND vocab_id=%s
         """
         cur.execute(COMMAND, (user_id, vocab_id))
-
-        return cur.fetchall()[0][0]
+        r = cur.fetchall()
+        if r:
+            return r[0][0]
+        else:
+            return "0"
     
     def get_test_vocab():
     

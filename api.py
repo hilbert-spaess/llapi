@@ -335,17 +335,46 @@ def new_user():
     
     print(req)
     
+    if req == {}:
+        
+        print("BEMLO")
+        
+        
+        
+        COMMAND = """SELECT * FROM courses"""
+        cur.execute(COMMAND)
+        records = cur.fetchall()
+        
+        options = {}
+        for instance in records:
+            options[instance[0]] = {"name": instance[1]}
+            
+        out["choices"] = options
+        
+        print(out)
+        
+        res = make_response(jsonify(out))
+        
+        return res
+    
     a = cur.fetchall()
     
     if not a:
         
+        
         course_id = req["course"]
         print("course choice", course_id)
+        
+        if course_id in [1, "1"]:
+            vlevel = '4'
+        if course_id in [2, "2"]:
+            vlevel = '1.5'
+        
         
         COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial)
         VALUES(%s, %s, %s, %s, 1)
         RETURNING id"""
-        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], '4.5', course_id, req["email"]))
+        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], vlevel, course_id, req["email"]))
         user_id = cur.fetchall()[0][0]
         print("id", user_id)
         
