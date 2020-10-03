@@ -375,8 +375,8 @@ def new_user():
             message = """This is the Core GRE course. If you want to change the difficulty, or if you have any questions, get in touch with Alex.\nThis course has 1 level. Level 2 arrives on 5/10."""
         
         
-        COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial, message)
-        VALUES(%s, %s, %s, %s, %s, %s)
+        COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial, message, level)
+        VALUES(%s, %s, %s, %s, %s, %s, 1)
         RETURNING id"""
         cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], vlevel, course_id, req["email"], tutorial, message))
         user_id = cur.fetchall()[0][0]

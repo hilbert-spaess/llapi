@@ -1,36 +1,36 @@
-accurate:1574:exact, precise, correct:122
-accustomed:1598:in the habit of,usually:126
-acquire:1945:get come into possession of:145::
-adjust:2691:alter/change to make better:210:::
-advantage:3029:something that makes you better / superior:250:::
-advocate:3125:push for something,argue for something:270::
-annual:7794:happens every year:617:::
-assume :11591:take as true without proof:910:::
-benefit:17500:get something good from:1414:::
-brief:23450:short,small,not very long:1975:
-collapse:37100:break down, fall in:3157::
-community:38484:a group of people living locally:3284:::
-conflict:39652:a fight between two groups or individuals:3465:::
-contribute:40874:give towards, provide, help towards an end:3644:
-core:41623:the center of an object:3725:::
-decline:47934:get worse:4332:::
-demonstrate:49042:present, show, give an exhibition:4467:
-detect:50151:Notice / perceive / discover:4593:::
-efficient:57775:effective without wasting time and effort:5459:::
-endure:59694:live through, put up with:5646:
-enhance:59928:make better / more attractive:5673:::
-estimate:61552:make a rough guess / calculation:5829:::
-evidence:62373:why you think something is true, reasoning and knowledge behind something:5881::
-evolve:62428:grow and develop:5889:::
-expand:63037:extend, grow:5991::
-expose:63320:reveal, unmask, make accessible to the outside:6040:
-extract:63612:Remove, take out, pull out:6071:
-focus:70379:direct attention, pay attention:6670::
-function:73401:what something is used for:7006:::
-fundamental:73453:essential, important, basic:7010:
-generate:75179:produce, bring into existence, create:7179:
-hollow:89513:empty, having a space inside:8160::
-hostile:90628:very unfriendly, aggressively opposed:8262::
-impact:93480:a strong effect/consequence:8521:::
-implement:93717:apply, use, utilise, carry out:8561
-influence:95751:ability to have an impact on something:8843:::
+accurate:1574:exact, precise, correct:122:1
+accustomed:1598:in the habit of,usually:126:2
+acquire:1945:get come into possession of:145:1
+adjust:2691:alter/change to make better:210:2
+advantage:3029:something that makes you better / superior:250:1
+advocate:3125:push for something,argue for something:270:2
+annual:7794:happens every year:617:1
+assume :11591:take as true without proof:910:2
+benefit:17500:get something good from:1414:1
+brief:23450:short,small,not very long:1975:2
+collapse:37100:break down, fall in:3157:1
+community:38484:a group of people living locally:3284:2
+conflict:39652:a fight between two groups or individuals:3465:1
+contribute:40874:give towards, provide, help towards an end:3644:2
+core:41623:the center of an object:3725:1
+decline:47934:get worse:4332:2
+demonstrate:49042:present, show, give an exhibition:4467:1
+detect:50151:Notice / perceive / discover:4593:2
+efficient:57775:effective without wasting time and effort:5459:1
+endure:59694:live through, put up with:5646:2
+enhance:59928:make better / more attractive:5673:1
+estimate:61552:make a rough guess / calculation:5829:2
+evidence:62373:why you think something is true, reasoning and knowledge behind something:5881:1
+evolve:62428:grow and develop:5889:2
+expand:63037:extend, grow:5991:1
+expose:63320:reveal, unmask, make accessible to the outside:6040:2
+extract:63612:Remove, take out, pull out:6071:1
+focus:70379:direct attention, pay attention:6670:2
+function:73401:what something is used for:7006:1
+fundamental:73453:essential, important, basic:7010:2
+generate:75179:produce, bring into existence, create:7179:1
+hollow:89513:empty, having a space inside:8160:2
+hostile:90628:very unfriendly, aggressively opposed:8262:1
+impact:93480:a strong effect/consequence:8521:2
+implement:93717:apply, use, utilise, carry out:8561:1
+influence:95751:ability to have an impact on something:8843:2

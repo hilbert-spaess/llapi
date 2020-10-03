@@ -74,7 +74,7 @@ def new_course(user_id, course_id):
     print("YO")
     print(course_id == 1)
     
-    if course_id == 1:
+    if course_id in [1, "1"]:
         
         conn, cur = connect()
         
@@ -94,10 +94,10 @@ def new_course(user_id, course_id):
 
                     
                     INS_COMMAND = """
-                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, sense, definition)
-                    VALUES(%s, %s, %s, %s, %s, %s, %s)
+                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, sense, definition, level)
+                    VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
                     """
-                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[1].strip(), row[2].strip()))
+                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[1].strip(), row[2].strip(), row[4].strip()))
                     
         new_vocab_add(cur, user_id, 5, 0)
         

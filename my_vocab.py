@@ -2,8 +2,6 @@ import psycopg2
 
 def load_vocab(cur, user_id, req):
     
-    out = {}
-    
     def get_all_sample_sentences(v, sense):
     
         COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
@@ -85,9 +83,52 @@ def load_vocab(cur, user_id, req):
 
         return future
     
-    out["active"] = get_active_vocab()
+    def get_user_level():
+        
+        COMMAND = """SELECT level FROM users
+        WHERE id=%s
+        """
+        cur.execute(COMMAND, (user_id,))
+        
+        return cur.fetchall()[0][0]
     
-    out["future"] = get_future_vocab()
+    def get_vocab_dict():
+        
+        # get all vocab with streak, sense, samples and level
+        
+        COMMAND = """
+        SELECT v.id, v.word, u.definition, u.sense, u.level, u.streak FROM user_vocab u
+        INNER JOIN vocab v
+        ON v.id = u.vocab_id
+        WHERE u.user_id=%s
+        """
+        cur.execute(COMMAND, (user_id,))
+        records = cur.fetchall()
+        print("all")
+        
+        print(records)
+        
+        vocabdict = {}
+        
+        for item in records:
+            
+            sentences = get_all_sample_sentences(item[0], item[3])
+            
+            if item[4] in vocabdict.keys():
+                vocabdict[item[4]][item[0]] = {"samples": sentences, "w": item[1], "d": item[2], "s": item[5]}
+            else:
+                print("bemloe")
+                vocabdict[item[4]] = {item[0]: {"samples": sentences, "w": item[1], "d": item[2], "s": item[5]}}
+
+        return vocabdict
+    
+    out = {}
+    
+    out["vocab"] = get_vocab_dict()
+    
+    out["level"] = get_user_level()
+    
+    print(out)
     
     return out
     
