@@ -46,13 +46,20 @@ def initialise_vocab_user(user_id, vocab, word_no):
     
 def new_vocab_add(cur, user_id, word_no, delay):
     
+    LVL_COMMAND = """
+    SELECT level FROM users
+    WHERE id=%s
+    """
+    cur.execute(LVL_COMMAND, (user_id,))
+    lvl = cur.fetchall()[0][0]
+    
     NEW_COMMAND = """
     SELECT u.vocab_id FROM user_vocab u
     INNER JOIN vocab v
     ON u.vocab_id = v.id
-    WHERE u.user_id = %s AND v.counts > 1 and u.active = 0
+    WHERE u.user_id = %s AND v.counts > 1 and u.active = 0 and u.level <= %s
     """
-    cur.execute(NEW_COMMAND, (user_id,))
+    cur.execute(NEW_COMMAND, (user_id, lvl))
     potential_new_words = [z[0] for z in cur.fetchall()]
     
     print("potential: ", potential_new_words)
