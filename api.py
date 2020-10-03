@@ -368,15 +368,17 @@ def new_user():
         if course_id in [1, "1"]:
             vlevel = '4'
             tutorial=1
+            message = "This is the Core TOEFL course. If you want to change the difficulty, or if you have any questions, get in touch with Alex."
         if course_id in [2, "2"]:
             vlevel = '1.5'
             tutorial=0
+            message = "This is the Core GRE course. If you want to change the difficulty, or if you have any questions, get in touch with Alex."
         
         
-        COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial)
-        VALUES(%s, %s, %s, %s, %s)
+        COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial, message)
+        VALUES(%s, %s, %s, %s, %s, %s)
         RETURNING id"""
-        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], vlevel, course_id, req["email"], tutorial))
+        cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], vlevel, course_id, req["email"], tutorial, message))
         user_id = cur.fetchall()[0][0]
         print("id", user_id)
         
