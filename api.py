@@ -372,7 +372,7 @@ def new_user():
         if course_id in [2, "2"]:
             vlevel = '1.5'
             tutorial=0
-            message = "This is the Core GRE course. If you want to change the difficulty, or if you have any questions, get in touch with Alex."
+            message = """This is the Core GRE course. If you want to change the difficulty, or if you have any questions, get in touch with Alex.\nThis course has 1 level. Level 2 arrives on 5/10."""
         
         
         COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial, message)
