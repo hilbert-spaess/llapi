@@ -36,7 +36,30 @@ def get_all_sample_sentences(cur, v, chunkid):
     cur.execute(COMMAND, (chunkid, v))
     r = cur.fetchall()
     if not r:
-        return []
+        
+        COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
+        INNER JOIN chunk_vocab cv
+        ON cv.chunk_id = c.id
+        WHERE cv.vocab_id=%s
+        """
+        cur.execute(COMMAND, (v, ))
+        sentences = []
+
+        for instance in cur.fetchall():
+
+            sentence_breaks = [-1] + [int(k) for k in instance[1].split(",")]
+            lower_cap = sentence_breaks[int(instance[2])] + 1
+            upper_cap = sentence_breaks[int(instance[2])+1] + 1
+
+            location = int(instance[3].split(",")[0]) - lower_cap
+            sentence = "#".join(instance[0].split("#")[lower_cap: upper_cap])
+
+            sentences.append((sentence, location))
+
+        sentences.sort(key=lambda x: len(x[0]))
+
+        return sentences
+        
     
         
     sense = r[0][0]
@@ -516,5 +539,3 @@ def get_next(streak, correct):
     
     pass
 
-conn, cur = connect()
-print(get_today_progress(cur, "1"))
