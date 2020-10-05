@@ -43,9 +43,9 @@ def get_all_sample_sentences(cur, v, chunkid):
         COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
         INNER JOIN chunk_vocab cv
         ON cv.chunk_id = c.id
-        WHERE cv.vocab_id=%s
+        WHERE cv.vocab_id=%s AND c.id != %s
         """
-        cur.execute(COMMAND, (v, ))
+        cur.execute(COMMAND, (v, chunkid))
         sentences = []
 
         for instance in cur.fetchall():
@@ -70,9 +70,9 @@ def get_all_sample_sentences(cur, v, chunkid):
     COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
     INNER JOIN chunk_vocab cv
     ON cv.chunk_id = c.id
-    WHERE cv.vocab_id=%s AND cv.sense=%s
+    WHERE cv.vocab_id=%s AND cv.sense=%s AND c.id != %s
     """
-    cur.execute(COMMAND, (v, sense))
+    cur.execute(COMMAND, (v, sense, chunkid))
     sentences = []
     
     for instance in cur.fetchall():
