@@ -98,7 +98,7 @@ def on_review(cur, user_id, req):
         
         COMMAND = """SELECT levelled FROM user_vocab
         WHERE user_id=%s AND level=%s"""
-        cur.execute(COMMAND, (user_id, lvl))
+        cur.execute(COMMAND, (user_id, level))
         records = cur.fetchall()
         
         total = len(records)
