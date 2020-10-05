@@ -35,6 +35,7 @@ def get_all_sample_sentences(cur, v, chunkid):
     """
     cur.execute(COMMAND, (chunkid, v))
     r = cur.fetchall()
+    print(r)
     if not r:
         
         print("bemlo")
