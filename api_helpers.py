@@ -37,6 +37,8 @@ def get_all_sample_sentences(cur, v, chunkid):
     r = cur.fetchall()
     if not r:
         
+        print("bemlo")
+        
         COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
         INNER JOIN chunk_vocab cv
         ON cv.chunk_id = c.id
