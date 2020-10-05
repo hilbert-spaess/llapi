@@ -29,9 +29,19 @@ def user_update(cur, course_id):
         for vocab in vocablist:
         
             cur.execute(INS_COMMAND, (user_id, vocab[3].strip(), 0, 0, 0, vocab[2].strip(), vocab[4].strip()))
+            
+def course_message(cur, course_id, course_message):
+    
+    COMMAND = """UPDATE users 
+    SET message=%s
+    WHERE course_id=%s
+    """
+    cur.execute(COMMAND, (course_id, course_message))
         
 conn, cur = connect()
-user_update(cur, "2")
+
+course_message(cur, "2", "This is the Core GRE course. If you want to change the difficulty, or if you have any questions, get in touch with Alex.\nThis course has 2 levels.")
+
 cur.close()
 conn.commit()
 conn.close()
