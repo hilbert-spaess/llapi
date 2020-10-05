@@ -7,6 +7,7 @@ import json
 import pandas as pd
 import psycopg2
 from api_helpers import choose_next_chunk, next_chunk, get_all_chunks, load_tutorial, get_today_progress
+from lesson_helpers import get_all_lessons
 import on_review
 from connect import connect
 import threading
@@ -208,6 +209,7 @@ def get_text_chunk():
     
     a = cur.fetchall()
     
+    # possibly a new user
     
     if not a:
         out["displayType"] = "newUser"
@@ -222,41 +224,8 @@ def get_text_chunk():
     
     user_id = a[0][0]
     
-    if "tutorial" in req.keys() and req["tutorial"] == "done":
-        print("TUTORIAL OVER")
-        COMMAND = """UPDATE users
-        SET tutorial = 0
-        WHERE id=%s
-        """
-        cur.execute(COMMAND, (user_id,))
-        
-        COMMAND = """DELETE FROM user_nextchunk
-        WHERE user_id=%s AND chunk_id=1492
-        """
-        cur.execute(COMMAND, (user_id,))
-        cur.close()
-        conn.commit()
-        conn.close()
-        
-        conn, cur = connect()
-    
-    elif a[0][1]:
-        
-        out = {}
-        
-        out["tutorialchunk"] = load_tutorial(cur, user_id)
-        
-        out["displayType"] = "tutorial"
-        
-        cur.close()
-        conn.commit()
-        conn.close()
-
-        res = make_response(jsonify(out))
-
-        return res
-        
-    
+    # possibly just a log
+           
     if req == {}:
         return make_response(jsonify({}))
     
@@ -266,8 +235,6 @@ def get_text_chunk():
     
     else:
         
-        print(req["first"])
-        
         if req["first"] == 1:
             on_review.set_first(cur, user_id, req)
             
@@ -276,10 +243,6 @@ def get_text_chunk():
             conn.close()
             
             conn, cur = connect()
-            
-        print("baibaiBAI")
-        print(req["interaction"][req["keyloc"]]["streak"])
-        print(req["answeredCorrect"])
         
         if req["first"] == 0 or (req["interaction"][req["keyloc"]]["streak"] > 0 and int(req["answers"][int(req["keyloc"])]) == 1):
             print("REVIEW")
@@ -318,6 +281,53 @@ def get_text_chunk():
         res = make_response(jsonify(out))
 
         return res
+    
+@app.route('/api/getlessons', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def get_lessons():
+    
+    req = request.get_json()
+    conn, cur = connect()
+    out = {}
+    
+    COMMAND = """SELECT id, tutorial FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    a = cur.fetchall()
+    
+    # possibly a new user
+    
+    if not a:
+        out["displayType"] = "newUser"
+        
+        res = make_response(jsonify(out))
+
+        cur.close()
+        conn.commit()
+        conn.close()
+
+        return res
+    
+    user_id = a[0][0]
+    
+    COMMAND = """SELECT 1 FROM user_vocab uv 
+    INNER JOIN users u
+    ON u.id = uv.user_id
+    WHERE u.id=%s AND uv.level <= u.level AND active=0"""
+    
+    cur.execute(COMMAND, (user_id,))
+    
+    if cur.fetchall():
+        out["displayType"] = "lessons"
+        all_lessons = get_all_lessons(cur, user_id)
+        out["all_lessons"] = all_lessons
+    
+    return out
+    
+    
     
 @app.route('/api/newuser', methods=["POST", "GET"])
 @cross_origin(origin='*')
@@ -367,7 +377,7 @@ def new_user():
         
         if course_id in [1, "1"]:
             vlevel = '4'
-            tutorial=1
+            tutorial=0
             message = "This is the Core TOEFL course. If you want to change the difficulty, or if you have any questions, get in touch with Alex."
         if course_id in [2, "2"]:
             vlevel = '1.5'
@@ -601,7 +611,7 @@ def load_progress():
 @app.route('/api/launchscreen', methods=["POST", "GET"])
 @cross_origin(origin='*')
 @requires_auth
-def load_notifications():
+def launch_screen():
 
     conn, cur = connect()
     req = request.get_json()
@@ -633,7 +643,15 @@ def load_notifications():
     message = a[0][2]
     out["tutorial"] = tutorial
     
-    out["notification"] = get_today_progress(cur, user_id)[0]
+    out["read_notification"] = get_today_progress(cur, user_id)[0]
+    
+    COMMAND = """SELECT * FROM user_vocab uv 
+    INNER JOIN users u
+    ON u.id = uv.user_id
+    WHERE u.id=%s AND uv.level <= u.level AND active=0"""
+    cur.execute(COMMAND, (user_id,))
+    
+    out["lessons_notification"] = len(cur.fetchall())
     
     out["message"] = message
     

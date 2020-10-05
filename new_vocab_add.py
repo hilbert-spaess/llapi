@@ -105,11 +105,6 @@ def new_course(user_id, course_id):
                     VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
                     """
                     cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[1].strip(), row[2].strip(), row[4].strip()))
-                    
-        new_vocab_add(cur, user_id, 5, 0)
-        
-        # schedule tutorial
-        scheduler.schedule_next_chunk_fixed(cur, "3284", user_id, "1492")
         
         cur.close()
         conn.commit()
@@ -151,5 +146,3 @@ def new_course(user_id, course_id):
 
         scheduler.schedule(user_id)
     
-
-#core_ids = pickle.load(open("./data/core/toefl_core_ids.data", 'rb'))
