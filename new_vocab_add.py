@@ -101,10 +101,10 @@ def new_course(user_id, course_id):
 
                     
                     INS_COMMAND = """
-                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, sense, definition, level)
-                    VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, sense, definition, level, levelled)
+                    VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
                     """
-                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[1].strip(), row[2].strip(), row[4].strip()))
+                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[1].strip(), row[2].strip(), row[4].strip(), 0))
         
         cur.close()
         conn.commit()

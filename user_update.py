@@ -6,8 +6,8 @@ def user_update(cur, course_id):
 
     course_dict = {"2": "2_GRE/"}
     
-    INS_COMMAND ="""INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level)
-    VALUES(%s, %s, %s, %s, %s, %s, %s)
+    INS_COMMAND ="""INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
+    VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
     ON CONFLICT DO NOTHING
     """
     
@@ -28,7 +28,7 @@ def user_update(cur, course_id):
     for user_id in users:
         for vocab in vocablist:
         
-            cur.execute(INS_COMMAND, (user_id, vocab[3].strip(), 0, 0, 0, vocab[2].strip(), vocab[4].strip()))
+            cur.execute(INS_COMMAND, (user_id, vocab[3].strip(), 0, 0, 0, vocab[2].strip(), vocab[4].strip(), 0))
             
 def course_message(cur, course_id, course_message):
     

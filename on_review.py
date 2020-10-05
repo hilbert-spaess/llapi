@@ -79,6 +79,40 @@ def on_review(cur, user_id, req):
          streak_to_days = {1: "1", 2: "2", 3: "4", 4: "7", 5: "14"}
     
          return streak_to_days[streak]
+    
+    def handle_levels():
+        
+        COMMAND = """UPDATE user_vocab
+        SET levelled=1
+        WHERE user_id=%s AND vocab_id=%s"""
+        
+        if streak == 3:
+            
+            cur.execute(COMMAND, (user_id, req["interaction"][req["keyloc"]]["v"]))
+            
+        LVL_COMMAND = """SELECT level
+        FROM users WHERE id=%s"""
+        cur.execute(LVL_COMMAND, (user_id,))
+        
+        level = cur.fetchall()[0][0]
+        
+        COMMAND = """SELECT levelled FROM user_vocab
+        WHERE user_id=%s AND level=%s"""
+        cur.execute(COMMAND, (user_id, lvl))
+        records = cur.fetchall()
+        
+        total = len(records)
+        levelled = len([x for x in records if x[0]])
+        
+        if (float(levelled)/float(total)) > 0.9:
+            
+            COMMAND = """UPDATE users
+            SET level=level+1
+            WHERE user_id=%s
+            """
+            cur.execute(COMMAND, (user_id,))
+            
+            
         
     
     # log result
@@ -94,4 +128,6 @@ def on_review(cur, user_id, req):
     print("correct", correct)
 
     set_unscheduled()
+    
+    handle_levels()
     
