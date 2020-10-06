@@ -114,7 +114,22 @@ def get_relevant_sentences(cur, user_id, v, chunkids):
         sentences.append((sentence, location))
     
     return sentences
-        
+
+def get_level_progress(cur, user_id, level):
+    
+    COMMAND = """SELECT streak FROM user_vocab
+    WHERE user_id=%s AND level=%s
+    """
+    cur.execute(COMMAND, (user_id, level))
+    records = cur.fetchall()
+    
+    total = 3 * len(records)
+    progress = sum([min(3, x[0]) for x in records])
+    
+    print(total)
+    print(progress)
+    
+    return float(progress)/float(total)
 
 def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     

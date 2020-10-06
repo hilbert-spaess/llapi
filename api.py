@@ -6,7 +6,7 @@ import numpy as np
 import json
 import pandas as pd
 import psycopg2
-from api_helpers import choose_next_chunk, next_chunk, get_all_chunks, load_tutorial, get_today_progress
+from api_helpers import choose_next_chunk, next_chunk, get_all_chunks, load_tutorial, get_today_progress, get_level_progress
 from lesson_helpers import get_all_lessons
 import on_review
 from connect import connect
@@ -378,11 +378,11 @@ def new_user():
         if course_id in [1, "1"]:
             vlevel = '4'
             tutorial=0
-            message = "This is the Core TOEFL course. If you want to change the difficulty, or if you have any questions, get in touch with Alex."
+            message = "This is the Core TOEFL course. If you want to change the difficulty, or if you have any questions, get in touch."
         if course_id in [2, "2"]:
             vlevel = '1.5'
             tutorial=0
-            message = """This is the Core GRE course. If you want to change the difficulty, if you have specific words/topics you want to see, or if you have any questions, get in touch with Alex."""
+            message = """This is the Core GRE course. If you want to change the difficulty, if you have specific words/topics you want to see, or if you have any questions, get in touch."""
         
         
         COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial, message, level)
@@ -616,7 +616,7 @@ def launch_screen():
     conn, cur = connect()
     req = request.get_json()
     
-    COMMAND = """SELECT id, tutorial, message FROM users
+    COMMAND = """SELECT id, tutorial, message, level FROM users
     WHERE name=%s
     """
     
@@ -641,9 +641,12 @@ def launch_screen():
     user_id = a[0][0]
     tutorial = a[0][1]
     message = a[0][2]
+    level = a[0][3]
     out["tutorial"] = tutorial
     
     out["read_notification"] = get_today_progress(cur, user_id)[0]
+    
+    out["level"] = level
     
     COMMAND = """SELECT * FROM user_vocab uv 
     INNER JOIN users u
@@ -654,6 +657,8 @@ def launch_screen():
     out["lessons_notification"] = len(cur.fetchall())
     
     out["message"] = message
+    
+    out["levelprogress"] = get_level_progress(cur, user_id, level)
     
     res = make_response(jsonify(out))
     
