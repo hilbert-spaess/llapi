@@ -5,6 +5,10 @@ from config import COURSE_DIRECTORY
 def user_update(cur, course_id):
 
     course_dict = {"2": "2_GRE/"}
+
+    CHECK_COMMAND = """SELECT * FROM user_vocab
+    WHERE user_id=%s AND vocab_id=%s
+    """
     
     INS_COMMAND ="""INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
     VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
@@ -18,7 +22,7 @@ def user_update(cur, course_id):
     users = [x[0] for x in cur.fetchall()]
     
     
-    with open(COURSE_DIRECTORY + course_dict[course_id] + "curriculum.txt", 'r') as curriculumfile:
+    with open(COURSE_DIRECTORY + course_dict[course_id] + "curriculum.txt", 'r', errors='replace') as curriculumfile:
 
             lines = [x for x in curriculumfile.readlines() if x.strip()]
             vocablist = [x.split(":") for x in lines]
@@ -27,8 +31,10 @@ def user_update(cur, course_id):
     
     for user_id in users:
         for vocab in vocablist:
-        
-            cur.execute(INS_COMMAND, (user_id, vocab[3].strip(), 0, 0, 0, vocab[2].strip(), vocab[4].strip(), 0))
+            cur.execute(CHECK_COMMAND, (user_id, vocab[3].strip()))
+            r = cur.fetchall()
+            if not r:
+                cur.execute(INS_COMMAND, (user_id, vocab[3].strip(), 0, 0, 0, vocab[2].strip(), vocab[4].strip(), 0))
             
 def course_message(cur, course_id, course_message):
     
@@ -36,11 +42,11 @@ def course_message(cur, course_id, course_message):
     SET message=%s
     WHERE course_id=%s
     """
-    cur.execute(COMMAND, (course_id, course_message))
+    cur.execute(COMMAND, (course_message, course_id))
         
 conn, cur = connect()
 
-course_message(cur, "2", "This is the Core GRE course. If you want to change the difficulty, or if you have any questions, get in touch with Alex.\nThis course has 2 levels.")
+user_update(cur, "2")
 
 cur.close()
 conn.commit()

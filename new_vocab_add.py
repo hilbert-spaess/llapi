@@ -85,7 +85,7 @@ def new_course(user_id, course_id):
         
         conn, cur = connect()
         
-        with open(DIRECTORY + "/data/core/core_curriculum.txt", 'r', encoding="utf-8", errors='replace') as curriculumfile:
+        with open(DIRECTORY + "/data/core/core_curriculum.txt", 'r', errors='replace') as curriculumfile:
             
             lines = curriculumfile.readlines()
             
@@ -118,7 +118,7 @@ def new_course(user_id, course_id):
 
         conn, cur = connect()
 
-        with open(COURSE_DIRECTORY + "2_GRE/curriculum.txt", 'r') as curriculumfile:
+        with open(COURSE_DIRECTORY + "2_GRE/curriculum.txt", 'r', errors='replace') as curriculumfile:
 
             lines = curriculumfile.readlines()
             
