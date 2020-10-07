@@ -76,7 +76,7 @@ def on_review(cur, user_id, req):
         
     def next_time():
         
-         streak_to_days = {1: "1", 2: "2", 3: "4", 4: "7", 5: "14"}
+         streak_to_days = {1: "1", 2: "2", 3: "3", 4: "6", 5: "14"}
     
          return streak_to_days[streak]
     
