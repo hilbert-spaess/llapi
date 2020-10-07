@@ -97,7 +97,7 @@ def load_vocab(cur, user_id, req):
         # get all vocab with streak, sense, samples and level
         
         COMMAND = """
-        SELECT v.id, v.word, u.definition, u.sense, u.level, u.streak FROM user_vocab u
+        SELECT v.id, v.word, u.definition, u.sense, u.level, u.streak, u.active FROM user_vocab u
         INNER JOIN vocab v
         ON v.id = u.vocab_id
         WHERE u.user_id=%s
@@ -108,23 +108,24 @@ def load_vocab(cur, user_id, req):
         
         print(records)
         
-        vocabdict = {}
+        vocablist = []
         
         for item in records:
             
             sentences = get_all_sample_sentences(item[0], item[3])
-            
-            if item[4] in vocabdict.keys():
-                vocabdict[item[4]][item[0]] = {"samples": sentences, "w": item[1], "d": item[2], "s": item[5]}
-            else:
-                print("bemloe")
-                vocabdict[item[4]] = {item[0]: {"samples": sentences, "w": item[1], "d": item[2], "s": item[5]}}
 
-        return vocabdict
+            vocablist.append({"samples": sentences, "w": item[1], "d": item[2], "s": item[5], "l": item[4], "a": item[6]})
+            
+            sorted(vocablist, key=lambda x: x['l'])
+
+        return vocablist
     
     out = {}
     
+    
     out["vocab"] = get_vocab_dict()
+    
+    print(out["vocab"])
     
     out["level"] = get_user_level()
     
