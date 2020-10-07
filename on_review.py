@@ -86,7 +86,7 @@ def on_review(cur, user_id, req):
         SET levelled=1
         WHERE user_id=%s AND vocab_id=%s"""
         
-        if streak == 3:
+        if streak == 4:
             
             cur.execute(COMMAND, (user_id, req["interaction"][req["keyloc"]]["v"]))
             

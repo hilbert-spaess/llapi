@@ -123,7 +123,7 @@ def get_level_progress(cur, user_id, level):
     cur.execute(COMMAND, (user_id, level))
     records = cur.fetchall()
     
-    total = 3 * len(records)
+    total = 4 * len(records)
     progress = sum([min(3, x[0]) for x in records])
     
     print(total)
