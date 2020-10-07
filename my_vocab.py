@@ -116,7 +116,7 @@ def load_vocab(cur, user_id, req):
 
             vocablist.append({"samples": sentences, "w": item[1], "d": item[2], "s": item[5], "l": item[4], "a": item[6]})
             
-            sorted(vocablist, key=lambda x: x['l'])
+            vocablist.sort(key=lambda x: int(x['l']))
 
         return vocablist
     
