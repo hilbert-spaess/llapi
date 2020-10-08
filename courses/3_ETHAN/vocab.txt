@@ -1,0 +1,52 @@
+damp:slightly wet:adjective
+leap:forceful jump:noun
+grasp:hold on tightly:verb
+scatter:send in all directions:verb
+dose:certain amount (usually of medicine):noun
+strain:push to the limit:verb
+trail:a path, (usually for walking):noun
+awful:very bad:adjective
+regret:feel disappointed about something:verb
+barrier: something that blocks or divides:noun
+limp: soft and floppy : adjective
+chore:a boring task:noun
+insane:mad, crazy:adjective
+demolish: completely destroy, break : verb
+swamp: a wet and muddy area:noun
+mist:low, smoky clouds:noun
+veil: cloth that covers a face or important object:noun
+shiver: shake because of the cold, or fear:verb
+submarine:vehicle that goes under water: noun
+giggle:laugh loudly like a child:verb
+scarce: hard to find, not very common:adjective
+swift:very fast:adjective
+murmur:speak quietly:verb
+crumble:break into pieces:verb
+sneak: move around in a quiet and suspicious way:verb 
+refund: give back money:verb
+blink:close your eyes quickly:verb
+optional: you can choose to do it:adjective
+imaginative:has lots of ideas:adjective
+herd:a group of animals, like cows:noun
+delightful
+oak
+pillow
+mammal
+tumble
+jungle
+cheerful
+fragile
+monk
+dreadful
+weep
+cooperative
+butterfly
+delete
+feast
+furious
+slump
+quest
+revenge
+hurricane
+fashionable
+notify

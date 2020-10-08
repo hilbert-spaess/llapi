@@ -1,0 +1,40 @@
+occlude:x:obstruct, cover, obscure, block:19322:1:verb
+prosaic:x:mundane, bland, lacking originality:13257:1:adjective
+abjure:x:renounce, give up, retract:19370:1:verb
+halcyon:x:idyllic, peaceful, glorious (period of time):19374:1:adjective
+polemic:x:strong verbal or written attack, outburst:12725:1:noun
+myopic:x:short-sighted (literal or figurative):19396:1:adjective
+welter:x:a confused mess, a large number of confused items:19407:1:noun
+fusillade:x:series of shots or missiles:19420:1:noun
+heterodox:x:unorthodox, unusual, not conforming:19426:1:adjective
+quiescence:x:inactivity, dormancy, drowsiness:19440:1:noun
+xenophobia:x:dislike of foreigners:19245:1:noun
+yoke:x:wooden attachment to working animals (figurative use as instrument of restraint):19451:1:noun
+frieze:x:sculpted/painted wall decoration:6921:1:noun
+
+libertine:x:indulgent, free-spirited, without morals:19470:2:adjective
+ignoble:x:not honourable in character:19476:2:adjective
+diatribe:x:a bitter verbal attack:19492:2:noun
+egress:x:exit, ability to leave:19512:2:noun
+sobriquet:x:nickname, moniker:19524:2:noun
+incise:x:cut into, carve into:19537:2:verb
+paucity:x:lack, shortage:19547:2:noun
+savant:x:someone with high knowledge and skills in one area:19615:2:noun
+cloture:x:procedure for ending debate and taking a vote:19617:2:noun
+gainsay:x:contradict, deny, oppose, disagree:19614:2:verb
+abeyance:x:a state of disuse:19612:2:noun
+
+
+iconoclast:x:critic, skeptic, someone who attacks common beliefs:19595:3:noun
+turgid:x:(about language) tediously overblown, inflated, pompous:19596:3:adjective
+supine:x:weak, spineless, failing to act:19597:3:adjective
+vociferous:x:blatant, noisy, clamorous:18635:3:adjective
+ambivalent:x:having mixed feelings, unsure, uncertain:516:3:adjective
+erstwhile:x:former, old, past, one-time:19598:3:adjective
+edify:x:instruct or improve someone morally or intellectually:19599:3:verb
+anodyne:x:bland, not likely to cause offence, dull:19601:3:adjective
+précis:x:a summary of text or speech, synopsis, summation:19604:3:noun
+homogeneous:x:uniform, of the same kind, identical, unvaried:8193:3:adjective
+verdant:x:(about countryside) leafy, green, grass, lush:19606:3:adjective
+indolence:x:avoidance of activity or exertion, laziness, slothfulness:19607:3:noun
+euphony:x:being pleasing to the ear, melodiousness, musicality:19608:3:noun
