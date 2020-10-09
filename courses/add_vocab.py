@@ -89,3 +89,7 @@ conn, cur = connect()
 
 add_vocab(cur)
 
+cur.close()
+conn.commit()
+conn.close()
+
