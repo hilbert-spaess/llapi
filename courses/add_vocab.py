@@ -92,6 +92,8 @@ def add_vocab(cur):
         
         if not cur.fetchall():
             
+            print("INSERTING " + word)
+            
             cur.execute(COMMAND, (COURSE_NO, vocab_id, definition))
 
 conn, cur = connect()
