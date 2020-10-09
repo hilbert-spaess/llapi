@@ -79,7 +79,7 @@ def add_vocab(cur):
     """
         
     COMMAND = """INSERT INTO course_vocab(course_id, vocab_id, definition, counts)
-    VALUES(%s, %s, %s)
+    VALUES(%s, %s, %s, 0)
     """
 
     for item in lines:
