@@ -16,7 +16,7 @@ libertine:indulgent, free-spirited, without morals:adjective
 ignoble:not honourable in character:adjective
 diatribe:a bitter verbal attack:noun
 egress:exit, ability to leave:noun
-turgid:(about language) tediously overblown, inflated, pompous:adjectives
+turgid:(about language) tediously overblown, inflated, pompous:adjective
 supine:weak, spineless, failing to act:adjective
 vociferous:blatant, noisy, clamorous:adjective
 ambivalent:having mixed feelings, unsure, uncertain:adjective
@@ -58,7 +58,7 @@ waft:drift, float, glide through the air:verb
 expiate:atone for, make amends for, make up for (a sin):verb
 neophyte: beginner, learner, novice: noun
 munificent: very generous, lavish, bountiful:adjective
-paean:song of praise or triumph:paean
+paean:song of praise or triumph:noun
 maelstrom: storm, state of violent confusion, turmoil:noun
 bilk:obtain money dishonestly:verb
 truculent:quick to fight, aggressive, defiant:adjective

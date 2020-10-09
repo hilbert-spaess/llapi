@@ -1,4 +1,5 @@
-occlude:x:obstruct, cover, obscure, block:19322:1:verb
+
+cclude:x:obstruct, cover, obscure, block:19322:1:verb
 prosaic:x:mundane, bland, lacking originality:13257:1:adjective
 abjure:x:renounce, give up, retract:19370:1:verb
 halcyon:x:idyllic, peaceful, glorious (period of time):19374:1:adjective
@@ -24,17 +25,43 @@ cloture:x:procedure for ending debate and taking a vote:19617:2:noun
 gainsay:x:contradict, deny, oppose, disagree:19614:2:verb
 abeyance:x:a state of disuse:19612:2:noun
 
-
-iconoclast:x:critic, skeptic, someone who attacks common beliefs:19595:3:noun
-turgid:x:(about language) tediously overblown, inflated, pompous:19596:3:adjective
-supine:x:weak, spineless, failing to act:19597:3:adjective
+iconoclast:x:critic, skeptic, someone who attacks common beliefs:19607:3:noun
+turgid:x:(about language) tediously overblown, inflated, pompous:19608:3:adjective
+supine:x:weak, spineless, failing to act:19609:3:adjective
 vociferous:x:blatant, noisy, clamorous:18635:3:adjective
 ambivalent:x:having mixed feelings, unsure, uncertain:516:3:adjective
-erstwhile:x:former, old, past, one-time:19598:3:adjective
-edify:x:instruct or improve someone morally or intellectually:19599:3:verb
-anodyne:x:bland, not likely to cause offence, dull:19601:3:adjective
-précis:x:a summary of text or speech, synopsis, summation:19604:3:noun
+erstwhile:x:former, old, past, one-time:19610:3:adjective
+edify:x:instruct or improve someone morally or intellectually:19611:3:verb
+anodyne:x:bland, not likely to cause offence, dull:19613:3:adjective
+précis:x:a summary of text or speech, synopsis, summation:19616:3:noun
 homogeneous:x:uniform, of the same kind, identical, unvaried:8193:3:adjective
-verdant:x:(about countryside) leafy, green, grass, lush:19606:3:adjective
-indolence:x:avoidance of activity or exertion, laziness, slothfulness:19607:3:noun
-euphony:x:being pleasing to the ear, melodiousness, musicality:19608:3:noun
+verdant:x:(about countryside) leafy, green, grass, lush:19618:3:adjective
+
+indolence:x:avoidance of activity or exertion, laziness, slothfulness:19619:3:noun
+euphony:x:being pleasing to the ear, melodiousness, musicality:19620:3:noun
+
+extol:x:praise enthusiastically, go wild about:6064:4:verb
+hegemony:x:leadership, dominance, dominion:19621:4:noun
+ersatz:x:fake, artificial, substitute, imitation, (usually inferior):19622:4:adjective
+diurnal:x:(about animals) active in the daytime:19623:4:adjective
+nadir:x:the lowest point in someone's fortunes, the all-time low:19624:4:noun
+soporific:x:sedative, inducing sleep, making one drowsy:19625:4:adjective
+gaffe:x:an unintentional act causing embarrassment, blunder:7065:4:noun
+compendium:x:collection, compilation, especially in a book or publication:19626:4:noun
+nostrum:x:favourite cure,scheme for bringing about some reform:19627:4:noun
+dyspeptic:x:irritable, bad-tempered, having indigestion:19628:4:adjective
+pastiche:x:artistic work mixing various sources, a medley:19629:4:noun
+catalyst:x:person or thing that starts/stimulates an event:2482:4:noun
+panoply:x:a complete or impressive collection:19630:5:noun
+magnate:x:a wealthy and influential businessperson/tycoon:10139:5:noun
+conscript:x:sign someone up (usually to the military):3516:5:verb
+catharsis:x:strong emotional relief, release:19631:5:noun
+philistine:x:someone hostile or indifferent to culture:19632:5:noun
+repast:x:meal, feat, banquet (formal):19633:5:noun
+vitiate:x:destroy the validity of, get rid of (legal):19634:5:verb
+waft:x:drift, float, glide through the air:18682:5:verb
+expiate:x:atone for, make amends for, make up for (a sin):19635:5:verb
+neophyte:x:beginner, learner, novice:19636:5:noun
+munificent:x:very generous, lavish, bountiful:19637:5:adjective
+paean:x:song of praise or triumph:19638:5:noun
+

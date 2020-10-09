@@ -1,0 +1,6 @@
+1: historical dungeon paragraphs
+2: AI dungeon concept paragraphs
+3: InferKit (3 paragraphs) 
+4: ___ GRE sentence level + paragraphs
+5: ___ Ethan (basic sentences + basic paragraphs)
+
