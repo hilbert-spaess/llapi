@@ -108,7 +108,7 @@ def on_review(cur, user_id, req):
             
             COMMAND = """UPDATE users
             SET level=level+1
-            WHERE user_id=%s
+            WHERE id=%s
             """
             cur.execute(COMMAND, (user_id,))
             
