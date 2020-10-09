@@ -226,7 +226,7 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
             
             COMMAND = """
             SELECT word, zipf FROM vocab
-            WHERE pos=%s AND LEFT(word,1)=%s AND id != %s
+            WHERE pos=%s AND LEFT(word,1)=%s AND id != %s AND zipf > 0
             """
             cur.execute(COMMAND, (pos, first_letter, item[0]))
             options = [list(a) for a in cur.fetchall() if a[1] > 0]
