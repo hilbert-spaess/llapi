@@ -67,7 +67,6 @@ def add_vocab(cur):
             cur.execute(INS_COMMAND, (word, pos, rank))
             l = cur.fetchall()[0][0]
             
-            print(l)
             return l
 
     with open(VOCABFILE, 'r') as vocabfile:
@@ -75,8 +74,12 @@ def add_vocab(cur):
         lines = vocabfile.readlines()
         lines = [x.split(":") for x in lines if len(x.split(":")) == 3]
         
+    CHK_COMMAND = """SELECT * FROM course_vocab
+    WHERE course_id=%s AND vocab_id=%s
+    """
+        
     COMMAND = """INSERT INTO course_vocab(course_id, vocab_id, definition, counts)
-    VALUES(%s, %s, %s, %s)
+    VALUES(%s, %s, %s)
     """
 
     for item in lines:
@@ -85,6 +88,12 @@ def add_vocab(cur):
         
         vocab_id = get_vocab_id(word, pos)
         
+        cur.execute(CHK_COMMAND, (COURSE_NO, vocab_id))
+        
+        if not cur.fetchall():
+            
+            cur.execute(COMMAND, (COURSE_NO, vocab_id, definition))
+
 conn, cur = connect()
 
 add_vocab(cur)
