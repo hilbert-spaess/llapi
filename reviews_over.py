@@ -13,6 +13,8 @@ def get_new_word_no(cur, user_id):
 def reviews_over(user_id):
     
     conn, cur = connect()
+    
+    scheduler.schedule(user_id)
 
     word_no = get_new_word_no(cur, user_id)
     new_vocab_add.new_vocab_add(cur, user_id, word_no, 1)
