@@ -98,7 +98,6 @@ def schedule_next_chunk_basic(cur, vocab_id, user_id):
     next_chunk = choose_next_chunk(cur, vocab_id, user_id)
 
     if not next_chunk:
-        log_warning({"user_id": user_id, "vocab_id": vocab_id, "text": "No chunks left for this vocab", "time": str(time.time())})
         return 0
     
     schedule_time = get_schedule_time(cur, vocab_id, user_id)
