@@ -1,0 +1,36 @@
+accurate:exact, precise, correct:adjective
+accustomed:in the habit of,usually:adjective
+acquire:get come into possession of:verb
+adjust:alter/change to make better:verb
+advantage:something that makes you better / superior:noun
+advocate:push for something,argue for something:verb
+annual:happens every year:adjective
+assume:take as true without proof:verb
+benefit:get something good from:verb
+brief:short,small,not very long:adjective
+collapse:break down, fall in:verb
+community:a group of people living locally:noun
+conflict:a fight between two groups or individuals:noun
+contribute:give towards, provide, help towards an end:verb
+core:the center of an object:noun
+decline:get worse:verb
+demonstrate:present, show, give an exhibition:verb
+detect:Notice / perceive / discover:verb
+efficient:effective without wasting time and effort:adjective
+endure:live through, put up with:verb
+enhance:make better / more attractive:verb
+estimate:make a rough guess / calculation:verb
+evidence:why you think something is true, reasoning and knowledge behind something:noun
+evolve:grow and develop:verb
+expand:extend, grow:verb
+expose:reveal, unmask, make accessible to the outside:verb
+extract:Remove, take out, pull out:verb
+focus:direct attention, pay attention:verb
+function:what something is used for:noun
+fundamental:essential, important, basic:adjective
+generate:produce, bring into existence, create:verb
+hollow:empty, having a space inside:adjective
+hostile:very unfriendly, aggressively opposed:adjective
+impact:a strong effect/consequence:noun
+implement:apply, use, utilise, carry out:verb
+influence:ability to have an impact on something:noun

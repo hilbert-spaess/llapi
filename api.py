@@ -12,7 +12,7 @@ import on_review
 from connect import connect
 import threading
 import reviews_over
-import my_vocab, my_progress
+import my_vocab, my_progress, new_user_choices
 import new_vocab_add
 from config import API_AUDIENCE
 import random
@@ -565,6 +565,59 @@ def new_user_level_test():
     conn.close()
     
     return res
+
+@app.route('/api/coursevocab', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def course_vocab():
+    
+    out = {}
+    conn, cur = connect()
+    req = request.get_json()
+    
+    COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial, message, level)
+    VALUES(%s, %s, %s, %s, %s, %s, 1)
+    RETURNING id"""
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], 0, req["course"], req["email"], 0, ""))
+    user_id = cur.fetchall()[0][0]
+    
+    out["course_vocab"] = new_user_choices.course_vocab_samples(cur, user_id)
+    
+    print(out["course_vocab"])
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+    
+    return res
+
+@app.route('/api/coursevocabsubmit', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def course_vocab_submit():
+    
+    out = {}
+    conn, cur = connect()
+    req = request.get_json()
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    a = cur.fetchall()
+    
+    user_id = a[0][0]
+    
+    words = req["words"]
+    
+    new_user_choices.course_vocab_submit(cur, user_id, words)
+    
+    res = make_response(jsonify(out))
+    
+    return res
+    
 
 @app.route('/api/loadprogress', methods=["POST", "GET"])
 @cross_origin(origin='*')

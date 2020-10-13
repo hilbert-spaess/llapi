@@ -18,31 +18,7 @@ def first_set_active(cur, user_id, vocab_id, delay):
     SET active=1, next=(NOW() + (%s * INTERVAL '1 day'))
     WHERE user_id=%s AND vocab_id=%s
     """
-    cur.execute(ACTIVE_COMMAND, (delay, user_id, vocab_id))             
-
-def initialise_vocab_user(user_id, vocab, word_no):
-    
-    conn, cur = connect()
-    
-    # vocab added to user_vocab
-    
-    INS_COMMAND = """
-    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak)
-    VALUES(%s, %s, %s, %s, %s)
-    """
-    
-    for vocab_id in vocab:
-        cur.execute(INS_COMMAND, (user_id, vocab_id, 0, 0, 0))
-    
-    # ?10? words added to reviews IF there are >1 chunks using IT.
-                    
-    new_vocab_add(cur, user_id, word_no, 0)
-    
-    cur.close()
-    conn.commit()
-    conn.close()
-    
-    scheduler.schedule(user_id)
+    cur.execute(ACTIVE_COMMAND, (delay, user_id, vocab_id)) 
     
 def new_vocab_add(cur, user_id, word_no, delay):
     
@@ -55,9 +31,9 @@ def new_vocab_add(cur, user_id, word_no, delay):
     
     NEW_COMMAND = """
     SELECT u.vocab_id FROM user_vocab u
-    INNER JOIN vocab v
-    ON u.vocab_id = v.id
-    WHERE u.user_id = %s AND v.counts > 1 and u.active = 0 and u.level <= %s
+    INNER JOIN course_vocab cv
+    ON u.vocab_id = cv.vocab_id
+    WHERE u.user_id = %s AND cv.counts > 1 and u.active = 0 and u.level <= %s
     """
     cur.execute(NEW_COMMAND, (user_id, lvl))
     potential_new_words = [z[0] for z in cur.fetchall()]
@@ -72,73 +48,44 @@ def new_vocab_add(cur, user_id, word_no, delay):
         
         first_set_active(cur, user_id, vocab_id, delay)
         
-def new_course(user_id, course_id):
+def new_course(user_id, course_id, words):
+    
+    conn, cur = connect()
     
     print("YO")
     print(course_id == 1)
+    print(course_id == 2)
     
-    if course_id in [1, "1"]:
+    COMMAND = """SELECT vocab_id, definition FROM course_vocab
+    WHERE course_id=%s AND counts > 5
+    """
+    cur.execute(COMMAND, (course_id,))
+    vocab_ids = cur.fetchall()
+    level1 = random.sample(vocab_ids, min(15, len(vocab_ids)))
+    
+    left = list(set(vocab_ids) - set(level1))
+    
+    INS_COMMAND = """
+    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
+    VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+    """
+    
+    for item in level1:
+        print(item)
+        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, item[1], 1, 0))
         
-        conn, cur = connect()
+    level2 = random.sample(left, min(15, len(left)))
+    
+    for item in level2:
+        print(item)
+        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, item[1], 2, 0))
         
-        with open(DIRECTORY + "/data/core/core_curriculum.txt", 'r', errors='replace') as curriculumfile:
-            
-            lines = curriculumfile.readlines()
-            
-            for row in lines:
-
-                print(row)
-
-                row = row.split(":")
-
-                print(row)
-                
-                if row[0].strip():
-
-                    
-                    INS_COMMAND = """
-                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, sense, definition, level, levelled)
-                    VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                    """
-                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[1].strip(), row[2].strip(), row[4].strip(), 0))
+    new_vocab_add(cur, user_id, 5, 0)
         
-        cur.close()
-        conn.commit()
-        conn.close()
-        
-        scheduler.schedule(user_id)
-        
-    if course_id in [2, "2"]:
-        
-        print("BBEMLO")
-
-        conn, cur = connect()
-
-        with open(COURSE_DIRECTORY + "2/curriculum.txt", 'r', errors='replace') as curriculumfile:
-
-            lines = curriculumfile.readlines()
-            
-            for row in lines:
-                
-                row = row.split(":")
-                
-                if row[0].strip():
-                    
-                    print(row)
-                    print(row[3].strip())
-                    
-                    INS_COMMAND = """
-                    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level)
-                    VALUES(%s, %s, %s, %s, %s, %s, %s)
-                    """
-                    cur.execute(INS_COMMAND, (user_id, row[3].strip(), 0, 0, 0, row[2].strip(), row[4].strip()))
-        
-
-        new_vocab_add(cur, user_id, 5, 0)
-
-        cur.close()
-        conn.commit()
-        conn.close()
-
-        scheduler.schedule(user_id)
+    cur.close()
+    conn.commit()
+    conn.close()
+    
+    scheduler.schedule(user_id)
+    
     

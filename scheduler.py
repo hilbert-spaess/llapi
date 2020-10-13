@@ -9,6 +9,9 @@ import json
 from warning import log_warning
 import time
 
+import os
+from config import COURSE_DIRECTORY
+
 def find_unscheduled_vocab(cur, user_id):
     
     FIND_COMMAND = """
@@ -36,12 +39,27 @@ def get_schedule_time(cur, vocab_id, user_id):
 
 def choose_next_chunk(cur, vocab_id, user_id):
     
-    NEXT_COMMAND = """
-    SELECT chunk_id FROM chunk_vocab
-    WHERE vocab_id = %s
+    CRS_COMMAND = """SELECT course_id
+    FROM users
+    WHERE id=%s
     """
-    cur.execute(NEXT_COMMAND, (vocab_id,))
-    potential_nexts = [x[0] for x in cur.fetchall()]
+    cur.execute(CRS_COMMAND, (user_id,))
+    course_id = cur.fetchall()[0][0]
+    
+    with open(os.path.join(COURSE_DIRECTORY, 'course_source.txt'), 'r') as CSFILE:
+        
+         lines = CSFILE.readlines()
+            
+    course_source = {x.split(":")[0].strip():[y.strip() for y in x.split(":")[1].split(",")] for x in lines}
+    
+    source_list = course_source[str(course_id)]
+    
+    NEXT_COMMAND = """
+    SELECT chunk_id FROM chunk_vocab cv
+    INNER JOIN chunks c
+    ON c.id = cv.chunk_id
+    WHERE cv.vocab_id = %s AND c.source=%s
+    """
     
     # look for the chunks the user has already seen
     
@@ -52,27 +70,25 @@ def choose_next_chunk(cur, vocab_id, user_id):
     cur.execute(ALREADY_COMMAND, (user_id, vocab_id,))
     already_seen = [x[0] for x in cur.fetchall()]
     
-    candidates = list(set(potential_nexts) - set(already_seen))
-    
-    random.shuffle(candidates)
-    
-    COMM = """SELECT source FROM chunks
-    WHERE id=%s
-    """
-
-    if not candidates:
-        return 0
-    
-    for candidate in candidates:
+    for source in source_list:
         
-        cur.execute(COMM, (candidate,))
-        a = cur.fetchall()
-        if a[0][0] == "4" or a[0][0] == 4:
-            return candidate
+        cur.execute(NEXT_COMMAND, (vocab_id, source))
+        potential_nexts = [x[0] for x in cur.fetchall()]
+        
+        candidates = list(set(potential_nexts) - set(already_seen))
+        random.shuffle(candidates)
+        
+        if candidates:
+            
+            next_chunk = random.sample(candidates, 1)[0]
+            
+            return next_chunk
+            
+    return 0
     
-    next_chunk = random.sample(candidates, 1)[0]
+    #candidates = list(set(potential_nexts) - set(already_seen))
     
-    return next_chunk
+    #random.shuffle(candidates)
 
 def get_unknown_vocab(cur, vocab_id, user_id):
     

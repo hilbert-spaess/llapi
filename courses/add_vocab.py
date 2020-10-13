@@ -4,11 +4,13 @@
 # robust checking that not been added yet
 
 import os
-from config import COURSE_DIRECTORY, COURSE_NO, VOCABFILE, API_DIRECTORY
+from config import COURSE_DIRECTORY, COURSE_NO, API_DIRECTORY
 
 from connect import connect
 
 import csv
+
+VOCABFILE = os.path.join(COURSE_DIRECTORY, COURSE_NO, "vocab.txt")
 
 # load vocab.
 # vocabfile: word:definition:POS
