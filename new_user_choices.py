@@ -1,6 +1,8 @@
 import random
 import new_vocab_add
 
+from connect import connect
+
 def course_vocab_samples(cur, user_id):
     
     CRS_COMMAND = """SELECT course_id
@@ -23,7 +25,9 @@ def course_vocab_samples(cur, user_id):
     
     return vocab
 
-def course_vocab_submit(cur, user_id, words):
+def course_vocab_submit(user_id, words):
+    
+    conn, cur = connect()
     
     # get a sample rank
     
@@ -42,18 +46,22 @@ def course_vocab_submit(cur, user_id, words):
     if course_id==1:
         
         message = "This is the Core TOEFL course. If you want to change the difficulty, or if you have any questions, get in touch."
-        vlevel = "4"
+        vlevel = "10000"
         
     if course_id==2:
         
         message = "This is the Core GRE course. If you want to change the difficulty, or if you have any questions, get in touch."
-        vlevel = "1"
+        vlevel = "30000"
         
     COMMAND = """UPDATE users
     SET vlevel=%s, message=%s
     WHERE id=%s
     """
     cur.execute(COMMAND, (vlevel, message, user_id))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
     
     new_vocab_add.new_course(user_id, course_id, words)
     

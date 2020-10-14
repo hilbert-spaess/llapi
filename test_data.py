@@ -127,16 +127,21 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         user_level = cur.fetchall()[0][0]
 
         COMMAND = """
-        SELECT v.id, v.zipf FROM vocab v
+        SELECT v.id, v.rank FROM vocab v
         INNER JOIN chunk_vocab c
         ON c.vocab_id = v.id
-        WHERE c.chunk_id = %s AND c.first_sentence = %s AND v.zipf > 0 AND v.pos != 'determiner'
+        WHERE c.chunk_id = %s AND c.first_sentence = %s AND v.rank > 0 AND v.pos != 'determiner'
         """
         cur.execute(COMMAND, (next_chunk, str(sen)))
         potential = cur.fetchall()
 
         if potential:
-            potential = sorted(potential, key = lambda x: abs(x[1] - user_level))[0]
+            print("***POTENTIAL***")
+            print(potential)
+            print("user_lvl", user_level)
+            potential = sorted(potential, key = lambda x: np.abs(np.log(x[1]) - np.log(user_level)))
+            print(potential)
+            potential = potential[0]
 
         return potential
     
@@ -149,6 +154,12 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         return [lower_cap, upper_cap]
     
     test_data = {}
+    COMMAND = """
+    SELECT vlevel FROM users
+    WHERE id=%s
+    """
+    cur.execute(COMMAND,(user_id,))
+    user_level = cur.fetchall()[0][0]
     
     # a JSON to into the user_nextchunk database for ease of loading.
     
@@ -190,14 +201,14 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         if get_interaction_mode(item) in ["4", "6"]:
             
             COMMAND = """
-            SELECT v.pos, v.zipf, v.word, cv.tags FROM vocab v
+            SELECT v.pos, v.rank, v.word, cv.tags FROM vocab v
             INNER JOIN chunk_vocab cv
             ON cv.vocab_id = v.id
-            WHERE v.id = %s AND chunk_id=%s
+            WHERE v.id = %s AND chunk_id=%s 
             """
             cur.execute(COMMAND, (item[0], next_chunk))
             out = cur.fetchall()[0]
-            pos = out[0]; zipf = out[1]; wd = out[2]; tag = out[3].split(",")[0]
+            pos = out[0]; rank = out[1]; wd = out[2]; tag = out[3].split(",")[0]
             
             alternatives = []
             
@@ -213,28 +224,35 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
         if get_interaction_mode(item) in ["3", "6"]:
             
             COMMAND = """
-            SELECT v.pos, v.zipf, v.word, cv.tags FROM vocab v
+            SELECT v.pos, v.rank, v.word, cv.tags FROM vocab v
             INNER JOIN chunk_vocab cv
             ON cv.vocab_id = v.id
             WHERE v.id = %s AND chunk_id=%s
             """
             cur.execute(COMMAND, (item[0], next_chunk))
             out = cur.fetchall()[0]
-            pos = out[0]; zipf = out[1]; wd = out[2]; tag = out[3].split(",")[0]
+            pos = out[0]; rank = out[1]; wd = out[2]; tag = out[3].split(",")[0]
             
             first_letter = wd[0].lower()
             
             COMMAND = """
-            SELECT word, zipf FROM vocab
-            WHERE pos=%s AND LEFT(word,1)=%s AND id != %s AND zipf > 0
+            SELECT word, rank FROM vocab
+            WHERE pos=%s AND LEFT(word,1)=%s AND id != %s AND rank > 0
             """
             cur.execute(COMMAND, (pos, first_letter, item[0]))
             options = [list(a) for a in cur.fetchall() if a[1] > 0]
-            options.sort(key=lambda x: np.abs(x[1] - zipf) + np.abs(len(wd) - len(x[0])))
+            print(wd)
+            print(rank)
+            if rank:
+                options.sort(key=lambda x: np.abs(np.log(x[1]) - np.log(rank)) + np.abs(len(wd) - len(x[0])))
+            else:
+                options.sort(key=lambda x: np.abs(np.log(x[1]) - np.log(user_level)) + np.abs(len(wd) - len(x[0])))
+            print("**OPTIONS**")
+            print(options)
             y = options[:min(len(options), 3):]
             
             print("YMCA",  y)
-            y.append([wd, zipf])
+            y.append([wd, rank])
 
             for idc in range(len(y)):
                 print(y[idc][0])

@@ -454,6 +454,48 @@ def load_vocab():
 
     return res
 
+@app.route('/api/newvocabword', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def new_vocab_word():
+    
+    req = request.get_json()
+    conn, cur = connect()
+    
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    user_id = cur.fetchall()[0][0]
+    
+    if req["type"] == "submit":
+        
+        print(req["payload"])
+        print("SUBMITTED")
+        
+        out = my_vocab.new_word(cur, req["payload"], user_id)
+        
+    elif req["type"] == "confirm":
+        
+        my_vocab.confirm_new_word(cur, req["payload"], user_id)
+        
+        out = {"state": "null"}
+        
+    else:
+        
+        out= {"state": "null"}
+        
+    cur.close()
+    conn.commit()
+    conn.close()
+    
+    res = make_response(jsonify(out))
+    
+    return res
+    
+
 @app.route('/api/getdata', methods=["POST", "GET"])
 @cross_origin(origin='*')
 @requires_auth
@@ -513,58 +555,6 @@ def get_today_words():
     
     return res
 
-@app.route('/api/newuserleveltest', methods=["POST", "GET"])
-@cross_origin(origin='*')
-@requires_auth
-def new_user_level_test():
-    
-    conn, cur = connect()
-    req = request.get_json()
-    
-    out = {}
-    out["words"] = []
-    
-    COMMAND = """SELECT word FROM vocab
-    WHERE zipf > 4 AND zipf < 5"""
-    cur.execute(COMMAND)
-    records = cur.fetchall()
-    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 3)
-    
-    for x in vocab:
-        out["words"].append(x)
-        
-    COMMAND = """SELECT word FROM vocab
-    WHERE zipf > 3 AND zipf < 4"""
-    cur.execute(COMMAND)
-    records = cur.fetchall()
-    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 3)
-    for x in vocab:
-        out["words"].append(x)
-    
-    COMMAND = """SELECT word FROM vocab
-    WHERE zipf > 2 AND zipf < 3"""
-    cur.execute(COMMAND)
-    records = cur.fetchall()
-    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 3)
-    
-    for x in vocab:
-        out["words"].append(x)
-        
-    COMMAND = """SELECT word FROM vocab
-    WHERE zipf < 2"""
-    cur.execute(COMMAND)
-    records = cur.fetchall()
-    vocab = random.sample([x[0] for x in records if (len(x[0].split(" "))==1 and "-" not in x[0] and x[0][0].islower())], 3)
-    for x in vocab:
-        out["words"].append(x)
-    
-    res = make_response(jsonify(out))
-    
-    cur.close()
-    conn.commit()
-    conn.close()
-    
-    return res
 
 @app.route('/api/coursevocab', methods=["POST", "GET"])
 @cross_origin(origin='*')
@@ -612,7 +602,11 @@ def course_vocab_submit():
     
     words = req["words"]
     
-    new_user_choices.course_vocab_submit(cur, user_id, words)
+    new_user_choices.course_vocab_submit(user_id, words)
+    
+    cur.close()
+    conn.commit()
+    conn.close()
     
     res = make_response(jsonify(out))
     

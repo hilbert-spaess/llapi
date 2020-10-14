@@ -2,5 +2,7 @@
 2: AI dungeon concept paragraphs
 3: InferKit (3 paragraphs) 
 4: ___ GRE sentence level + paragraphs
-5: ___ Ethan (basic sentences + basic paragraphs)
+5: ditto
+6: ___ Ethan (basic sentences + basic paragraphs)
+7: GRE just sentences. (no paras).
 

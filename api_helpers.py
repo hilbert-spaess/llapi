@@ -135,7 +135,7 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     
     interaction_data = []
     COMMAND = """
-    SELECT v.pos, v.zipf, v.word, cv.tags FROM vocab v
+    SELECT v.pos, v.rank, v.word, cv.tags FROM vocab v
     INNER JOIN chunk_vocab cv
     ON cv.vocab_id = v.id
     WHERE v.id = %s AND chunk_id=%s
@@ -143,7 +143,7 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     cur.execute(COMMAND, (v, chunkid))
 
     out = cur.fetchall()[0]
-    pos = out[0]; zipf = out[1]; wd = out[2]; tag = out[3].split(",")[0]
+    pos = out[0]; rank = out[1]; wd = out[2]; tag = out[3].split(",")[0]
 
     
     outdata = {}
@@ -169,7 +169,7 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
         # load synonyms from synonym database
 
         COMMAND = """
-        SELECT v.word, v.zipf FROM vocab v
+        SELECT v.word, v.rank FROM vocab v
         INNER JOIN synonyms s
         ON s.vocab2_id = v.id
         WHERE s.vocab1_id=%s

@@ -92,6 +92,15 @@ def load_vocab(cur, user_id, req):
         
         return cur.fetchall()[0][0]
     
+    def get_max_level():
+        
+        COMMAND = """SELECT level FROM user_vocab
+        WHERE user_id=%s
+        """
+        cur.execute(COMMAND, (user_id,))
+        l = max([x[0] for x in cur.fetchall()])
+        return l + 1
+    
     def get_vocab_dict():
         
         # get all vocab with streak, sense, samples and level
@@ -129,9 +138,145 @@ def load_vocab(cur, user_id, req):
     
     out["level"] = get_user_level()
     
+    out["maxlevel"] = get_max_level()
+    
     print(out)
     
     return out
+
+def new_word(cur, word, user_id):
     
+    def check_in_course():
+        
+        CRS_COMMAND = """SELECT course_id FROM users
+        WHERE id=%s
+        """
+        cur.execute(CRS_COMMAND, (user_id,))
+        course_id = cur.fetchall()[0][0]
+        
+        COMMAND = """SELECT v.word, v.id, v.pos, cv.definition FROM course_vocab cv
+        INNER JOIN vocab v
+        ON v.id = cv.vocab_id
+        WHERE cv.course_id=%s AND v.word=%s
+        """
+        cur.execute(COMMAND, (course_id, word))
+        return cur.fetchall()
+    
+    def check_in_dictionary():
+        
+        COMMAND = """SELECT word, id, pos FROM vocab
+        WHERE word=%s
+        """
+        cur.execute(COMMAND, (word,))
+        
+        return cur.fetchall()
+        
+    # check if in course
+    
+    in_course = check_in_course()
+    
+    LVL_COMMAND = """SELECT * FROM user_vocab uv 
+    INNER JOIN users u
+    ON u.id = uv.user_id
+    WHERE u.id=%s AND uv.level = u.level
+    """
+    cur.execute(LVL_COMMAND, (user_id,))
+    l = len(cur.fetchall())
+    
+    m = 15
+    level = l
+    if l >= m:
+        
+        level = l+1
+    
+    if in_course:
+        
+        INS_COMMAND = """
+        INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
+        VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        
+        
+        return {"state": "in_dictionary", "data": in_course}
+    
+    # check if in dictionary
+    
+    in_dictionary = check_in_dictionary()
+    
+    if in_dictionary:
+        
+        COMMAND = """INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, level, levelled)
+        VALUES(%s, %s, %s, %s, %s, %s, %s)
+        """
+        
+        return {"state": "in_dictionary", "data": in_dictionary}
+    
+    return {"state": "not_in_dictionary", "data": word}
+
+def confirm_new_word(cur, data, user_id):
+    
+    word = data[0]
+    vocab_id = data[1]
+    
+    def check_in_course():
+        
+        CRS_COMMAND = """SELECT course_id FROM users
+        WHERE id=%s
+        """
+        cur.execute(CRS_COMMAND, (user_id,))
+        course_id = cur.fetchall()[0][0]
+        
+        COMMAND = """SELECT definition FROM course_vocab
+        WHERE course_id=%s AND vocab_id=%s
+        """
+        cur.execute(COMMAND, (course_id, vocab_id))
+        return cur.fetchall()
+    
+    def check_in_dictionary():
+        
+        COMMAND = """SELECT word, id, pos FROM vocab
+        WHERE word=%s
+        """
+        cur.execute(COMMAND, (word,))
+        
+        return cur.fetchall()
+    
+    MAXLVL_COMMAND = """SELECT level FROM user_vocab
+    WHERE user_id=%s
+    """
+    cur.execute(MAXLVL_COMMAND, (user_id,))
+    level = max([x[0] for x in cur.fetchall()])
+    
+    LVL_COMMAND = """SELECT * FROM user_vocab
+    WHERE user_id=%s AND level=%s
+    """
+    cur.execute(LVL_COMMAND, (user_id,str(level)))
+                
+    l = len(cur.fetchall())
+    
+    
+    if l>=15:
+        
+        level += 1
+        
+    print("LEVEL", level)
+               
+        
+    in_course = check_in_course()
+    
+    if in_course:
+        
+        INS_COMMAND = """
+        INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
+        VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        
+    else:
+        
+        INS_COMMAND = """INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, level, levelled)
+        VALUES(%s, %s, %s, %s, %s, %s, %s)
+        """
+        cur.execute(INS_COMMAND, (user_id, vocab_id, "0", "0", "0", level, "0"))
+        
     
     
