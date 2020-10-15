@@ -707,6 +707,14 @@ def launch_screen():
     
     out["levelprogress"] = get_level_progress(cur, user_id, level)
     
+    COMMAND = """SELECT v.word, uv.streak FROM user_vocab uv
+    INNER JOIN vocab v
+    ON uv.vocab_id = v.id
+    WHERE uv.user_id=%s AND uv.level=%s
+    """
+    cur.execute(COMMAND, (user_id, level))
+    out["levelwords"] = [{"w": x[0], "s": x[1]} for x in cur.fetchall()]
+    
     res = make_response(jsonify(out))
     
     cur.close()

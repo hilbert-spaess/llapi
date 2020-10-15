@@ -58,7 +58,7 @@ def update_all_courses(cur):
     
 conn, cur = connect()
 
-update_all_courses(cur)
+update_message(cur, "UPDATE 14/10: You can now add your own vocab in the My Vocab section. New vocab will be queued to level 3.", "2")
 
 cur.close()
 conn.commit()
