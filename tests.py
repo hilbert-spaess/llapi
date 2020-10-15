@@ -38,11 +38,11 @@ def insert_test_user(data):
     
     print(data)
     
-    COMMAND = """INSERT INTO users(name, email, vlevel, course_id, tutorial, level)
-    VALUES(%s, %s, %s, %s, %s, %s)
+    COMMAND = """INSERT INTO users(name, email, vlevel, course_id, tutorial, level, message)
+    VALUES(%s, %s, %s, %s, %s, %s, %s)
     RETURNING id
     """
-    cur.execute(COMMAND, (TST, "test@gmail.com", data["vlevel"], data["course_id"], "0", data["level"]))
+    cur.execute(COMMAND, (TST, "test@gmail.com", data["vlevel"], data["course_id"], "0", data["level"], data["message"]))
     
     user_id = cur.fetchall()[0][0]
                                                                       
@@ -239,13 +239,13 @@ def simulate(simulated_user_id):
     
     conn, cur = connect()
     
-    COMMAND = """SELECT vlevel, course_id, level FROM users
+    COMMAND = """SELECT vlevel, course_id, level, message FROM users
     WHERE id=%s
     """
     cur.execute(COMMAND, (simulated_user_id,))
     r = cur.fetchall()[0]
     
-    data = {"vlevel": r[0], "course_id": r[1], "level": r[2]}
+    data = {"vlevel": r[0], "course_id": r[1], "level": r[2], "message": r[3]}
     
     user_id = insert_test_user(data)
     
@@ -344,6 +344,5 @@ data = {"vlevel": "1.5", "course_id": "2", "level": "1"}
 level_up(data)
 """
 
-log_in_test()
-
-
+simulate("39")
+step_time_test_user()

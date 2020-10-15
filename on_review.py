@@ -20,17 +20,7 @@ def on_review(cur, user_id, req):
     key_location = int(req["keyloc"])
     correct = req["answers"][key_location]
     
-    def calculate_streak():
-        
-        current_streak = req["interaction"][str(key_location)]["streak"]
-        
-        if not correct:
-            return 1
-        
-        else:
-            return current_streak + 1
-        
-    streak = calculate_streak()
+    streak = req["streak"]
     
     print("Streak", streak)
             
@@ -104,13 +94,64 @@ def on_review(cur, user_id, req):
         total = len(records)
         levelled = len([x for x in records if x[0]])
         
-        if (float(levelled)/float(total)) > 0.9:
+        if (float(levelled)/float(total)) > 0.8:
             
             COMMAND = """UPDATE users
             SET level=level+1
             WHERE id=%s
             """
             cur.execute(COMMAND, (user_id,))
+            
+            populate_levels(level+1)
+    
+    def populate_levels(level):
+        
+        for crucial_level in [level, level+1]:
+            
+            CRS_COMMAND = """SELECT course_id FROM users
+            WHERE id=%s
+            """
+            cur.execute(CRS_COMMAND, (user_id,))
+            course_id = cur.fetchall()[0][0]
+            
+            ALL_COMMAND = """SELECT vocab_id, definition FROM user_vocab
+            WHERE user_id=%s
+            """
+            cur.execute(ALL_COMMAND, (user_id,))
+            all_current = cur.fetchall()
+            
+            COMMAND = """SELECT * FROM user_vocab
+            WHERE level = %s AND user_id=%s
+            """
+            cur.execute(COMMAND, (str(crucial_level), user_id))
+            
+            t = len(cur.fetchall())
+
+            if t < 15:
+                
+                COMMAND = """SELECT vocab_id, definition FROM course_vocab
+                WHERE course_id=%s
+                """
+                cur.execute(COMMAND, (course_id,))
+                all_potentials = cur.fetchall()
+                
+                potentials = list(set(all_potentials) - set(all_current))
+                
+                new_vocab = random.sample(potentials, min(len(potentials), 15 - t))
+                
+                INS_COMMAND = """
+                INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
+                VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+                """
+                for item in new_vocab:
+                    
+                    cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, item[1], crucial_level, 0))
+                    
+                    
+                
+                
+            
+            
             
             
         
