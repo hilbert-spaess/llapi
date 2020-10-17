@@ -66,7 +66,7 @@ def on_review(cur, user_id, req):
         
     def next_time():
         
-         streak_to_days = {1: "1", 2: "2", 3: "3", 4: "6", 5: "14"}
+         streak_to_days = {1: "1", 2: "2", 3: "3", 4: "6", 5: "14", 6: "30", 7: "60", 8: "100"}
     
          return streak_to_days[streak]
     
@@ -130,7 +130,7 @@ def on_review(cur, user_id, req):
             if t < 15:
                 
                 COMMAND = """SELECT vocab_id, definition FROM course_vocab
-                WHERE course_id=%s
+                WHERE course_id=%s AND counts > 4
                 """
                 cur.execute(COMMAND, (course_id,))
                 all_potentials = cur.fetchall()
@@ -140,12 +140,12 @@ def on_review(cur, user_id, req):
                 new_vocab = random.sample(potentials, min(len(potentials), 15 - t))
                 
                 INS_COMMAND = """
-                INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
-                VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled, course_id)
+                VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 for item in new_vocab:
                     
-                    cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, item[1], crucial_level, 0))
+                    cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, item[1], crucial_level, 0, course_id))
                     
                     
                 

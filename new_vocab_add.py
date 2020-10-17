@@ -33,7 +33,7 @@ def new_vocab_add(cur, user_id, word_no, delay):
     SELECT u.vocab_id FROM user_vocab u
     INNER JOIN course_vocab cv
     ON u.vocab_id = cv.vocab_id
-    WHERE u.user_id = %s AND cv.counts > 1 and u.active = 0 and u.level <= %s
+    WHERE u.user_id = %s AND cv.counts > 4 and u.active = 0 and u.level <= %s
     """
     cur.execute(NEW_COMMAND, (user_id, lvl))
     potential_new_words = [z[0] for z in cur.fetchall()]
@@ -66,19 +66,19 @@ def new_course(user_id, course_id, words):
     left = list(set(vocab_ids) - set(level1))
     
     INS_COMMAND = """
-    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
-    VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+    INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled, course_id)
+    VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     
     for item in level1:
         print(item)
-        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, item[1], 1, 0))
+        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, item[1], 1, 0, course_id))
         
     level2 = random.sample(left, min(15, len(left)))
     
     for item in level2:
         print(item)
-        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, item[1], 2, 0))
+        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, item[1], 2, 0, course_id))
         
     new_vocab_add(cur, user_id, 5, 0)
         

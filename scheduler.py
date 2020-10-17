@@ -83,6 +83,10 @@ def choose_next_chunk(cur, vocab_id, user_id):
             next_chunk = random.sample(candidates, 1)[0]
             
             return next_chunk
+        
+        elif potential_nexts:
+            
+            next_chunk = random.sample(potential_nexts, 1)[0]
             
     return 0
     
