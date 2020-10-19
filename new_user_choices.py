@@ -53,6 +53,11 @@ def course_vocab_submit(user_id, words):
         message = "This is the Core GRE course. If you want to change the difficulty, or if you have any questions, get in touch."
         vlevel = "30000"
         
+    if course_id==5:
+        
+        message = "Primary school reading account. If you want to change the difficulty, or if you have any questions, get in touch."
+        vlevel= "5000"
+        
     COMMAND = """UPDATE users
     SET vlevel=%s, message=%s
     WHERE id=%s
