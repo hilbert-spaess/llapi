@@ -549,6 +549,8 @@ def get_today_review_progress():
     
     for instance in records:
         todaychunks.append([instance[0], instance[1], instance[2]])
+    
+    todaychunks = list(set(todaychunks))
         
     LOC_COMMAND = """SELECT locations FROM chunk_vocab
     WHERE chunk_id=%s AND vocab_id=%s
