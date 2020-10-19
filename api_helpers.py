@@ -283,6 +283,10 @@ def build_context(chunk, grammar, vocab, unknown_vocab):
     for idx, word in enumerate(chunk):
         context[str(idx)] = {'w': word, 'g': [], 'v': 0, 'u': 0}
         
+    print(context.keys())
+    print(vocab)
+    print(grammar)
+        
     for item in grammar:
         for j in item[2].split(","):
             context[j]['g'].append(str(item[0]))

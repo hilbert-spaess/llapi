@@ -12,10 +12,12 @@ import on_review
 from connect import connect
 import threading
 import reviews_over
-import my_vocab, my_progress, new_user_choices
+import my_vocab, my_progress, new_user_choices, read_for_fun
 import new_vocab_add
 from config import API_AUDIENCE
 import random
+
+import permissions
 
 from six.moves.urllib.request import urlopen
 from functools import wraps
@@ -157,6 +159,23 @@ def get_first_chunk():
     
     return res
 
+@app.route('/api/readforfun', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def read_for_fun_api(cur, user_id):
+    
+    out = {}
+    
+    out["allChunks"] = read_for_fun.read_for_fun(cur, user_id)
+    
+    out["today_progress"] = {"yet": len(out["allChunks"]), "done": 0}
+    
+    out["displayType"] = "readforfun"
+    
+    res = make_response(jsonify(out))
+    
+    return res
+
 def get_first_chunk1(cur, user_id, req):
     
     chunk_id = choose_next_chunk(cur, user_id)
@@ -184,7 +203,9 @@ def get_first_chunk1(cur, user_id, req):
         print("NOTHING LEFT")
         
     yet, done = get_today_progress(cur, user_id)
-    out["today_progress"] = {"yet": yet, "done": done}  
+    out["today_progress"] = {"yet": yet, "done": done}
+    
+    out["permissions"] = permissions.get_permissions(cur, user_id)
     
     res = make_response(jsonify(out))
     
@@ -228,6 +249,17 @@ def get_text_chunk():
            
     if req == {}:
         return make_response(jsonify({}))
+    
+    if "displayType" in req.keys() and req["displayType"] == "readforfun":
+        
+        return read_for_fun_api(cur, user_id)
+    
+    if "displayType" in req.keys() and req["displayType"] == "readforfunlogging":
+        
+        print("HERE NIGGA")
+                                           
+        res = make_response(jsonify(out))
+        return res                                   
     
     if req["answeredCorrect"] == "-1":
         print("HEMLO this is the first chumk")
@@ -623,6 +655,8 @@ def get_today_words():
     
     out = {}
     out["words"] = list(set([x[0] for x in words]))
+    
+    out["permissions"] = permissions.get_permissions(cur, user_id)
     
     res = make_response(jsonify(out))
     
