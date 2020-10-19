@@ -172,3 +172,62 @@ def on_review(cur, user_id, req):
     
     handle_levels()
     
+def manual_level_up(cur, user_id):
+    
+    def populate_levels(level):
+        
+        for crucial_level in [level, level+1]:
+            
+            CRS_COMMAND = """SELECT course_id FROM users
+            WHERE id=%s
+            """
+            cur.execute(CRS_COMMAND, (user_id,))
+            course_id = cur.fetchall()[0][0]
+            
+            ALL_COMMAND = """SELECT vocab_id, definition FROM user_vocab
+            WHERE user_id=%s
+            """
+            cur.execute(ALL_COMMAND, (user_id,))
+            all_current = cur.fetchall()
+            
+            COMMAND = """SELECT * FROM user_vocab
+            WHERE level = %s AND user_id=%s
+            """
+            cur.execute(COMMAND, (str(crucial_level), user_id))
+            
+            t = len(cur.fetchall())
+
+            if t < 15:
+                
+                COMMAND = """SELECT vocab_id, definition FROM course_vocab
+                WHERE course_id=%s AND counts > 4
+                """
+                cur.execute(COMMAND, (course_id,))
+                all_potentials = cur.fetchall()
+                
+                potentials = list(set(all_potentials) - set(all_current))
+                
+                new_vocab = random.sample(potentials, min(len(potentials), 15 - t))
+                
+                INS_COMMAND = """
+                INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled, course_id)
+                VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """
+                for item in new_vocab:
+                    
+                    cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, item[1], crucial_level, 0, course_id))
+                    
+        
+    COMMAND = """UPDATE users
+    SET level=level+1
+    WHERE id=%s
+    """
+    cur.execute(COMMAND, (user_id,))
+    
+    COMMAND = """SELECT level FROM users
+    WHERE id=%s
+    """
+    cur.execute(COMMAND, (user_id,))
+    level = cur.fetchall()[0][0]
+
+    populate_levels(level)

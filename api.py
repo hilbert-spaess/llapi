@@ -518,7 +518,82 @@ def get_data():
 
     return res
 
+@app.route('/api/todayprogress', methods=['POST', 'GET'])
+@cross_origin(origin='*')
+@requires_auth
+def get_today_review_progress():
+    
+    conn, cur = connect()
+    req = request.get_json()
+    out = {}
+    
+    COMMAND = """SELECT id, level FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    a = cur.fetchall()
+    
+    user_id = a[0][0]
+    level = a[0][1]
+    
+    COMMAND = """SELECT c.chunk, uv.vocab_id, c.id FROM chunks c
+    INNER JOIN user_vocab_log uv
+    ON uv.chunk_id = c.id
+    WHERE user_id=%s AND DATE(uv.time) = DATE(NOW())
+    """
+    cur.execute(COMMAND, (user_id,))
+    
+    records = cur.fetchall()
+    
+    todaychunks = []
+    
+    for instance in records:
+        todaychunks.append([instance[0], instance[1], instance[2]])
+        
+    LOC_COMMAND = """SELECT locations FROM chunk_vocab
+    WHERE chunk_id=%s AND vocab_id=%s
+    """
+    
+    WD_COMMAND = """SELECT word FROM vocab
+    WHERE id=%s
+    """
+    
+    for i, instance in enumerate(todaychunks):
+        cur.execute(LOC_COMMAND, (instance[2], instance[1]))
+        location = cur.fetchall()[0][0].split(",")[0]
+        
+        todaychunks[i].append(location)
+        
+        cur.execute(WD_COMMAND, (instance[1],))
+        wd = cur.fetchall()[0][0]
+        
+        todaychunks[i].append(wd)
+    
+    out["todaychunks"] = todaychunks
+    
+    COMMAND = """SELECT v.word, uv.streak FROM user_vocab uv
+    INNER JOIN vocab v
+    ON uv.vocab_id = v.id
+    WHERE uv.user_id=%s AND uv.vocab_id=%s
+    """
+    words = []
+    for i, instance in enumerate(todaychunks):
+        
+        cur.execute(COMMAND, (user_id, instance[1]))
+        x = cur.fetchall()[0]
+        words.append({"w": x[0], "s": x[1]})
 
+    out["words"] = words
+    
+    res = make_response(jsonify(out))
+    
+    cur.close()
+    conn.commit()
+    conn.close()
+    
+    return res
+    
+    
 @app.route('/api/todaywords', methods=["POST", "GET"])
 @cross_origin(origin='*')
 @requires_auth
