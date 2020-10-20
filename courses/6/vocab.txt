@@ -1,8 +1,8 @@
-abbreviate
-accordingly
-accountable
-acquiesce
-adequate
+abbreviate:shorten (usually text):verb
+accordingly:in a corresponding way; in a related way:adverb
+accountable:responsible for actions and decisions;expected to justify decisions:adjective
+acquiesce:accept something reluctantly:verb
+adequate:satisfactory, acceptable:adjective
 advantage
 adverse
 advocate
@@ -58,12 +58,12 @@ deduce
 demonstrate
 denotation
 denote
-derive
-deter
+derive: obtain, get something from : verb
+deter: discourage someone from doing something : verb
 determine
 devise
-dichotomy
-differentiate
+dichotomy : a division between two opposite things : noun
+differentiate : tell what makes something different : verb
 discredit
 distinguish
 divisive
