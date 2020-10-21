@@ -344,5 +344,4 @@ data = {"vlevel": "1.5", "course_id": "2", "level": "1"}
 level_up(data)
 """
 
-simulate("82")
-step_time_test_user()
+log_in_test()

@@ -33,7 +33,7 @@ def new_vocab_add(cur, user_id, word_no, delay):
     SELECT u.vocab_id FROM user_vocab u
     INNER JOIN course_vocab cv
     ON u.vocab_id = cv.vocab_id
-    WHERE u.user_id = %s AND cv.counts > 4 and u.active = 0 and u.level <= %s
+    WHERE u.user_id = %s AND cv.counts > 1 and u.active = 0 and u.level <= %s
     """
     cur.execute(NEW_COMMAND, (user_id, lvl))
     potential_new_words = [z[0] for z in cur.fetchall()]
@@ -57,7 +57,7 @@ def new_course(user_id, course_id, words):
     print(course_id == 2)
     
     COMMAND = """SELECT vocab_id, definition FROM course_vocab
-    WHERE course_id=%s AND counts > 5
+    WHERE course_id=%s AND counts > 1
     """
     cur.execute(COMMAND, (course_id,))
     vocab_ids = cur.fetchall()
