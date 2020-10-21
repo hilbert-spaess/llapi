@@ -63,6 +63,11 @@ def course_vocab_submit(user_id, words):
         message = "Year 4 reading account. Get in touch if you have questions."
         vlevel = "7000"
         
+    if course_id==6:
+        
+        message = "Essay vocab account. Get in touch if you have questions."
+        vlevel = "10000"
+        
     COMMAND = """UPDATE users
     SET vlevel=%s, message=%s
     WHERE id=%s
