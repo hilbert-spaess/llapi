@@ -28,6 +28,9 @@ blink:close your eyes quickly:verb
 optional: you can choose to do it:adjective
 imaginative:has lots of ideas:adjective
 herd:a group of animals, like cows:noun
+chink:a small opening, narrow gap:noun
+troop:soldiers, armed forces:noun
+prosperity:condition and times of success, good fortune:noun
 delightful
 oak
 pillow

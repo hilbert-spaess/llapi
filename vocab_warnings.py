@@ -6,7 +6,7 @@ def no_counts(cur, user_id, level, course_id):
     
     WD_COMMAND = """SELECT word FROM vocab WHERE id=%s"""
     
-    print("\nNEW AND UNHINGED")
+    print("\nNEW AND UNHINGED\n")
     
     COMMAND = """SELECT uv.vocab_id, uv.level, uv.definition FROM user_vocab uv
     WHERE user_id=%s
@@ -22,7 +22,7 @@ def no_counts(cur, user_id, level, course_id):
             wd = cur.fetchall()[0][0]
 
             print(wd)
-            print("Level: " + str(instance[2]))
+            print("Level: " + str(instance[1]))
         
     
     COMMAND = """SELECT uv.vocab_id, cv.counts, uv.level FROM user_vocab uv
@@ -33,7 +33,7 @@ def no_counts(cur, user_id, level, course_id):
     cur.execute(COMMAND, (user_id, level + 2, course_id))
     records = cur.fetchall()
     
-    print("\nNOT ENOUGH SENTENCES FOR")
+    print("\nNOT ENOUGH SENTENCES FOR\n")
     
     WD_COMMAND = """SELECT word FROM vocab WHERE id=%s"""
     
