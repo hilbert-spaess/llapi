@@ -58,7 +58,7 @@ def update_all_courses(cur):
     
 conn, cur = connect()
 
-update_message(cur, "Hi Ethan. Let me know if this is too easy or hard. You can add new words to study later with the plus button in 'My Vocab'!", "5")
+update_message(cur, "Hi Childs Hill school! We hope the reading is fun.", "7")
 
 cur.close()
 conn.commit()

@@ -65,15 +65,15 @@ devise
 dichotomy : a division between two opposite things : noun
 differentiate : tell what makes something different : verb
 discredit
-distinguish
-divisive
-dubious
-egalitarian
-elucidate
-engender
-enmity
-entrenched
-enumerate
+distinguish : tell something is different : verb
+divisive : causing disagreement between people : adjective
+dubious : not trustworthy, to be doubted : adjective
+egalitarian : bringing equality to all people : adjective
+elucidate : explain clearly : verb
+engender : cause, bring about, give rise to : verb
+enmity : feeling of opposition, mistrust or hostility: adjective
+entrenched : deeply fixed, rooted, ingrained : adjective
+enumerate : count out, list : verb
 equivalent
 erroneous
 esoteric
