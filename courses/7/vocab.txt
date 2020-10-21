@@ -4,12 +4,12 @@ develop:grow and become more advanced:verb
 predict:say that something will happen in the future:verb
 difference:a way in which two things are not the same:noun
 disappointed
-prefer
-persuade
-exercise
-promise
-probably
-recent
+prefer:like something better than something else:verb
+source:where something comes from:noun
+exercise:activity requiring physical effort:verb
+promise:guarantee to definitely do something:verb
+probably:almost certainly:adverb
+recent:happened a short time ago:adjective
 remember
 believe
 century

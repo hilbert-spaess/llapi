@@ -104,22 +104,32 @@ def read_for_fun(cur, user_id):
     WHERE cv.vocab_id=%s AND c.source=%s
     """
     
+    ALL_PREV_COMMAND = """SELECT chunk_id FROM user_vocab_log
+    WHERE user_id=%s
+    """
+    cur.execute(ALL_PREV_COMMAND, (user_id,))
+    all_prev = [x[0] for x in cur.fetchall()]
+    
     for vocab_id in vocab_ids:
         
         for source in source_list:
             
             cur.execute(COMMAND, (vocab_id, source))
-            records = cur.fetchall()
+            records = [x[0] for x in cur.fetchall()]
             
-            if records:
+            new = list(set(records) - set(all_prev))
+            
+            if new:
+                
+                chunk_id = random.sample(new, 1)[0]
+                
+                allchunks.append(next_chunk(cur, user_id, vocab_id, chunk_id))
+                
+                break
+            
+            elif records:
 
                 chunk_id = random.sample(records, 1)[0]
-                
-                print("*****")
-                print("HENLO")
-                print(chunk_id)
-                print("HENLO")
-                print("*****")
 
                 allchunks.append(next_chunk(cur, user_id, vocab_id, chunk_id))
                 
