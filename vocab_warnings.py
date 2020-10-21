@@ -9,12 +9,14 @@ def no_counts(cur, user_id, level, course_id):
     print("\nNEW AND UNHINGED")
     
     COMMAND = """SELECT uv.vocab_id, uv.level, uv.definition FROM user_vocab uv
-    WHERE definition='' AND user_id=%s
+    WHERE user_id=%s
     """
     cur.execute(COMMAND, (user_id,))
     records = cur.fetchall()
     
     for instance in records:
+        
+        print(
         
         if not instance[2]:
         
