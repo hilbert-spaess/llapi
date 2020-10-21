@@ -16,8 +16,6 @@ def no_counts(cur, user_id, level, course_id):
     
     for instance in records:
         
-        print(
-        
         if not instance[2]:
         
             cur.execute(WD_COMMAND, (instance[0],))
