@@ -7,7 +7,6 @@ import json
 import pandas as pd
 import psycopg2
 from api_helpers import choose_next_chunk, next_chunk, get_all_chunks, load_tutorial, get_today_progress, get_level_progress
-from lesson_helpers import get_all_lessons
 import on_review
 from connect import connect
 import threading
@@ -313,52 +312,6 @@ def get_text_chunk():
         res = make_response(jsonify(out))
 
         return res
-    
-@app.route('/api/getlessons', methods=["POST", "GET"])
-@cross_origin(origin='*')
-@requires_auth
-def get_lessons():
-    
-    req = request.get_json()
-    conn, cur = connect()
-    out = {}
-    
-    COMMAND = """SELECT id, tutorial FROM users
-    WHERE name=%s
-    """
-    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
-    
-    a = cur.fetchall()
-    
-    # possibly a new user
-    
-    if not a:
-        out["displayType"] = "newUser"
-        
-        res = make_response(jsonify(out))
-
-        cur.close()
-        conn.commit()
-        conn.close()
-
-        return res
-    
-    user_id = a[0][0]
-    
-    COMMAND = """SELECT 1 FROM user_vocab uv 
-    INNER JOIN users u
-    ON u.id = uv.user_id
-    WHERE u.id=%s AND uv.level <= u.level AND active=0"""
-    
-    cur.execute(COMMAND, (user_id,))
-    
-    if cur.fetchall():
-        out["displayType"] = "lessons"
-        all_lessons = get_all_lessons(cur, user_id)
-        out["all_lessons"] = all_lessons
-    
-    return out
-    
     
     
 @app.route('/api/newuser', methods=["POST", "GET"])

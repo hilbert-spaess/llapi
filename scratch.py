@@ -1,40 +1,36 @@
-# add course to all vocabulary currently in circulation.
+# port definitions from course_vocab to vocab
 
 from connect import connect
 
-
-def add_course(cur, user_id):
+def port_definition(cur, course_id, vocab_id):
     
-    COMMAND = """SELECT course_id FROM users
+    DEFCOM = """SELECT definition FROM course_vocab
+    WHERE course_id=%s AND vocab_id=%s
+    """
+    cur.execute(DEFCOM, (course_id, vocab_id))
+    
+    definition = cur.fetchall()[0][0]
+    
+    COMM = """UPDATE vocab 
+    SET definition=%s
     WHERE id=%s
     """
-    cur.execute(COMMAND, (user_id,))
-    course_id = cur.fetchall()[0][0]
+    cur.execute(COMM, (definition, vocab_id))
     
-    COMMAND = """UPDATE user_vocab
-    SET course_id=%s
-    WHERE user_id=%s
-    """
-    cur.execute(COMMAND, (course_id, user_id))
+def port_all_definitions(cur):
+    
+    cur.execute("SELECT course_id, vocab_id FROM course_vocab")
+    records = cur.fetchall()
+    print(records)
+    
+    for instance in records:
+        
+        print(instance[0])
+        port_definition(cur, instance[0], instance[1])
+    
+conn, cur = connect()
 
-def get_all_ids(cur):
-    
-    COMMAND = """SELECT id FROM users"""
-    cur.execute(COMMAND)
-    
-    ids = [x[0] for x in cur.fetchall()]
-    
-    return ids
-
-conn,cur = connect()
-
-user_ids = get_all_ids(cur)
-
-for user_id in user_ids:
-    
-    print(user_id)
-    
-    add_course(cur, user_id)
+port_all_definitions(cur)
 
 cur.close()
 conn.commit()

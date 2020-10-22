@@ -114,7 +114,7 @@ def on_review(cur, user_id, req):
             cur.execute(CRS_COMMAND, (user_id,))
             course_id = cur.fetchall()[0][0]
             
-            ALL_COMMAND = """SELECT vocab_id, definition FROM user_vocab
+            ALL_COMMAND = """SELECT vocab_id FROM user_vocab
             WHERE user_id=%s
             """
             cur.execute(ALL_COMMAND, (user_id,))
@@ -125,11 +125,15 @@ def on_review(cur, user_id, req):
             """
             cur.execute(COMMAND, (str(crucial_level), user_id))
             
+            DEFCOMM = """SELECT definition FROM vocab
+            WHERE id=%s
+            """
+            
             t = len(cur.fetchall())
 
             if t < 15:
                 
-                COMMAND = """SELECT vocab_id, definition FROM course_vocab
+                COMMAND = """SELECT vocab_id FROM course_vocab
                 WHERE course_id=%s AND counts > 4
                 """
                 cur.execute(COMMAND, (course_id,))
@@ -145,7 +149,10 @@ def on_review(cur, user_id, req):
                 """
                 for item in new_vocab:
                     
-                    cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, item[1], crucial_level, 0, course_id))
+                    cur.execute(DEFCOMM, (item[0],))
+                    definition = cur.fetchal()[0][0]
+                    
+                    cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, definition, crucial_level, 0, course_id))
                     
                     
                 
@@ -184,7 +191,7 @@ def manual_level_up(cur, user_id):
             cur.execute(CRS_COMMAND, (user_id,))
             course_id = cur.fetchall()[0][0]
             
-            ALL_COMMAND = """SELECT vocab_id, definition FROM user_vocab
+            ALL_COMMAND = """SELECT vocab_id FROM user_vocab
             WHERE user_id=%s
             """
             cur.execute(ALL_COMMAND, (user_id,))
@@ -196,10 +203,14 @@ def manual_level_up(cur, user_id):
             cur.execute(COMMAND, (str(crucial_level), user_id))
             
             t = len(cur.fetchall())
+            
+            DEFCOMM = """SELECT definition FROM vocab
+            WHERE id=%s
+            """
 
             if t < 15:
                 
-                COMMAND = """SELECT vocab_id, definition FROM course_vocab
+                COMMAND = """SELECT vocab_id FROM course_vocab
                 WHERE course_id=%s AND counts > 4
                 """
                 cur.execute(COMMAND, (course_id,))
@@ -215,7 +226,10 @@ def manual_level_up(cur, user_id):
                 """
                 for item in new_vocab:
                     
-                    cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, item[1], crucial_level, 0, course_id))
+                    cur.execute(DEFCOMM, (item[0],))
+                    definition = cur.fetchal()[0][0]
+                    
+                    cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, definition, crucial_level, 0, course_id))
                     
         
     COMMAND = """UPDATE users

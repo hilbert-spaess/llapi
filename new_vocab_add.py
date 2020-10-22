@@ -56,12 +56,16 @@ def new_course(user_id, course_id, words):
     print(course_id == 1)
     print(course_id == 2)
     
-    COMMAND = """SELECT vocab_id, definition FROM course_vocab
+    COMMAND = """SELECT vocab_id FROM course_vocab
     WHERE course_id=%s AND counts > 1
     """
     cur.execute(COMMAND, (course_id,))
     vocab_ids = cur.fetchall()
     level1 = random.sample(vocab_ids, min(15, len(vocab_ids)))
+    
+    DEFCOMM = """SELECT definition FROM vocab
+    WHERE id=%s
+    """
     
     left = list(set(vocab_ids) - set(level1))
     
@@ -71,14 +75,16 @@ def new_course(user_id, course_id, words):
     """
     
     for item in level1:
-        print(item)
-        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, item[1], 1, 0, course_id))
+        cur.execute(DEFCOMM, (item[0],))
+        definition = cur.fetchall()[0][0]
+        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, definition, 1, 0, course_id))
         
     level2 = random.sample(left, min(15, len(left)))
     
     for item in level2:
-        print(item)
-        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, item[1], 2, 0, course_id))
+        cur.execute(DEFCOMM, (item[0],))
+        definition = cur.fetchall()[0][0]
+        cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, definition, 2, 0, course_id))
         
     new_vocab_add(cur, user_id, 5, 0)
         

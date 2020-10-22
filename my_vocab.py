@@ -33,7 +33,7 @@ def load_vocab(cur, user_id, req):
         # return dictionary of active vocab with streaks
 
         COMMAND = """
-        SELECT v.id, v.word, u.streak, u.definition, u.sense FROM user_vocab u
+        SELECT v.id, v.word, u.streak, v.definition, u.sense FROM user_vocab u
         INNER JOIN vocab v
         ON v.id = u.vocab_id
         WHERE u.user_id=%s AND u.active=%s
@@ -60,7 +60,7 @@ def load_vocab(cur, user_id, req):
         # return dictionary of active vocab with streaks
 
         COMMAND = """
-        SELECT v.id, v.word, u.definition, u.sense FROM user_vocab u
+        SELECT v.id, v.word, v.definition, u.sense FROM user_vocab u
         INNER JOIN vocab v
         ON v.id = u.vocab_id
         WHERE u.user_id=%s AND u.active=%s
@@ -106,7 +106,7 @@ def load_vocab(cur, user_id, req):
         # get all vocab with streak, sense, samples and level
         
         COMMAND = """
-        SELECT v.id, v.word, u.definition, u.sense, u.level, u.streak, u.active FROM user_vocab u
+        SELECT v.id, v.word, v.definition, u.sense, u.level, u.streak, u.active FROM user_vocab u
         INNER JOIN vocab v
         ON v.id = u.vocab_id
         WHERE u.user_id=%s
@@ -154,7 +154,7 @@ def new_word(cur, word, user_id):
         cur.execute(CRS_COMMAND, (user_id,))
         course_id = cur.fetchall()[0][0]
         
-        COMMAND = """SELECT v.word, v.id, v.pos, cv.definition FROM course_vocab cv
+        COMMAND = """SELECT v.word, v.id, v.pos, v.definition FROM course_vocab cv
         INNER JOIN vocab v
         ON v.id = cv.vocab_id
         WHERE cv.course_id=%s AND v.word=%s
@@ -226,7 +226,7 @@ def confirm_new_word(cur, data, user_id):
         cur.execute(CRS_COMMAND, (user_id,))
         course_id = cur.fetchall()[0][0]
         
-        COMMAND = """SELECT definition FROM course_vocab
+        COMMAND = """SELECT * FROM course_vocab
         WHERE course_id=%s AND vocab_id=%s
         """
         cur.execute(COMMAND, (course_id, vocab_id))
@@ -264,19 +264,10 @@ def confirm_new_word(cur, data, user_id):
         
     in_course = check_in_course()
     
-    if in_course:
-        
-        INS_COMMAND = """
-        INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled)
-        VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
-        """
-        
-    else:
-        
-        INS_COMMAND = """INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, level, levelled)
-        VALUES(%s, %s, %s, %s, %s, %s, %s)
-        """
-        cur.execute(INS_COMMAND, (user_id, vocab_id, "0", "0", "0", level, "0"))
-        
+    INS_COMMAND = """INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, level, levelled)
+    VALUES(%s, %s, %s, %s, %s, %s, %s)
+    """
+    cur.execute(INS_COMMAND, (user_id, vocab_id, "0", "0", "0", level, "0"))
+
     
     

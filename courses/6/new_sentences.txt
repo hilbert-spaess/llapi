@@ -1,248 +1,83 @@
+﻿#exacerbate
 
 
-#abbreviate
-
-The tendency in some post-modern writing to avoid long sentences and complex syntax in favour of short, sometimes single, words, is part of a general trend to brevity in modern life, in which formerly florid prose is abbreviated.
-The information that is lost in the process of abbreviating a message can be made up for if the people involved already share knowledge between themselves.
-The word "Mississippi" can be abbreviated as "MS".
-Doctors tend to abbreviate concepts considerably in their writing, which can lead to problems for people unfamiliar with them.
-The various policies and laws that the Government passes are occasionally so complex that they can't be understood by the average citizen. They are often abbreviated by politicians when the meaning needs to be conveyed to the public.
-It is generally agreed that abbreviating the relevant phrases would enhance the readability of the publication.
-"Would you like to abbreviate the message slightly?" the telegraph operator asked.
-When writing in compressed form, it is often difficult to accurately abbreviate a long word while still retaining the original meaning.
-"Life is too important to be taken seriously." is a saying that a abbreviates his whole ideology to a single sentence.
-The students recommended that he abbreviate his lectures, which tended to be long and tedious.
-
-#accordingly
-
-However, English farmers were unable to keep up with the demand for food. Accordingly, landowners had to look elsewhere for their supply.
-The judge, having heard the evidence, ruled accordingly that the book in question was libelous towards an identifiable person, and he issued an injunction against its continued publication.
-The British granted more and more freedom to the colonies, and the colonial elite became less fearful of London's intentions accordingly.
-She refused to sign her name, and he refused to help her accordingly.
-The law was changed, but the slave owners were compensated for their loss of property accordingly.
-The courts had made their decision and religious law would remain in effect accordingly.
-Peter the Great's social reforms were undoubtedly successful, and accordingly paved the way for his transformation of Russia into a major European power.
-Rapid communication channels have changed the way we speak, and the language style of newspapers, blogs, and social media websites has been influenced accordingly.
-The company paid high wages and treated its employees well, and its internal popularity grew accordingly.
-I desired a nomadic and romantic life. Accordingly, I left the big city with just the bag on my back.
+Their use of the outdated computer system sometimes exacerbated their problems, but the company was stubborn and refused to invest in new software.
+The peasants' misery was exacerbated by the increasing taxes they had to pay to their noble rulers, which eventually caused them to riot.
+Far-right propaganda will only exacerbate racial tensions and ultimately lead to more violence.
+The destruction of the Native Americans' way of life only exacerbated their hatred of white settlers.
+The situation in the former Yugoslavia was not helped by the fact that the leaders of the former republics -- specifically Slovenia and Croatia -- were eager to see it exacerbatedi further.
+The feeling of fear and uncertainty caused by the financial crisis exacerbated the economic downturn.
+Sadly, the anti-immigrant feelings, which were already high before the attacks, have only been exacerbated by recent cases of domestic terrorism.
+The war of terror with Iraq has worsened America's image in the Middle East and has exacerbated anti-western sentiment.
+The First World War was caused by a combination of interlocking alliances, the military arms race, and a string of international crises that served to exacerbate the tensions that had built up within this framework.
+Unemployment was already a serious problem before the Wall Street Crash, and its effects only exacerbated the situation, causing increased poverty and social unrest.
+In my opinion, the spread of English throughout the world has exacerbated rather than alleviated linguistic and cultural misunderstandings.
 
 
-#accountable
-
-The recent spate of financial scandals has led the populace to demand the government be held accountable.
-Politicians who are not directly elected are not directly accountable to the people.
-A democratically elected leader is directly accountable to the citizens in a way that an unelected monarch like Elizabeth never was.
-The results of this research allowed the government to hold the researchers directly accountable for the money spent on their projects.
-It's much easier to cheer from behind a screen than it is to be accountable for your team's performance on the field.
-Managers must hold employees more accountable for their decisions and actions.
-They blamed the government for the dreadful state of the country and said it was not being held accountable for the problems it had caused.
-In previous eras, it was accepted that rulers were only accountable to the gods for their actions.
-The argument that the university should be held less accountable to government, which funds it, has been raised many times.
-This society was very hierarchical and the rulers had little need to be accountable to anybody else, except the Gods.
-
-#acquiesce
-
-Reluctantly, he acquiesced and handed over the file.
-Owing to the animosity of the crowd, the army had to acquiesce to the demands of the protestors.
-The military were reluctant to acquiesce to the government's orders, but were still wary of the recently installed regime.
-The students acquiesced to the demands made by the national union, much to the annoyance of the university, which lost money as a result.
-However, the population will mostly acquiesce to this, knowing that it is ultimately for their own good.
-The Hutus in Rwanda had always quietly acquiesced to the rule of their less numerous Tutsi compatriots.
-However the states of Brandenburg and Saxony never really acquiesced to these territorial changes, instead continuing to lay claim to their annexed territories.
-The defendant refused to acquiesce to the judge's request for an explanation.
-The mayor finally acquiesced to demands for housing reform after most of the suburb was flooded.
-The messenger hinted that the artists would be wise to acquiesce to their patrons' wishes
-Many politicians in the Weimar Republic, themselves unhappy with the reparations that had been imposed on them by the Treaty of Versailles, implicitly acquiesced to his rise.
-
-#adequate
-
-Adequate nutrition is essential for every child's normal mental and physical development.
-A good butler should have adequate knowledge of wines, a working knowledge of cigars and a complete understanding of mixology.
-The builders of the first railways had fond an efficient and economical way of conveying passengers and goods over long distances.
-A universal basic income would guarantee every household adequate means to subsist.
-His reading comprehension is adequate, but his writing skills need considerable improvement.
-One usually finds that authorities are very accommodating if they see you are making an adequate effort to learn.
-While certainly a good student, she knew she could not hand in an adequate composition under the circumstances.
-However, the continued functioning of the state was reliant on an adequate communication system, among many other things like a strong police force and a reliable transportation network.
-The problem is that the solutions proposed are only adequate in the short-term, and they do not resolve the problem completely.
-After a week in the jungle, he felt that his experience hunting was adequate to begin work on the novel.
+#explicit
 
 
-
-#derive
-
-Fantasy derives its mystique and attraction from the universal human wish to escape from the world.
-The artist is fascinated with paintings that explore the way the human brain perceives shapes and patterns, and how our minds attempt to derive meaning where often none exists.
-The movie's ending is a little obscure, but if you pay close attention, it becomes clear that the director intends to insinuate that the hero derives a certain amount of sadistic pleasure in killing.
-"The only way we can derive some meaning from this senseless tragedy is by ensuring that it isn't repeated.", announced the politician.
-But the question remains: from where does humanity's sense of morality ultimately derive?
-Sophisticated instruments such as spectrometers are also used in the gold fields to derive information such as the density of rocks.
-The name of the street is believed to be derived from the large reservoirs once located where the street was later built.
-When a group of terrorists attempt to blow up the oil-well, they directly derive their legitimacy from the skewed public perception of environmental damage caused by the burning of fossil fuels.
-Most of the world's food supply has come from the high-yielding strains of wheat, corn and rice that scientists have derived by conventional breeding.
-We cannot derive an algorithm to solve the problem from the information given alone.
-Heidegger believed that we must free ourselves from the 'they' and become an authentic individual, instead of simply deriving our purpose from the traditional roles that society has laid out for us.
+The team's instructions were very explicit; they were to follow a set itinerary and were not allowed to deviate from it under any circumstances.
+A tenant is required to obtain explicit consent from the landlord if they wish to redecorate the property.
+She received explicit instructions on how to find the office and what time she should arrive, however she still showed up late.
+Linguists have an explicit understanding of grammar, unlike most people who merely have a tacit understanding.
+The two sides reached an explicit agreement regarding the property, and subsequently signed a contract.
+It was difficult to obtain an explicit understanding of the contents of the film since he barely understood the language.
 
 
-#deter
-
-The threat of execution, or in later years exile, was employed to deter any would-be petty criminals.
-The laws were designed to deter underground drug dealers, not discourage citizens with legitimate medical concerns.
-The soldiers were dettered from direct attack thanks to the constant harrying of their lines by Indian skirmishers.
-Unfortunately there is no punishment severe enough to deter some individuals from committing crimes
-The President has repeatedly said that his plan to deter Iraqi aggression in the region is working.
-The best way to deter a nuclear attack may be by maintaining a nuclear arsenal of one's own. 
-The problem with the proposal is that it would deter foreign investment in this country responsible for half of the nation's growth, which is clearly unacceptable.
-The seemingly harsh punishment was motivated by the desire to deter the children from ever engaging in such risky behaviour again.
-The law was intended to deter potential burglars by making the punishment fit the crime: more serious burglary would incur more serious punishments.
-These safeguards would certainly deter any industrial spy from stealing the company's research.
-Following a series of terrorist attacks in the capital, the prime minister announced that he was going to implement new security measures which would help deter future attacks.
+#evaluate
 
 
-#dichotomy
-
-To the mind of the critic, there was an ever-present dichotomy between high art and low art.
-The apparent clash between religion and science is actually only a dichotomy when both fields claim absolutes, whether in heaven or in nature.
-The contrast between urban and rural life in the United States is a clear example of a social dichotomy.
-In most societies there is a dichotomy between the human desire for wealth and success and the equally universal desire to live a virtuous and spiritually fulfilling life.
-There is a dichotomy in our views of the burqa: while many Europeans consider it an oppressive, archaic garment that symbolizes the subservience of Islamic women, others consider banning it to be an affront to Muslim identity and culture.
-Furthermore, Farr noted that the distinction between the role of man as husband and father was a false dichotomy.
-For ambitious men like him, the main dichotomy of the Cold War was that of totalitarianism versus freedom.
-Conversations with poets and scientists revealed the dichotomy between intuitive and rational thought processes.
-I have long been an advocate for understanding the human brain as an essential dichotomy between the left and right brain, the rational and irrational.
-"The idea that there's a dichotomy between the intellectual and the popular is total nonsense," he told the students.
-The Nature vs. Nurture debate is an old one, with a long history of scientific investigation giving evidence for both sides of the dichotomy.
-
-#differentiate
-
-The approach they use to differentiate the functions of different genes is first to find out which parts of the DNA are responsible for the expression of particular proteins.
-Human social groups tend to exaggerate the differences that exist between them and others, in order to differentiate themselves from competing groups.
-The earliest attempts at making computers workable were mechanical, using gears and switches. The integrated circuits came later, allowing for faster speeds, as well as the ability to differentiate between different types of stored data.
-The aristocrats were always looking to differentiate themselves from the general masses.
-The two clusters of flowers in the garden, the orchids and the lilies, were often difficult to differentiate between.
-During the Cold War, it became increasingly difficult for the average citizen to differentiate between government propaganda and legitimate information.
-It's obvious that you can't hope to differentiate between the statistical effects of several different variables when working with a sample size of only twenty.
-Some of the Native American tribes looked to differentiate themselves by specific outward features such as clothing or hairstyles.
-
-#distinguish
-
-The two Italian city-states were organized along the same basic model, but there were several ways in which they could be distinguished.
-It was difficult to distinguish the noise of the wind through the pine trees from that of the running water.
-An appropriate surveillance system will distinguish between innocent civilians and hostile threats without infringing on basic human rights.
-His mental illness has progressed to a stage such that he can't distinguish between reality and illusion.
-Some Enlightenment thinkers tried to distinguish themselves from the radicals of the French Revolution and opposed the use of violence to bring about social change.
-The fourteenth-century writer Petrarch wrote love elegies and distinguished himself from other writers of the time by concentrating on the theme of love rather than noble deeds.
-The U.S. Supreme Court has distinguished between information provided by a company such as a list of its customers, and information generated by the company in the course of doing business, such as customer records.
-Some historians have found it difficult to distinguish fact from fiction in the ancient stories of King Arthur.
-It was difficult for the captain to distinguish one soldier from another because they were all dressed alike.
-
-#divisive
-
-The issue of farm subsidies has been a divisive one in American politics for many years.
-The question of whether it is right for doctors to allow a person to die when medical treatment is available which could extend the life of that person, but only at the cost of infringing their dignity, is a divisive one.
-The Church was very influential in people's lives and so the Reformation was a divisive issue across much of the continent.
-The effect of the new law is likely to be divisive in that small businesses with under twenty employees will be exempt from the quota.
-Thatcher was very successful in her crusade against the trade unions, which were broken after a long and divisive strike.
-The Corn Laws imposed a tariff on imported grain, helping wealthy landowners by making it difficult for poor people to afford food. The laws were politically divisive because the rich and the poor had vastly different economic interests, and voting patterns reflected this.
-The decision to remove color from the flags proved to be divisive.
-The only weapon we have against divisive propaganda is our own critical faculties.
-The musician's transition to experimental music has proved divisive: some angry members of the audience decide to walk out of the concert.
-The Vietnam War was highly divisive, with protests dividing Americans over the issue of overseas intervention.
-
-#dubious
-
-Many observers regard the purported merits of globalisation as dubious, pointing out the profits are mostly isolated to certain parts of the world.
-The promise of cloned organs to cure disease was a dubious promise at best.
-The decision to test the sedative on prisoners had dubious legal implications.
-Some of these results are dubious to put it mildly and I will need to repeat the experiments again to see if I get the same results.
-The results of the experiment seem to be based on dubious statistical interpretation of what seems like a very limited survey area.
-The dubious financial practices of the politicians caused alarm.
-It is expected that a least a handful of the paintings will be fakes, although none seem to be of particularly dubious quality.
-The scientific evidence in favor of the existence of ghosts and other paranormal phenomena is dubious at best.
-The evidence that he was the culprit is dubious at best.
-The dubious and self-serving rationalizations for invading Iraq made by the U.S. and British governments are well known.
-The new tests were supposed to be double-blind and placebo-controlled, but there were some dubious practices by the testing center.
+The religious aspect of the Reformation is hard to evaluate since there remain so many different opinions on it.
+New recruits to the army are evaluated based on their level of fitness and mental aptitude before being assigned to suitable divisions.
+The website helps customers evaluate the pros and cons of different network providers, so that they can choose one which is most suitable to their needs.
+His job and manager was to evaluate the progress of various divisions in his department every month.
+Every voter should be able to clearly evaluate the success or failure of each candidate's policies during the term in office.
+To put it simply, the ability to evaluate one's surroundings and make decisions based on past experience and information is a large part of what's commonly called 'intelligence'.
+It is necessary to evaluate many different sources before coming to a conclusion regarding the course of events.
+The most immediate challenge is to find methods to rapidly and reliably evaluate the safety of new vaccine candidates, so that the most suitable one can be delivered to people as soon as possible.
+The current crude method that is used to evaluate managers' success is to examine how much they increased the revenue and profit.
+Levels of obesity are evaluated differently in different parts of the world, but are high-level risk factors for early death regardless.
 
 
-#egalitarian
+#evoke
 
-Some of the oldest human societies were surprisingly egalitarian because survival required close cooperation.
-The more egalitarian participants of the debate also refuse to admit that IQ tests measure anything important.
-He and other inspired leaders were important in the spread of the egalitarian ideas of the Renaissance and Age of Enlightenment to the masses.
-In their egalitarian approach to problem-solving, bees are similar to humans in many ways.
-Most of the people in the Pueblo village were farmers and maintained an egalitarian social hierarchy.
-Sweden has long been a stronghold of egalitarian ideals.
-The egalitarian values of some sub-cultures clash strongly with those of modern society as a whole.
-The French Revolution was instigated in part to create a more egalitarian society.
-Some have claimed that this was one of the first egalitarian societies in history.
-North American Native Indians are famous for their egalitarian attitude. Anyone could become a chief, democratic decision-making was used instead of hereditary rulers, and women had high status.
-He found the coastal natives much more egalitarian than the societies he encountered further inland.
 
-#elucidate
+By locating the tribal and ancient sources of the stories, the curator attempts to evoke scenes that would have been recognisable to people in that time, making the exhibition extremely authentic.
+The painting is supposed to evoke a feeling of calm and serenity, yet the critic labelled it as a dreary and emotionless piece of art.
+The song evoked happy memories of when he was young, since his grandfather would sing it to him every Sunday afternoon.
+Relentless propaganda is a common device used to evoke feelings of patriotism within the population, especially during war.
+The fall of the Soviet Union in 1991 evoked much controversy among Russian historians, who disagreed violently about the significance of the event in Russian history.
+Although mostly original, some of his techniques for creating sounds evoked other music that the audience may have heard before.
+The charity advertisement evoked feelings of sympathy within many viewers, leaing to a large number of donations from around the country.
+The heritage site had been restored and reopened to the public. The medieval town evoked a sense of tranquility in the visitors, with its winding cobbled alleys and slowly turning water mills.
 
-One job of the historian is to elucidate the past to the layperson, and this is particularly important when a particular event or period of history is surrounded by myth.
-The professor was unable to elucidate its details to my satisfaction without the use of complex jargon.
-Friedrich Hayek, a Nobel prize-winning economist who wrote "The Road to Serfdom" (1944), elucidated the threat to individual freedom posed by central planning.
-Gaselee's study of the 1348 plague helped to elucidate the mechanism of transmission of this killer disease.
-My recent article helps elucidate the legal issues raised by advances in medicine, especially reproductive technology.
-It was he who first elucidated the relationship between the flow of electricity and chemical reactions, a fundamental scientific achievement.
-Later thinkers tried to elucidate his theories, but a lot of his unpublished notes were effectively unreadable, hindering their interpretation.
-The book's discussion of genetics does a good job of elucidating the particular case of the eye and how natural selection most likely played a role in its development.
-The purpose of chapter six is to elucidate some of these mechanisms and hypothesize why the brain is organized the way it is.
 
-#engender
+#factor
 
-The 1960's counter culture movement engendered a wave of social reforms that continue to benefit ordinary people in the US and elsewhere today.
-The move from the personal to the impersonal, from rule of man to rule of law, from tyranny to equality is a journey inevitably engendered by the nature of money itself.
-As the trial Judge said, Johnson's insults and defiance towards the court and prisoners engendered considerable animosity in many of his fellows.
-It is a quite legitimate concern that the new rules may engender unexpected consequences and have grave significance for the stability of the institution.
-Differences in social status can often engender feelings of mistrust and even hatred between different groups.
-The feeling engendered by the understated ceremony was intimate and profound.
-The immense increase in the use of coal, gas, and oil during the industrial revolution had engendered a belief that an ever-increasing amount of fossil fuel would always be readily available.
-The psychologist hypothesized that too much power over a prolonged period of time may engender a loss of compassion.
-While education on its own cannot engender progressive ideas in a society, it can certainly allow the articulate expression of such ideas when they occur.
-In the nineteenth century, capitalism began to engender a new class of people, the industrial working class.
 
-#enmity
+The chief factor in the extinction of the dinosaurs was their size: any animals that big were necessarily extremely inefficient at converting food into energy, so they depended on vast amounts of food to survive. This limited their ability to adapt to their surroundings following a meteor strike.
+The emperor's arrogance as a political leader was a contributing factor in the revolution, as it angered the population.
+The main factor behind the rise of the European nation states was the consolidation of power under monarchs, which led to a strengthening of the central government.
+The most important factor that ensured Europe's global domination was the tradition of rational thought and empiricism that had been ongoing for centuries.
+Since the 19th century, industrialisation has been a major factor in contributing to global pollution.
+There are three main factors involved in the speed of plant growth: amount of light, temperature and supply of nutrients.
+The main factors in the collapse of the Inca Empire were diseases brought over by the Europeans, most of which they had no cure for.
+There are various factors that may have led to the decline in crime during that period, including improvements to employment and more efficient policing methods.
+Differences in diet were a key factor in determining whether one lived or died during the Black Death.
+Other factors that might have contributed to the rapid growth of the city include an excellent trade route near it and a fertile river valley.
 
-The cold war which existed between the United States and the USSR was an instance of the inevitable enmity between capitalism and communism.
-In these years his enmity for Sulla grew and he would accept nothing except direct confrontation.
-The Hundred Years' War between France and England was an enduring enmity between the two countries.
-At that time there was no love lost between the two academic rivals. In fact they harbored an active enmity for each other.
-The great enmity between the Houses of Lancaster and York was a major cause of strife.
-There was some enmity between the aristocracy and the knights, which manifested itself in objections to the conferral of money and land.
-Owing to past enmities between the two of them, he couldn't provide an objective reference on her character.
-The enmity between the two tribes in the region dated back centuries.
-The relationship between the papacy and the Holy Roman Emperor was one of enmity, founded in mutual distrust.
-And even though there was a natural enmity between the two statesmen, they both needed each other.
 
-#entrenched
+#foremost
 
-The culture of entrenched elitism that the universities in Britain are accused of fostering appears to be slowly changing.
-The British hold on India had become deeply entrenched by the time Queen Victoria ascended to the throne in 1837.
-Many of the older teachers were entrenched in their old ways and resistant to change.
-However, entrenched beliefs about authority and social status often run contrary to liberal ideals.
-Her entrenched religious beliefs were severely threatened by the new findings of molecular biology
-Nothing could be done to solve this problem, thanks to the stultifying effects of the entrenched bureaucracy.
-The failure of any government to maintain social order in these areas means that crime hsa been allowed to become entrenched in certain parts of the city.
-The Austrian chief of general staff was a firm believer in the value of entrenched positions and had made sure there were plenty of them built in Galicia.
-The issue of Apartheid in South Africa is an entrenched system that has been in place for decades.
-And so the contrast between Iranian men's treatment of women and Western men's treatment of women is even more stark when it comes to divorce.
-The South's traditional institutions were so entrenched that they couldn't be eliminated even by radical reconstruction.
-Britain's failure to achieve her colonial goals was due to the fact that they had another war on their hands, this time with the French and Indians in North America.
-The importance or success of the compromises doesn't detract from the fact that people on both sides were entrenched in their beliefs and unwilling to compromise.
-The rebels' failure to breach the city walls and the increasing casualties forced them to realize that they could not take the city by overrunning it, and they fell back on their original plan of trying to besiege it into submission.
 
-#enumerate
-
-The experts sat around the table and tried to enumerate all the different ways the operation could fail.
-Simply enumerating the flaws in your opponent's argument is a valuable rhetorical technique.
-The statesman carefully enumerated the ideals he would strive to uphold.
-A discerning naturalist, Darwin enumerated countless species of animals and plants in his detailed notebooks.
-The book also enumerates three key limitations of the traditional scientific method.
-It would be impossible to enumerate all the factors that contributed to the decline in the Native American population after Europeans came to America.
-In art, he is best known for his 'Dance of the Hours'; a fanciful ballet which enumerates the hours of the day, setting each hour to its own dance.
-The so-called Big Five personality traits have been enumerated by researchers as the prominent factors that describe human personality.
-The steps involved in carrying out the statistical test can be enumerated as follows.
-The lawyer enumerated the crucial pieces of evidence that supported his case.
+Albert Einstein is widely regarded as the foremost scientific figure of the twentieth century, mainly for his work on relativity.
+One of the foremost experts on the subject gave a detailed report at the conference. Her talk was oversubscribed due to the overwhelming interest.
+The country's foremost art centre had to close its doors due to the worsening of the pandemic. 
+The Taj Majal is one of the world's foremost examples of Mughal architecture and epitomises the beauty and excess of Emperor Shah Jahan's court.
+A prominent Christian and foremost biblical scholar of his era, Eusebius was instrumental in shaping the development of early Christianity.
+Haydn's greatness as a composer is foremost in his instrumental music rather than his songs and operas, which were by no means inferior.
+Unsurprisingly, the main focus of the new school is the arts, and the foremost lecture on music is given by an expert on Chopin.
+Galileo is considered one of the foremost figures in the history of observational astronomy.
+Captain James Cook was a 18th-century British explorer who came to be regarded by some as the greatest seaman of his era, and is still regarded as one of the foremost explorers of all time.
 

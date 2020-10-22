@@ -135,7 +135,7 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     
     interaction_data = []
     COMMAND = """
-    SELECT v.pos, v.rank, v.word, cv.tags FROM vocab v
+    SELECT v.pos, v.rank, v.word, cv.tags, v.definition FROM vocab v
     INNER JOIN chunk_vocab cv
     ON cv.vocab_id = v.id
     WHERE v.id = %s AND chunk_id=%s
@@ -143,7 +143,7 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     cur.execute(COMMAND, (v, chunkid))
 
     out = cur.fetchall()[0]
-    pos = out[0]; rank = out[1]; wd = out[2]; tag = out[3].split(",")[0]
+    pos = out[0]; rank = out[1]; wd = out[2]; tag = out[3].split(",")[0]; definition=out[4]
 
     
     outdata = {}
@@ -192,13 +192,10 @@ def get_vocab_interaction_data(cur, user_id, chunkid, v, interaction):
     
     if interaction in ["4", "6"]:
         
-        COMMAND = """SELECT definition FROM user_vocab
-        WHERE user_id=%s AND vocab_id=%s"""
-        cur.execute(COMMAND, (user_id, v))
-        r = cur.fetchall()
-        if not r:
+        if not definition:
             return get_vocab_interaction_data(cur, user_id, chunkid, v, "3")
-        definition = r[0][0]
+
+        
         samples = get_all_sample_sentences(cur, v, chunkid)
         samples = samples[:min(2, len(samples))]
         

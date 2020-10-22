@@ -22,26 +22,26 @@ allude
 authentic
 autonomy
 attribute
-bias
-brazen
-claim
-clarify
+bias : unfair preference/inclination for one opinion : noun
+brazen : bold and without shame : adjective 
+claim : a bold statement, assertion, position : noun
+clarify : make something less confused and more easily understood : verb
 reinforce
 calculate
-capitalise
-catalyst
+capitalise : take advantage of an opportunity : verb
+catalyst : something that makes change occur faster : noun
 cause
 characterise
 circumspect
 clandestine
-coerce
-coherent
+coerce : persuade by force or threats : verb
+coherent : consistent, logical, making total sense : adjective
 compelling
 condone
-consensus
+consensus : general agreement : noun
 constitute
 construct
-contend
+contend : argue, make the point that : verb
 context
 contrary
 conundrum
@@ -51,7 +51,7 @@ correlate
 correlation
 corroborate
 counterargument
-credible
+credible : trustworthy, believable (of an opinion) : adjective
 critique
 cumulative
 deduce
@@ -71,30 +71,30 @@ dubious : not trustworthy, to be doubted : adjective
 egalitarian : bringing equality to all people : adjective
 elucidate : explain clearly : verb
 engender : cause, bring about, give rise to : verb
-enmity : feeling of opposition, mistrust or hostility: adjective
+enmity : feeling of opposition, mistrust or hostility: noun
 entrenched : deeply fixed, rooted, ingrained : adjective
 enumerate : count out, list : verb
 equivalent
 erroneous
 esoteric
 establish
-eliminate
+eliminate : remove, get rid of : verb
 entail
 emphasise
 essentially
-exacerbate
+exacerbate:make something even worse:verb
 exemplar
-explicit
+explicit : stated clearly and in detail : adjective
 expository
 extol
-evaluate
+evaluate : come to an idea of the value of something : verb
 evidence
-evoke
+evoke : bring a feeling or idea to mind:verb
 fabricate
 facet
-factor
+factor:particular cause leading to a result:noun
 figurative
-foremost
+foremost:most important, leading:adjective
 former
 formulate
 foster
