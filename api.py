@@ -784,6 +784,20 @@ def launch_screen():
     
     out["vocab_data"] = my_vocab.load_vocab(cur, user_id, req)
     
+    COMMAND = """SELECT word FROM vocab v
+    INNER JOIN user_vocab_log l 
+    ON v.id = l.vocab_id
+    WHERE l.user_id=%s AND EXTRACT(DAY FROM l.time) = EXTRACT(DAY FROM NOW()) 
+    """
+    cur.execute(COMMAND, (user_id,))
+    
+    words = cur.fetchall()
+    
+    out["review_data"] = {}
+    out["review_data"]["words"] = list(set([x[0] for x in words]))
+    
+    out["review_data"]["permissions"] = permissions.get_permissions(cur, user_id)
+    
     COMMAND = """SELECT v.word, uv.streak FROM user_vocab uv
     INNER JOIN vocab v
     ON uv.vocab_id = v.id
