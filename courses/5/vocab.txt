@@ -31,6 +31,7 @@ herd:a group of animals, like cows:noun
 chink:a small opening, narrow gap:noun
 troop:soldiers, armed forces:noun
 prosperity:condition and times of success, good fortune:noun
+pork: pig meat : noun
 delightful
 oak
 pillow

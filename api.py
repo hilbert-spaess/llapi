@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, jsonify, _request_ctx_stack
+from flask import Flask, request, make_response, jsonify, _request_ctx_stack, redirect
 from flask_cors import CORS, cross_origin
 import pickle
 import csv
@@ -72,6 +72,13 @@ def get_token_auth_header():
 
     token = parts[1]
     return token
+
+@app.route('/api/firstchunk', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def redirect_to_verify():
+    
+    return redirect("http://ricecake.ai", code=302)
 
 def requires_auth(f):
     """Determines if the Access Token is valid
