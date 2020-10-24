@@ -782,6 +782,8 @@ def launch_screen():
     
     out["read_data"] = get_first_chunk1(cur, user_id).get_json()
     
+    out["vocab_data"] = my_vocab.load_vocab(cur, user_id, req)
+    
     COMMAND = """SELECT v.word, uv.streak FROM user_vocab uv
     INNER JOIN vocab v
     ON uv.vocab_id = v.id
