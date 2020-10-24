@@ -95,22 +95,22 @@ facet
 factor:particular cause leading to a result:noun
 figurative
 foremost:most important, leading:adjective
-former
+former: having previously been something : adjective
 formulate
 foster
-furthermore
-generalisation
+furthermore:in addition, besides (introducing new argument):adverb
+generalisation:a general statement obtained from a few cases:noun
 hypocrisy
-hypothesize
-illustrate
+hypothesise : form a guess, make a theory : verb
+illustrate : give an example of something : verb
 impetus
 implication
-implicit
+implicit : suggested but not directly expressed : adjective
 imply
 inadvertent
 incisive
 incomprehensible
-incorporate
+incorporate : include, take something in as part of a whole : verb
 indicate
 infer
 inference

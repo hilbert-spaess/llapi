@@ -1,112 +1,25 @@
-﻿#exacerbate
-
-
-Their use of the outdated computer system sometimes exacerbated their problems, but the company was stubborn and refused to invest in new software.
-The peasants' misery was exacerbated by the increasing taxes they had to pay to their noble rulers, which eventually caused them to riot.
-Far-right propaganda will only exacerbate racial tensions and ultimately lead to more violence.
-The destruction of the Native Americans' way of life only exacerbated their hatred of white settlers.
-The situation in the former Yugoslavia was not helped by the fact that the leaders of the former republics -- specifically Slovenia and Croatia -- were eager to see it exacerbatedi further.
-The feeling of fear and uncertainty caused by the financial crisis exacerbated the economic downturn.
-Sadly, the anti-immigrant feelings, which were already high before the attacks, have only been exacerbated by recent cases of domestic terrorism.
-The war of terror with Iraq has worsened America's image in the Middle East and has exacerbated anti-western sentiment.
-The First World War was caused by a combination of interlocking alliances, the military arms race, and a string of international crises that served to exacerbate the tensions that had built up within this framework.
-Unemployment was already a serious problem before the Wall Street Crash, and its effects only exacerbated the situation, causing increased poverty and social unrest.
-In my opinion, the spread of English throughout the world has exacerbated rather than alleviated linguistic and cultural misunderstandings.
-
-
-#explicit
-
-
-The team's instructions were very explicit; they were to follow a set itinerary and were not allowed to deviate from it under any circumstances.
-A tenant is required to obtain explicit consent from the landlord if they wish to redecorate the property.
-She received explicit instructions on how to find the office and what time she should arrive, however she still showed up late.
-Linguists have an explicit understanding of grammar, unlike most people who merely have a tacit understanding.
-The two sides reached an explicit agreement regarding the property, and subsequently signed a contract.
-It was difficult to obtain an explicit understanding of the contents of the film since he barely understood the language.
-
-
-#evaluate
-
-
-The religious aspect of the Reformation is hard to evaluate since there remain so many different opinions on it.
-New recruits to the army are evaluated based on their level of fitness and mental aptitude before being assigned to suitable divisions.
-The website helps customers evaluate the pros and cons of different network providers, so that they can choose one which is most suitable to their needs.
-His job and manager was to evaluate the progress of various divisions in his department every month.
-Every voter should be able to clearly evaluate the success or failure of each candidate's policies during the term in office.
-To put it simply, the ability to evaluate one's surroundings and make decisions based on past experience and information is a large part of what's commonly called 'intelligence'.
-It is necessary to evaluate many different sources before coming to a conclusion regarding the course of events.
-The most immediate challenge is to find methods to rapidly and reliably evaluate the safety of new vaccine candidates, so that the most suitable one can be delivered to people as soon as possible.
-The current crude method that is used to evaluate managers' success is to examine how much they increased the revenue and profit.
-Levels of obesity are evaluated differently in different parts of the world, but are high-level risk factors for early death regardless.
-
-
-#evoke
-
-
-By locating the tribal and ancient sources of the stories, the curator attempts to evoke scenes that would have been recognisable to people in that time, making the exhibition extremely authentic.
-The painting is supposed to evoke a feeling of calm and serenity, yet the critic labelled it as a dreary and emotionless piece of art.
-The song evoked happy memories of when he was young, since his grandfather would sing it to him every Sunday afternoon.
-Relentless propaganda is a common device used to evoke feelings of patriotism within the population, especially during war.
-The fall of the Soviet Union in 1991 evoked much controversy among Russian historians, who disagreed violently about the significance of the event in Russian history.
-Although mostly original, some of his techniques for creating sounds evoked other music that the audience may have heard before.
-The charity advertisement evoked feelings of sympathy within many viewers, leaing to a large number of donations from around the country.
-The heritage site had been restored and reopened to the public. The medieval town evoked a sense of tranquility in the visitors, with its winding cobbled alleys and slowly turning water mills.
-
-
-#factor
-
-
-The chief factor in the extinction of the dinosaurs was their size: any animals that big were necessarily extremely inefficient at converting food into energy, so they depended on vast amounts of food to survive. This limited their ability to adapt to their surroundings following a meteor strike.
-The emperor's arrogance as a political leader was a contributing factor in the revolution, as it angered the population.
-The main factor behind the rise of the European nation states was the consolidation of power under monarchs, which led to a strengthening of the central government.
-The most important factor that ensured Europe's global domination was the tradition of rational thought and empiricism that had been ongoing for centuries.
-Since the 19th century, industrialisation has been a major factor in contributing to global pollution.
-There are three main factors involved in the speed of plant growth: amount of light, temperature and supply of nutrients.
-The main factors in the collapse of the Inca Empire were diseases brought over by the Europeans, most of which they had no cure for.
-There are various factors that may have led to the decline in crime during that period, including improvements to employment and more efficient policing methods.
-Differences in diet were a key factor in determining whether one lived or died during the Black Death.
-Other factors that might have contributed to the rapid growth of the city include an excellent trade route near it and a fertile river valley.
-
-
-#foremost
-
-
-Albert Einstein is widely regarded as the foremost scientific figure of the twentieth century, mainly for his work on relativity.
-One of the foremost experts on the subject gave a detailed report at the conference. Her talk was oversubscribed due to the overwhelming interest.
-The country's foremost art centre had to close its doors due to the worsening of the pandemic. 
-The Taj Majal is one of the world's foremost examples of Mughal architecture and epitomises the beauty and excess of Emperor Shah Jahan's court.
-A prominent Christian and foremost biblical scholar of his era, Eusebius was instrumental in shaping the development of early Christianity.
-Haydn's greatness as a composer is foremost in his instrumental music rather than his songs and operas, which were by no means inferior.
-Unsurprisingly, the main focus of the new school is the arts, and the foremost lecture on music is given by an expert on Chopin.
-Galileo is considered one of the foremost figures in the history of observational astronomy.
-Captain James Cook was a 18th-century British explorer who came to be regarded by some as the greatest seaman of his era, and is still regarded as one of the foremost explorers of all time.
-
-
-#former
+﻿#former
 
 
 Former US first lady Barbara Bush died on April 17, 2018 at the age of 92.
 The former colonies were largely agricultural societies with tight knit communities and almost no urbanisation.
 One of the former leaders of the country has been living in exile for twenty-five years. She is now seventy-three years old, but was very popular during her rule.
-The typical middle-class American lifestyle is very different from that of the current upper classes, the former being primarily concerned with convenience and the latter primarily concerned with display.
 In 1945 the former League of Nations section was divided into two new bodies: the United Nations and the International Court of Justice.
 The former secretary of state will be remembered for his scandal in which it was discovered that he had accepted large payments from foreign governments.
-The former prime minister has written a detailed memoir of his time in office, however it had to be vetted by the government to make sure that in didn't contain any classified information.
+The former prime minister has written a detailed memoir of his time in office, but it had to be vetted by the government to make sure that in didn't contain any classified information.
 
 
 #furthermore
 
 
 The invention of paper was pivotal to the improvement of communication. Furthermore, the ability to write down words encouraged the development of literature and eventually allowed for the keeping of records and storing of information.
-I am not interested in the products you advertise, furthermore I asked your company not to contact me again.
-Carrier pigeons were a useful alternative to sending aa messenger on horseback. Furthermore, the use of carrier pigeons meant that messages were less likely to be intercepted by the enemy.
-He stressed the importance of innovation for capitalising on new opportunities. Furthermore, many other nations are beginning to industrialise and catch up to Britain's level of technology, so new technology was needed if they were to maintain their lead.
+I am not interested in the products you advertise. Furthermore, I have already asked your company not to contact me again.
+Carrier pigeons were a useful alternative to sending a messenger on horseback. Furthermore, the use of carrier pigeons meant that messages were less likely to be intercepted by the enemy.
 Global warming has led to more frequent cases of extreme weather around the world. Furthermore, it has an acute effect on delicate ecosystems such as coral reefs, many of which perished as a result.
 Substituting sugar with sweeteners is claimed to decrease the risk of diabetes. Furthermore, the addition of these sweeteners means that the diet drinks end up with exactly the same taste as the sugary drinks.
-The Renaissance was a period where artists flourished under the patronage of wealthy families. Furthermore, it was a time of great intellectual awakening that challenged many of the ideas which had gone before.
-The mismanagement of the hospital has caused huge disruptions and must be corrected as soon as possible. Furthermore, doctors and patients have been put at risk , and will continue to do so until the situation is resolved.
-The pandemic has forced the government to cut funding to the arts. Furthermore, they has drastically cut funding even for universal health care and education.
-Smoking is not only addictive, furthermore it is linked to many different types of cancer.
+The Renaissance was a period during which artists flourished under the patronage of wealthy families. Furthermore, it was a time of great intellectual awakening that challenged many of the ideas which had come before.
+The pandemic has forced the government to cut funding to the arts. Furthermore, they have drastically cut funding even for universal health care and education.
+Smoking has been shown to be extremely addictive. Furthermore it is linked to many different types of cancer.
 The house is beautifully decorated and has a great garden. Furthermore, it is situated close to many shops and restaurants.
 
 
@@ -114,58 +27,50 @@ The house is beautifully decorated and has a great garden. Furthermore, it is si
 
 
 Make too wide a generalisation and you will end up with a meaningless, unwieldy theory that doesn't really explain anything, so please base your ideas on the facts you have.
-It is often a mistake to make generalisations about particular cultures, especially if the country is large, in which case there will be significant variations in regional customs.
-It is very rare to find a generalisation in history that doesn't eventually get overturned.
-The tendency to make sweeping generalisations based on insufficient evidence is a sign of gross carelessness. For example, it would be incorrect to say ‘All lawyers are liars.'
-Students should avoid reading historical commentary which includes many generalisations, as this suggests the author has not taken the care to produce a nuanced argument.
-The theory has had a lot of criticism, most of it directed toward its broad generalisations that do not accurately reflect the complexities of the societies involved.
-Some people find generalisations about religions misleading, such as saying that all Buddhists are pacifist or all Christians believe in heaven and hell.
-The generalisation that members of higher classes had more access to higher education was correct, but enrolment in universities by students from poorer families is rapidly increasing.
-The generalisation that all metals expand when heated is observed to be true.
-The problem with generalisation is that while many people assume that it is an easy way of explaining something, it never really gives the whole picture.
+It is often a mistake to make generalisations about particular cultures, especially if the country at hand is large, in which case there will be significant variations in regional customs.
+It is very rare to find a historical generalisation without a corresponding counterexample.
+The tendency to make sweeping generalisations based on insufficient evidence is a sign of carelessness. For example, it would be incorrect to say ‘All lawyers are liars.'
+It's good practice to avoid reading historical commentary which includes many generalisations, as this suggests the author has not taken the care to produce a nuanced argument.
+The theory has received a lot of criticism, most of it directed toward its broad generalisations that do not accurately reflect the complexities of the societies involved.
+This observation has a straightforward generalisation: all metals expand when heated is observed to be true.
+The problem with reflexive generalisation is that while it provides an adequate overview, it never provides enough detail to arrive at a concrete inference.
 
 
 #hypothesise
 
 
-We can hypothesise that the role of women in the Church actually became more restricted as a result of this event, since they were no longer allowed near the altar.
-Darwin's 'survival of the fittest' theory or 'natural selection' is just a hypothesis; it has not been proven, but it’s based on extensive evidence he collected over many years hence widely accepted by the scientific community.
-The scientific hypotheses of the day were consistently being disproven as new information came to light.
-The theory of relativity was first hypothesised by Einstein in the early twentieth century, he later received a Nobel Prize in Physics for his work.
+Darwin's 'survival of the fittest' theory or 'natural selection' is a hypothesis; it has not been proven beyond all doubt, but it’s based on extensive evidence he collected over many years and is hence widely accepted by the scientific community.
+The theory of relativity was first hypothesised by Einstein in the early twentieth century. He ultimately received a Nobel Prize in Physics for this work, among others.
 Galileo used astronomical observations to hypothesise that the planets orbited around the sun, not the Earth. This clashed with the Church’s geocentric model of the universe and he was imprisoned for blasphemy.
-The Earth's climate has gone through cycles in which it gets warmer and colder. In the 1800s, people began to hypothesise a connection between these climate changes and human activities like burning fossil fuels.
-The hypothesis that early human beings were hunters was based on the archaeological findings of weapons in caves, suggesting they were fabricated and used to kill animals.
-Many historians had to reject the Marxist theory of class struggle and hypothesise that it was actually political and economic struggles that caused the French Revolution.
-Gravity was well-studied extensively discussed in Newton's time, yet the relationship between gravity and light had only been hypothesised by Einstein in his special theory of relativity.
+The Earth's climate has gone through cycles in which it gets warmer and colder. In the 1800s, people began to hypothesise an additional factor driving modern climate change, namely human industrial activities.
+Many historians had to reject the Marxist theory of class struggle and hypothesise instead that the French Revolution was largely driven by economic factors.
+Gravity was well-studied and extensively discussed in Newton's time, yet the relationship between gravity and light was first hypothesised by Einstein with his special theory of relativity.
 Many criminologists have hypothesised that media violence influences real-life human behaviour, and there is growing evidence to support the claim that exposure to violence in media desensitises people towards it.
 
 
 #illustrate
 
 
-This chart illustrates the various factors that contributed to the disaster, many of which were related to human error rather than unforeseen circumstance.
-His paintings of the poor and suffering sections of 19th-century Paris illustrated the ark inequality that existed, and highlighted he need for radical social reform.
-The Civil War illustrated the weaknesses of the Federal system by allowing a deplorable situation to the point where it threatened the unity of the country.
+This chart illustrates the various factors that contributed to the nuclear disaster, many of which were related to human error rather than unforeseen circumstance.
+His paintings of the poor and suffering quarters of 19th-century Paris illustrated the stark inequality that existed, and highlighted he need for radical social reform.
+The American Civil War illustrated the weaknesses of the Federal system by allowing a deplorable situation to the point where it threatened the unity of the country.
 He illustrated his point using a variety of facts and sources, and the audience found his argument very compelling.
 The film I watched illustrated the concept that if a person is placed in an environment which is unlike their original one, they will begin to internalise the values of this new environment.
-He created a sophisticated presentation that illustrated the importance of symbology in many historical and anthropological studies today.
+He created a sophisticated presentation that illustrated the importance of symbology in the intersection of archaeology and anthropology.
 He illustrated how germs could spread easily in hospitals from patient to patient and stressed the importance of washing hands frequently.
-The water cycle illustrates the movement of water between the biosphere and atmosphere. Water evaporates and precipitates back down, passing through living organisms in the process.
 
 
 #implicit
 
 
-"Listen to me carefully," he said with quiet but implicit urgency. "You absolutely can't mention your father's business dealings to anyone, especially the police."
-There was an implicit agreement that whoever spoke first would be held responsible for whatever the group did, hence none of them spoke when questioned about the matter.
+He spoke in a soft voice, with the confidence that accompanies the implicit threat of violence.
+There was an implicit agreement that whoever spoke first would be held responsible for whatever the group did, hence none of them was willing to break the silence.
 The use of such symbols in art has continued ever since and is still widespread, although their meaning has long since become more subtle and implicit rather than explicit.
-The new law is an implicit admission that racial discrimination is illegal, and a great step forward in achieving social equality.
-The user agreement states that by using this software the customer gives implicit consent for the service to use their information for marketing purposes.
+The new user agreement states that by using this software the customer gives explicit consent for the service to use their information for marketing purposes. Previously, this agreement had been implicit, as all other companies operated in this manner.
 There is the implicit assumption in his proposal that he would attain as much funding as he required, which was simply untrue. The department would never pay for his outlandish plans.
-The contract had an implicit clause that he would be paid more if the machine was finished ahead of schedule.
+It was implicit that the scientist would be paid more if the machine was finished ahead of schedule.
 Despite not being told explicitly, students had an implicit understanding that cheating in the exam would be punished severely.
 Much of our legal system is based on ideas of fairness that are implicit in most people's consciousness, even if they couldn't necessarily rigorously justify them or even express them explicitly.
-The relationship between health and wealth is an interesting one, since it is fairly implicit that they are related to each other; poverty has been empirically proved to have been the underlying cause of illness in many cases.
 The idea of the existence of a soul is implicit in the ideology of many early religions. It is often understood that the soul is eternal and separates from the body after death.
 
 
@@ -173,15 +78,13 @@ The idea of the existence of a soul is implicit in the ideology of many early re
 
 
 Although we did incorporate many of their suggestions into the design, in the end we had to cut some of the original features in order to stay on schedule and under budget.
-Until the Age of Enlightenment, plague was incorporated within a system of beliefs and myths. It was seen as a punishment from God towards people who did wrong things.
 Furthermore, the process of industrialisation had incorporated large groups of peasants into the market economy.
-Incorporating these recommendations into our business plans will increase our revenue in the next few years.
-The emperor wished to incorporated the church into the state, hence aligning his leadership with divine right and further reinforcing his position.
-The United Nations incorporated the Universal Declaration of Human Rights into a binding treaty that all members adhered to.
-The Anglo-Saxons incorporated many of the native English beliefs into their own faith, it could be said the invaders were assimilated somewhat by the traditions of the people they conquered.
-Although most of the tribes incorporated into the Roman Empire did so willingly, some required a little more convincing than others. Occasionally tribes were threatened into submission since they could not win against the Roman army.
+Incorporating these recommendations into our plans will increase our profits over the next few years.
+The emperor wished to incorporate the church into the state, hence aligning his leadership with divine right and further reinforcing his position.
+The United Nations incorporated the Universal Declaration of Human Rights into a binding treaty to which all members adhered.
+Although most of the tribes were incorporated into the Roman Empire with minimal resistance, some required a little more convincing than others.
 The medieval Church incorporated many pagan rituals into Christianity to win over the population that practiced those ceremonies.
-In an attempt to incorporate more elements of human rights into the penal system, corrections officers were provided with more training to make sure they acted according to guidelines.
+In an attempt to incorporate changing public opinion into the functioning of the penal system, officers were provided with more training to make sure they acted according to guidelines.
 Incorporating more fruits and vegetables into the diet is beneficial for one's health.
 
 
