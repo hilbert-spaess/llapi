@@ -15,6 +15,7 @@ import my_vocab, my_progress, new_user_choices, read_for_fun
 import new_vocab_add
 from config import API_AUDIENCE
 import random
+import json
 
 import permissions
 
@@ -77,7 +78,7 @@ def get_token_auth_header():
 @cross_origin(origin='*')
 def redirect_to_verify():
     
-    req = stringify(request.get_json())
+    req = json.dumps(request.get_json())
     
     return redirect("http://ricecake.ai?" + req, code=302)
 
