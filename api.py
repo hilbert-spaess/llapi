@@ -80,7 +80,7 @@ def redirect_to_verify():
     
     print(request.get_json())
     
-    req = json.dumps(request.get_json())
+    req = request.query_string.decode()
     
     return redirect("http://ricecake.ai/register?" + req, code=302)
 
