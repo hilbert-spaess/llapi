@@ -78,6 +78,8 @@ def get_token_auth_header():
 @cross_origin(origin='*')
 def redirect_to_verify():
     
+    print(request.get_json())
+    
     req = json.dumps(request.get_json())
     
     return redirect("http://ricecake.ai/register?" + req, code=302)
