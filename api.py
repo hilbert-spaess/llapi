@@ -184,7 +184,7 @@ def read_for_fun_api(cur, user_id):
     
     return res
 
-def get_first_chunk1(cur, user_id, req):
+def get_first_chunk1(cur, user_id):
     
     chunk_id = choose_next_chunk(cur, user_id)
     print("chunk id: ", chunk_id)
@@ -271,7 +271,7 @@ def get_text_chunk():
     
     if req["answeredCorrect"] == "-1":
         print("HEMLO this is the first chumk")
-        return get_first_chunk1(cur, user_id, req)
+        return get_first_chunk1(cur, user_id)
     
     else:
         
@@ -779,6 +779,8 @@ def launch_screen():
     out["message"] = message
     
     out["levelprogress"] = get_level_progress(cur, user_id, level)
+    
+    out["read_data"] = get_first_chunk1(cur, user_id).get_json()
     
     COMMAND = """SELECT v.word, uv.streak FROM user_vocab uv
     INNER JOIN vocab v
