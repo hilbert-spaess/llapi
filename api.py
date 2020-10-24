@@ -80,7 +80,7 @@ def redirect_to_verify():
     
     req = json.dumps(request.get_json())
     
-    return redirect("http://ricecake.ai?" + req, code=302)
+    return redirect("http://ricecake.ai/register?" + req, code=302)
 
 def requires_auth(f):
     """Determines if the Access Token is valid
