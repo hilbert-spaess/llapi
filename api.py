@@ -77,7 +77,9 @@ def get_token_auth_header():
 @cross_origin(origin='*')
 def redirect_to_verify():
     
-    return redirect("http://ricecake.ai", code=302)
+    req = stringify(request.get_json())
+    
+    return redirect("http://ricecake.ai?" + req, code=302)
 
 def requires_auth(f):
     """Determines if the Access Token is valid
