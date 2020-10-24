@@ -73,7 +73,7 @@ def get_token_auth_header():
     token = parts[1]
     return token
 
-@app.route('/api/firstchunk', methods=["POST", "GET"])
+@app.route('/api/register', methods=["POST", "GET"])
 @cross_origin(origin='*')
 @requires_auth
 def redirect_to_verify():
