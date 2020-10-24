@@ -75,7 +75,6 @@ def get_token_auth_header():
 
 @app.route('/api/register', methods=["POST", "GET"])
 @cross_origin(origin='*')
-@requires_auth
 def redirect_to_verify():
     
     return redirect("http://ricecake.ai", code=302)
