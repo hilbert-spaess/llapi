@@ -1,105 +1,14 @@
-﻿#former
+﻿#indicate
 
 
-Former US first lady Barbara Bush died on April 17, 2018 at the age of 92.
-The former colonies were largely agricultural societies with tight knit communities and almost no urbanisation.
-One of the former leaders of the country has been living in exile for twenty-five years. She is now seventy-three years old, but was very popular during her rule.
-In 1945 the former League of Nations section was divided into two new bodies: the United Nations and the International Court of Justice.
-The former secretary of state will be remembered for his scandal in which it was discovered that he had accepted large payments from foreign governments.
-The former prime minister has written a detailed memoir of his time in office, but it had to be vetted by the government to make sure that in didn't contain any classified information.
-
-
-#furthermore
-
-
-The invention of paper was pivotal to the improvement of communication. Furthermore, the ability to write down words encouraged the development of literature and eventually allowed for the keeping of records and storing of information.
-I am not interested in the products you advertise. Furthermore, I have already asked your company not to contact me again.
-Carrier pigeons were a useful alternative to sending a messenger on horseback. Furthermore, the use of carrier pigeons meant that messages were less likely to be intercepted by the enemy.
-Global warming has led to more frequent cases of extreme weather around the world. Furthermore, it has an acute effect on delicate ecosystems such as coral reefs, many of which perished as a result.
-Substituting sugar with sweeteners is claimed to decrease the risk of diabetes. Furthermore, the addition of these sweeteners means that the diet drinks end up with exactly the same taste as the sugary drinks.
-The Renaissance was a period during which artists flourished under the patronage of wealthy families. Furthermore, it was a time of great intellectual awakening that challenged many of the ideas which had come before.
-The pandemic has forced the government to cut funding to the arts. Furthermore, they have drastically cut funding even for universal health care and education.
-Smoking has been shown to be extremely addictive. Furthermore it is linked to many different types of cancer.
-The house is beautifully decorated and has a great garden. Furthermore, it is situated close to many shops and restaurants.
-
-
-#generalisation
-
-
-Make too wide a generalisation and you will end up with a meaningless, unwieldy theory that doesn't really explain anything, so please base your ideas on the facts you have.
-It is often a mistake to make generalisations about particular cultures, especially if the country at hand is large, in which case there will be significant variations in regional customs.
-It is very rare to find a historical generalisation without a corresponding counterexample.
-The tendency to make sweeping generalisations based on insufficient evidence is a sign of carelessness. For example, it would be incorrect to say ‘All lawyers are liars.'
-It's good practice to avoid reading historical commentary which includes many generalisations, as this suggests the author has not taken the care to produce a nuanced argument.
-The theory has received a lot of criticism, most of it directed toward its broad generalisations that do not accurately reflect the complexities of the societies involved.
-This observation has a straightforward generalisation: all metals expand when heated is observed to be true.
-The problem with reflexive generalisation is that while it provides an adequate overview, it never provides enough detail to arrive at a concrete inference.
-
-
-#hypothesise
-
-
-Darwin's 'survival of the fittest' theory or 'natural selection' is a hypothesis; it has not been proven beyond all doubt, but it’s based on extensive evidence he collected over many years and is hence widely accepted by the scientific community.
-The theory of relativity was first hypothesised by Einstein in the early twentieth century. He ultimately received a Nobel Prize in Physics for this work, among others.
-Galileo used astronomical observations to hypothesise that the planets orbited around the sun, not the Earth. This clashed with the Church’s geocentric model of the universe and he was imprisoned for blasphemy.
-The Earth's climate has gone through cycles in which it gets warmer and colder. In the 1800s, people began to hypothesise an additional factor driving modern climate change, namely human industrial activities.
-Many historians had to reject the Marxist theory of class struggle and hypothesise instead that the French Revolution was largely driven by economic factors.
-Gravity was well-studied and extensively discussed in Newton's time, yet the relationship between gravity and light was first hypothesised by Einstein with his special theory of relativity.
-Many criminologists have hypothesised that media violence influences real-life human behaviour, and there is growing evidence to support the claim that exposure to violence in media desensitises people towards it.
-
-
-#illustrate
-
-
-This chart illustrates the various factors that contributed to the nuclear disaster, many of which were related to human error rather than unforeseen circumstance.
-His paintings of the poor and suffering quarters of 19th-century Paris illustrated the stark inequality that existed, and highlighted he need for radical social reform.
-The American Civil War illustrated the weaknesses of the Federal system by allowing a deplorable situation to the point where it threatened the unity of the country.
-He illustrated his point using a variety of facts and sources, and the audience found his argument very compelling.
-The film I watched illustrated the concept that if a person is placed in an environment which is unlike their original one, they will begin to internalise the values of this new environment.
-He created a sophisticated presentation that illustrated the importance of symbology in the intersection of archaeology and anthropology.
-He illustrated how germs could spread easily in hospitals from patient to patient and stressed the importance of washing hands frequently.
-
-
-#implicit
-
-
-He spoke in a soft voice, with the confidence that accompanies the implicit threat of violence.
-There was an implicit agreement that whoever spoke first would be held responsible for whatever the group did, hence none of them was willing to break the silence.
-The use of such symbols in art has continued ever since and is still widespread, although their meaning has long since become more subtle and implicit rather than explicit.
-The new user agreement states that by using this software the customer gives explicit consent for the service to use their information for marketing purposes. Previously, this agreement had been implicit, as all other companies operated in this manner.
-There is the implicit assumption in his proposal that he would attain as much funding as he required, which was simply untrue. The department would never pay for his outlandish plans.
-It was implicit that the scientist would be paid more if the machine was finished ahead of schedule.
-Despite not being told explicitly, students had an implicit understanding that cheating in the exam would be punished severely.
-Much of our legal system is based on ideas of fairness that are implicit in most people's consciousness, even if they couldn't necessarily rigorously justify them or even express them explicitly.
-The idea of the existence of a soul is implicit in the ideology of many early religions. It is often understood that the soul is eternal and separates from the body after death.
-
-
-#incorporate
-
-
-Although we did incorporate many of their suggestions into the design, in the end we had to cut some of the original features in order to stay on schedule and under budget.
-Furthermore, the process of industrialisation had incorporated large groups of peasants into the market economy.
-Incorporating these recommendations into our plans will increase our profits over the next few years.
-The emperor wished to incorporate the church into the state, hence aligning his leadership with divine right and further reinforcing his position.
-The United Nations incorporated the Universal Declaration of Human Rights into a binding treaty to which all members adhered.
-Although most of the tribes were incorporated into the Roman Empire with minimal resistance, some required a little more convincing than others.
-The medieval Church incorporated many pagan rituals into Christianity to win over the population that practiced those ceremonies.
-In an attempt to incorporate changing public opinion into the functioning of the penal system, officers were provided with more training to make sure they acted according to guidelines.
-Incorporating more fruits and vegetables into the diet is beneficial for one's health.
-
-
-#indicate
-
-
-The Party official simply said that he would be willing to meet with me, his actions indicated a desire to discuss something of importance.
-Unfortunately the depth of the river was not indicated on the map the officers were using during the battle. When the army reached the riverbank, they were stuck and unable to cross.
+The tone and mannerisms of the official's actions indicated a desire to discuss something of importance.
+Unfortunately the depth of the river was not indicated on the map the officers were using during the battle.
 As indicated by the dramatic increase in the number and size of forts in that region, the country's military leaders thought an invasion by the enemy was probable.
-In the first half of the eighteenth century death rates indicate that an average middle-class family could expect to lose between one and two children, usually to infectious diseases.
+In the first half of the eighteenth century death rates indicate that an average family could expect to lose between one and two children, usually to infectious diseases.
 The development of strong unions indicates that workers in the early 21st century feel a vital need to band together to negotiate with their employers.
-The fact that the town had flooded indicated there has been a lot of rain recently.
 The existence of a sizeable population of humans in the Americas during the Ice Age indicates that humans did not require intensive agriculture to survive.
-The most obvious indication that the Aztecs were a powerful civilisation is their pyramids.
-The violent crime rate among juvenile delinquents in the United States indicates that there is a strong relationship between drug abuse and criminal activity.
+The awe-inspiring architecture of the Aztecs indicates that this was a powerful civilisation.
+Data collected among juvenile delinquents in the United States indicates that there is a strong relationship between drug abuse and criminal activity.
 In the 1890s, the United States entered a serious economic depression, known as the Panic of 1893, which was accompanied by an agricultural depression. These economic problems indicated that a modernisation of the American economy was necessary.
 The content of his lecture indicates that he believes there is a direct link between a disease epidemic and the collapse of the Inca civilisation.
 Although the results indicated that the chances of the geneticists' theory being right were very high, there was still a possibility, however small, that they could be wrong.
@@ -112,16 +21,12 @@ While most of these examples indicate that the period was a time of rising prosp
 
 The archaeologists inferred from the paintings that cavemen were able to make fire and cook meat, which would have greatly improved their nutrition.
 Historians could infer from the text that temples were at the heart of religious life in that period. It is likely that people regularly visited priests to make offerings to the Gods.
-The size of the German military forces could only be guessed at, but the inference was that they were substantial and well trained.
-The data from the Scripps study suggest that it is not correct to infer, as many scholars have, that ancient Jewish women were passive participants in marriage.
-Due to the sudden nature of the volcanic eruption, archaeologists could infer what people were doing when it happened since the ashes buried them before they could escape. It was a tragedy, but provides a remarkable insight into the daily lives of people that time.
+The volcanic eruption at Pompeii preserved bodies and buildings,meaning archaeologists could easily infer what people were doing at the time. It was a tragedy, but provides a remarkable insight into the daily lives of people that time.
 The police could only infer that the suspect must be in hiding, though they did not know where to start looking.
-Despite the advanced analytical techniques scientists have at their disposal, it is difficult to infer what the past atmosphere was like from fossilised plants.
-Most people inferred that new technologies like the printing press had made it easier for people to read more.
-They inferred from this that the person who lived here must have been a very bad farmer because, according to them, the soil was too poor to grow crops on.
-The reporter inferred from these facts that the council's reason for raising the taxes were definitely not financial, and that corruption may have occurred.
+Despite the advanced analytical techniques scientists have at their disposal, it is difficult to infer what the past atmosphere was like from only fossilised plants.
+The reporter inferred from these facts that the council's reason for raising the taxes were definitely unreasonable, and that corruption may have occurred.
 Hence it can be inferred that the huge trading ships of the Phoenicians must have used the stars to find their bearings at night.
-It is wrong to infer from this information that Tom was a cruel boss, since I have heard that he is not a bad person, merely that he is strict with his employees.
-He infers from this new evidence that many of the people living in England during the Ice Age were surprisingly dark-skinned despite surviving in such a cold climate.
+It would be unfair to immediately infer from this information that Tom was a cruel boss, since I have heard that he is not a bad person, merely that he is strict with his employees.
+He infers from this new evidence that many of the people living in England during the Ice Age were surprisingly dark-skinned despite surviving in such a cold and often sunless climate.
 From this I can infer that when students have to memorise entire essays, they forget them quickly and don't understand the ideas underlying the facts.
 While we have no written records from the time of the pharaohs, many people have tried to infer things from the statues and paintings they have left behind.

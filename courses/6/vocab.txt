@@ -111,8 +111,8 @@ inadvertent
 incisive
 incomprehensible
 incorporate : include, take something in as part of a whole : verb
-indicate
-infer
+indicate: show, point at:verb
+infer : deduce or conclude from evidence : verb
 inference
 induce
 insinuate

@@ -3,13 +3,24 @@ import psycopg2
 def load_vocab(cur, user_id, req):
     
     def get_all_sample_sentences(v, sense):
-    
-        COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
-        INNER JOIN chunk_vocab cv
-        ON cv.chunk_id = c.id
-        WHERE cv.vocab_id=%s AND cv.sense=%s
-        """
-        cur.execute(COMMAND, (v, sense))
+        
+        if not sense:
+            
+            COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
+            INNER JOIN chunk_vocab cv
+            ON cv.chunk_id = c.id
+            WHERE cv.vocab_id=%s
+            """
+            cur.execute(COMMAND, (v,))
+        
+        else:
+            COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
+            INNER JOIN chunk_vocab cv
+            ON cv.chunk_id = c.id
+            WHERE cv.vocab_id=%s AND cv.sense=%s
+            """
+            cur.execute(COMMAND, (v, sense))
+        
         sentences = []
 
         for instance in cur.fetchall():
