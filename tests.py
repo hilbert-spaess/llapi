@@ -1,6 +1,7 @@
 # TESTS OF THE CURRENT SETUP
 
 TST = "auth0|5f8055e3d94ca10071bb1a90"
+TST2 = "auth0|5f96f26c7539d10068acec2b"
 # test account
 
 import psycopg2
@@ -27,6 +28,20 @@ def delete_test_user():
     COMMAND = """DELETE FROM users
     WHERE name=%s"""
     cur.execute(COMMAND, (TST,))
+    
+    close(conn, cur)
+    
+    print("Test user deleted")
+    
+def delete_alex_test_user():
+    
+    print("Deleting test user")
+    
+    conn, cur = connect()
+    
+    COMMAND = """DELETE FROM users
+    WHERE name=%s"""
+    cur.execute(COMMAND, (TST2,))
     
     close(conn, cur)
     
@@ -106,7 +121,10 @@ def log_in_test():
         print("Try logging in with test@gmail.com")
 
         response = input(">")
-        
+
+def log_in_test_alex():
+    
+    delete_alex_test_user()
     
 def random_day_lvl1(data):
     
@@ -322,7 +340,31 @@ def step_time_test_user():
     
     close(conn, cur)
     
+def step_time_test_user_alex():
     
+    conn, cur = connect()
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (TST2,))
+    user_id = cur.fetchall()[0][0]
+    
+    COMMAND = """UPDATE user_nextchunk
+    SET next = next - INTERVAL '1 day'
+    WHERE user_id=%s
+    """
+    
+    cur.execute(COMMAND, (user_id,))
+    
+    COMMAND = """UPDATE user_vocab_log 
+    SET time = time - INTERVAL '1 day'
+    WHERE user_id=%s
+    """
+    
+    cur.execute(COMMAND, (user_id,))
+    
+    close(conn, cur)
     
     
 
@@ -343,5 +385,3 @@ print("Level up test.")
 data = {"vlevel": "1.5", "course_id": "2", "level": "1"}
 level_up(data)
 """
-
-log_in_test()

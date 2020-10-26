@@ -12,6 +12,7 @@ from connect import connect
 import threading
 import reviews_over
 import my_vocab, my_progress, new_user_choices, read_for_fun
+from tests import log_in_test_alex, step_time_test_user_alex
 import new_vocab_add
 from config import API_AUDIENCE
 import random
@@ -684,7 +685,53 @@ def course_vocab_submit():
     res = make_response(jsonify(out))
     
     return res
+
+
+
+@app.route('/api/resetaccount', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def reset_account():
     
+    conn, cur = connect()
+    
+    req = request.get_json()
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    a = cur.fetchall()
+    
+    user_id = a[0][0]
+    
+    log_in_test_alex()
+    
+    return make_response(jsonify({}))
+
+@app.route('/api/steptime', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def step_time():
+    
+    conn, cur = connect()
+    
+    req = request.get_json()
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    a = cur.fetchall()
+    
+    user_id = a[0][0]
+    
+    step_time_test_user_alex()
+    
+    return make_response(jsonify({}))
+     
 
 @app.route('/api/loadprogress', methods=["POST", "GET"])
 @cross_origin(origin='*')
