@@ -81,13 +81,16 @@ def new_course(user_id, course_id, words):
     """
     cur.execute(COMMAND, (course_id,))
     vocab_ids = cur.fetchall()
-    level1 += random.sample(vocab_ids, min(10, len(vocab_ids)))
+    left = list(set(vocab_ids) - set(level1))
+    level1 += random.sample(left, min(10, len(left)))
     
     DEFCOMM = """SELECT definition FROM vocab
     WHERE id=%s
     """
-    
+    print(vocab_ids)
+    print(level1)
     left = list(set(vocab_ids) - set(level1))
+    print(left)
     
     INS_COMMAND = """
     INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, definition, level, levelled, course_id)
@@ -106,6 +109,7 @@ def new_course(user_id, course_id, words):
         definition = cur.fetchall()[0][0]
         cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, definition, 2, 0, course_id))
      
+    print(word_ids)
     for vocab_id in word_ids:
         
         first_set_active(cur, user_id, vocab_id, 0)
