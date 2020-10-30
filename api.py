@@ -651,13 +651,7 @@ def course_vocab():
     conn, cur = connect()
     req = request.get_json()
     
-    COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial, message, level)
-    VALUES(%s, %s, %s, %s, %s, %s, 1)
-    RETURNING id"""
-    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], 0, req["course"], req["email"], 0, ""))
-    user_id = cur.fetchall()[0][0]
-    
-    out["course_vocab"] = new_user_choices.course_vocab_samples(cur, user_id)
+    out["course_vocab"] = new_user_choices.course_vocab_samples(cur, req["course"])
     
     print(out["course_vocab"])
     
@@ -678,21 +672,22 @@ def course_vocab_submit():
     conn, cur = connect()
     req = request.get_json()
     
-    COMMAND = """SELECT id FROM users
-    WHERE name=%s
-    """
-    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
-    a = cur.fetchall()
+    print(req)
     
-    user_id = a[0][0]
+    COMMAND = """INSERT INTO users(name, vlevel, course_id, email, tutorial, message, level)
+    VALUES(%s, %s, %s, %s, %s, %s, 1)
+    RETURNING id"""
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'], 0, req["course"], req["email"], 0, ""))
+    user_id = cur.fetchall()[0][0]
     
     words = req["words"]
-    
-    new_user_choices.course_vocab_submit(user_id, words)
+    course_id = req["course"]
     
     cur.close()
     conn.commit()
     conn.close()
+    
+    new_user_choices.course_vocab_submit(user_id, course_id, words)
     
     res = make_response(jsonify(out))
     

@@ -3,15 +3,7 @@ import new_vocab_add
 
 from connect import connect
 
-def course_vocab_samples(cur, user_id):
-    
-    CRS_COMMAND = """SELECT course_id
-    FROM users
-    WHERE id=%s
-    """
-    cur.execute(CRS_COMMAND, (user_id,))
-    
-    course_id = cur.fetchall()[0][0]
+def course_vocab_samples(cur, course_id):
     
     VOCAB_COMMAND = """SELECT v.word FROM course_vocab cv
     INNER JOIN vocab v
@@ -21,11 +13,11 @@ def course_vocab_samples(cur, user_id):
     cur.execute(VOCAB_COMMAND, (course_id,))
     
     vocab = cur.fetchall()
-    vocab = random.sample([x[0] for x in vocab], min(20, len(vocab)))
+    vocab = random.sample([x[0] for x in vocab], min(35, len(vocab)))
     
     return vocab
 
-def course_vocab_submit(user_id, words):
+def course_vocab_submit(user_id, course_id, words):
     
     conn, cur = connect()
     
@@ -33,15 +25,7 @@ def course_vocab_submit(user_id, words):
     
     # vlevel, message
     
-    CRS_COMMAND = """SELECT course_id
-    FROM users
-    WHERE id=%s
-    """
-    cur.execute(CRS_COMMAND, (user_id,))
-    
-    course_id = cur.fetchall()[0][0]
-    
-    print(course_id)
+    course_id = int(course_id)
     
     if course_id==1:
         

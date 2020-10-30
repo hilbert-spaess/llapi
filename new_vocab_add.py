@@ -52,16 +52,36 @@ def new_course(user_id, course_id, words):
     
     conn, cur = connect()
     
+    
     print("YO")
+    print("WORDS")
+    print(words)
     print(course_id == 1)
     print(course_id == 2)
+    
+    VID_COMMAND = """SELECT v.id FROM vocab v
+    INNER JOIN course_vocab cv
+    ON cv.vocab_id = v.id
+    WHERE v.word=%s AND cv.course_id=%s
+    """
+    
+    level1 = []
+    word_ids = []
+    for word in words:
+        
+        print(word[1])
+        cur.execute(VID_COMMAND, (word[1], course_id))
+        
+        vid = cur.fetchall()
+        level1.append(vid[0])
+        word_ids.append(vid[0][0])
     
     COMMAND = """SELECT vocab_id FROM course_vocab
     WHERE course_id=%s AND counts > 1
     """
     cur.execute(COMMAND, (course_id,))
     vocab_ids = cur.fetchall()
-    level1 = random.sample(vocab_ids, min(15, len(vocab_ids)))
+    level1 += random.sample(vocab_ids, min(10, len(vocab_ids)))
     
     DEFCOMM = """SELECT definition FROM vocab
     WHERE id=%s
@@ -85,8 +105,11 @@ def new_course(user_id, course_id, words):
         cur.execute(DEFCOMM, (item[0],))
         definition = cur.fetchall()[0][0]
         cur.execute(INS_COMMAND, (user_id, item[0], 0, 0, 0, definition, 2, 0, course_id))
+     
+    for vocab_id in word_ids:
         
-    new_vocab_add(cur, user_id, 5, 0)
+        first_set_active(cur, user_id, vocab_id, 0)
+    #new_vocab_add(cur, user_id, 5, 0)
         
     cur.close()
     conn.commit()
