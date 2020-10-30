@@ -118,21 +118,21 @@ induce
 insinuate
 instil
 insular
-integrate
-introduce
+integrate: unite into a functioning whole : verb
+introduce: bring something into use for the first time : verb
 invariably
 invert
 inveterate
 mantra
-maxim
-meticulous
+maxim : a short statement expressing general truth : noun
+meticulous : showing great attention to detail : adjective
 modicum
-myriad
+myriad : extremely great in number : adjective
 nominal
 notwithstanding
-nuance
-objective
-obtain
+nuance : a subtle difference in meaning : noun
+objective : presenting only the facts- not influenced by opinion : adjective
+obtain : get, acquire : verb
 obtuse
 opportunistic
 outline
@@ -140,9 +140,9 @@ notice
 panacea
 paradigm
 paraphrase
-paramount
+paramount: most important, of supreme importance : adjective
 persuade
-plausible
+plausible: reasonable, probable (of an idea, argument): adjective
 plethora
 portray
 power

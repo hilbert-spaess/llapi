@@ -227,7 +227,7 @@ def manual_level_up(cur, user_id):
                 for item in new_vocab:
                     
                     cur.execute(DEFCOMM, (item[0],))
-                    definition = cur.fetchal()[0][0]
+                    definition = cur.fetchall()[0][0]
                     
                     cur.execute(INS_COMMAND, (user_id, str(item[0]), 0, 0, 0, definition, crucial_level, 0, course_id))
                     

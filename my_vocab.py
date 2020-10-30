@@ -140,6 +140,40 @@ def load_vocab(cur, user_id, req):
 
         return vocablist
     
+    def get_choices():
+    
+        CRS_COMMAND = """SELECT course_id FROM users
+        WHERE id=%s
+        """
+        cur.execute(CRS_COMMAND, (user_id,))
+        course_id = cur.fetchall()[0][0]
+    
+        POSS_COMMAND = """SELECT cv.vocab_id FROM course_vocab cv
+        WHERE cv.course_id=%s
+        """
+        cur.execute(POSS_COMMAND, (course_id,))
+        poss_ids = [x[0] for x in cur.fetchall()]
+        
+        IN_COMMAND = """SELECT vocab_id FROM user_vocab
+        WHERE user_id=%s"""
+        cur.execute(IN_COMMAND, (user_id,))
+        in_ids = [x[0] for x in cur.fetchall()]
+        
+        choices = list(set(poss_ids) - set(in_ids))
+        
+        newchoices = []
+        
+        COMMAND = """SELECT id, word, definition FROM vocab
+        WHERE id=%s
+        """
+        
+        for vocab_id in choices:
+            cur.execute(COMMAND, (vocab_id,))
+            item = cur.fetchall()[0]
+            newchoices.append({'w': item[1], 'd': item[2], 'id': item[0], 'a': 0})
+        
+        return newchoices
+        
     out = {}
     
     
@@ -150,6 +184,8 @@ def load_vocab(cur, user_id, req):
     out["level"] = get_user_level()
     
     out["maxlevel"] = get_max_level()
+    
+    out["choices"] = get_choices()
     
     print(out)
     
@@ -280,5 +316,65 @@ def confirm_new_word(cur, data, user_id):
     """
     cur.execute(INS_COMMAND, (user_id, vocab_id, "0", "0", "0", level, "0"))
 
+def submit_choice(cur, user_id, data):
+    
+    CRS_COMMAND = """SELECT course_id FROM users
+    WHERE id=%s
+    """
+    cur.execute(CRS_COMMAND, (user_id,))
+    course_id = cur.fetchall()[0][0]
+    
+    
+    INS_COMMAND = """INSERT INTO user_vocab(user_id, vocab_id, active, scheduled, streak, level, levelled)
+    VALUES(%s, %s, %s, %s, %s, %s, %s)
+    """
+    VID_COMMAND = """SELECT vocab_id FROM course_vocab cv
+    INNER JOIN vocab v
+    ON v.id=cv.vocab_id
+    WHERE v.word=%s AND cv.course_id=%s
+    """
+    UPD_COMMAND = """UPDATE user_vocab
+    SET level=%s
+    WHERE user_id=%s AND vocab_id=%s
+    """
+    
+    chosen = [data["s"][i]['id'] for i in data["c"]]
+    level = int(data["l"])
+    vocab = [(x['w'], x['l']) for x in data['v']]
+    insertlength = int(data["i"])
+    
+    for v in vocab[:insertlength]:
+        cur.execute(VID_COMMAND, (v[0],course_id))
+        vid = cur.fetchall()[0][0]
+        cur.execute(INS_COMMAND, (user_id, vid, "0", "0", "0", v[1], "0"))
+    for v in vocab[insertlength:]:
+        cur.execute(VID_COMMAND, (v[0],course_id))
+        vid = cur.fetchall()[0][0]
+        cur.execute(UPD_COMMAND, (v[1], user_id, vid))
+        
+def delete_word(cur, user_id, data):
+    
+    wd = data['w']
+    
+    CRS_COMMAND = """SELECT course_id FROM users
+    WHERE id=%s
+    """
+    cur.execute(CRS_COMMAND, (user_id,))
+    course_id = cur.fetchall()[0][0]
+    
+    VID_COMMAND = """SELECT vocab_id FROM course_vocab cv
+    INNER JOIN vocab v
+    ON v.id=cv.vocab_id
+    WHERE v.word=%s AND cv.course_id=%s
+    """
+    cur.execute(VID_COMMAND, (wd ,course_id))
+    vid = cur.fetchall()[0][0]
+    
+    DEL_COMMAND = """DELETE FROM user_vocab
+    WHERE user_id=%s AND vocab_id=%s
+    """
+    cur.execute(DEL_COMMAND, (user_id, vid))
+    
+    
     
     

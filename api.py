@@ -477,6 +477,18 @@ def new_vocab_word():
         my_vocab.confirm_new_word(cur, req["payload"], user_id)
         
         out = {"state": "null"}
+    
+    elif req["type"] == "submit_choice":
+        
+        my_vocab.submit_choice(cur, user_id, req["payload"])
+        
+        out = {"state": "null"}
+        
+    elif req["type"] == "delete":
+        
+        my_vocab.delete_word(cur, user_id, req["payload"]["data"])
+        
+        out = {"state": "null"}
         
     else:
         
