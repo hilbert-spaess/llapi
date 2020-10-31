@@ -13,7 +13,7 @@ def course_vocab_samples(cur, course_id):
     cur.execute(VOCAB_COMMAND, (course_id,))
     
     vocab = cur.fetchall()
-    vocab = random.sample([x[0] for x in vocab], min(35, len(vocab)))
+    vocab = random.sample([x[0] for x in vocab], min(30, len(vocab)))
     
     return vocab
 
