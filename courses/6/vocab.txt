@@ -6,14 +6,14 @@ adequate:satisfactory, acceptable:adjective
 advantage
 adverse
 advocate
-alacrity
-alleged
-amplify
+alacrity: brisk and cheerful readiness : noun
+alleged : said, without proof, to have taken place : adjective
+amplify : increase something, make something stronger : verb
 analogy
 annotate
 anomaly
-antecedent
-antithesis
+antecedent : a thing that precedes another : noun
+antithesis : the direct opposite of something else : noun
 articulate
 aspect
 assert
@@ -224,10 +224,10 @@ bolster
 commonplace : ordinary, not unusual : adjective
 contentious : likely to cause argument, controversial : adjective
 conventional
-endorse
+endorse : approve of, support : verb
 exhaustive
 heterogeneous
-inconsequential
+inconsequential : unimportant, not significant : adjective
 mundane
 obvious
 perplex
@@ -281,8 +281,8 @@ confine
 consolidate
 debunk
 disinterest
-distort
-downplay
+distort : give a misleading account of : verb
+downplay : make something appear less important than it is : verb
 flexible
 frustrate
 hearten
@@ -301,11 +301,11 @@ redundant
 robust
 susceptible
 tenacious
-undermine
+undermine : lessen the effectiveness of something : verb
 antithetical
-atypical
+atypical: unusal, different from others of its type : adjective
 commend
-constrain
+constrain : limit to a particular course of action : verb
 daunting
 deleterious
 diffidence

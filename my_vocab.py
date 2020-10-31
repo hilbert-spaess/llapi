@@ -1,25 +1,43 @@
 import psycopg2
+from config import COURSE_DIRECTORY
+import os
 
 def load_vocab(cur, user_id, req):
     
     def get_all_sample_sentences(v, sense):
         
+        CRS_COMMAND = """SELECT course_id FROM users
+        WHERE id=%s
+        """
+        cur.execute(CRS_COMMAND, (user_id,))
+        course_id = cur.fetchall()[0][0]
+        
+        with open(os.path.join(COURSE_DIRECTORY, 'course_source.txt'), 'r') as CSFILE:
+        
+             lines = CSFILE.readlines()
+
+        course_source = {x.split(":")[0].strip():[y.strip() for y in x.split(":")[1].split(",")] for x in lines}
+
+        source = course_source[str(course_id)][0]
+        
+        # TODO: MEGA FIX THIS HERE !!!
+
         if not sense:
             
             COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
             INNER JOIN chunk_vocab cv
             ON cv.chunk_id = c.id
-            WHERE cv.vocab_id=%s
+            WHERE cv.vocab_id=%s AND c.source=%s
             """
-            cur.execute(COMMAND, (v,))
+            cur.execute(COMMAND, (v,source))
         
         else:
             COMMAND = """SELECT c.chunk, c.sentence_breaks, cv.first_sentence, cv.locations FROM chunks c
             INNER JOIN chunk_vocab cv
             ON cv.chunk_id = c.id
-            WHERE cv.vocab_id=%s AND cv.sense=%s
+            WHERE cv.vocab_id=%s AND cv.sense=%s AND c.source=%s
             """
-            cur.execute(COMMAND, (v, sense))
+            cur.execute(COMMAND, (v, sense, source))
         
         sentences = []
 
