@@ -77,22 +77,6 @@ def new_course(user_id, course_id, words):
         level1.append(vid[0])
         word_ids.append(vid[0][0])
         
-    RNK_COMMAND = """SELECT rank FROM vocab
-    WHERE id=%s
-    """
-    
-    rnks = []
-    
-    for item in level1:
-        
-        cur.execute(RNK_COMMAND, (item[0],))
-        rnks.append(cur.fetchall()[0][0])
-        
-    user_rank = np.max(rnks)
-    
-    print(user_rank)
-    print("^USR RANK")
-        
     
     COMMAND = """SELECT vocab_id FROM course_vocab
     WHERE course_id=%s AND counts > 1
@@ -100,7 +84,7 @@ def new_course(user_id, course_id, words):
     cur.execute(COMMAND, (course_id,))
     vocab_ids = cur.fetchall()
     left = list(set(vocab_ids) - set(level1))
-    level1 += sorted(left, key=lambda x: np.abs(x[0] - user_rank))[:min(10, len(left))]
+    level1 += random.sample(left, min(10, len(left)))
     
     DEFCOMM = """SELECT definition FROM vocab
     WHERE id=%s
