@@ -216,6 +216,8 @@ def get_first_chunk1(cur, user_id):
     
     out["permissions"] = permissions.get_permissions(cur, user_id)
     
+    print(out["today_progress"])
+    
     res = make_response(jsonify(out))
     
     return res
@@ -838,19 +840,21 @@ def launch_screen():
     
     out["vocab_data"] = my_vocab.load_vocab(cur, user_id, req)
     
-    COMMAND = """SELECT word FROM vocab v
-    INNER JOIN user_vocab_log l 
-    ON v.id = l.vocab_id
-    WHERE l.user_id=%s AND EXTRACT(DAY FROM l.time) = EXTRACT(DAY FROM NOW()) 
-    """
+    COMMAND = """SELECT * FROM user_vocab
+    WHERE user_id=%s AND streak > 0"""
     cur.execute(COMMAND, (user_id,))
+    lightbluewords = len(cur.fetchall())
     
-    words = cur.fetchall()
+    COMMAND = """SELECT * FROM user_vocab
+    WHERE user_id=%s AND streak > 4"""
+    cur.execute(COMMAND, (user_id,))
+    darkbluewords = len(cur.fetchall())
     
-    out["review_data"] = {}
-    out["review_data"]["words"] = list(set([x[0] for x in words]))
+    lightbluewords = lightbluewords - darkbluewords
     
-    out["review_data"]["permissions"] = permissions.get_permissions(cur, user_id)
+    out["wordnos"] = [lightbluewords, darkbluewords]
+    
+    
     
     COMMAND = """SELECT v.word, uv.streak FROM user_vocab uv
     INNER JOIN vocab v
@@ -859,6 +863,7 @@ def launch_screen():
     """
     cur.execute(COMMAND, (user_id, level))
     out["levelwords"] = [{"w": x[0], "s": x[1]} for x in cur.fetchall()]
+    
     
     res = make_response(jsonify(out))
     
