@@ -6,7 +6,7 @@ import os
 
 from config import COURSE_DIRECTORY
 
-def next_chunk(cur, user_id, vocab_id, chunk_id):
+def next_chunk(cur, user_id, vocab_id, chunk_id, options=None):
     
     COMMAND = """
     SELECT chunk FROM chunks
@@ -27,7 +27,7 @@ def next_chunk(cur, user_id, vocab_id, chunk_id):
     out["grammar"] = api_helpers.build_grammar(grammar)
     out["chunkid"] = chunk_id
     
-    test_data = get_test_data(cur, vocab_id, user_id, chunk_id)
+    test_data = get_test_data(cur, vocab_id, user_id, chunk_id, options)
     
     for i in test_data.keys():
         

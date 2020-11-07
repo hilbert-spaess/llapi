@@ -22,7 +22,7 @@ def get_vocab_data(cur, vocab_id, user_id, next_chunk, v_context):
     # for a particular vocab id, find location, interaction mechanism, length after the interaction
 
 
-def get_test_data(cur, vocab_id, user_id, next_chunk):
+def get_test_data(cur, vocab_id, user_id, next_chunk, options={}):
     
     def get_streak():
     
@@ -97,9 +97,13 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
             return None
     
     def get_interaction_mode(item):
+        
+        print(options)
     
         # will need code here once I figure out what good interactions look like
         if item[2]:
+            if "interaction_mode" in options.keys():
+                return options["interaction_mode"]
             if not get_streak():
                 return "6"
             else:
@@ -240,16 +244,14 @@ def get_test_data(cur, vocab_id, user_id, next_chunk):
             WHERE pos=%s AND LEFT(word,1)=%s AND id != %s AND rank > 0
             """
             cur.execute(COMMAND, (pos, first_letter, item[0]))
-            options = [list(a) for a in cur.fetchall() if a[1] > 0]
+            wdoptions = [list(a) for a in cur.fetchall() if a[1] > 0]
             print(wd)
             print(rank)
             if rank:
-                options.sort(key=lambda x: np.abs(np.log(x[1]) - np.log(rank)) + np.abs(len(wd) - len(x[0])))
+                wdoptions.sort(key=lambda x: np.abs(np.log(x[1]) - np.log(rank)) + np.abs(len(wd) - len(x[0])))
             else:
-                options.sort(key=lambda x: np.abs(np.log(x[1]) - np.log(user_level)) + np.abs(len(wd) - len(x[0])))
-            print("**OPTIONS**")
-            print(options)
-            y = options[:min(len(options), 3):]
+                wdoptions.sort(key=lambda x: np.abs(np.log(x[1]) - np.log(user_level)) + np.abs(len(wd) - len(x[0])))
+            y = wdoptions[:min(len(wdoptions), 3):]
             
             print("YMCA",  y)
             y.append([wd, rank])
