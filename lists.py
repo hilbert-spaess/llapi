@@ -99,7 +99,7 @@ def read_list(cur, user_id, data):
     cur.execute(VOC_COMMAND, (list_id,))
     vocab_ids = [x[0] for x in cur.fetchall()]
     
-    vocab_ids = random.sample(vocab_ids, min(10, len(vocab_ids)))
+    vocab_ids = random.sample(vocab_ids, min(13, len(vocab_ids)))
 
     CHUNK_COMMAND = """SELECT chunk_id FROM chunk_vocab cv
     INNER JOIN chunks c
@@ -125,7 +125,7 @@ def read_list(cur, user_id, data):
     new_all_chunks = [[], [], [], [], []]
     words = []
     
-    idx_dict = {0: 0, 1: 0, 2: 0, 3: 1, 4: 1, 5: 1, 6: 2, 7: 2, 8: 2, 9: 2}
+    idx_dict = {0: 0, 1: 0, 2: 0, 3: 1, 4: 1, 5: 2, 6: 2, 7: 2, 8: 3, 9: 3, 10: 3, 11: 3, 12: 3}
     for idx, v in enumerate(vocab_ids):
         
         cur.execute(WD_COMMAND, (v,))
