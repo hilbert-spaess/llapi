@@ -170,8 +170,6 @@ def quicksession(cur, user_id, data):
     source_list = course_source[str(course_id)]
     source_id = source_list[0]
     
-    qno = data["qno"]
-    
     def get_interaction_mode(vocab_id, k):
         
         if k == 0:
