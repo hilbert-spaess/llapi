@@ -20,6 +20,13 @@ def load_lists(cur, user_id):
         cur.execute(CRS_COMMAND, (user_id,))
         course_id = cur.fetchall()[0][0]
         
+        VOC_COM = """SELECT v.id, v.word FROM course_vocab cv
+        INNER JOIN vocab v
+        ON v.id=cv.vocab_id
+        WHERE cv.course_id=%s AND cv.counts>5"""
+        cur.execute(VOC_COM, (course_id,))
+        course_lists = [{"words": cur.fetchall(), "name": "Smart session", "id": 0}]
+        
         print(course_id)
         
         LST_COMMAND = """SELECT lc.list_id, l.name FROM list_course lc
@@ -57,12 +64,16 @@ def read_list(cur, user_id, data):
     print("read list " + str(data["id"]))
     
     list_id = data["id"]
-    qno = data["qno"]
     
     if list_id == "quicksession":
         
         return quicksession(cur, user_id, data)
     
+    LISTNAME = """SELECT name FROM lists
+    WHERE id=%s
+    """
+    cur.execute(LISTNAME, (list_id,))
+    list_name= cur.fetchall()[0][0]
       
     CRS_COMMAND = """SELECT course_id FROM users
     WHERE id=%s
@@ -140,7 +151,7 @@ def read_list(cur, user_id, data):
         random.shuffle(newj)
         new_all_chunks[j] = newj
     
-    return {"allChunks": new_all_chunks, "words": words}
+    return {"allChunks": new_all_chunks, "words": words, "name": list_name}
 
 def quicksession(cur, user_id, data):
     
@@ -161,27 +172,28 @@ def quicksession(cur, user_id, data):
     
     qno = data["qno"]
     
-    def get_interaction_mode(vocab_id):
+    def get_interaction_mode(vocab_id, k):
         
-        STRK_COMMAND = """SELECT streak FROM user_vocab
-        WHERE user_id=%s AND vocab_id=%s
-        """
-        cur.execute(STRK_COMMAND, (user_id, vocab_id))
-        r = cur.fetchall()
-        
-        if r and r[0][0] > 0:
+        if k == 0:
             
-            return "4"
+            return "6"
         
         else:
-        
-            return random.choice(["4", "6"])
+            
+            return "4"
     
     
     # get stuff seen today
     
+    all_chunks = []
+    
     VOC_COMMAND = """SELECT vocab_id FROM course_vocab
-    WHERE course_id=%s"""
+    WHERE course_id=%s AND counts>5"""
+    
+    cur.execute(VOC_COMMAND, (course_id,))
+    vocab_ids = [x[0] for x in cur.fetchall()]
+    
+    vocab_ids = random.sample(vocab_ids, min(13, len(vocab_ids)))
     
     CHUNK_COMMAND = """SELECT chunk_id FROM chunk_vocab cv
     INNER JOIN chunks c
@@ -189,22 +201,38 @@ def quicksession(cur, user_id, data):
     WHERE vocab_id=%s AND source=%s
     """
     
-    cur.execute(VOC_COMMAND, (course_id,))
-    vocab_ids = [x[0] for x in cur.fetchall()]
+    random.shuffle(vocab_ids)
     
-    all_chunks = []
-    
-    for i in range(qno):
-        
-        vocab_id = random.choice(vocab_ids)
-        
-        cur.execute(CHUNK_COMMAND, (vocab_id, source_id))
+    for vocab_id in vocab_ids:
+
+        cur.execute(CHUNK_COMMAND, (vocab_id, source_list[0]))
         r = cur.fetchall()
-        
+
         if r:
-            chunk_id = r[0][0]
+            chunk_ids = random.sample(r,5)
+
+
+        all_chunks.append([next_chunk(cur, user_id, vocab_id, chunk_id, options={"interaction_mode": get_interaction_mode(vocab_id, k)}) for (k, chunk_id) in enumerate(chunk_ids)])
         
-        all_chunks.append(next_chunk(cur, user_id, vocab_id, chunk_id, options={"interaction_mode": get_interaction_mode(vocab_id)}))
-        
+    WD_COMMAND = """SELECT word FROM vocab
+    WHERE id=%s
+    """
+    new_all_chunks = [[], [], [], [], []]
+    words = []
     
-    return {"allChunks": all_chunks, "today_progress": {"yet": len(all_chunks), "done": 0}}
+    idx_dict = {0: 0, 1: 0, 2: 0, 3: 1, 4: 1, 5: 2, 6: 2, 7: 2, 8: 3, 9: 3, 10: 3, 11: 3, 12: 3}
+    for idx, v in enumerate(vocab_ids):
+        
+        cur.execute(WD_COMMAND, (v,))
+        words.append(cur.fetchall()[0][0])
+        
+        for j in range(5):
+            if j >= idx_dict[idx]:
+                new_all_chunks[j].append(all_chunks[idx][j-idx_dict[idx]])
+    
+    for j in range(5):
+        newj = new_all_chunks[j][:]
+        random.shuffle(newj)
+        new_all_chunks[j] = newj
+    
+    return {"allChunks": new_all_chunks, "words": words, "name": "Smart session"}
