@@ -65,7 +65,7 @@ def read_list(cur, user_id, data):
     
     list_id = data["id"]
     
-    if list_id == "quicksession":
+    if list_id == 0:
         
         return quicksession(cur, user_id, data)
     
