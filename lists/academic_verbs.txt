@@ -9,7 +9,9 @@ elucidate
 symbolise
 derive
 rectify
-claim
 evaluate
 clarify
 evoke
+articulate
+assert
+assume

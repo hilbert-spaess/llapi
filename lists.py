@@ -151,7 +151,7 @@ def read_list(cur, user_id, data):
         random.shuffle(newj)
         new_all_chunks[j] = newj
     
-    return {"allChunks": new_all_chunks, "words": words, "name": list_name}
+    return {"allChunks": new_all_chunks, "words": words, "name": list_name, "id": list_id}
 
 def quicksession(cur, user_id, data):
     
@@ -233,4 +233,31 @@ def quicksession(cur, user_id, data):
         random.shuffle(newj)
         new_all_chunks[j] = newj
     
-    return {"allChunks": new_all_chunks, "words": words, "name": "Smart session"}
+    return {"allChunks": new_all_chunks, "words": words, "name": "Smart session", "id": 0}
+
+def register_score(cur, user_id, req):
+    
+    INS_COMMAND = """INSERT INTO user_list(user_id, list_id, hs)
+    VALUES(%s, %s, %s)
+    """
+    
+    HS_COMMAND = """SELECT hs FROM user_list
+    WHERE user_id=%s AND list_id=%s
+    """
+    
+    HS_UP_COMMAND = """UPDATE user_list 
+    SET hs=%s
+    WHERE user_id=%s AND list_id=%s
+    """
+    
+    cur.execute(HS_COMMAND, (user_id, req["id"]))
+    r = cur.fetchall()
+    
+    if not r:
+        
+        cur.execute(INS_COMMAND, (user_id, req["id"], req["currentList"]))
+    
+    else:
+        if req["currentList"] > r[0][0]:
+            cur.execute(HS_UP_COMMAND, (req["currentList"], user_id, req["id"]))
+        

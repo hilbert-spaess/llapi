@@ -807,6 +807,11 @@ def new_list():
     
     out = {}
     
+    if req["payload"] == {}:
+        
+        res = make_response(jsonify(out))
+        return res
+    
     if req["type"] == "read":
         
         out["read_data"] = lists.read_list(cur, user_id, req["payload"])
@@ -822,6 +827,35 @@ def new_list():
     
     res = make_response(jsonify(out))
     
+    return res
+
+@app.route('/api/loglist', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def log_list():
+    
+    req = request.get_json()
+    conn, cur = connect()
+    
+    
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    user_id = cur.fetchall()[0][0]
+    
+    out = {}
+    
+    if "status" in req.keys() and req["status"] == "alive":
+        
+        lists.register_score(cur, user_id, req)
+        
+    cur.close()
+    conn.commit()
+    conn.close()
+    
+    res = make_response(jsonify({}))
     return res
 
     # Format error response and append status code

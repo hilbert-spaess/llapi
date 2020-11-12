@@ -1,13 +1,159 @@
 ﻿#constitute
 
 
-The poor living conditions in Western Europe at the time constitute the main reason why the black plague spread so rapidly. People were often crowded into slums that had no sanitation, hence why it became so deadly.
-The clergy at the time constituted one of the most educated strata in society. The printing press hadn’t been invented yet, hence only a few people had access to books and education.
+The poor living conditions in Western Europe at the time constituted the perfect arena for the black plague to spread so rapidly.
+The clergy at the time constituted the most educated subpopulation.
 The book was widely criticised for its antagonistic attitude towards the Jesuits, which many readers felt constituted a defamation of the entire Catholic religion.
-The citizens of the republic were granted Roman citizenship but this was not extended to all free men. It was felt that too many people would constitute a burden on the state.
-Some non-western foods, such as the spicy curries and rice noodles of Southeast Asia constitute the basis for many of the meals in the city.
+Immigration was strictly controlled, as the authorities expected a rapid intake would constitute a burden on the city.
+Rice constitutes the bulk of calorific intake in most non-western countries.
 The peasantry constituted more than 80% of the population at the time, and they needed to pay heavy taxes in order for the king to maintain his lavish lifestyle.
-The League of Nations, founded after World War I, was an organisation that was supposed to prevent wars from starting but in reality did not constitute an effective force for peace. 
-There was a strong feeling that Germany had been betrayed not only by her rulers but by her intellectuals, and that the country's humiliation, impoverishment and inflation did not merely constitute a material catastrophe, but a spiritual and intellectual one as well.
+In reality, the League of Nations did not constitute an effective force for peace.
+There was a strong feeling that Germany had been betrayed, by her rulers as well as her intellectuals, and that the country's humiliation, impoverishment and inflation did not merely constitute a material catastrophe, but a spiritual and intellectual one as well.
 The data does not constitute proof that the conditions found in the sample population are representative of the population as a whole.
-The publishers claim that the book constitutes the first systematic investigation of factors which led to the revolution, however in reality the book was poorly written and heavily biased towards the author’s own opinion.
+The publishers claim that the book constitutes the first systematic investigation of the revolution.
+
+
+#construct
+
+
+He believed that we construct perceived realities out of objective reality, and that these constructed realities have the potential to be powerful and dangerous.
+A good psychotherapist aims to construct a safe therapeutic environment and establish a relationship of trust and empathy with their patients.
+The writing course was designed to help students learn how to construct a logical argument.
+Romans were accomplished engineers, able to construct aqueducts that brought water into cities from natural springs, which were often a few kilometres away.
+The Suez Canal was constructed over a period of ten years in the late nineteenth century.
+The passage was written in a language she did not understand, but she was able to construct meanings of the words from clues, so she could decipher parts of the text.
+We have also uncovered blueprints detailing the steps necessary to construct additional copies of these machines.
+The pipeline was constructed to transport crude oil across Alaska to ports on the coast.
+
+
+#context
+
+
+When studying English Literature, understanding the context behind a book enriches the learning experience.
+The paucity of sources means that the context and motivation for Beethoven's letter is still obscure.
+The reading provides historical context for the issues raised in the rest of the course.
+When reading primary sources it is important to analyse the significance of the content in the context of the author's motivations.
+The meaning of a word in the English language depends on the context in which it occurs.
+The fresco is best appreciated in the context of its fascinating creation story.
+Words can mean different things in different contexts, so it is important to read the surrounding text if you want to gain an accurate understanding.
+The popularity of his xenophobic opinions is easily understood in the context of an ever-growing sentiment of nationalism. 
+
+
+#contrary
+
+
+The results of quantum theory run contrary to common sense and classical physics.
+The theory introduced by Einstein ran completely contrary to the prevailing doctrine of the time.
+Contrary to popular belief, Columbus was not the first European to land in the Americas.
+Contrary to popular belief, many feudal lords did not gain power from the decline of the Roman Empire but were actually granted their lands by the Catholic Church.
+Geologists have determined that, contrary to the leading hypothesis, the region is actually drifting slowly towards Africa.
+Despite the fact that he had opinions on most specific issues that ran contrary to those of the authorities, he was supportive of the peace process in general.
+This author will not tolerate arguments that run contrary to the Marxist doctrine of class conflict.
+The painting, contrary to popular belief, is not in fact a self-portrait.
+The union leaders argued that government intervention would run contrary to the free market principles on which the economy was based.
+
+
+#conundrum
+
+
+The fiendish final exam featured a single question, a conundrum that was sure to keep the students puzzled.
+The disappearance of the flight over international waters is a conundrum the investigators are striving to solve.
+The question of whether it is better to preserve the environment or to harness the environment for human good is indeed a conundrum for policy-makers.
+One of the greatest conundrums for evolutionary theory is what triggered the sudden explosion of human intelligence that occurred at some point during the last forty thousand years.
+The conundrum of how an ancient people were able to build such massive structures without the benefit of today's knowledge and technology still puzzles people to this day.
+The show posed a moral conundrum for the audience, which was left as an open-ended question for them to explore.
+I was impatient to unveil my solution to the teacher's conundrum, so I visited his office before the lesson.
+
+#convey
+
+
+When interviewed, the artist found it impossible to convey his sweeping ideas in simple terms.
+The main purpose of the address was to convey the message that Britain would do everything possible to defeat the enemy.
+It's the business of a historical fiction writer to convey to the reader the atmosphere and flavour of a particular era.
+The doctor's speech impediment was so crippling that he struggled to convey vital information to his patients.
+It would be impossible to convey that sense of panic and confusion to someone who has never experienced total war.
+The materials used to decorate the new office will convey professionalism and urgency, without rendering the working environment too sterile.
+It is important to convey a sense of drama and immediacy to the reader, since your goal is to capture their attention within the first few paragraphs of the book.
+The aim of the organisation is to convey information to the public that is scientifically sound and accessible to everyone, regardless of their education.
+The mass media have an important role to play in conveying information about scientific and technological advances to the public.
+The theories he has put forward in his books and lectures are meant to convey the idea that animals are sensitive and intelligent beings.
+
+
+#correlate
+
+Paleontologists take multiple readings from their fossil samples, and check that the results correlate before they report a conclusion with certainty.
+A core tenet of anthropology is that individual behaviour correlates strongly with the behaviour of the group.
+It is known that smoking as few as two cigarettes a day strongly correlates with increased risk of developing a variety of lung diseases, including cancer.
+A telling sign of a conspiracy theory is that it attempts to correlate multiple independent events using only tenuous evidence.
+They found that the number of hours a student spent watching television a day correlated with their academic performance, even when confounding factors such as exercise levels were taken into account.
+Conversely, higher education levels correlate with later age of marriage, most tellingly demonstrated in modern-day Scandinavian countries.
+Practising doctors have claimed that the research does not correlate meaningfully with their clinical experience.
+Tidal changes are closely correlated to the position and movements of the moon.
+The amount of trade between two nations correlates closely with the amount of diplomatic contact.
+
+
+#correlation
+
+
+There is an inverse correlation between education and the average number of children that couples have..
+A controversial geneticist claims he has found a correlation between intelligence and length of the second finger. 
+There is a strong correlation between sugar consumption and obesity.
+The fact that there is a correlation between the increase in carbon dioxide concentration in the atmosphere and an increase in average temperature is the fundamental observation behind global warming.
+Currently there is a positive correlation between education level and future earnings, but this relationship is projected to decline gradually over the coming decades.
+The researchers claimed that there was a strong statistical correlation between the blood types and the geographical origins of donors, although he saw no explanation for this observation.
+Environmentalists have pointed to a correlation between increased industrialisation and rising concentrations of carbon dioxide in the atmosphere.
+The task force's report showed a correlation between the number of young people smoking and the amount of cigarette advertising on television.
+The distinction between correlation and causation is of fundamental importance when refuting statistical fallacies.
+
+#corroborate
+
+
+The facts we have about the Anglo-Saxons come from multiple sources of varying trustworthiness, so it is a good sign if many of these sources corroborate each other.
+The latest discovery, a piece of pottery dating back millennia, corroborates the existence of the Indus civilisation.
+Wallace's evidence corroborated the new theory of natural selection.
+The reports were all second-hand, but the sources were numerous and corroborated one another.
+The government's claims that the rebels were planning to incinerate the capital were never corroborated by any acceptable independent source.
+I cannot say for certain that these photographs are genuine; I need to see some other evidence that corroborates your claim.
+Marcel's photographs corroborated the fact that much more snow fell in the mountains than previously thought.
+One way of determining whether a witness may be telling the truth is to see if his or her testimony can be corroborated by others.
+However, the most dramatic evidence of his guilt was provided by a tape recording that seemed to corroborate the testimony of the key witness against him.
+
+
+#critique
+
+
+My students can produce reviews and critiques, but never come up with ideas of their own!
+The main problem with all these explanations is that they fail to provide a convincing critique of the evidence that slavery was harmful to the Southern economy.
+The students took turns to critique each other’s work, and this helped them to learn from each other.
+The main Marxist critique of the standard neoclassical model is that it fails to incorporate important features of the real world, such as monopolies and debt.
+The main drawback of the scientific paper is that it does not offer a clear critique of the other competing theories.
+His supposedly scintillating critique of the scientific method bored me after the first few pages.
+She wrote a radical critique on the artist’s early works, calling them immature and unfulfilled.
+The most famous critique of the American healthcare system is that it tends to treat people only after they get sick rather than keep them from getting sick in the first place.
+The strongest of these critiques comes from Soviet archaeologists, who argue that the historical and written records in these areas are too vague to be used as evidence for the existence of a civilisation.
+
+
+#cumulative
+
+
+No single development is causing the company’s financial trouble – it’s the cumulative effect of years of weak leadership.
+The cumulative effect of using so many chemicals on the land could be disastrous.
+It is widely acknowledged that learning is a cumulative process, as knowledge takes time to solidify.
+The cumulative effects of years of natural disasters contributed to the great extinctions of the Cretacious period.
+The company made a cumulative profit of five million dollars over three years.
+The sophistication of the jet engine was the result of a cumulative process of trial-and-error over many years.
+Tainted meat from one animal could contaminate large amounts of meat stored in the same place, leading to a cumulative effect that could threaten an entire tribe.
+Years of malnutrition had taken a serious cumulative toll on his body's ability to ward off disease,
+
+
+#demonstrate
+
+
+The fossil demonstrates that complex animals existed on Earth more than half a billion years ago, far earlier than previously believed.
+The team demonstrated their findings, purporting to show that the Neanderthals disappeared many years earlier than previously believed.
+The invention of the telescope allowed for more accurate measurements, demonstrating the tight connection with technological and scientific developments.
+The protestors did not demonstrate any desire to remove the system, but only intended to reform certain aspects.
+The candidate was hired for the job because he demonstrated proficiency and competency in his interview.
+The new legislation demonstrated the government's commitment to change as well as its pragmatic approach to problem-solving.
+Newly released figures on unemployment demonstrate the extent of the damage this economic crisis has caused.
+Research has demonstrated that salmon migrate back to their spawning grounds to lay eggs.

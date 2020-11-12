@@ -14,10 +14,10 @@ annotate
 anomaly
 antecedent : a thing that precedes another : noun
 antithesis : the direct opposite of something else : noun
-articulate
-aspect
-assert
-assume
+articulate : explain/pronounce something clearly and distinctly : verb
+aspect : a particular part or feature of something : noun
+assert : state a fact confidently and forcefully : verb
+assume : take as true without proof : verb
 allude
 authentic
 autonomy
@@ -39,23 +39,23 @@ coherent : consistent, logical, making total sense : adjective
 compelling
 condone
 consensus : general agreement : noun
-constitute
-construct
+constitute : be part of, make part of a whole : verb
+construct : build or make : verb
 contend : argue, make the point that : verb
-context
-contrary
-conundrum
+context : the setting/background for an event, statement, idea : noun
+contrary : opposite in nature or meaning : adjective
+conundrum : confusing or difficult puzzle/riddle : noun
 converse
-convey
-correlate
-correlation
-corroborate
+convey : communicate an idea, impression, or feeling: verb
+correlate : have a dependent relationship with; change along with : verb
+correlation : a dependent relationship between two quantities : noun
+corroborate : confirm, back up (a theory, idea, or observation) : verb
 counterargument
 credible : trustworthy, believable (of an opinion) : adjective
-critique
-cumulative
+critique : a detailed analysis or assessment of something : noun
+cumulative : increasing over time; the result of increases over time : adjective
 deduce
-demonstrate
+demonstrate : present, show, give an exhibition : verb
 denotation
 denote
 derive: obtain, get something from : verb
