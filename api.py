@@ -861,7 +861,6 @@ def log_list():
 
 @app.route('/api/jobs', methods=["POST", "GET"])
 @cross_origin(origin='*')
-@requires_auth
 def load_jobs():
 
     req = request.get_json()
