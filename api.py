@@ -867,7 +867,7 @@ def load_jobs():
 
     out = {}
 
-    jobs = [{title: "Mako trading", body: "Some trading stuff"}]
+    jobs = [{'title': "Mako trading", 'body': "Some trading stuff"}]
 
     out["jobs"] = jobs
 
