@@ -865,6 +865,8 @@ def load_jobs():
 
     req = request.get_json()
 
+    out = {}
+
     jobs = [{title: "Mako trading", body: "Some trading stuff"}]
 
     out["jobs"] = jobs
