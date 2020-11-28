@@ -43,9 +43,21 @@ def load_lists(cur, user_id):
         WHERE list_id=%s
         """
         
+        HS_COMMAND = """SELECT hs FROM user_list
+        WHERE user_id=%s AND list_id=%s
+        """
+        
         for item in list_ids:
             cur.execute(VOC_COMMAND, (item[0],))
-            course_lists.append({"words": cur.fetchall(), "name": item[1], "id": item[0]})
+            wds = cur.fetchall()
+            random.shuffle(wds)
+            cur.execute(HS_COMMAND, (user_id, item[0],))
+            r = cur.fetchall()
+            if not r:
+                hs=0
+            else:
+                hs=r[0][0]+1
+            course_lists.append({"words": wds, "name": item[1], "id": item[0], "hs": hs})
             
         return course_lists
     
@@ -110,7 +122,7 @@ def read_list(cur, user_id, data):
     cur.execute(VOC_COMMAND, (list_id,))
     vocab_ids = [x[0] for x in cur.fetchall()]
     
-    vocab_ids = random.sample(vocab_ids, min(13, len(vocab_ids)))
+    vocab_ids = random.sample(vocab_ids, min(1, len(vocab_ids)))
 
     CHUNK_COMMAND = """SELECT chunk_id FROM chunk_vocab cv
     INNER JOIN chunks c

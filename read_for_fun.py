@@ -68,7 +68,7 @@ def next_chunk(cur, user_id, vocab_id, chunk_id, options=None):
     
     return out
 
-def read_for_fun(cur, user_id):
+def read_for_fun(cur, user_id, options={"new_no": 10}):
     
     # get all chunks in a manner similar to api helpers
     
@@ -86,7 +86,7 @@ def read_for_fun(cur, user_id):
     cur.execute(COMMAND, (user_id,))
     records = cur.fetchall()
     
-    vocab_ids = random.sample(records, min(10, len(records)))
+    vocab_ids = random.sample(records, min(options["new_no"], len(records)))
     
     allchunks = []
     
@@ -123,7 +123,8 @@ def read_for_fun(cur, user_id):
                 
                 chunk_id = random.sample(new, 1)[0]
                 
-                allchunks.append(next_chunk(cur, user_id, vocab_id, chunk_id))
+                allchunks.append(next_chunk(cur, user_id, vocab_id, chunk_id, options=options))
+                allchunks[-1]["first"] = 0
                 
                 break
             
@@ -131,7 +132,8 @@ def read_for_fun(cur, user_id):
 
                 chunk_id = random.sample(records, 1)[0]
 
-                allchunks.append(next_chunk(cur, user_id, vocab_id, chunk_id))
+                allchunks.append(next_chunk(cur, user_id, vocab_id, chunk_id, options=options))
+                allchunks[-1]["first"]=0
                 
                 break
         

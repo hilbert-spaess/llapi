@@ -104,8 +104,6 @@ def get_test_data(cur, vocab_id, user_id, next_chunk, options={}):
         if item[2]:
             if "interaction_mode" in options.keys():
                 return options["interaction_mode"]
-            if not get_streak():
-                return "6"
             else:
                 return "4"
         else:

@@ -161,7 +161,8 @@ def get_text_chunk():
     req = request.get_json()
     conn, cur = connect()
     out = {}
-    
+
+    print("rquest")
     print(req)
     
     COMMAND = """SELECT id, tutorial FROM users
@@ -187,7 +188,7 @@ def get_text_chunk():
     user_id = a[0][0]
     
     # possibly just a log
-           
+
     if req == {}:
         return make_response(jsonify({}))
     
@@ -710,7 +711,7 @@ def launch_screen():
     
     out["levelprogress"] = get_level_progress(cur, user_id, level)
     
-    out["read_data"] = reading.get_first_chunk(cur, user_id).get_json()
+    out["read_data"] = reading.daily_reading(cur, conn, user_id, {}).get_json()
     
     out["vocab_data"] = my_vocab.load_vocab(cur, user_id, req)
     
@@ -856,6 +857,21 @@ def log_list():
     conn.close()
     
     res = make_response(jsonify({}))
+    return res
+
+@app.route('/api/jobs', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def load_jobs():
+
+    req = request.get_json()
+
+    jobs = [{title: "Mako trading", body: "Some trading stuff"}]
+
+    out["jobs"] = jobs
+
+    res = make_response(jsonify(out))
+
     return res
 
     # Format error response and append status code

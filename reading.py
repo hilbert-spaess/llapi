@@ -31,22 +31,25 @@ import sys
 def daily_reading(cur, conn, user_id, req):
     
     out = {}
+
+   # analysischunks = [{"mechanism": "analysis", "text": "Jim bought a Capybara from the corner shop.", "question": "What did Jim buy from the corner shop?"}]
+
+    improvechunks = [{"mechanism": "improve", "text": "Jim bought a Capybara from the corner shop", "interaction": {"type": "choose", "question": "Improve this sentence using a word you've learned this session.", "options": ["acquired", "suffered", "imbued", "relented"]}}]
+
+    out["allChunks"] = improvechunks
+
+    out["today_progress"] = {"yet": len(out["allChunks"]), "done": 0}
+
+    res = make_response(jsonify(out))
+
+    return res
     
     if req["answeredCorrect"] == "-1":
         print("HEMLO this is the first chumk")
         return get_first_chunk(cur, user_id)
 
     if req["first"] == 1:
-        on_review.set_first(cur, user_id, req)
 
-        cur.close()
-        conn.commit()
-        conn.close()
-
-        conn, cur = connect()
-
-    if req["first"] == 0 or (req["interaction"][req["keyloc"]]["streak"] > 0 and int(req["answers"][int(req["keyloc"])]) == 1):
-        print("REVIEW")
         on_review.on_review(cur, user_id, req)
 
         cur.close()
@@ -91,26 +94,17 @@ def get_first_chunk(cur, user_id):
     out = {}
     
     if chunk_id:
-        allchunks = []
-        newallchunks = get_all_chunks(cur, user_id)
-        print("newallchunks", newallchunks)
-        for chunk in newallchunks:
-            print(chunk)
-            if chunk["first"]:
-                allchunks.append(chunk)
-        random.shuffle(allchunks)
-        for chunk in newallchunks:
-            if not chunk["first"]:
-                allchunks.append(chunk)
+        allchunks = get_all_chunks(cur, user_id)
+        allchunks = get_firsts(cur, user_id, allchunks)
+        if len(allchunks) < 20:
+            allchunks = supplement(cur, user_id, allchunks)
+            
         out["allChunks"] = allchunks
-        print(out["allChunks"])
     else:
         out["allChunks"] = [0]
         out["status"] = "done"
-        print("NOTHING LEFT")
         
-    yet, done = get_today_progress(cur, user_id)
-    out["today_progress"] = {"yet": yet, "done": done}
+    out["today_progress"] = {"yet": len(out["allChunks"]), "done": 0}
     
     out["permissions"] = permissions.get_permissions(cur, user_id)
     
@@ -119,4 +113,39 @@ def get_first_chunk(cur, user_id):
     res = make_response(jsonify(out))
     
     return res
+
+def get_firsts(cur, user_id, allchunks):
+    
+    # look for firsts. if there are firsts, get the corresponding fluff.
+    
+    fluffchunks = []
+    
+    for chunk in allchunks:
+        
+        if chunk["interaction"][chunk["keyloc"]]["streak"] == 0:
+            
+            fluffchunks.append(read_for_fun.next_chunk(cur, user_id, chunk["interaction"][chunk["keyloc"]]["v"] , chunk["chunkid"], options={"interaction_mode": "6"}))
+            fluffchunks[-1]["first"] = 0
+
+    for chunk in allchunks:
+            
+                fluffchunks.append(chunk)
+    
+    return fluffchunks
+
+def supplement(cur, user_id, allchunks):
+
+    # for now: completely randomly decide on supplementing up to 20
+
+    r = 20 - len(allchunks)
+
+    newchunks = read_for_fun.read_for_fun(cur, user_id, options={"new_no": r, "interaction_mode": "6"})
+
+    for chunk in newchunks:
+        allchunks.insert(random.randrange(len(allchunks)+1), chunk)
+
+    return allchunks
+
+    
+
         

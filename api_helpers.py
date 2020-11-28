@@ -388,7 +388,9 @@ def next_chunk(cur, user_id, chunk_id):
     #print("interactiondict", interactiondict)
     out["interaction"] = test_data
     
-    out["first"] = choices[0][4]
+    out["first"] = 1
+    
+    """
     
     if not out["first"]:
         
@@ -418,6 +420,8 @@ def next_chunk(cur, user_id, chunk_id):
         newout["first"] = 0
         
         return newout
+        
+    """    
         
     
     print("HEMMMMMLO")
