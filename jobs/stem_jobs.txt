@@ -10,7 +10,13 @@ https://www.mustardsystems.com/imgs/mustard-systems-logo.png
 Basic understanding of statistics.
 We use cutting-ede statistical methods to model a wide variety of sports, often developing our own techniques. We're looking for talented individuals to join our team.
 
+## Graduate Quantitative Researcher: Qube Research
+https://www.qube-rt.com/careers/graduate-opportunities/job?gh_jid=4104375002
+https://www.qube-rt.com/img/qrt.svg
+Coding skills required.
+Qube research is a quantitative and systematic investment manager. In this role, your core objective is to create high quality predictive signals.
 
+##
 mustard systems (*)
 qube research
 seamlessML
