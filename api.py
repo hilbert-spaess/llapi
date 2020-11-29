@@ -882,6 +882,8 @@ def load_jobs():
 
             if x.strip():
 
+                x = x.strip()
+
                 new[x.split()[0].strip()] = x.split()[1].strip()
 
         outjobs.append(new)
