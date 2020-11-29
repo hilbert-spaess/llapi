@@ -1,4 +1,5 @@
-## Graduate Trader at Mako
+##
+t Graduate Trader at Mako
 u https://www.mako.com/opportunities?gh_jid=4824398002
 i https://assets.website-files.com/5e4aa1a9585b23ac3d3fbedd/5e9da6baa92e924e078af672_Mako-Logo-Colour-2020.svg
 e Some programming experience.
@@ -6,7 +7,8 @@ l London, UK
 c n
 d 18-month graduate trader program is an immersive and structured programme designed to give our graduates the opportunity to develop in-depth knowledge and experience of the industry and options markets.
 
-## Sports Quantitative Analyst: Mustard Systems
+##
+t Sports Quantitative Analyst: Mustard Systems
 u https://www.mustardsystems.com/sports-quantitative-analyst-graduate.html
 i https://www.mustardsystems.com/imgs/mustard-systems-logo.png
 e Basic understanding of statistics.
@@ -14,7 +16,8 @@ l London, UK
 c y
 d We use cutting-ede statistical methods to model a wide variety of sports, often developing our own techniques. We're looking for talented individuals to join our team.
 
-## Graduate Quantitative Researcher: Qube Research
+##
+t Graduate Quantitative Researcher: Qube Research
 u https://www.qube-rt.com/careers/graduate-opportunities/job?gh_jid=4104375002
 i https://instahyre-2.s3-ap-south-1.amazonaws.com/media/CACHE/images/images/profile/base/employer/12552/7dac755aea/Screenshot%20from%202019-07-12%2015-03-07/60fc8f7480bd64c888ef41a752b50510.png
 e Coding skills required.
@@ -22,7 +25,8 @@ l London, UK
 c no
 d Qube research is a quantitative and systematic investment manager. In this role, your core objective is to create high quality predictive signals.
 
-## Quant trader- graduate entry: SeamlessML
+##
+t Quant trader- graduate entry: SeamlessML
 u http://www.seamlessml.com/jobs?gh_jid=4218052003
 i https://s3-cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/174/300/resized/logo_seamless.png?1581003403
 e Basic familiarity with Python
@@ -30,7 +34,8 @@ l Cambridge, UK
 c no
 d The trading team are responsible for developing trading execution systems and strategy back-testers with strong focus on robustness and high standards of code quality.
 
-## Graduate scheme: FTI consulting
+##
+t Graduate scheme: FTI consulting
 u https://fticonsult.referrals.selectminds.com/ftistudentcareers/jobs/2021-graduate-scheme-corporate-finance-digital-science-9749
 i https://fticonsultingcareers.com/wp-content/uploads/2019/09/FTI-logo-dark.png
 e Basic coding and data science skills.
@@ -38,7 +43,8 @@ l London, UK
 c no
 d Our projects range from long-term to proof-of-concept in nature, in such diverse areas as litigation support, time-series analysis, geo-spatial modelling, and communications analytics. The spectrum of projects that you will be exposed to should provide you with a holistic impression of life as a data scientist.
 
-## Marsh Graduate Programme 2021
+##
+t Marsh Graduate Programme 2021
 u https://careers.mmc.com/global/en/job/R_100047/Marsh-Graduate-Programme-2021-London
 i https://cdn.phenompeople.com/CareerConnectResources/MAMCGLOBAL/en_global/desktop/assets/images/v-1606191224498-careers-mmc-header-logo.png
 e Must be eligible to work in UK.
