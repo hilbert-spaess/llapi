@@ -872,7 +872,8 @@ def load_jobs():
     with open(DIRECTORY + "/jobs/stem_jobs.txt", 'r') as jobfile:
 
         joblines = jobfile.read()
-        jobs = joblines.split("##")[1:7]
+        jobs = joblines.split("##")[1:]
+        jobs = [x for x in jobs if x.strip()]
 
     for job in jobs:
 
@@ -886,7 +887,7 @@ def load_jobs():
 
                 print(x.split())
 
-                new[x.split()[0].strip()] = x.split()[1].strip()
+                new[x.split()[0].strip()] = " ".join(x.split()[1:]).strip()
 
         outjobs.append(new)
 
