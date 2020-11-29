@@ -12,7 +12,7 @@ We use cutting-ede statistical methods to model a wide variety of sports, often 
 
 ## Graduate Quantitative Researcher: Qube Research
 https://www.qube-rt.com/careers/graduate-opportunities/job?gh_jid=4104375002
-https://www.qube-rt.com/img/qrt.svg
+https://instahyre-2.s3-ap-south-1.amazonaws.com/media/CACHE/images/images/profile/base/employer/12552/7dac755aea/Screenshot%20from%202019-07-12%2015-03-07/60fc8f7480bd64c888ef41a752b50510.png
 Coding skills required.
 Qube research is a quantitative and systematic investment manager. In this role, your core objective is to create high quality predictive signals.
 
@@ -24,7 +24,7 @@ The trading team are responsible for developing trading execution systems and st
 
 ## Graduate scheme: FTI consulting
 https://fticonsult.referrals.selectminds.com/ftistudentcareers/jobs/2021-graduate-scheme-corporate-finance-digital-science-9749
-https://fticonsultingcareers.com/wp-content/uploads/2019/09/FTI-logo-light.png
+https://fticonsultingcareers.com/wp-content/uploads/2019/09/FTI-logo-dark.png
 Basic coding and data science skills.
 Our projects range from long-term to proof-of-concept in nature, in such diverse areas as litigation support, time-series analysis, geo-spatial modelling, and communications analytics. The spectrum of projects that you will be exposed to should provide you with a holistic impression of life as a data scientist.
 
