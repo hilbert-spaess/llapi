@@ -16,9 +16,22 @@ https://www.qube-rt.com/img/qrt.svg
 Coding skills required.
 Qube research is a quantitative and systematic investment manager. In this role, your core objective is to create high quality predictive signals.
 
-##
-mustard systems (*)
-qube research
+## Quant trader- graduate entry: SeamlessML
+http://www.seamlessml.com/jobs?gh_jid=4218052003
+https://s3-cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/174/300/resized/logo_seamless.png?1581003403
+Basic familiarity with Python
+The trading team are responsible for developing trading execution systems and strategy back-testers with strong focus on robustness and high standards of code quality.
+
+## Graduate scheme: FTI consulting
+https://fticonsult.referrals.selectminds.com/ftistudentcareers/jobs/2021-graduate-scheme-corporate-finance-digital-science-9749
+https://fticonsultingcareers.com/wp-content/uploads/2019/09/FTI-logo-light.png
+Basic coding and data science skills.
+Our projects range from long-term to proof-of-concept in nature, in such diverse areas as litigation support, time-series analysis, geo-spatial modelling, and communications analytics. The spectrum of projects that you will be exposed to should provide you with a holistic impression of life as a data scientist.
+
+
+
+
+
 seamlessML
 nomura
 AVIVA actuarial role?
