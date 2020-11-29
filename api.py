@@ -872,7 +872,7 @@ def load_jobs():
         joblines = jobfile.read()
         jobs = joblines.split("##")[1:3]
 
-    jobs = [[x.strip() for x in job.split("\n") if x.strip()] for x in jobs]
+    jobs = [[x.strip() for x in job.split("\n") if x.strip()] for job in jobs]
 
     jobs = [{'title': job[0], 'url': job[1], 'img': job[2], 'exp': job[3], 'desc': job[4]} for job in jobs]
 
