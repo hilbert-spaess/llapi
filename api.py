@@ -14,7 +14,7 @@ import reviews_over
 import my_vocab, my_progress, new_user_choices, read_for_fun
 from tests import log_in_test_alex, step_time_test_user_alex
 import new_vocab_add
-from config import API_AUDIENCE
+from config import API_AUDIENCE, DIRECTORY
 import random
 import json
 import lists
@@ -867,7 +867,14 @@ def load_jobs():
 
     out = {}
 
-    jobs = [{'title': "Mako trading", 'body': "Some trading stuff"}]
+    with open(DIRECTORY + "/jobs/stem_jobs.txt", 'r') as jobfile:
+
+        joblines = jobfile.read()
+        job = joblines.split("##")[1]
+
+    job = [x.strip() for x in job.split("\n") if x.strip()]
+
+    jobs = [{'title': job[0], 'url': job[1], 'img': job[2], 'exp': job[3], 'desc': job[4]}]
 
     out["jobs"] = jobs
 
