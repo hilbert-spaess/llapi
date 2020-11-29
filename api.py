@@ -867,16 +867,26 @@ def load_jobs():
 
     out = {}
 
+    outjobs = []
+
     with open(DIRECTORY + "/jobs/stem_jobs.txt", 'r') as jobfile:
 
         joblines = jobfile.read()
         jobs = joblines.split("##")[1:7]
 
-    jobs = [[x.strip() for x in job.split("\n") if x.strip()] for job in jobs]
+    for job in jobs:
 
-    jobs = [{'title': job[0], 'url': job[1], 'img': job[2], 'exp': job[3], 'desc': job[4]} for job in jobs]
+        new = {}
 
-    out["jobs"] = jobs
+        for x in job.split("\n"):
+
+            if x.strip():
+
+                new[x.split()[0].strip()] = x.split()[1].strip()
+
+        outjobs.append(new)
+
+    out["jobs"] = outjobs
 
     res = make_response(jsonify(out))
 
