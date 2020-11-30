@@ -1,4 +1,13 @@
 ##
+t Sports Quantitative Analyst: Mustard Systems
+u https://www.mustardsystems.com/sports-quantitative-analyst-graduate.html
+i https://www.mustardsystems.com/imgs/mustard-systems-logo.png
+e Basic understanding of statistics.
+l London, UK
+c y
+d We use cutting-edge statistical methods to model a wide variety of sports, often developing our own techniques. We're looking for talented individuals to join our team.
+
+##
 t Graduate Trader at Mako
 u https://www.mako.com/opportunities?gh_jid=4824398002
 i https://assets.website-files.com/5e4aa1a9585b23ac3d3fbedd/5e9da6baa92e924e078af672_Mako-Logo-Colour-2020.svg
@@ -6,15 +15,6 @@ e Some programming experience.
 l London, UK
 c n
 d 18-month graduate trader program is an immersive and structured programme designed to give our graduates the opportunity to develop in-depth knowledge and experience of the industry and options markets.
-
-##
-t Sports Quantitative Analyst: Mustard Systems
-u https://www.mustardsystems.com/sports-quantitative-analyst-graduate.html
-i https://www.mustardsystems.com/imgs/mustard-systems-logo.png
-e Basic understanding of statistics.
-l London, UK
-c y
-d We use cutting-ede statistical methods to model a wide variety of sports, often developing our own techniques. We're looking for talented individuals to join our team.
 
 ##
 t Graduate Quantitative Researcher: Qube Research
