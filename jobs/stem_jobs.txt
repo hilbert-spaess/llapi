@@ -52,3 +52,14 @@ l London, UK
 c no
 d Marsh is the world's leading insurance broker and risk adviser. Serves commercial and individual clients with data-driven risk solutions and advisory services.
 
+##
+t Graduate Risk Engineer: nPlan
+u https://nplan.breezy.hr/p/3e2862163e4e
+i https://gallery-cdn.breezy.hr/154292be-8039-4229-8926-98f365d8d561/nPlan.png
+c q
+e No specific experience
+l London, UK
+d The majority of large-scale construction projects are critically delayed, which comes with a huge financial cost: approx. $2T globally in lost productivity every year. So why do these critical delays consistently occur? Put simply, it is incredibly difficult to correctly estimate the duration of future activities. At nPlan, we're learning how the world was built and we're actively using that knowledge to help current and future projects to be delivered on time.
+
+
+

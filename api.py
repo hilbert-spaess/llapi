@@ -11,7 +11,7 @@ import on_review
 from connect import connect
 import threading
 import reviews_over
-import my_vocab, my_progress, new_user_choices, read_for_fun
+import my_vocab, my_progress, new_user_choices, read_for_fun, course_data
 from tests import log_in_test_alex, step_time_test_user_alex
 import new_vocab_add
 from config import API_AUDIENCE, DIRECTORY
@@ -858,6 +858,101 @@ def log_list():
     
     res = make_response(jsonify({}))
     return res
+
+@app.route('/api/coursedata', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def get_course_data():
+
+    req = request.get_json()
+    conn, cur = connect()
+
+    print("hemlo")
+    print(req)
+
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    user_id = cur.fetchall()[0][0]
+
+    return course_data.load_data(cur, user_id, req)
+
+@app.route('/api/analysislog', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def log_analysis():
+
+    req = request.get_json()
+    conn, cur = connect()
+
+
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    user_id = cur.fetchall()[0][0]
+
+    CHK_COMMAND = """SELECT * FROM tutee_course
+    WHERE user_id=%s AND answer_id=%s AND course_id=%s"""
+    
+    INS_COMMAND = """INSERT INTO tutee_course(text, user_id, answer_id, course_id)
+    VALUES(%s, %s, %s, %s)
+    """
+
+    UPD_COMMAND = """UPDATE tutee_course
+    SET text=%s
+    WHERE user_id=%s AND answer_id=%s AND course_id=%s
+    """
+
+    for item in req["answers"].items():
+
+        cur.execute(CHK_COMMAND, (user_id, item[0], req["course_id"]))
+        if not cur.fetchall():
+        
+            cur.execute(INS_COMMAND, (item[1], user_id, item[0], req["course_id"]))
+
+        else:
+
+            cur.execute(UPD_COMMAND, (item[1], user_id, item[0], req["course_id"]))
+
+    cur.close()
+    conn.commit()
+    conn.close()
+
+    print(req)
+    print("hemlo")
+
+    return make_response(jsonify({}))
+
+
+@app.route('/api/tutorview', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def get_tutors():
+
+    req = request.get_json()
+    conn, cur = connect()
+
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    user_id = cur.fetchall()[0][0]
+
+    print(req)
+    print("hemlo")
+
+
+    out = {"users": [{'user_id': '609', 'email':'test@gmail.com'}]}
+
+    return make_response(jsonify(out))
+
+
+
 
 @app.route('/api/jobs', methods=["POST", "GET"])
 @cross_origin(origin='*')

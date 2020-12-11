@@ -13,6 +13,7 @@ import threading
 import reviews_over
 import my_vocab, my_progress, new_user_choices, read_for_fun
 from tests import log_in_test_alex, step_time_test_user_alex
+import reading_analysis
 import new_vocab_add
 from config import API_AUDIENCE
 import random
@@ -34,9 +35,9 @@ def daily_reading(cur, conn, user_id, req):
 
    # analysischunks = [{"mechanism": "analysis", "text": "Jim bought a Capybara from the corner shop.", "question": "What did Jim buy from the corner shop?"}]
 
-    improvechunks = [{"mechanism": "improve", "text": "Jim bought a Capybara from the corner shop", "interaction": {"type": "choose", "question": "Improve this sentence using a word you've learned this session.", "options": ["acquired", "suffered", "imbued", "relented"]}}]
+    #improvechunks = [{"mechanism": "improve", "text": "Jim bought a Capybara from the corner shop", "interaction": {"type": "choose", "question": "Improve this sentence using a word you've learned this session.", "options": ["acquired", "suffered", "imbued", "relented"]}}]
 
-    out["allChunks"] = improvechunks
+    out["allChunks"] = reading_analysis.getchunks()
 
     out["today_progress"] = {"yet": len(out["allChunks"]), "done": 0}
 
