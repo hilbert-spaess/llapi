@@ -62,9 +62,11 @@ text2 = "It was a rimy morning, and very damp. I had seen the damp lying on the 
 
 question2 = {'q': 'In this extract the author employs an absurd simile. He writes that the window is "damp ... as if some goblin had been crying there all night".', 'i': {8: {'mode': 'fill'}}}
 
+"""
 for k in [{"mechanism": "device", "text": text1, "question": question1}, {"mechanism": "device", "text": text2, "question": question2}]:
 
     day1.append(k)
+"""
 
 #
 
