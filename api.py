@@ -947,7 +947,7 @@ def get_tutors():
     print("hemlo")
 
 
-    out = {"users": [{'user_id': '609', 'email':'test@gmail.com'}]}
+    out = {"users": [{'user_id': '609', 'email':'test@gmail.com'}, {'user_id': '596', 'email': 'albertdaitt@gmail.com'}]}
 
     return make_response(jsonify(out))
 

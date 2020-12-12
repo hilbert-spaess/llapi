@@ -12,12 +12,26 @@ def load_data(cur, user_id, req):
 
         COMMAND = """SELECT * FROM tutee_course
         WHERE user_id=%s AND course_id=%s"""
+        cur.execute(COMMAND, (req["data"]["user_id"], 1))
+        r = cur.fetchall()
+
+        for item in r:
+
+            answers[item[2]] = item[3]
+
+    else:
+
+        COMMAND = """SELECT * FROM tutee_course
+        WHERE user_id=%s AND course_id=%s"""
         cur.execute(COMMAND, (user_id, 1))
         r = cur.fetchall()
 
         for item in r:
 
             answers[item[2]] = item[3]
+        
+
+    
 
     out["answers"] = answers
 
