@@ -40,25 +40,28 @@ question5 = {'id': 5, 't': 0, 'd': "These are our synonyms. You can use them in 
 
 question55 = {'t': 0, 'q': "To use these pieces of evidence in an explanation, we could highlight what these words show about his attitude towards love. One example has been given. Try and do the same for the other two:", 'a': "He . interested in romantic feelings. The phrase \"a gibe and a sneer\" indicates that he is dismissive toward love. The words \"abhorrent\" and \"intrusive\" .", 'i': {1: {'mode': 'choose', 'a': 'is not', 'id': 25, 'choices': ['is', 'is not']}, 25: {'mode': 'free', 'id': 7, 'a': 'tell us that he finds such feelings repulsive and sees them as distractions to his work.'}}}
 
+question57 = {'id': 0, 't': 2, 'm': 'filler', 'q': "We can divide our answer into two parts:\n1. Sherlock's attitude towards Irene Adler and romantic feelings.\n2. What he is like as a detective.\n\nIn this session we will work on the second point.", 'i': {}, 'a':""}
 
 question6 = {'id': 6, 't': 0, 'q': "Here is the answer we've constructed together:", 'm': 'summary', 'a': 'Sherlock feels that Irene is special, since she "eclipses" and "predominates" her sex. This shows us that she is unique to him, and . He is not interested in romantic feelings. The phrase "a gibe and a sneer" indicates that he is dismissive towards love. The words "abhorrent" and "intrusions" tell us .', 'i': {23: {'mode': 'filled', 'id': 5}, 52: {'mode': 'filled', 'id': 7}}}
 
 question7 = {'id': 7, 't': 1, 'q': "What adjectives does Watson use to describe Sherlock's mind? Complete the statement below.", 'a': 'Watson describes Sherlock\'s mind as cold and precise, but also .', 'i': {5: {'mode': 'text', 'a': 'cold', 'id': 12}, 7: {'mode': 'text', 'a': 'precise,', 'id': 13}, 10: {'mode': 'text', 'a': 'balanced.', 'id': 14}}}
 
-question8 = {'id': 8, 't': 1, 'q': "Sherlock is described as being like a certain object- how is he described? What literary technique is this an example of?", 'a': 'He is compared to a . This is an example of a .', 'i': {5: {'a': 'perfect reasoning and observing machine', 'mode': 'text', 'id': 15}, 12: {'a': 'metaphor', 'id': 16, 'mode': 'choose', 'choices': ['metaphor', 'simile', 'personification', 'synopsis']}}}
+question8 = {'id': 8, 't': 1, 'q': "Sherlock is compared to a certain object- how is he described? What literary technique is this an example of?", 'a': 'He is compared to a . This is an example of a .', 'i': {5: {'a': 'perfect reasoning and observing machine', 'mode': 'text', 'id': 15}, 12: {'a': 'metaphor', 'id': 16, 'mode': 'choose', 'choices': ['metaphor', 'simile', 'personification', 'synopsis']}}}
 
 question9 = {'id': 9, 't': 1, 'q': "Explain what this metaphor tells us about him.", 'a': "He is a careful and logical detective, who is likely very intelligent.", 'i': {3: {'a': 'careful', 'id': 17, 'mode': 'choose', 'choices': ['careful', 'brash', 'excitable', 'nervous']}, 5: {'a': 'logical', 'mode': 'choose', 'id': 18, 'choices': ['ruthless', 'knowledgeable', 'logical', 'harsh']}, 11: {'a': 'intelligent.', 'id': 19, 'mode': 'choose', 'choices': ['rude', 'intelligent', 'deaf', 'brave']}}}
 
-question10 = {'id': 10, 't': 1, 'q': "The narrator mentions two items used by Sherlock, which give us more information about him. Complete your answer below:", 'a': 'Watson describes Sherlock\'s mind as "cold" and "precise", but also "balanced". He is described as a "perfect reasoning and observing machine". This is an example of a metaphor. The metaphor illustrates that he is a careful and logical detective, who is likely very intelligent. The phrases "sensitive instrument" and "high-power lenses" tell us about the tools he uses. This . his .', 'i': {59: {'id': 20, 'mode': 'choose', 'choices': ['energises', 'emphasises', 'empties', 'elevates'], 'a': 'emphasises'}, 61: {'id': 21, 'mode': 'free'}}}
+question10 = {'id': 10, 't': 1, 'q': "The narrator mentions two items used by Sherlock, which give us more information about him. Complete your answer below:", 'a': 'Watson describes Sherlock\'s mind as "cold" and "precise", but also "balanced". He is described as a "perfect reasoning and observing machine". This is an example of a metaphor. The metaphor illustrates that he is a careful and logical detective, who is likely very intelligent. The phrases "sensitive instrument" and "high-power lenses" tell us about the tools he uses. This . his .', 'i': {59: {'id': 20, 'mode': 'choose', 'choices': ['energises', 'emphasises', 'empties', 'elevates'], 'a': 'emphasises'}, 61: {'id': 21, 'mode': 'free', 'a': 'care and attention to detail, which gives us the impression that he is a thorough and effective detective.'}}}
 
-question11 = {'id': 11, 't': 2, 'm': 'summary',  'q': "We've helped you put your answers together. Feel free to make some changes, and then submit your final answer below", 'a': 'Sherlock feels that Irene is special, and that she "eclipses" and "predominates" her sex. She is unique to him, and . He is not interested in romantic feelings. The phrase "a gibe and a sneer" indicates . The words "abhorrent" and "intrusions" tell us . \n\nWatson describes Sherlock\'s mind as "cold" and "precise", but also "balanced". He is described as a "perfect reasoning and observing machine". This is an example of a metaphor. The metaphor illustrates that he is a careful and logical detective, who is likely very intelligent. The phrases "sensitive instrument" and "high-power lenses" tell us about the tools he uses. This emphasises his .', 'i': {20: {'mode': 'filled', 'id': 5}, 36: {'mode': 'filled', 'id': 7}, 44: {'mode': 'filled', 'id': 8}, 106: {'id': 21, 'mode': 'filled'}}}
+question11 = {'id': 11, 't': 2, 'm': 'summary',  'q': "We've helped you put your answers together. Feel free to make some changes, and then submit your final answer below", 'a': 'We are first told about how he feels about Irene Adler. Sherlock feels that Irene is special, and that she "eclipses" and "predominates" her sex. She is unique to him, and . He is not interested in romantic feelings. The phrase "a gibe and a sneer" indicates that he is dismissive towards love. The words "abhorrent" and "intrusions" tell us . \n\nIn fact, Sherlock is much more focused on his work. Watson describes Sherlock\'s mind as "cold" and "precise", but also "balanced". He is described as a "perfect reasoning and observing machine". This is an example of a metaphor. The metaphor illustrates that he is a careful and logical detective, who is likely very intelligent. The phrases "sensitive instrument" and "high-power lenses" tell us about the tools he uses. This emphasises his .', 'i': {31: {'mode': 'filled', 'id': 5}, 60: {'mode': 'filled', 'id': 7}, 44: {'mode': 'filled', 'id': 8}, 132: {'id': 21, 'mode': 'filled'}}}
+
+print(question11['a'].split().index('emphasises'))
 
 
 questions = [question0, question1, question2, question3, question4, question5, question55, question6, question7, question8, question9, question10, question11]
 
 day1comp = [question0, question1, question2, question3, question4, question5, question55, question6]
 
-day2comp = [question7, question8, question9, question10, question11]
+day2comp = [question57, question7, question8, question9, question10, question11]
 
 # day 1 devices questions
 
@@ -95,7 +98,47 @@ random.shuffle(day1vocab)
 
 day1 = {"Comprehension": [{"mechanism": "analysis", "text": text, "questions": day1comp, "main_questions": main_questions}], "Vocabulary": day1vocab, "Writing": day1writing}
 
-day2 = {"Comprehension": [{"mechanism": "analysis", "text": text, "questions": day2comp, "main_questions": main_questions}], "Writing": day1writing, "Vocabulary": []}
+##
+
+text1 = 'A man entered who could hardly have been less than six feet six inchesin height, with the chest and limbs of a Hercules.'
+
+question1 = {'id': 2010, 'q': 'In this extract, the author alludes to the Roman hero Hercules.', 'a': 'alludes', 'i': {5: {'mode': 'choose', 'choices': ['augments', 'alludes', 'anticipates', 'answers']}}}
+
+text2 = 'April is the cruellest month, breeding Lilacs out of the dead land'
+
+question2 = {'id': 2011, 'q': 'The stark juxtaposition of "Lilacs" and the "dead land" evokes an unsettling mood.', 'a': 'juxtaposition', 'i': {2: {'mode': 'devicefill'}}}
+
+# simile question
+
+text3 = "Now, I saw the damp lying on the bare hedges and spare grass, like a coarser sort of spiders' webs; hanging itself from twig to twig and blade to blade."
+
+question3 = {'id': 2012, 'q': 'Dickens uses personification to bring the mist to life, writing that it is "hanging itself from twig to twig"', 'a': 'personification', 'i': {2: {'mode': 'devicefill'}}}
+
+# metaphor question
+
+text4 = "He was a bag of bones, a floppy doll, a broken stick, a maniac."
+
+question4 = {'id': 2013, 'q': 'In this extract, Kerouac uses the emphatic technique of asyndeton: listing nouns without any conjuctions.', 'a': 'asyndeton', 'i': {9: {'mode': 'devicefill'}}}
+
+text5 = "Still young and healthy, he was blooming like a flower in season."
+
+question5 = {'id': 2014, 'q': 'The comparison of the boy to a flower is an example of a simile.', 'a': 'simile', 'i': {13: {'mode': 'devicefill'}}}
+
+text6 = "The stars were thousands of gems sprinkled across the night sky."
+
+question6 = {'id': 2015, 'q': 'The author uses the metaphor of stars as "gems", evoking the excitement of the night sky.', 'a': 'metaphor', 'i': {4: {'mode': 'devicefill'}}}
+
+# furthermore: 7
+
+question7 = {'id': 2016, 'q': "I'm not interested in what you have to offer, and furthermore, I refuse to be contacted again.", 'a': 'furthermore', 'i': {10: {'mode': 'choose', 'choices': ['furthermore', 'generally', 'nevertheless', 'in contrast']}}}
+
+# accordingly: 8
+
+question8 = {'id': 2017, 'q': "The author writes for a young audience, and accordingly he uses simple words with an exciting plot.", 'a': 'accordingly', 'i': {8: {'mode': 'choose', 'choices': ['furthermore', 'accordingly', 'undeniably', 'relentlessly']}}}
+
+day2vocab= [{"mechanism": "device", "text": text1, "question": question1}, {"mechanism": "device", "text": text2, "question": question2}, {"mechanism": "device", "text": text3, "question": question3}, {"mechanism": "device", "question": question4, "text": text4}, {"mechanism": "device", "question": question5, "text": text5}, {"mechanism": "device", "question": question6, "text": text6}, {"mechanism": "device", "question": question7}, {"mechanism": "device", "question": question8}]
+
+day2 = {"Comprehension": [{"mechanism": "analysis", "text": text, "questions": day2comp, "main_questions": main_questions}], "Writing": day1writing, "Vocabulary": day2vocab}
 
 
 days.append(day1)
