@@ -64,28 +64,38 @@ day2comp = [question7, question8, question9, question10, question11]
 
 text1 = "He was, I take it, the most perfect reasoning and observing machine that the world has seen."
 
-question1 = {'q': 'The author uses the metaphor "reasoning and observing machine" when describing Sherlock.', 'a': 'metaphor', 'i': {4: {'mode': 'devicefill'}}}
+question1 = {'id': 2000, 'q': 'The author uses the metaphor "reasoning and observing machine" when describing Sherlock.', 'a': 'metaphor', 'i': {4: {'mode': 'devicefill'}}}
 
 text2 = "It was a rimy morning, and very damp. I had seen the damp lying on the outside of my little window, as if some goblin had been crying there all night, and using the window for a pocket-handkerchief."
 
-question2 = {'q': 'In this extract the author employs an absurd simile. He writes that the window is "damp ... as if some goblin had been crying there all night".', 'a': 'simile',  'i': {8: {'mode': 'devicefill'}}}
+question2 = {'id': 2001, 'q': 'In this extract the author employs an absurd simile. He writes that the window is "damp ... as if some goblin had been crying there all night".', 'a': 'simile',  'i': {8: {'mode': 'devicefill'}}}
 
 text3 = "The moonbeams danced on the surface of the water."
 
-question3 = {'q': 'Here the author uses personification: the technique of describing an inanimate object as behaving like a human', 'a': 'personification', 'i': {4: {'mode': 'devicefill'}}}
+question3 = {'id': 2002, 'q': 'Here the author uses personification: the technique of describing an inanimate object as behaving like a human', 'a': 'personification', 'i': {4: {'mode': 'devicefill'}}}
 
-question4 = {'q': 'I wanted to see the world. Accordingly, I left my home with just a bag on my back.', 'a': 'Accordingly', 'i': {6: {'mode': 'choose', 'choices': ['In contrast', 'Furthermore', 'Accordingly', 'In conclusion']}}}
+question4 = {'id': 2003, 'q': 'I wanted to see the world. Accordingly, I left my home with just a bag on my back.', 'a': 'Accordingly', 'i': {6: {'mode': 'choose', 'choices': ['In contrast', 'Furthermore', 'Accordingly', 'In conclusion']}}}
 
-question5 = {'q': 'The speaker refuted all of his opponent\'s points. Furthermore, he pleased the audience while doing so.', 'a': 'Furthermore', 'i': {8: {'mode': 'choose', 'choices': ['Instead', 'Similarly', 'Nevertheless', 'Furthermore']}}}
+question5 = {'id': 2004, 'q': 'The speaker refuted all of his opponent\'s points. Furthermore, he pleased the audience while doing so.', 'a': 'Furthermore', 'i': {8: {'mode': 'choose', 'choices': ['Instead', 'Similarly', 'Nevertheless', 'Furthermore']}}}
 
-day1vocab= [{"mechanism": "device", "text": text1, "question": question1}, {"mechanism": "device", "text": text2, "question": question2}, {"mechanism": "device", "text": text3, "question": question3}, {"mechanism": "device", "question": question4}, {"mechanism": "device", "question": question5}]
+question6 = {'id': 2005, 'q': 'The chess player stared at the board. Her opponent did likewise.', 'a': 'likewise', 'i': {10: {'mode': 'choose', 'choices': ['Likewise', 'Nevertheless', 'Hence', 'Consequently']}}}
+
+question7 = {'id': 2006, 'q': 'The book was written many years ago. The language is therefore often unfamiliar.', 'a': 'therefore', 'i': {10: {'mode': 'choose', 'choices': ['furthermore', 'therefore', 'similarly', 'thereby']}}}
+
+question8 = {'id': 2007, 'q': 'The author conveys an atmosphere of supreme solitude and melancholy.', 'a': 'conveys', 'i': {2: {'mode': 'choose', 'choices': ['depicts', 'contrasts', 'combines', 'conveys']}}}
+
+question9 = {'id': 2008, 'q': 'The style of the dance epitomises the care-free attitude of the era.', 'a': 'epitomises', 'i': {5: {'mode': 'choose', 'choices': ['epitomises', 'employs', 'hints', 'insinuates']}}}
+
+question10 = {'id': 2009, 'q': 'The portrayal of his grandfather is a crude caricature of a stereotypical old man.', 'a': 'caricature', 'i': {8: {'mode': 'choose', 'choices': ['effigy', 'caricature', 'display', 'employment']}}}
+
+day1vocab= [{"mechanism": "device", "text": text1, "question": question1}, {"mechanism": "device", "text": text2, "question": question2}, {"mechanism": "device", "text": text3, "question": question3}, {"mechanism": "device", "question": question4}, {"mechanism": "device", "question": question5}, {"mechanism": "device", "question": question6}, {"mechanism": "device", "question": question7}, {"mechanism": "device", "question": question8}, {"mechanism": "device", "question": question9}, {"mechanism": "device", "question": question10}]
 
 day1writing = [{"mechanism": "writing", "id": 1001, "prompt": {"title": "Creative Writing Task: You can start this today and finish it tomorrow!", "text": "Sherlock occasionally dresses up as a beggar in order to observe strangers without being noticed. We know that he is very careful, and his disguises are usually very good.\nSee if you can carry on using the voice of the narrator and describe Sherlock disguised as a beggar on the side of the road. The start of the paragraph has been given. Feel free to change it. Here are some things you could pay attention to:\n-His clothes\n-His posture\n-Possible accessories\n-His interaction with passers-by\nIf you find this difficult, just write a few sentences and we will go through this in the lesson"}}]
 random.shuffle(day1vocab)
 
 day1 = {"Comprehension": [{"mechanism": "analysis", "text": text, "questions": day1comp, "main_questions": main_questions}], "Vocabulary": day1vocab, "Writing": day1writing}
 
-day2 = {"Comprehension": [{"mechanism": "analysis", "text": text, "questions": day2comp, "main_questions": main_questions}], "Writing": day1writing}
+day2 = {"Comprehension": [{"mechanism": "analysis", "text": text, "questions": day2comp, "main_questions": main_questions}], "Writing": day1writing, "Vocabulary": []}
 
 
 days.append(day1)

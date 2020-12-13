@@ -7,6 +7,7 @@ import json
 import pandas as pd
 import psycopg2
 from api_helpers import choose_next_chunk, next_chunk, get_all_chunks, load_tutorial, get_today_progress, get_level_progress
+from gcse_english_course import days
 import on_review
 from connect import connect
 import threading
@@ -878,6 +879,60 @@ def get_course_data():
     user_id = cur.fetchall()[0][0]
 
     return course_data.load_data(cur, user_id, req)
+
+@app.route('/api/coursedays', methods=["POST", "GET"])
+@cross_origin(origin='*')
+@requires_auth
+def get_course_days():
+
+    req = request.get_json()
+    conn, cur = connect()
+
+    COMMAND = """SELECT id FROM users
+    WHERE name=%s
+    """
+    cur.execute(COMMAND, (_request_ctx_stack.top.current_user['sub'],))
+    
+    user_id = cur.fetchall()[0][0]
+
+    out = {}
+
+    out["days"] = 2
+    out["notifications"] = []
+
+    comp_dict = {0: 7, 1: 21}
+
+    for i in range(out["days"]):
+
+        COMP_CMD = """SELECT * FROM tutee_course
+        WHERE course_id=1 AND user_id=%s AND answer_id=%s
+        """
+        cur.execute(COMP_CMD, (user_id, comp_dict[i]))
+        r = cur.fetchall()
+        print(r)
+        if r:
+            read = 0
+        else:
+            read = 1
+
+        write = 1
+
+        VOC_CMD = """SELECT answer_id FROM tutee_course
+        WHERE course_id=1 AND user_id=%s AND answer_id > 1999 AND answer_id < 3000"""
+        cur.execute(VOC_CMD, (user_id,))
+        answers = [x[0] for x in cur.fetchall()]
+
+        poss = [x["question"]['id'] for x in days[i]["Vocabulary"]]
+
+        print("poss", poss)
+        print("answers", answers)
+
+        rem = list(set(poss) - set(answers))
+
+        out["notifications"].append({"C": read, "V": len(rem), "W": write})
+
+    return make_response(jsonify(out))
+    
 
 @app.route('/api/analysislog', methods=["POST", "GET"])
 @cross_origin(origin='*')
