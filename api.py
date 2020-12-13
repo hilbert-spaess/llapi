@@ -897,7 +897,7 @@ def get_course_days():
 
     out = {}
 
-    out["days"] = 2
+    out["days"] = 1
     out["notifications"] = []
 
     comp_dict = {0: 7, 1: 21}
