@@ -100,9 +100,9 @@ day1 = {"Comprehension": [{"mechanism": "analysis", "text": text, "questions": d
 
 ##
 
-text1 = 'A man entered who could hardly have been less than six feet six inchesin height, with the chest and limbs of a Hercules.'
+text1 = 'A man entered who could hardly have been less than six feet six inches in height, with the chest and limbs of a Hercules.'
 
-question1 = {'id': 2010, 'q': 'In this extract, the author alludes to the Roman hero Hercules.', 'a': 'alludes', 'i': {5: {'mode': 'choose', 'choices': ['augments', 'alludes', 'anticipates', 'answers']}}}
+question1 = {'id': 2010, 'def': 'Make reference to something', 'q': 'In this extract, the author alludes to the Roman hero Hercules.', 'a': 'alludes', 'i': {5: {'mode': 'choose', 'choices': ['augments', 'alludes', 'anticipates', 'answers']}}}
 
 text2 = 'April is the cruellest month, breeding Lilacs out of the dead land'
 
@@ -134,7 +134,7 @@ question7 = {'id': 2016, 'q': "I'm not interested in what you have to offer, and
 
 # accordingly: 8
 
-question8 = {'id': 2017, 'q': "The author writes for a young audience, and accordingly he uses simple words with an exciting plot.", 'a': 'accordingly', 'i': {8: {'mode': 'choose', 'choices': ['furthermore', 'accordingly', 'undeniably', 'relentlessly']}}}
+question8 = {'id': 2017, 'q': "The author writes for a young audience, and accordingly he uses simple words with an exciting plot.", 'a': 'accordingly', 'def': 'As such; it follows that ...', 'i': {8: {'mode': 'choose', 'choices': ['furthermore', 'accordingly', 'undeniably', 'relentlessly']}}}
 
 day2vocab= [{"mechanism": "device", "text": text1, "question": question1}, {"mechanism": "device", "text": text2, "question": question2}, {"mechanism": "device", "text": text3, "question": question3}, {"mechanism": "device", "question": question4, "text": text4}, {"mechanism": "device", "question": question5, "text": text5}, {"mechanism": "device", "question": question6, "text": text6}, {"mechanism": "device", "question": question7}, {"mechanism": "device", "question": question8}]
 
@@ -206,9 +206,62 @@ day3comp = [{"text": text, "mechanism": "analysis", "questions": [question0, que
 
 day3writing = [{"mechanism": "writing", "id": 1002, "prompt": {"title": "Creative Writing Task: You can have a look at this now, but there is no comprehension on day 4.", "text": "We know that Dorothy’s family is poor, and that their home is remote. Write the next paragraph of this narrative, and talk about some of the things that Dorothy spends her time doing. Here are some ideas that might help:\n\nThere are fields all around her home, are there things for her to do in them?\nWe know that the nearest forest is miles away, can she venture that far?\nYou could make up a stream near her home perhaps.\nThink about how her surroundings change with the seasons, and whether her activities would adjust accordingly.\n\nPay attention to the atmosphere you are creating—what kind of life is she living? Is it a simple life, is she happy or content? It’s up to you to decide, you could include some more detailed descriptions of her surroundings to contribute to the atmosphere."}}]
 
-day3 = {"Comprehension": day3comp, "Vocabulary": [], "Writing": day3writing}
+# juxtaposition
+
+text1 = 'Merry and tragical? Tedious and brief?; That is hot ice, and wondrous strange snow!; How shall we find the concord of this discord?'
+
+question1 = {'id': 2020, 'q': 'With the close positioning of \"hot\" and \"ice\", \"concord\" and \"discord\", this extract features repeated use of juxtaposition.', 'def': 'two things placed close together with contrasting effect', 'a': 'juxtaposition', 'i': {17: {'mode': 'devicefill'}}}
+
+# asyndeton
+
+text2 = 'An empty stream, a great silence, an impenetrable forest. The air was thick, warm, heavy, sluggish.'
+
+question2 = {'id': 2021, 'q': 'The author uses the asyndeton "thick, warm, heavy, sluggish", to convey a stultifying and oppressive atmosphere.', 'def': 'a list without conjunctions', 'a': 'asyndeton', 'i': {4: {'mode': 'devicefill'}}}
+
+# personification
+
+text3 = 'The mouth of the cave yawned open before him.'
+
+question3 = {'id': 2022, 'q': 'By writing that the cave mouth \"yawned\", the author uses personification to bring his description to life.', 'def': 'attributing human characteristics to an inanimate object', 'a': 'personification', 'i': {10: {'mode': 'devicefill'}}}
+
+# interjection
+
+question4 = {'id': 2023, 'q': 'The teacher made a sharp interjection, rebuking the pupil for their actions and demanding that they return to their seat.', 'a': 'interjection', 'def': 'an abrupt remark, an exclamation', 'i': {5: {'mode': 'choose', 'choices': ['addendum', 'interjection', 'retention', 'suspicion']}}}
+
+# allude
+
+question8 = {'id': 2028, 'q': 'The so-called "Goldilocks zone" is the region of space in which planetary conditions are just right for life to occur. The name alludes to the famous fairy tale of Goldilocks and the three bears.', 'a': 'alludes', 'def': 'refer to, make reference to', 'i': {22: {'mode': 'definition'}}}
+
+# systematic
+
+question5 = {'id': 2024, 'q': 'The subject of anatomy refers to the systematic study of the human body and its constituent parts.', 'a': 'systematic', 'def': 'done or acting according to a fixed plan or system', 'i': {7: {'mode': 'choose', 'choices': ['systematic', 'reductive', 'materialistic', 'salacious']}}}
+
+# catalyst
+
+question5 = {'id': 2025, 'q': 'The war had the effect of acting as a catalyst for the growth of many different industries.', 'a': 'catalyst', 'def': 'something that causes or accelerates change', 'i': {9: {'mode': 'choose', 'choices': ['analogy', 'refactoring', 'catalyst', 'deployment']}}}
+
+# hypothesise
+
+question6 = {'id': 2026, 'q': 'The theory of relativity was first hypothesised by Einstein in the early twentieth century.', 'a': 'hypothesised', 'def': 'conjecture, make a guess, put forward a hypothesis', 'i': {6: {'mode': 'choose', 'choices': ['hypnotised', 'heralded', 'haunted', 'hypothesised']}}}
+
+# dubious
+
+question7 = {'id': 2027, 'q': 'The evidence that he was the culprit is dubious at best.', 'a': 'dubious', 'def': 'not to be relied on, suspicious', 'i': {8: {'mode': 'choose', 'choices': ['derived', 'dubious', 'daunting', 'deterred']}}}
+# The evidence that he was the culprit is dubious at best. 
+
+question9 = {'id': 2029, 'q': 'When interviewed, the artist found it impossible to convey his sweeping ideas in simple terms.', 'a': 'convey', 'a': 'convey', 'def': 'make an idea known and understandable', 'i': {8: {'mode': 'choose', 'choices': ['confer', 'convey', 'confide', 'correlate']}}}
+
+#When interviewed, the artist found it impossible to convey his sweeping ideas in simple terms.
+
+day3vocab = [{"text": text1, "question": question1, "mechanism": "device"}, {"text": text2, "question": question2, "mechanism": "device"}, {"text": text3, "question": question3, "mechanism": "device"}, {"question": question4, "mechanism": "device"},  {"question": question5, "mechanism": "device"},  {"question": question6, "mechanism": "device"},  {"question": question7, "mechanism": "device"},  {"question": question8, "mechanism": "device"}, {"question": question9, "mechanism": "device"}]
+
+day3 = {"Comprehension": day3comp, "Vocabulary": day3vocab, "Writing": day3writing}
+
+day4 = {"Comprehension": day3comp, "Vocabulary": day3vocab, "Writing": day3writing}
 
 days.append(day3)
+
+days.append(day4)
 
 print(text)
 
