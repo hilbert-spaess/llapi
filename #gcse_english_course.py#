@@ -310,6 +310,14 @@ question4 = {'id': 2043, 'q': 'The anthropological consensus is that religion, a
 
 question5 = {'id': 2044, 'q': 'The scientific evidence in favour of the existence of ghosts and other paranormal phenomena is dubious at best.', 'a': 'dubious', 'def': 'disputable, untrustworthy', 'i': {15: {'mode': 'choose', 'choices': ['distracting', 'dubious', 'divisive', 'dismissive']}}}
 
+# juxtaposition
+
+
+
+# metaphor
+
+# simile
+
 
 day5vocab = [{"question": question1, "mechanism": "device"}, {"question": question2, "mechanism": "device"}, {"question": question3, "mechanism": "device"},{"question": question4, "mechanism": "device"}, {"question": question5, "mechanism": "device"}]
 
