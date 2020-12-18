@@ -317,6 +317,181 @@ day5 = {"Comprehension": day5comp, "Writing": [], "Vocabulary": day5vocab}
 
 days.append(day5)
 
-print(text)
+text= " ".join("""It was a rimy morning, and very damp. I had seen the damp lying on the outside of my little
 
+window, as if some goblin had been crying there all night, and using the window for a pocket-
+handkerchief. Now, I saw the damp lying on the bare hedges and spare grass, like a coarser
+
+sort of spiders' webs; hanging itself from twig to twig and blade to blade. On every rail and gate,
+wet lay clammy; and the marsh-mist was so thick, that the wooden finger on the post directing
+people to our village—a direction which they never accepted, for they never came there—was
+invisible to me until I was quite close under it. Then, as I looked up at it, while it dripped, it
+seemed to my oppressed conscience like a phantom devoting me to the Hulks.""".split())
+
+main_questions = ["How does the writer use language to create atmosphere?"]
+
+question0 = {"t": 0, "m": "filler", "q": "It is possible to describe the atmosphere in many ways, in this question we will encourage you to choose two impressions and give reasons for them.", 'i': {}, 'a': ""}
+
+question1 = {"t": 0, "q": "What words could you use to describe the atmosphere? Write some down and we will suggest some of the ones we came up with.", "d": "Here are some that we came up with. Feel free to use them later.", "a": ".", "i": {0: {"id": 80, "mode": "free", "a": "Sombre, mysterious, frightening/spine-chilling/creepy, dangerous..."}}}
+
+question2 = {"t": 0, "m": "noanswer", "q": "Descriptive adjectives: Sombre, mysterious, frightening/spine-chilling/creepy, dangerous\nChoose one of the adjectives and find two quotes to use as evidence for this feeling. Try to explain why the phrases give you this feeling.", "a": "Mood/atmosphere: . Evidence: . How do the quotes make you feel and why do they have this effect? . ", "i": {1: {"id": 81, "mode": "free", "a": ""}, 3: {"id": 82, "mode": "free"}, 18: {"id": 83, "mode": "free"}}}
+
+question3 = {"t": 0, "m": "noanswer", "q": "Descriptive adjectives: Sombre, mysterious, frightening/spine-chilling/creepy, dangerous\nNow do the same thing for another adjective.", "a": "Mood/atmosphere: . Evidence: . How do the quotes make you feel and why do they have this effect? . ", "i": {1: {"id": 84, "mode": "free", "a": ""}, 3: {"id": 85, "mode": "free"}, 18: {"id": 86, "mode": "free"}}}
+
+question4 = {"t": 0, "m": "noanswer", "q": "Now try to join your answers using appropriate connectives to form a free-flowing paragraph. Here are some phrases/words you may find helpful:\n\nActive verbs: • ...shows/creates/portrays... • ...evokes/instills a sense of... • A/An...image is depicted through/by...", "a": "Mood/atmosphere: . Evidence: . How do the quotes make you feel and why do they have this effect? . .Mood/atmosphere: . Evidence: . How do the quotes make you feel and why do they have this effect? . .", "i": {1: {"id": 81, "mode": "filled", "a": ""}, 3: {"id": 82, "mode": "filled"}, 18: {"id": 83, "mode": "filled"}, 20: {"id": 84, "mode": "filled"}, 22: {"id": 85, "mode": "filled"}, 37: {"id": 86, "mode": "filled"}, 38: {"id": 87, "mode": "free", "freelines": 4}}}
+
+question5 = {"t": 0, "m": "noanswer", "q": "Charles Dickens employed pathetic fallacy in his work. You could think of this as a special case of personification where human emotions are attributes to objects or nature/weather etc. It is often used to reflect the mood of a character, in this case the narrator Pip. Judging by the mood the writer has created, how could you describe Pip’s mood?", "a": ".", "i": {0: {"mode": "free", "id": 88}}}
+
+day6comp = [{"main_questions": main_questions, "text": text, "mechanism": "analysis", "questions": [question0, question1, question2, question3, question4, question5]}]
+
+# consensus def
+
+question1 = {'id': 2050, 'q': 'The scientific community ultimately reached a consensus that animal testing was unacceptable and should only be used as last resort for absolutely critical drug trials .', 'a': 'consensus', 'def': 'general agreement', 'i': {6: {'mode': 'definition'}}}
+
+# hypothesise def
+
+question2 = {'id': 2051, 'q': 'Gravity was well - studied and extensively discussed in Newton \'s time , yet the relationship between gravity and light was first hypothesised by Einstein with his special theory of relativity .', 'a': 'hypothesised', 'def': 'form a guess, make a theory', 'i': {22: {'mode': 'definition'}}}
+
+# catalyst def
+
+question3 = {'id': 2052, 'q': 'The atmosphere created by these new ideas served as a catalyst for the period of intellectual brilliance that was seventeenth - century England .', 'a': 'catalyst', 'def': 'something that makes change occur faster', 'i': {10: {'mode': 'definition'}}}
+
+# maxim choose
+
+question4 = {'id': 2053, 'q': 'The maxim "All men are created equal" was used to argue that it was illegitimate to own another person , and that slavery should be made illegal .', 'a': 'maxim', 'def': 'a short statement expressing general truth', 'i': {1: {'mode': 'choose', 'choices': ['maxim', 'mango', 'mixer', 'medic']}}}
+
+# dichotomy choose
+
+question5 = {'id': 2054, 'q': 'Conversations with poets and scientists revealed the dichotomy between intuitive and rational thought processes .', 'a': 'dichotomy', 'def': 'a division between two opposite things', 'i': {7: {'mode': 'choose', 'choices': ['detergent', 'dichotomy', 'deference', 'diligence']}}}
+
+
+# plausible choose
+
+question6 = {'id': 2055, 'q': 'The argument may be plausible , but the history of mathematics reveals that without formal proof , our everyday intuition is not to be trusted when it comes to infinite sets .', 'a': 'plausible', 'def': 'reasonable, probable (of an idea, argument)', 'i': {4: {'mode': 'choose', 'choices': ['plausible', 'pragmatic', 'premature', 'primitive']}}}
+
+
+# paramount choose
+
+question7 = {'id': 2056, 'q': 'It was of paramount importance that the protesters remain non - violent , or the police would surely have license to intervene .', 'a': 'paramount', 'def': 'most important, of supreme importance', 'i': {3: {'mode': 'choose', 'choices': ['perpetual', 'paramount', 'plentiful', 'pertinent']}}}
+
+
+# correlate choose
+
+question8 = {'id': 2057, 'q': 'They found that the number of hours a student spent watching television a day correlated with their academic performance , even when confounding factors such as exercise levels were taken into account .', 'a': 'correlated', 'def': 'have a dependent relationship with; change along with', 'i': {14: {'mode': 'choose', 'choices': ['cooperated', 'circulated', 'correlated', 'cultivated']}}}
+
+day6vocab = [{"question": question1, "mechanism": "device"}, {"question": question2, "mechanism": "device"}, {"question": question3, "mechanism": "device"},{"question": question4, "mechanism": "device"}, {"question": question5, "mechanism": "device"}, {"question": question6, "mechanism": "device"}, {"question": question7, "mechanism": "device"}, {"question": question8, "mechanism": "device"}]
+
+random.shuffle(day6vocab)
+
+day6 = {"Comprehension": day6comp, "Vocabulary": day6vocab}
+
+days.append(day6)
+
+## day 7
+
+day7writing = [{"mechanism": "writing", "id": 1003, "prompt": {"title": "Creative Writing Task", "text": "In the next part of the story, she goes to a very elaborate ball and has an excellent time. Try to write a piece of text describing this event and her experience. The key thing is to develop more detail about a few important things. Think about the following:\n\nSetting the scene and describing the ball (there are many things you could write about, choose two or three and try to add as much detail as possible)\n\nWhat she does at the ball and how she enjoyed it (you could describe her feelings or communicate how she feels through describing her actions)\n\nYou have been provided with the text, feel free to look at it for inspiration or even use little bits you really like. Otherwise please try and use your own words."}}]
+
+# day 7 vocab
+
+# maxim def
+
+q1 = {'id': 2060, 'q': 'The antecedents to the modern theory of modal realism , summarised by the maxim " Whatever can exist , does exist " , can be found centuries earlier with the work of the ancient Greek philosopher Plato .', 'a': 'maxim', 'def': 'a short statement expressing general truth', 'i': {13: {'mode': 'definition'}}}
+
+# dichotomy def
+
+q2 = {'id': 2061, 'q': 'The Nature vs. Nurture debate is an old one , with a long history of scientific investigation giving evidence for both sides of the dichotomy .', 'a': 'dichotomy', 'def': 'a division between two opposite things', 'i': {24: {'mode': 'definition'}}}
+
+# plausible def
+
+q3 = {'id': 2062, 'q': 'His refutation of my conjecture , dismissed outhand during the lecture , seemed more and more plausible as I reflected on it later .', 'a': 'plausible', 'def': 'reasonable, probable (of an idea, argument)', 'i': {16: {'mode': 'definition'}}}
+
+# paramount def
+
+q4 = {'id': 2063, 'q': 'The importance of the king within his realm was second to that of the Pope , whose influence over matters theological ( and often political ) was paramount .', 'a': 'paramount', 'def': 'most important, of supreme importance', 'i': {27: {'mode': 'definition'}}}
+
+# correlate def
+
+q5 = {'id': 2064, 'q': 'The amount of trade between two nations correlates closely with the amount of diplomatic contact .', 'a': 'correlates', 'def': 'have a dependent relationship with; change along with', 'i': {7: {'mode': 'definition'}}}
+
+# aspect c
+
+q6 = {'id': 2065, 'q': 'The goal was to modernise various aspects of the house without changing its essential character , which required , for example , finding ways to restore the old floorboards to their original condition .', 'a': 'aspects', 'def': 'a particular part or feature of something', 'i': {6: {'mode': 'choose', 'choices': ['accesses', 'aspects', 'authors', 'agencies']}}}
+
+# implicit c
+
+q7 = {'id': 2066, 'q': 'The idea of the existence of a soul is implicit in the ideology of many early religions . It is often understood that the soul is eternal and separates from the body after death .', 'a': 'implicit', 'def': 'suggested but not directly expressed', 'i': {9: {'mode': 'choose', 'choices': ['imperial', 'integral', 'inherent', 'implicit']}}}
+
+# arbitrary c
+
+q8 = {'id': 2067, 'q': 'The university , despite being an institution of scholarship , seems to set completely arbitrary grade boundaries every term .', 'a': 'arbitrary', 'def': 'based on random choice rather than reason', 'i': {14: {'mode': 'choose', 'choices': ['alternate', 'arbitrary', 'ambiguous', 'authentic']}}}
+
+# simile
+
+# metaphor
+
+# alliteration
+
+# hyperbole
+
+day7vocab = [{"question": q1, "mechanism": "device"}, {"question": q2, "mechanism": "device"}, {"question": q3, "mechanism": "device"},{"question": q4, "mechanism": "device"}, {"question": q5, "mechanism": "device"}, {"question": q6, "mechanism": "device"}, {"question": q7, "mechanism": "device"}, {"question": q8, "mechanism": "device"}]
+
+day7 = {"Writing": day7writing, "Vocabulary": day7vocab, "Comprehension": []}
+
+days.append(day7)
+
+##
+
+# day 8 vocab
+
+# aspect def
+
+# catalyst def
+
+# implicit def
+
+# arbitrary def
+
+# consensus def
+
+# rudimentary c
+
+# myriad c
+
+# critique c
+
+# personification
+
+# juxtaposition
+
+# asyndeton
+
+# alliteration
+
+# hyperbole
+
+##
+
+# day 9 vocab
+
+# rudimentary def
+
+# myriad d
+
+# critique d
+
+# dichotomy d
+
+# plausible d
+
+# paramount d
+
+# correlate d
+
+# capitalise c
+
+# corroborate c
+
+# sybillance
+
+# metaphor
 

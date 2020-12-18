@@ -897,10 +897,10 @@ def get_course_days():
 
     out = {}
 
-    out["days"] = 5
+    out["days"] = 6
     out["notifications"] = []
 
-    comp_dict = {0: 7, 1: 21, 2: 49, 3: 49, 4: -1}
+    comp_dict = {0: 7, 1: 21, 2: 49, 3: 49, 4: -1, 5: -1, 6: -1}
 
     for i in range(out["days"]):
 

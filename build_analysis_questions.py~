@@ -1,0 +1,16 @@
+from connect import connect
+
+conn, cur = connect()
+
+def list_words():
+
+    CMD = """SELECT v.word FROM vocab v 
+    INNER JOIN course_vocab cv
+    ON cv.vocab_id = v.id
+    WHERE cv.course_id=6"""
+
+    cur.execute(CMD)
+
+    print(cur.fetchall())
+
+list_words()
