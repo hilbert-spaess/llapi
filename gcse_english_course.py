@@ -286,7 +286,7 @@ question3 = {"t": 0, "q": "**What do you notice about the way they talk to each 
 
 question4 = {"t": 0, "q": "**What do you notice about the sentences, are they long? Think about the effect this creates.", "a": "The sentences are short and (create) the feel of a (quick) conversation. This (highlights) Watson’s decisiveness in agreeing to help, since he does not take time to (hesitate). He immediately agrees to . and expresses that he (doesn’t) mind breaking the law. Watson’s quick responses also (implies) that he trusts Sherlock, because he knows Sherlock wouldn't ask him to break the law (unless) it was for a good cause.", 'i': {5: {'mode': 'choose', 'id': 60, 'a': 'create', 'choices': ['enact', 'create', 'disrupt', 'envision']}, 10: {'mode': 'choose', 'id': 61, 'a': 'quick', 'choices': ['quick', 'slow', 'steady']}, 13: {'mode': 'choose', 'id': 62, 'a': 'highlights', 'choices': ['predicts', 'disseminates', 'highlights', 'corrupts']}, 27: {'mode': 'choose', 'id': 63, 'a': 'hesitate.', 'choices': ['harangue', 'haughty', 'headlong', 'hesitate']}, 32: {'mode': 'textsyn', 'id': 64,'a': 'cooperate', 's': 'go along with it'}, 37: {'mode': 'choose', 'id': 65, 'a': 'doesn\'t', 'choices': ['does', 'doesn\'t']}, 46: {'mode': 'choose', 'a': 'implies', 'id': 66, 'choices': ['imply', 'insinuate', 'infer', 'impede']}, 62: {'mode': 'choose', 'a': 'unless', 'id': 67, 'choices': ['until', 'always', 'unless', 'without']}}}
 
-question5 = {"t": 0, "q": "From their conversation we can already infer that they are unreserved and unguarded towards each other. Let’s explore how structure—in this case, the chronology/order of events— emphasises that Watson trusts Sherlock.\nThis is a more subtle point. Complete the answer below:", "a": "Notice the structure of the conversation and chronology of events, which reinforces this theme of trust. Watson agrees to not only help Sherlock but also to break the law before knowing what the mission is. This would be unlikely unless he completely trusted him.", "i": {13: {"mode": "choose", "id": 68, "a": "theme", "choices": ["theory", "theme", "thesis", "theology"]}, 29: {"mode": "choose", "id": 69, "a": "before", "choices": ["before", "after"]}, 41: {"mode": "choose", "id": 69, "a": "completely", "choices": ["partially", "completely", "implicitly", "repeatedly"]}}}
+question5 = {"t": 0, "q": "From their conversation we can already infer that they are unreserved and unguarded towards each other. Let’s explore how structure—in this case, the chronology/order of events— emphasises that Watson trusts Sherlock.\nThis is a more subtle point. Complete the answer below:", "a": "Notice the structure of the conversation and chronology of events, which reinforces this theme of trust. Watson agrees to not only help Sherlock but also to break the law before knowing what the mission is. This would be unlikely unless he completely trusted him.", "i": {13: {"mode": "choose", "id": 68, "a": "theme", "choices": ["theory", "theme", "thesis", "theology"]}, 29: {"mode": "choose", "id": 69, "a": "before", "choices": ["before", "after"]}, 41: {"mode": "choose", "id": 70, "a": "completely", "choices": ["partially", "completely", "implicitly", "repeatedly"]}}}
 
 question6 = {"t": 0, "m": "summary", "q": "Here is our final answer structured around the themes of friendship and trust:", "a": "The form of this text is a conversation, and we can infer from their casual conversation style that they are good friends. Their verbal exchange is casual because Sherlock directly asks Watson for a favour without greeting him, and we know that they are acquantied because Sherlock says,”I was sure that I might rely on you”. This shows that they know each other well and are on amiable terms with each other. The sentences are short and create the feel of a quick conversation. This highlights Watson’s decisiveness in agreeing to help, since he does not take time to hesitate. He immediately agrees to to “cooperate” and expresses that he doesn't mind breaking the law.\n\nWatson’s quick responses also imply that he trusts Sherlock, because he knows Sherlock wouldn't ask him to break the law unless it was for a good cause. Notice the structure of the conversation and chronology of events, which reinforces this theme of trust. Watson agrees to not only help Sherlock but also to break the law before knowing what the mission is. This would be unlikely unless he completely trusted him.", 'i': {}}
 
@@ -435,7 +435,38 @@ q8 = {'id': 2067, 'q': 'The university , despite being an institution of scholar
 
 day7vocab = [{"question": q1, "mechanism": "device"}, {"question": q2, "mechanism": "device"}, {"question": q3, "mechanism": "device"},{"question": q4, "mechanism": "device"}, {"question": q5, "mechanism": "device"}, {"question": q6, "mechanism": "device"}, {"question": q7, "mechanism": "device"}, {"question": q8, "mechanism": "device"}]
 
-day7 = {"Writing": day7writing, "Vocabulary": day7vocab, "Comprehension": []}
+text = """
+The girl was one of those pretty and charming young creatures who sometimes are born, as if by a slip of fate, into a family of clerks. She had no dowry, no expectations, no way of being known, understood, loved, married by any rich and distinguished man; so she let herself be married to a little clerk of the Ministry of Public Instruction.
+She dressed plainly because she could not dress well, but she was unhappy as if she had really fallen from a higher station; since with women there is neither caste nor rank, for beauty, grace and charm take the place of family and birth. Natural ingenuity, instinct for what is elegant, a supple mind are their sole hierarchy, and often make of women of the people the equals of the very greatest ladies.
+Mathilde suffered ceaselessly, feeling herself born to enjoy all delicacies and all luxuries. She was distressed at the poverty of her dwelling, at the bareness of the walls, at the shabby chairs, the ugliness of the curtains. All those things, of which another woman of her rank would never even have been conscious, tortured her and made her angry. The sight of the little Breton peasant who did her humble housework aroused in her despairing regrets and bewildering dreams. She thought of silent antechambers hung with Oriental tapestry, illumined by tall bronze candelabra, and of two great footmen in knee breeches who sleep in the big armchairs, made drowsy by the oppressive heat of the stove. She thought of long reception halls hung with ancient silk, of the dainty cabinets containing priceless curiosities and of the little coquettish perfumed reception rooms made for chatting at five o'clock with intimate friends, with men famous and sought after, whom all women envy and whose attention they all desire.
+"""
+
+main_questions = ["The Diamond Necklace", "Interpretation Question", "Things we learn about the main character"]
+
+q0 = {"t": 0, "m": "filler", "q": "We will be thinking about what we learn about the girl being described. This time I will still guide you with some topics, but first let's look at some key words and phrases.", "a": "", "i": {}}
+
+q1 = {"t": 1, "q": "Try to explain what the following word/phrase means in your own words.", "a": "Clerk: .", "i": {1: {"mode": "free", "id": 90, "a": "Basic office worker."}}}
+
+q2 = {"t": 1, "q": "Try to explain what the following word/phrase means in your own words.", "a": "\"a higher station\" (paragraph 2): .", "i": {5: {"mode": "free", "id": 91, "a": "A higher social class."}}}
+
+q3 = {"t": 1, "q": "Try to explain what the word in asterisks (**) means in your own words.", "a": "**For** beauty, grace, and charm take the place of family and birth: .", "i": {12: {"mode": "free", "id": 92, "a": "Since/Because"}}}
+
+q4 = {"t": 1, "q": "Try to explain what the following word/phrase means in your own words.", "a": "Shabby (paragraph 3): .", "i": {3: {"mode": "free", "id": 93, "a": "Scruffy, worn down"}}}
+
+q5 = {"t": 1, "q": "Try to explain what the following word/phrase means in your own words.", "a": "Tapestry (paragraph 3): .", "i": {3: {"mode": "free", "id": 94, "a": "Heavy hanging fabrics, such as curtains or hanging rugs"}}}
+
+q6 = {"t": 2, "m": "noanswer", "q": "Write down a few key points and find some evidence for each point. You DO NOT need to explain your answer", "a": "(1 of 4) What is her position in life? .", "i": {9: {"mode": "free", "id": 95, "a": "Heavy hanging fabrics, such as curtains or hanging rugs", "freelines": 4}}}
+
+q7 = {"t": 2, "m": "noanswer", "q": "Write down a few key points and find some evidence for each point. You DO NOT need to explain your answer", "a": "(2 of 4) What do we learn about her appearance? .", "i": {10: {"mode": "free", "id": 96, "a": "Heavy hanging fabrics, such as curtains or hanging rugs", "freelines": 4}}}
+
+q8 = {"t": 2, "m": "noanswer", "q": "Write down a few key points and find some evidence for each point. You DO NOT need to explain your answer", "a": "(3 of 4) How does she feel about her situation in life? .", "i": {12: {"mode": "free", "id": 97, "a": "Heavy hanging fabrics, such as curtains or hanging rugs", "freelines": 4}}}
+
+q9 = {"t": 2, "m": "noanswer", "q": "Write down a few key points and find some evidence for each point. You DO NOT need to explain your answer", "a": "(4 of 4) What kind of life does she want? .", "i": {10: {"mode": "free", "id": 98, "a": "Heavy hanging fabrics, such as curtains or hanging rugs", "freelines": 4}}}
+
+
+day7comp = [{"text": text, "mechanism": "analysis", "questions": [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9], "main_questions": main_questions}]
+
+day7 = {"Writing": day7writing, "Vocabulary": day7vocab, "Comprehension": day7comp}
 
 days.append(day7)
 
