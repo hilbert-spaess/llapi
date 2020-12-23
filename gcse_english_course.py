@@ -463,14 +463,55 @@ q8 = {"t": 2, "m": "noanswer", "q": "Write down a few key points and find some e
 
 q9 = {"t": 2, "m": "noanswer", "q": "Write down a few key points and find some evidence for each point. You DO NOT need to explain your answer", "a": "(4 of 4) What kind of life does she want? .", "i": {10: {"mode": "free", "id": 98, "a": "Heavy hanging fabrics, such as curtains or hanging rugs", "freelines": 4}}}
 
-
 day7comp = [{"text": text, "mechanism": "analysis", "questions": [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9], "main_questions": main_questions}]
 
 day7 = {"Writing": day7writing, "Vocabulary": day7vocab, "Comprehension": day7comp}
 
 days.append(day7)
 
+
+
 ##
+
+text = """On his bench in Madison Square Soapy moved uneasily. When wild geese honk high of nights, and when women without sealskin coats grow kind to their husbands, and when Soapy moves uneasily on his bench in the park, you may know that winter is near at hand. 
+
+A dead leaf fell in Soapy's lap. That was Jack Frost's card. Jack is kind to the regular denizens of Madison Square, and gives fair warning of his annual call. At the corners of four streets he hands his pasteboard to the North Wind, footman of the mansion of All Outdoors, so that the inhabitants thereof may make ready. 
+
+Soapy's mind became cognisant of the fact that the time had come for him to resolve himself into a singular Committee of Ways and Means to provide against the coming rigour. And therefore he moved uneasily on his bench. 
+
+The hibernatorial ambitions of Soapy were not of the highest. In them there were no considerations of Mediterranean cruises, of soporific Southern skies drifting in the Vesuvian Bay. Three months on the Island was what his soul craved. Three months of assured board and bed and congenial company, safe from Boreas and bluecoats, seemed to Soapy the essence of things desirable. 
+
+For years the hospitable Blackwell's had been his winter quarters. Just as his more fortunate fellow New Yorkers had bought their tickets to Palm Beach and the Riviera each winter, so Soapy had made his humble arrangements for his annual hegira to the Island. And now the time was come. On the previous night three Sabbath newspapers, distributed beneath his coat, about his ankles and over his lap, had failed to repulse the cold as he slept on his bench near the spurting fountain in the ancient square. So the Island loomed big and timely in Soapy's mind. He scorned the provisions made in the name of charity for the city's dependents. In Soapy's opinion the Law was more benign than Philanthropy. There was an endless round of institutions, municipal and eleemosynary, on which he might set out and receive lodging and food accordant with the simple life. But to one of Soapy's proud spirit the gifts of charity are encumbered. If not in coin you must pay in humiliation of spirit for every benefit received at the hands of philanthropy. As Caesar had his Brutus, every bed of charity must have its toll of a bath, every loaf of bread its compensation of a private and personal inquisition. Wherefore it is better to be a guest of the law, which though conducted by rules, does not meddle unduly with a gentleman's private affairs."""
+
+main_questions = ["See if you can infer what the following word/phrase means.", "Try and answer this interpretation question.", "Soapy tries to get caught by police six times but he fails. Can you summarise each of the attempts?"]
+
+q1 = {"t": 0, "m": "noanswer", "q": "Women without sealskin coats", "a": ".", "i": {0: {"mode": "free", "id": 100}}}
+
+q2 = {"t": 0, "m": "noanswer", "q": "Denizen", "a": ".", "i": {0: {"mode": "free", "id": 101}}}
+
+q3 = {"t": 0, "m": "noanswer", "q": "Cognisant", "a": ".", "i": {0: {"mode": "free", "id": 102}}}
+
+q4 = {"t": 0, "m": "noanswer", "q": "Hibernatorial", "a": ".", "i": {0: {"mode": "free", "id": 103}}}
+
+q5 = {"t": 1, "m": "noanswer", "q": "Who is Soapy?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "id": "104"}}}
+
+q6 = {"t": 1, "m": "noanswer", "q": "What is the issue that Soapy is about to face?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "id": "105"}}}
+
+q7 = {"t": 1, "m": "noanswer", "q": "What kind of place is Blackwell's?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "id": "106"}}}
+
+q8 = {"t": 1, "m": "noanswer", "q": "What was his attitude towards charity?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "id": "107"}}}
+
+day8qs = [q1, q2, q3, q4, q5, q6, q7, q8]
+
+for i in range(6):
+
+    day8qs.append({"t": 2, "m": "noanswer", "q": "Attempt " + str(i+1), "a": ".", "i": {0: {"mode": "free", "freelines": 4, "id": 108+i}}})
+
+day8comp = [{"text": text, "mechanism": "analysis", "questions": day8qs, "main_questions": main_questions}]
+
+day8 = {"Comprehension": day8comp}
+
+days.append(day8)
 
 # day 8 vocab
 

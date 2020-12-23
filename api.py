@@ -897,10 +897,10 @@ def get_course_days():
 
     out = {}
 
-    out["days"] = 7
+    out["days"] = 8
     out["notifications"] = []
 
-    comp_dict = {0: 7, 1: 21, 2: 49, 3: 49, 4: -1, 5: -1, 6: -1}
+    comp_dict = {0: 7, 1: 21, 2: 49, 3: 49, 4: -1, 5: -1, 6: -1, 7: -1}
 
     for i in range(out["days"]):
 
@@ -917,19 +917,21 @@ def get_course_days():
 
         write = 1
 
-        VOC_CMD = """SELECT answer_id FROM tutee_course
-        WHERE course_id=1 AND user_id=%s AND answer_id > 1999 AND answer_id < 3000"""
-        cur.execute(VOC_CMD, (user_id,))
-        answers = [x[0] for x in cur.fetchall()]
+        out["notifications"].append({"C": read, "W": write})
 
-        poss = [x["question"]['id'] for x in days[i]["Vocabulary"]]
+        if "Vocabulary" in days[i]:
 
-        print("poss", poss)
-        print("answers", answers)
+            VOC_CMD = """SELECT answer_id FROM tutee_course
+            WHERE course_id=1 AND user_id=%s AND answer_id > 1999 AND answer_id < 3000"""
+            cur.execute(VOC_CMD, (user_id,))
+            answers = [x[0] for x in cur.fetchall()]
 
-        rem = list(set(poss) - set(answers))
+            poss = [x["question"]['id'] for x in days[i]["Vocabulary"]]
 
-        out["notifications"].append({"C": read, "V": len(rem), "W": write})
+            rem = list(set(poss) - set(answers))
+
+            out["notifications"][-1]["V"] = len(rem)
+        
 
     return make_response(jsonify(out))
     
