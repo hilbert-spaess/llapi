@@ -469,6 +469,8 @@ day7 = {"Writing": day7writing, "Vocabulary": day7vocab, "Comprehension": day7co
 
 days.append(day7)
 
+day7writing = [{"mechanism": "writing", "id": 1003, "prompt": {"title": "Creative Writing Task", "text": "In the next part of the story, she goes to a very elaborate ball and has an excellent time. Try to write a piece of text describing this event and her experience. The key thing is to develop more detail about a few important things. Think about the following:\n\nSetting the scene and describing the ball (there are many things you could write about, choose two or three and try to add as much detail as possible)\n\nWhat she does at the ball and how she enjoyed it (you could describe her feelings or communicate how she feels through describing her actions)\n\nYou have been provided with the text, feel free to look at it for inspiration or even use little bits you really like. Otherwise please try and use your own words."}}]
+
 
 
 ##
@@ -512,6 +514,10 @@ day8comp = [{"text": text, "mechanism": "analysis", "questions": day8qs, "main_q
 day8 = {"Comprehension": day8comp}
 
 days.append(day8)
+
+day9writing = [{"mechanism": "writing", "id": 1005, "prompt": {"title": "Explore the idea that appearances can be deceptive in The Cop and the Anthem", "text": "We touched on the themes of poverty and social class, and introduced the idea that a lot of the characters were surprising when it came to their identity and intellect.\n\nWe will use this opportunity to practise forming a cohesive thesis in a longer piece of writing. By considering the context, answer the question above. Think of O'Henry's idea that all four million inhabitants in New York were worth knowing, not just \"the 400\"."}}]
+
+day9 = {"Writing": day9writing}
 
 # day 8 vocab
 
