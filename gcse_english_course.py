@@ -519,6 +519,8 @@ day9writing = [{"mechanism": "writing", "id": 1005, "prompt": {"title": "Explore
 
 day9 = {"Writing": day9writing}
 
+days.append(day9)
+
 # day 8 vocab
 
 # aspect def
