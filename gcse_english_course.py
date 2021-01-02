@@ -521,6 +521,119 @@ day9 = {"Writing": day9writing}
 
 days.append(day9)
 
+## day 10 stuff
+
+text = """
+I
+Half a league, half a league,
+Half a league onward,
+All in the valley of Death
+   Rode the six hundred.
+“Forward, the Light Brigade!
+Charge for the guns!” he said.
+Into the valley of Death
+   Rode the six hundred.
+
+II
+“Forward, the Light Brigade!”
+Was there a man dismayed?
+Not though the soldier knew
+   Someone had blundered.
+   Theirs not to make reply,
+   Theirs not to reason why,
+   Theirs but to do and die.
+   Into the valley of Death
+   Rode the six hundred.
+
+III
+Cannon to right of them,
+Cannon to left of them,
+Cannon in front of them
+   Volleyed and thundered;
+Stormed at with shot and shell,
+Boldly they rode and well,
+Into the jaws of Death,
+Into the mouth of hell
+   Rode the six hundred.
+
+IV
+Flashed all their sabres bare,
+Flashed as they turned in air
+Sabring the gunners there,
+Charging an army, while
+   All the world wondered.
+Plunged in the battery-smoke
+Right through the line they broke;
+Cossack and Russian
+Reeled from the sabre stroke
+   Shattered and sundered.
+Then they rode back, but not
+   Not the six hundred.
+
+V
+Cannon to right of them,
+Cannon to left of them,
+Cannon behind them
+   Volleyed and thundered;
+Stormed at with shot and shell,
+While horse and hero fell.
+They that had fought so well
+Came through the jaws of Death,
+Back from the mouth of hell,
+All that was left of them,
+   Left of six hundred.
+
+VI
+When can their glory fade?
+O the wild charge they made!
+   All the world wondered.
+Honour the charge they made!
+Honour the Light Brigade,
+   Noble six hundred!
+"""
+
+main_questions = ["Explore how Tennyson creates excitement in \'The Charge of the Light Brigade\'"]
+
+q1 = {"t": 0, "m": "filler", "q": "This is a war poem written by English poet Lord Alfred Tennyson. It describes a group of men on horses charging at cannons. The charge was the result of a mistake made by another soldier. The poem is moving and breathless, and evokes the excitement of charging horses.\n\nIn this question we'll work through some important aspects of the poem.\n\nThe poem is fun to read out loud!", "a": "", "i": {}}
+
+q2 = {"t": 0, "q": "First, let's look at some details of the poem.\n\nHow many horsemen are there? .", "a": ".", "i": {0: {"mode": "fill", "a": "600", "id": 120}}}
+
+q3 = {"t": 0, "q": "Who are they charging at? .", "a": ".", "i": {0: {"mode": "fill", "a": "Russian soldiers and cannons", "id": 121}}}
+
+q4 = {"t": 0, "m": "noanswer", "q": "Find evidence in the text for the following events:\n\nSomeone makes a mistake when ordering them to charge.", "a": ".", "i": {0: {"mode": "free", "a": "Russian soldiers and cannons", "id": 122}}}
+
+q5 = {"t": 0, "m": "noanswer", "q": "Find evidence in the text for the following events:\n\nThe cannons completely surround the horsemen.", "a": ".", "i": {0: {"mode": "free", "a": "Russian soldiers and cannons", "id": 123}}}
+
+q6 = {"t": 0, "m": "noanswer", "q": "Find evidence in the text for the following events:\n\nLots of the horsemen die.", "a": ".", "i": {0: {"mode": "free", "a": "Russian soldiers and cannons", "id": 124}}}
+
+q7 = {"t": 0, "m": "noanswer", "q": "Tennyson uses rhyme to enhance the excitement. Find two examples of rhymes in the text, and write briefly about what effect they create.", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "Russian soldiers and cannons", "id": 125}}}
+
+q8 = {"t": 0, "m": "noanswer", "q": "Tennyson repeats lots of small phrases. Find two examples of repetition. What do they sound like when you say them outloud? What effect do they create?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "Russian soldiers and cannons", "id": 126}}}
+
+q9 = {"t": 0, "m": "noanswer", "q": "Tennyson uses metaphors and personification involving death. Find two examples: why do they create tension?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "Russian soldiers and cannons", "id": 127}}}
+
+q10 = {"t": 0, "m": "noanswer", "q": "Let's consider the ways in which the last verse is different from the others. Make a few notes for each topic:", "a": "Length: . Rhyming: .", "i": {1: {"mode": "free", "a": "Russian soldiers and cannons", "id": 128}, 3: {"mode": "free", "id": 129}}}
+
+q11 = {"t": 0, "m": "noanswer", "q": "Let's consider the ways in which the last verse is different from the others. Make a few notes for each topic:", "a": "Punctuation: . Tone/mood: .", "i": {1: {"mode": "free", "a": "Russian soldiers and cannons", "id": 130}, 3: {"mode": "free", "id": 131}}}
+
+q12 = {"t": 0, "m": "noanswer", "q": "Here's a space for you to leave any last notes about the poem.", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "Russian soldiers and cannons", "id": 132}}}
+
+
+day10comp = [{"text": text, "mechanism": "analysis", "questions": [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12], "main_questions": main_questions}]
+
+q1 = {"t": 0, "m": "noanswer", "q": "Women without sealskin coats", "a": ".", "i": {0: {"mode": "free", "id": 100}}}
+
+q3 = {"t": 0, "m": "noanswer", "q": "Cognisant", "a": ".", "i": {0: {"mode": "free", "id": 102}}}
+
+q4 = {"t": 0, "m": "noanswer", "q": "Hibernatorial", "a": ".", "i": {0: {"mode": "free", "id": 103}}}
+
+q5 = {"t": 1, "m": "noanswer", "q": "Who is Soapy?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "id": "104"}}}
+
+day10 = {"Comprehension": day10comp}
+
+days.append(day10)
+
+
 # day 8 vocab
 
 # aspect def
