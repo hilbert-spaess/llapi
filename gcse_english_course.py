@@ -633,6 +633,74 @@ day10 = {"Comprehension": day10comp}
 
 days.append(day10)
 
+## day 11
+
+text = """
+
+I
+
+They throw in Drummer Hodge, to rest
+     Uncoffined—just as found:
+His landmark is a kopje-crest
+     That breaks the veldt around;
+And foreign constellations west
+     Each night above his mound.
+ 
+
+II
+
+Young Hodge the Drummer never knew—
+     Fresh from his Wessex home—
+The meaning of the broad Karoo,
+     The Bush, the dusty loam,
+And why uprose to nightly view
+     Strange stars amid the gloam.
+ 
+
+III
+
+Yet portion of that unknown plain
+     Will Hodge for ever be;
+His homely Northern breast and brain
+     Grow up a Southern tree,
+And strange-eyed constellations reign
+     His stars eternally.
+
+"""
+
+main_questions = ["What effect does the poem have on the reader, and how does the poet accomplish these effects?"]
+
+q1 = {"t": 0, "m": "filler", "q": "Hardy's poem describes the grave of a soldier, (a drummer), who fought and died in South Africa. It contrasts the landscape of his foreign grave with the home he came from.", "a": "", "i": {}}
+
+q2 = {"t": 0, "m": "noanswer", "q": "Hardy deliberately uses difficult foreign words. Look up the definitions of the following words, and write them in your own words.\n\nKopje", "a": ".", "i": {0: {"mode": "free", "a": "", "id": 140}}}
+
+q3 = {"t": 0, "m": "noanswer", "q": "Hardy deliberately uses difficult foreign words. Look up the definitions of the following words, and write them in your own words.\n\nveldt", "a": ".", "i": {0: {"mode": "free", "a": "", "id": 141}}}
+
+q4 = {"t": 0, "m": "noanswer", "q": "Hardy deliberately uses difficult foreign words. Look up the definitions of the following words, and write them in your own words.\n\nKaroo", "a": ".", "i": {0: {"mode": "free", "a": "", "id": 142}}}
+
+q5 = {"t": 0, "m": "noanswer", "q": "Hardy deliberately uses difficult foreign words. Look up the definitions of the following words, and write them in your own words.\n\ngloam", "a": ".", "i": {0: {"mode": "free", "a": "", "id": 143}}}
+
+q6 = {"t": 0, "m": "noanswer", "q": "What does the use of foreign words reveal?", "a": ".",  "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 144}}}
+
+q7 = {"t": 0, "m": "noanswer", "q": "Find some quotes in the text that refer to the theme of: isolation", "a": ".",  "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 145}}}
+
+q8 = {"t": 0, "m": "noanswer", "q": "Find some quotes in the text that refer to the theme of: nature.", "a": ".",  "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 146}}}
+
+q9 = {"t": 0, "m": "noanswer", "q": "How do the stanzas start and end? What effect does this create.", "a": ".",  "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 147}}}
+
+q10 = {"t": 0, "m": "noanswer", "q": "Find a quote in which Hardy personifies the stars. How does he present them?", "a": ".",  "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 148}}}
+
+q11 = {"t": 0, "m": "noanswer", "q": "Find some examples of alliteration or interesting sounds in the poem.", "a": ".",  "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 149}}}
+
+q12 = {"t": 0, "m": "noanswer", "q": "What is the rhyme scheme of the poem. What does it remind you of?", "a": ".",  "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 150}}}
+
+q13 = {"t": 0, "m": "noanswer", "q": "Here's a space for you to leave any last notes about the poem.", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "Russian soldiers and cannons", "id": 151}}}
+
+day11comp = [{"text": text, "mechanism": "analysis", "questions": [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13], "main_questions": main_questions}]
+
+day11 = {"Comprehension": day11comp}
+
+days.append(day11)
 
 # day 8 vocab
 
