@@ -702,6 +702,44 @@ day11 = {"Comprehension": day11comp}
 
 days.append(day11)
 
+text = """
+We stood by a pond that winter day,
+And the sun was white, as though chidden of God,
+And a few leaves lay on the starving sod;
+– They had fallen from an ash, and were gray.
+
+Your eyes on me were as eyes that rove
+Over tedious riddles of years ago;
+And some words played between us to and fro
+On which lost the more by our love.
+
+The smile on your mouth was the deadest thing
+Alive enough to have strength to die;
+And a grin of bitterness swept thereby
+Like an ominous bird a-wing….
+
+Since then, keen lessons that love deceives,
+And wrings with wrong, have shaped to me
+Your face, and the God curst sun, and a tree,
+And a pond edged with grayish leaves. 
+"""
+
+main_questions = ["How does the poet depict his relationship in this poem?"]
+
+q1 = {"t": 0, "m": "noanswer", "q": "Let's build some paragraphs as part of an answer.\n\nHow is the theme of death presented in the context of the relationship?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 160}}}
+
+q2 = {"t": 0, "m": "noanswer", "q": "Let's build some paragraphs as part of an answer.\n\nHow do body parts represent the fate of the relationship as a whole?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 161}}}
+
+q3 = {"t": 0, "m": "noanswer", "q": "Let's build some paragraphs as part of an answer.\n\nHow are time and change relevant to the relationship?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 162}}}
+
+q4 = {"t": 0, "m": "noanswer", "q": "What do you think was the fate of the relationship? How would you summarise the depiction of the relationship as a whole?", "a": ".", "i": {0: {"mode": "free", "freelines": 4, "a": "", "id": 163}}}
+
+day12comp = [{"text": text, "mechanism": "analysis", "questions": [q1, q2, q3, q4], "main_questions": main_questions}]
+
+day12 = {"Comprehension": day12comp}
+
+days.append(day12)
+
 # day 8 vocab
 
 # aspect def
